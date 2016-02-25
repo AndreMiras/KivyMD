@@ -7,7 +7,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.button import MDIconButton
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehaviour import ElevationBehaviour
+from kivymd.elevationbehavior import ElevationBehavior
 
 Builder.load_string('''
 #:import m_res kivymd.material_resources
@@ -44,8 +44,8 @@ Builder.load_string('''
 ''')
 
 
-class Toolbar(ThemableBehavior, ElevationBehaviour, BackgroundColorBehavior,
-              RelativeLayout):
+class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
+			  RelativeLayout):
 	left_action_items = ListProperty()
 	"""The icons on the left of the toolbar.
 

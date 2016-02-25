@@ -2,7 +2,7 @@
 from kivy.lang import Builder
 from kivy.properties import BoundedNumericProperty, ReferenceListProperty
 from kivy.uix.boxlayout import BoxLayout
-from kivymd.elevationbehaviour import ElevationBehaviour
+from kivymd.elevationbehavior import ElevationBehavior
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
@@ -18,7 +18,7 @@ Builder.load_string('''
 ''')
 
 
-class MDCard(ThemableBehavior, ElevationBehaviour, BoxLayout):
+class MDCard(ThemableBehavior, ElevationBehavior, BoxLayout):
 	r = BoundedNumericProperty(1., min=0., max=1.)
 	g = BoundedNumericProperty(1., min=0., max=1.)
 	b = BoundedNumericProperty(1., min=0., max=1.)

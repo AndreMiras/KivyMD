@@ -7,7 +7,7 @@ from kivy.properties import AliasProperty
 from kivy.metrics import dp
 
 Builder.load_string('''
-<ElevationBehaviour>
+<ElevationBehavior>
 	canvas.before:
 		Color:
 			a: self._soft_shadow_a
@@ -24,7 +24,7 @@ Builder.load_string('''
 		Color:
 			a: 1
 
-<RoundElevationBehaviour>
+<RoundElevationBehavior>
 	canvas.before:
 		Color:
 			a: self._soft_shadow_a
@@ -43,7 +43,7 @@ Builder.load_string('''
 ''')
 
 
-class ElevationBehaviour(object):
+class ElevationBehavior(object):
 	_elevation = NumericProperty(1)
 
 	def _get_elevation(self):
@@ -68,7 +68,7 @@ class ElevationBehaviour(object):
 	_hard_shadow_a = NumericProperty(0)
 
 	def __init__(self, **kwargs):
-		super(ElevationBehaviour, self).__init__(**kwargs)
+		super(ElevationBehavior, self).__init__(**kwargs)
 		self.bind(elevation=self._update_shadow,
 		          pos=self._update_shadow,
 		          size=self._update_shadow)
@@ -126,7 +126,7 @@ class ElevationBehaviour(object):
 			self._hard_shadow_a = 0
 
 
-class RoundElevationBehaviour(object):
+class RoundElevationBehavior(object):
 	_elevation = NumericProperty(1)
 
 	def _get_elevation(self):
@@ -151,7 +151,7 @@ class RoundElevationBehaviour(object):
 	_hard_shadow_a = NumericProperty(0)
 
 	def __init__(self, **kwargs):
-		super(RoundElevationBehaviour, self).__init__(**kwargs)
+		super(RoundElevationBehavior, self).__init__(**kwargs)
 		self._shadow = App.get_running_app().theme_cls.round_shadow
 		self.bind(elevation=self._update_shadow,
 		          pos=self._update_shadow,

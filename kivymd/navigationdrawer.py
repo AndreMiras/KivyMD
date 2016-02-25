@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty
-from kivymd.elevationbehaviour import ElevationBehaviour
+from kivymd.elevationbehavior import ElevationBehavior
 from kivymd.icon_definitions import md_icons
 from kivymd.label import MDLabel
 from kivymd.list import OneLineIconListItem, ILeftBody, BaseListItem
@@ -42,7 +42,7 @@ Builder.load_string('''
 ''')
 
 
-class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehaviour):
+class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehavior):
 	'''Implementation of the Navigation Drawer pattern.'''
 
 	header_img = StringProperty()

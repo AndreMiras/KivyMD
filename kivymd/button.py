@@ -23,8 +23,8 @@ from kivy.animation import Animation
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior, \
 	RectangularRippleBehavior
-from kivymd.elevationbehaviour import ElevationBehaviour, \
-	RoundElevationBehaviour
+from kivymd.elevationbehavior import ElevationBehavior, \
+	RoundElevationBehavior
 from kivymd.theming import ThemableBehavior
 from kivymd.color_definitions import colors
 
@@ -177,8 +177,8 @@ class MDFlatButton(ThemableBehavior, RectangularRippleBehavior,
 
 
 class MDRaisedButton(ThemableBehavior, RectangularRippleBehavior,
-                     ElevationBehaviour, ButtonBehavior,
-                     AnchorLayout):
+					 ElevationBehavior, ButtonBehavior,
+					 AnchorLayout):
 	_bg_color_down = ListProperty([])
 	background_color = ListProperty()
 	background_color_down = ListProperty()
@@ -297,8 +297,8 @@ class MDRaisedButton(ThemableBehavior, RectangularRippleBehavior,
 
 
 class MDFloatingActionButton(ThemableBehavior, CircularRippleBehavior,
-                             RoundElevationBehaviour, ButtonBehavior,
-                             AnchorLayout):
+							 RoundElevationBehavior, ButtonBehavior,
+							 AnchorLayout):
 	_bg_color_down = ListProperty([])
 	background_color = ListProperty()
 	background_color_down = ListProperty()
