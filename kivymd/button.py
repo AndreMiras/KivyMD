@@ -137,7 +137,7 @@ Builder.load_string('''
 
 
 class MDIconButton(CircularRippleBehavior, ButtonBehavior, BoxLayout):
-	icon = StringProperty('md-lens')
+	icon = StringProperty('circle')
 	theme_text_color = OptionProperty(None, allownone=True,
 	                                  options=['Primary', 'Secondary', 'Hint',
 	                                           'Error', 'Custom'])
@@ -341,7 +341,7 @@ class MDFloatingActionButton(ThemableBehavior, CircularRippleBehavior,
 	background_color_disabled = AliasProperty(_get_bg_color_disabled,
 	                                          _set_bg_color_disabled,
 	                                          bind=('_bg_color_disabled',))
-	icon = StringProperty('md-android')
+	icon = StringProperty('android')
 
 	_elev_norm = NumericProperty(6)
 

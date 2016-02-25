@@ -36,8 +36,8 @@ RelativeLayout:
 	Toolbar:
 		id: toolbar
 		title: 'KivyMD Kitchen Sink'
-		left_action_items: [['md-menu', lambda x: nav_drawer.toggle()]]
-		right_action_items: [['md-more-vert', lambda x: None]]
+		left_action_items: [['menu', lambda x: nav_drawer.toggle()]]
+		right_action_items: [['more-vert', lambda x: None]]
 	ScreenManager:
 		id: scr_mngr
 		size_hint_y: None
@@ -74,7 +74,7 @@ RelativeLayout:
 				pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 			MDFloatingActionButton:
 				id:					float_act_btn
-				icon:				'md-replay'
+				icon:				'plus'
 				size_hint:			None, None
 				size:				dp(56), dp(56)
 				opposite_colors:	True
@@ -131,19 +131,19 @@ RelativeLayout:
 						text: "Single-line item with left icon"
 						IconLeftSampleWidget:
 							id: li_icon_1
-							icon: 'md-stars'
+							icon: 'star-circle'
 					TwoLineIconListItem:
 						text: "Two-line item..."
 						secondary_text: "...with left icon"
 						IconLeftSampleWidget:
 							id: li_icon_2
-							icon: 'md-chat'
+							icon: 'comment-text-alt'
 					ThreeLineIconListItem:
 						text: "Three-line item..."
 						secondary_text: "...with left icon..." + '\\n' + "and third line!"
 						IconLeftSampleWidget:
 							id: li_icon_3
-							icon: 'md-sd-storage'
+							icon: 'card-sd'
 					OneLineAvatarIconListItem:
 						text: "Single-line + avatar&icon"
 						AvatarSampleWidget:
@@ -396,66 +396,66 @@ RelativeLayout:
 				title: "Toolbar with right buttons"
 				pos_hint: {'center_x': 0.5, 'center_y': 0.25}
 				background_color: get_color_from_hex(colors['Amber']['700'])
-				right_action_items: [['md-content-copy', lambda x: None]]
+				right_action_items: [['copy', lambda x: None]]
 			Toolbar:
 				title: "Toolbar with left and right buttons"
 				pos_hint: {'center_x': 0.5, 'center_y': 0.12}
 				background_color: get_color_from_hex(colors['DeepPurple']['A400'])
-				left_action_items: [['md-arrow-back', lambda x: None]]
-				right_action_items: [['md-https', lambda x: None], \
-					['md-videocam', lambda x: None], \
-					['md-play-arrow', lambda x: None]]
+				left_action_items: [['arrow-left', lambda x: None]]
+				right_action_items: [['lock', lambda x: None], \
+					['camera', lambda x: None], \
+					['play', lambda x: None]]
 
 	NavigationDrawer:
 		id: nav_drawer
 		size_hint_y: None
 		height: root.height - toolbar.height
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Bottom sheets"
 			on_release: scr_mngr.current = 'bottomsheet'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Buttons"
 			on_release: scr_mngr.current = 'button'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Cards"
 			on_release: scr_mngr.current = 'card'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Dialogs"
 			on_release: scr_mngr.current = 'dialog'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Lists"
 			on_release: scr_mngr.current = 'list'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Menus"
 			on_release: scr_mngr.current = 'menu'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Progress & activity"
 			on_release: scr_mngr.current = 'progress'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Selection controls"
 			on_release: scr_mngr.current = 'selectioncontrols'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Snackbars"
 			on_release: scr_mngr.current = 'snackbar'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Text fields"
 			on_release: scr_mngr.current = 'textfields'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Themes"
 			on_release: scr_mngr.current = 'theming'
 		NavigationDrawerIconButton:
-			icon: 'md-lens'
+			icon: 'circle'
 			text: "Toolbars"
 			on_release: scr_mngr.current = 'toolbar'
 '''
@@ -526,8 +526,8 @@ class KitchenSink(App):
 		bs = MDListBottomSheet()
 		bs.add_item("Here's an item with text only", lambda x: x)
 		bs.add_item("Here's an item with an icon", lambda x: x,
-		            icon='md-cast')
-		bs.add_item("Here's another!", lambda x: x, icon='md-nfc')
+		            icon='account-calendar')
+		bs.add_item("Here's another!", lambda x: x, icon='nfc')
 		bs.open()
 
 	def show_example_grid_bottom_sheet(self):

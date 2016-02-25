@@ -1,2234 +1,1567 @@
+# -*- coding: utf-8 -*-
+
+# Thanks to Sergey Kupletsky (github.com/zavoloklom) for its Material Design
+# Iconic Font, which provides KivyMD's icons.
+
+# GALLERY HERE:
+# https://zavoloklom.github.io/material-design-iconic-font/icons.html
+
+# LAST UPDATED: version 2.2.0 of Material Design Iconic Font
+
 md_icons = {
-	'md-3d-rotation':
-		u"\uf000",
+    '3d-rotation': u'',
 
-	'md-accessibility':
-		u"\uf001",
+    'airplane-off': u'',
 
-	'md-account-balance':
-		u"\uf002",
+    'airplane': u'',
 
-	'md-account-balance-wallet':
-		u"\uf003",
+    'album': u'',
 
-	'md-account-box':
-		u"\uf004",
+    'archive': u'',
 
-	'md-account-child':
-		u"\uf005",
+    'assignment-account': u'',
 
-	'md-account-circle':
-		u"\uf006",
+    'assignment-alert': u'',
 
-	'md-add-shopping-cart':
-		u"\uf007",
+    'assignment-check': u'',
 
-	'md-alarm':
-		u"\uf008",
+    'assignment-o': u'',
 
-	'md-alarm-add':
-		u"\uf009",
+    'assignment-return': u'',
 
-	'md-alarm-off':
-		u"\uf00a",
+    'assignment-returned': u'',
 
-	'md-alarm-on':
-		u"\uf00b",
+    'assignment': u'',
 
-	'md-android':
-		u"\uf00c",
+    'attachment-alt': u'',
 
-	'md-announcement':
-		u"\uf00d",
+    'attachment': u'',
 
-	'md-aspect-ratio':
-		u"\uf00e",
+    'audio': u'',
 
-	'md-assessment':
-		u"\uf00f",
+    'badge-check': u'',
 
-	'md-assignment':
-		u"\uf010",
+    'balance-wallet': u'',
 
-	'md-assignment-ind':
-		u"\uf011",
+    'balance': u'',
 
-	'md-assignment-late':
-		u"\uf012",
+    'battery-alert': u'',
 
-	'md-assignment-return':
-		u"\uf013",
+    'battery-flash': u'',
 
-	'md-assignment-returned':
-		u"\uf014",
+    'battery-unknown': u'',
 
-	'md-assignment-turned-in':
-		u"\uf015",
+    'battery': u'',
 
-	'md-autorenew':
-		u"\uf016",
+    'bike': u'',
 
-	'md-backup':
-		u"\uf017",
+    'block-alt': u'',
 
-	'md-book':
-		u"\uf018",
+    'block': u'',
 
-	'md-bookmark':
-		u"\uf019",
+    'boat': u'',
 
-	'md-bookmark-outline':
-		u"\uf01a",
+    'book-image': u'',
 
-	'md-bug-report':
-		u"\uf01b",
+    'book': u'',
 
-	'md-cached':
-		u"\uf01c",
+    'bookmark-outline': u'',
 
-	'md-class':
-		u"\uf01d",
+    'bookmark': u'',
 
-	'md-credit-card':
-		u"\uf01e",
+    'brush': u'',
 
-	'md-dashboard':
-		u"\uf01f",
+    'bug': u'',
 
-	'md-delete':
-		u"\uf020",
+    'bus': u'',
 
-	'md-description':
-		u"\uf021",
+    'cake': u'',
 
-	'md-dns':
-		u"\uf022",
+    'car-taxi': u'',
 
-	'md-done':
-		u"\uf023",
+    'car-wash': u'',
 
-	'md-done-all':
-		u"\uf024",
+    'car': u'',
 
-	'md-event':
-		u"\uf025",
+    'card-giftcard': u'',
 
-	'md-exit-to-app':
-		u"\uf026",
+    'card-membership': u'',
 
-	'md-explore':
-		u"\uf027",
+    'card-travel': u'',
 
-	'md-extension':
-		u"\uf028",
+    'card': u'',
 
-	'md-face-unlock':
-		u"\uf029",
+    'case-check': u'',
 
-	'md-favorite':
-		u"\uf02a",
+    'case-download': u'',
 
-	'md-favorite-outline':
-		u"\uf02b",
+    'case-play': u'',
 
-	'md-find-in-page':
-		u"\uf02c",
+    'case': u'',
 
-	'md-find-replace':
-		u"\uf02d",
+    'cast-connected': u'',
 
-	'md-flip-to-back':
-		u"\uf02e",
+    'cast': u'',
 
-	'md-flip-to-front':
-		u"\uf02f",
+    'chart-donut': u'',
 
-	'md-get-app':
-		u"\uf030",
+    'chart': u'',
 
-	'md-grade':
-		u"\uf031",
+    'city-alt': u'',
 
-	'md-group-work':
-		u"\uf032",
+    'city': u'',
 
-	'md-help':
-		u"\uf033",
+    'close-circle-o': u'',
 
-	'md-highlight-remove':
-		u"\uf034",
+    'close-circle': u'',
 
-	'md-history':
-		u"\uf035",
+    'close': u'',
 
-	'md-home':
-		u"\uf036",
+    'cocktail': u'',
 
-	'md-https':
-		u"\uf037",
+    'code-setting': u'',
 
-	'md-info':
-		u"\uf038",
+    'code-smartphone': u'',
 
-	'md-info-outline':
-		u"\uf039",
+    'code': u'',
 
-	'md-input':
-		u"\uf03a",
+    'coffee': u'',
 
-	'md-invert-colors':
-		u"\uf03b",
+    'collection-bookmark': u'',
 
-	'md-label':
-		u"\uf03c",
+    'collection-case-play': u'',
 
-	'md-label-outline':
-		u"\uf03d",
+    'collection-folder-image': u'',
 
-	'md-language':
-		u"\uf03e",
+    'collection-image-o': u'',
 
-	'md-launch':
-		u"\uf03f",
+    'collection-image': u'',
 
-	'md-list':
-		u"\uf040",
+    'collection-item-1': u'',
 
-	'md-lock':
-		u"\uf041",
+    'collection-item-2': u'',
 
-	'md-lock-open':
-		u"\uf042",
+    'collection-item-3': u'',
 
-	'md-lock-outline':
-		u"\uf043",
+    'collection-item-4': u'',
 
-	'md-loyalty':
-		u"\uf044",
+    'collection-item-5': u'',
 
-	'md-markunread-mailbox':
-		u"\uf045",
+    'collection-item-6': u'',
 
-	'md-note-add':
-		u"\uf046",
+    'collection-item-7': u'',
 
-	'md-open-in-browser':
-		u"\uf047",
+    'collection-item-8': u'',
 
-	'md-open-in-new':
-		u"\uf048",
+    'collection-item-9-plus': u'',
 
-	'md-open-with':
-		u"\uf049",
+    'collection-item-9': u'',
 
-	'md-pageview':
-		u"\uf04a",
+    'collection-item': u'',
 
-	'md-payment':
-		u"\uf04b",
+    'collection-music': u'',
 
-	'md-perm-camera-mic':
-		u"\uf04c",
+    'collection-pdf': u'',
 
-	'md-perm-contact-cal':
-		u"\uf04d",
+    'collection-plus': u'',
 
-	'md-perm-data-setting':
-		u"\uf04e",
+    'collection-speaker': u'',
 
-	'md-perm-device-info':
-		u"\uf04f",
+    'collection-text': u'',
 
-	'md-perm-identity':
-		u"\uf050",
+    'collection-video': u'',
 
-	'md-perm-media':
-		u"\uf051",
+    'compass': u'',
 
-	'md-perm-phone-msg':
-		u"\uf052",
+    'cutlery': u'',
 
-	'md-perm-scan-wifi':
-		u"\uf053",
+    'delete': u'',
 
-	'md-picture-in-picture':
-		u"\uf054",
+    'dialpad': u'',
 
-	'md-polymer':
-		u"\uf055",
+    'dns': u'',
 
-	'md-print':
-		u"\uf056",
+    'drink': u'',
 
-	'md-query-builder':
-		u"\uf057",
+    'edit': u'',
 
-	'md-question-answer':
-		u"\uf058",
+    'email-open': u'',
 
-	'md-receipt':
-		u"\uf059",
+    'email': u'',
 
-	'md-redeem':
-		u"\uf05a",
+    'eye-off': u'',
 
-	'md-report-problem':
-		u"\uf05b",
+    'eye': u'',
 
-	'md-restore':
-		u"\uf05c",
+    'eyedropper': u'',
 
-	'md-room':
-		u"\uf05d",
+    'favorite-outline': u'',
 
-	'md-schedule':
-		u"\uf05e",
+    'favorite': u'',
 
-	'md-search':
-		u"\uf05f",
+    'filter-list': u'',
 
-	'md-settings':
-		u"\uf060",
+    'fire': u'',
 
-	'md-settings-applications':
-		u"\uf061",
+    'flag': u'',
 
-	'md-settings-backup-restore':
-		u"\uf062",
+    'flare': u'',
 
-	'md-settings-bluetooth':
-		u"\uf063",
+    'flash-auto': u'',
 
-	'md-settings-cell':
-		u"\uf064",
+    'flash-off': u'',
 
-	'md-settings-display':
-		u"\uf065",
+    'flash': u'',
 
-	'md-settings-ethernet':
-		u"\uf066",
+    'flip': u'',
 
-	'md-settings-input-antenna':
-		u"\uf067",
+    'flower-alt': u'',
 
-	'md-settings-input-component':
-		u"\uf068",
+    'flower': u'',
 
-	'md-settings-input-composite':
-		u"\uf069",
+    'font': u'',
 
-	'md-settings-input-hdmi':
-		u"\uf06a",
+    'fullscreen-alt': u'',
 
-	'md-settings-input-svideo':
-		u"\uf06b",
+    'fullscreen-exit': u'',
 
-	'md-settings-overscan':
-		u"\uf06c",
+    'fullscreen': u'',
 
-	'md-settings-phone':
-		u"\uf06d",
+    'functions': u'',
 
-	'md-settings-power':
-		u"\uf06e",
+    'gas-station': u'',
 
-	'md-settings-remote':
-		u"\uf06f",
+    'gesture': u'',
 
-	'md-settings-voice':
-		u"\uf070",
+    'globe-alt': u'',
 
-	'md-shop':
-		u"\uf071",
+    'globe-lock': u'',
 
-	'md-shopping-basket':
-		u"\uf072",
+    'globe': u'',
 
-	'md-shopping-cart':
-		u"\uf073",
+    'graduation-cap': u'',
 
-	'md-shop-two':
-		u"\uf074",
+    'group': u'',
 
-	'md-speaker-notes':
-		u"\uf075",
+    'home': u'',
 
-	'md-spellcheck':
-		u"\uf076",
+    'hospital-alt': u'',
 
-	'md-star-rate':
-		u"\uf077",
+    'hospital': u'',
 
-	'md-stars':
-		u"\uf078",
+    'hotel': u'',
 
-	'md-store':
-		u"\uf079",
+    'hourglass-alt': u'',
 
-	'md-subject':
-		u"\uf07a",
+    'hourglass-outline': u'',
 
-	'md-swap-horiz':
-		u"\uf07b",
+    'hourglass': u'',
 
-	'md-swap-vert':
-		u"\uf07c",
+    'http': u'',
 
-	'md-swap-vert-circle':
-		u"\uf07d",
+    'image-alt': u'',
 
-	'md-system-update-tv':
-		u"\uf07e",
+    'image-o': u'',
 
-	'md-tab':
-		u"\uf07f",
+    'image': u'',
 
-	'md-tab-unselected':
-		u"\uf080",
+    'inbox': u'',
 
-	'md-theaters':
-		u"\uf081",
+    'invert-colors-off': u'',
 
-	'md-thumb-down':
-		u"\uf082",
+    'invert-colors': u'',
 
-	'md-thumbs-up-down':
-		u"\uf083",
+    'key': u'',
 
-	'md-thumb-up':
-		u"\uf084",
+    'label-alt-outline': u'',
 
-	'md-toc':
-		u"\uf085",
+    'label-alt': u'',
 
-	'md-today':
-		u"\uf086",
+    'label-heart': u'',
 
-	'md-track-changes':
-		u"\uf087",
+    'label': u'',
 
-	'md-translate':
-		u"\uf088",
+    'labels': u'',
 
-	'md-trending-down':
-		u"\uf089",
+    'lamp': u'',
 
-	'md-trending-neutral':
-		u"\uf08a",
+    'landscape': u'',
 
-	'md-trending-up':
-		u"\uf08b",
+    'layers-off': u'',
 
-	'md-turned-in':
-		u"\uf08c",
+    'layers': u'',
 
-	'md-turned-in-not':
-		u"\uf08d",
+    'library': u'',
 
-	'md-verified-user':
-		u"\uf08e",
+    'link': u'',
 
-	'md-view-agenda':
-		u"\uf08f",
+    'lock-open': u'',
 
-	'md-view-array':
-		u"\uf090",
+    'lock-outline': u'',
 
-	'md-view-carousel':
-		u"\uf091",
+    'lock': u'',
 
-	'md-view-column':
-		u"\uf092",
+    'mail-reply-all': u'',
 
-	'md-view-day':
-		u"\uf093",
+    'mail-reply': u'',
 
-	'md-view-headline':
-		u"\uf094",
+    'mail-send': u'',
 
-	'md-view-list':
-		u"\uf095",
+    'mall': u'',
 
-	'md-view-module':
-		u"\uf096",
+    'map': u'',
 
-	'md-view-quilt':
-		u"\uf097",
+    'menu': u'',
 
-	'md-view-stream':
-		u"\uf098",
+    'money-box': u'',
 
-	'md-view-week':
-		u"\uf099",
+    'money-off': u'',
 
-	'md-visibility':
-		u"\uf09a",
+    'money': u'',
 
-	'md-visibility-off':
-		u"\uf09b",
+    'more-vert': u'',
 
-	'md-wallet-giftcard':
-		u"\uf09c",
+    'more': u'',
 
-	'md-wallet-membership':
-		u"\uf09d",
+    'movie-alt': u'',
 
-	'md-wallet-travel':
-		u"\uf09e",
+    'movie': u'',
 
-	'md-work':
-		u"\uf09f",
+    'nature-people': u'',
 
-	'md-error':
-		u"\uf0a0",
+    'nature': u'',
 
-	'md-warning':
-		u"\uf0a1",
+    'navigation': u'',
 
-	'md-album':
-		u"\uf0a2",
+    'open-in-browser': u'',
 
-	'md-av-timer':
-		u"\uf0a3",
+    'open-in-new': u'',
 
-	'md-closed-caption':
-		u"\uf0a4",
+    'palette': u'',
 
-	'md-equalizer':
-		u"\uf0a5",
+    'parking': u'',
 
-	'md-explicit':
-		u"\uf0a6",
+    'pin-account': u'',
 
-	'md-fast-forward':
-		u"\uf0a7",
+    'pin-assistant': u'',
 
-	'md-fast-rewind':
-		u"\uf0a8",
+    'pin-drop': u'',
 
-	'md-games':
-		u"\uf0a9",
+    'pin-help': u'',
 
-	'md-hearing':
-		u"\uf0aa",
+    'pin-off': u'',
 
-	'md-high-quality':
-		u"\uf0ab",
+    'pin': u'',
 
-	'md-loop':
-		u"\uf0ac",
+    'pizza': u'',
 
-	'md-mic':
-		u"\uf0ad",
+    'plaster': u'',
 
-	'md-mic-none':
-		u"\uf0ae",
+    'power-setting': u'',
 
-	'md-mic-off':
-		u"\uf0af",
+    'power': u'',
 
-	'md-movie':
-		u"\uf0b0",
+    'print': u'',
 
-	'md-my-library-add':
-		u"\uf0b1",
+    'puzzle-piece': u'',
 
-	'md-my-library-books':
-		u"\uf0b2",
+    'quote': u'',
 
-	'md-my-library-music':
-		u"\uf0b3",
+    'railway': u'',
 
-	'md-new-releases':
-		u"\uf0b4",
+    'receipt': u'',
 
-	'md-not-interested':
-		u"\uf0b5",
+    'refresh-alt': u'',
 
-	'md-pause':
-		u"\uf0b6",
+    'refresh-sync-alert': u'',
 
-	'md-pause-circle-fill':
-		u"\uf0b7",
+    'refresh-sync-off': u'',
 
-	'md-pause-circle-outline':
-		u"\uf0b8",
+    'refresh-sync': u'',
 
-	'md-play-arrow':
-		u"\uf0b9",
+    'refresh': u'',
 
-	'md-play-circle-fill':
-		u"\uf0ba",
+    'roller': u'',
 
-	'md-play-circle-outline':
-		u"\uf0bb",
+    'ruler': u'',
 
-	'md-playlist-add':
-		u"\uf0bc",
+    'scissors': u'',
 
-	'md-play-shopping-bag':
-		u"\uf0bd",
+    'screen-rotation-lock': u'',
 
-	'md-queue':
-		u"\uf0be",
+    'screen-rotation': u'',
 
-	'md-queue-music':
-		u"\uf0bf",
+    'search-for': u'',
 
-	'md-radio':
-		u"\uf0c0",
+    'search-in-file': u'',
 
-	'md-recent-actors':
-		u"\uf0c1",
+    'search-in-page': u'',
 
-	'md-repeat':
-		u"\uf0c2",
+    'search-replace': u'',
 
-	'md-repeat-one':
-		u"\uf0c3",
+    'search': u'',
 
-	'md-replay':
-		u"\uf0c4",
+    'seat': u'',
 
-	'md-shuffle':
-		u"\uf0c5",
+    'settings-square': u'',
 
-	'md-skip-next':
-		u"\uf0c6",
+    'settings': u'',
 
-	'md-skip-previous':
-		u"\uf0c7",
+    'shape': u'',
 
-	'md-snooze':
-		u"\uf0c8",
+    'shield-check': u'',
 
-	'md-stop':
-		u"\uf0c9",
+    'shield-security': u'',
 
-	'md-subtitles':
-		u"\uf0ca",
+    'shopping-basket': u'',
 
-	'md-surround-sound':
-		u"\uf0cb",
+    'shopping-cart-plus': u'',
 
-	'md-videocam':
-		u"\uf0cc",
+    'shopping-cart': u'',
 
-	'md-videocam-off':
-		u"\uf0cd",
+    'sign-in': u'',
 
-	'md-video-collection':
-		u"\uf0ce",
+    'sort-amount-asc': u'',
 
-	'md-volume-down':
-		u"\uf0cf",
+    'sort-amount-desc': u'',
 
-	'md-volume-mute':
-		u"\uf0d0",
+    'sort-asc': u'',
 
-	'md-volume-off':
-		u"\uf0d1",
+    'sort-desc': u'',
 
-	'md-volume-up':
-		u"\uf0d2",
+    'spellcheck': u'',
 
-	'md-web':
-		u"\uf0d3",
+    'spinner': u'',
 
-	'md-business':
-		u"\uf0d4",
+    'storage': u'',
 
-	'md-call':
-		u"\uf0d5",
+    'store-24': u'',
 
-	'md-call-end':
-		u"\uf0d6",
+    'store': u'',
 
-	'md-call-made':
-		u"\uf0d7",
+    'subway': u'',
 
-	'md-call-merge':
-		u"\uf0d8",
+    'sun': u'',
 
-	'md-call-missed':
-		u"\uf0d9",
+    'tab-unselected': u'',
 
-	'md-call-received':
-		u"\uf0da",
+    'tab': u'',
 
-	'md-call-split':
-		u"\uf0db",
+    'tag-close': u'',
 
-	'md-chat':
-		u"\uf0dc",
+    'tag-more': u'',
 
-	'md-clear-all':
-		u"\uf0dd",
+    'tag': u'',
 
-	'md-comment':
-		u"\uf0de",
+    'thumb-down': u'',
 
-	'md-contacts':
-		u"\uf0df",
+    'thumb-up-down': u'',
 
-	'md-dialer-sip':
-		u"\uf0e0",
+    'thumb-up': u'',
 
-	'md-dialpad':
-		u"\uf0e1",
+    'ticket-star': u'',
 
-	'md-dnd-on':
-		u"\uf0e2",
+    'toll': u'',
 
-	'md-email':
-		u"\uf0e3",
+    'toys': u'',
 
-	'md-forum':
-		u"\uf0e4",
+    'traffic': u'',
 
-	'md-import-export':
-		u"\uf0e5",
+    'translate': u'',
 
-	'md-invert-colors-off':
-		u"\uf0e6",
+    'triangle-down': u'',
 
-	'md-invert-colors-on':
-		u"\uf0e7",
+    'triangle-up': u'',
 
-	'md-live-help':
-		u"\uf0e8",
+    'truck': u'',
 
-	'md-location-off':
-		u"\uf0e9",
+    'turning-sign': u'',
 
-	'md-location-on':
-		u"\uf0ea",
+    ' ungroup': u'',
 
-	'md-message':
-		u"\uf0eb",
+    'wallpaper': u'',
 
-	'md-messenger':
-		u"\uf0ec",
+    'washing-machine': u'',
 
-	'md-no-sim':
-		u"\uf0ed",
+    'window-maximize': u'',
 
-	'md-phone':
-		u"\uf0ee",
+    'window-minimize': u'',
 
-	'md-portable-wifi-off':
-		u"\uf0ef",
+    'window-restore': u'',
 
-	'md-quick-contacts-dialer':
-		u"\uf0f0",
+    'wrench': u'',
 
-	'md-quick-contacts-mail':
-		u"\uf0f1",
+    'zoom-in': u'',
 
-	'md-ring-volume':
-		u"\uf0f2",
+    'zoom-out': u'',
 
-	'md-stay-current-landscape':
-		u"\uf0f3",
+    'alert-circle-o': u'',
 
-	'md-stay-current-portrait':
-		u"\uf0f4",
+    'alert-circle': u'',
 
-	'md-stay-primary-landscape':
-		u"\uf0f5",
+    'alert-octagon': u'',
 
-	'md-stay-primary-portrait':
-		u"\uf0f6",
+    'alert-polygon': u'',
 
-	'md-swap-calls':
-		u"\uf0f7",
+    'alert-triangle': u'',
 
-	'md-textsms':
-		u"\uf0f8",
+    'help-outline': u'',
 
-	'md-voicemail':
-		u"\uf0f9",
+    'help': u'',
 
-	'md-vpn-key':
-		u"\uf0fa",
+    'info-outline': u'',
 
-	'md-add':
-		u"\uf0fb",
+    'info': u'',
 
-	'md-add-box':
-		u"\uf0fc",
+    'notifications-active': u'',
 
-	'md-add-circle':
-		u"\uf0fd",
+    'notifications-add': u'',
 
-	'md-add-circle-outline':
-		u"\uf0fe",
+    'notifications-none': u'',
 
-	'md-archive':
-		u"\uf0ff",
+    'notifications-off': u'',
 
-	'md-backspace':
-		u"\uf100",
+    'notifications-paused': u'',
 
-	'md-block':
-		u"\uf101",
+    'notifications': u'',
 
-	'md-clear':
-		u"\uf102",
+    'account-add': u'',
 
-	'md-content-copy':
-		u"\uf103",
+    'account-box-mail': u'',
 
-	'md-content-cut':
-		u"\uf104",
+    'account-box-o': u'',
 
-	'md-content-paste':
-		u"\uf105",
+    'account-box-phone': u'',
 
-	'md-create':
-		u"\uf106",
+    'account-box': u'',
 
-	'md-drafts':
-		u"\uf107",
+    'account-calendar': u'',
 
-	'md-filter-list':
-		u"\uf108",
+    'account-circle': u'',
 
-	'md-flag':
-		u"\uf109",
+    'account-o': u'',
 
-	'md-forward':
-		u"\uf10a",
+    'account': u'',
 
-	'md-gesture':
-		u"\uf10b",
+    'accounts-add': u'',
 
-	'md-inbox':
-		u"\uf10c",
+    'accounts-alt': u'',
 
-	'md-link':
-		u"\uf10d",
+    'accounts-list-alt': u'',
 
-	'md-mail':
-		u"\uf10e",
+    'accounts-list': u'',
 
-	'md-markunread':
-		u"\uf10f",
+    'accounts-outline': u'',
 
-	'md-redo':
-		u"\uf110",
+    'accounts': u'',
 
-	'md-remove':
-		u"\uf111",
+    'face': u'',
 
-	'md-remove-circle':
-		u"\uf112",
+    'female': u'',
 
-	'md-remove-circle-outline':
-		u"\uf113",
+    'male-alt': u'',
 
-	'md-reply':
-		u"\uf114",
+    'male-female': u'',
 
-	'md-reply-all':
-		u"\uf115",
+    'male': u'',
 
-	'md-report':
-		u"\uf116",
+    'mood-bad': u'',
 
-	'md-save':
-		u"\uf117",
+    'mood': u'',
 
-	'md-select-all':
-		u"\uf118",
+    'run': u'',
 
-	'md-send':
-		u"\uf119",
+    'walk': u'',
 
-	'md-sort':
-		u"\uf11a",
+    'cloud-box': u'',
 
-	'md-text-format':
-		u"\uf11b",
+    'cloud-circle': u'',
 
-	'md-undo':
-		u"\uf11c",
+    'cloud-done': u'',
 
-	'md-access-alarm':
-		u"\uf11d",
+    'cloud-download': u'',
 
-	'md-access-alarms':
-		u"\uf11e",
+    'cloud-off': u'',
 
-	'md-access-time':
-		u"\uf11f",
+    'cloud-outline-alt': u'',
 
-	'md-add-alarm':
-		u"\uf120",
+    'cloud-outline': u'',
 
-	'md-airplanemode-off':
-		u"\uf121",
+    'cloud-upload': u'',
 
-	'md-airplanemode-on':
-		u"\uf122",
+    'cloud': u'',
 
-	'md-battery-20':
-		u"\uf123",
+    'download': u'',
 
-	'md-battery-30':
-		u"\uf124",
+    'file-plus': u'',
 
-	'md-battery-50':
-		u"\uf125",
+    'file-text': u'',
 
-	'md-battery-60':
-		u"\uf126",
+    'file': u'',
 
-	'md-battery-80':
-		u"\uf127",
+    'folder-outline': u'',
 
-	'md-battery-90':
-		u"\uf128",
+    'folder-person': u'',
 
-	'md-battery-alert':
-		u"\uf129",
+    'folder-star-alt': u'',
 
-	'md-battery-charging-20':
-		u"\uf12a",
+    'folder-star': u'',
 
-	'md-battery-charging-30':
-		u"\uf12b",
+    'folder': u'',
 
-	'md-battery-charging-50':
-		u"\uf12c",
+    'gif': u'',
 
-	'md-battery-charging-60':
-		u"\uf12d",
+    'upload': u'',
 
-	'md-battery-charging-80':
-		u"\uf12e",
+    'border-all': u'',
 
-	'md-battery-charging-90':
-		u"\uf12f",
+    'border-bottom': u'',
 
-	'md-battery-charging-full':
-		u"\uf130",
+    'border-clear': u'',
 
-	'md-battery-full':
-		u"\uf131",
+    'border-color': u'',
 
-	'md-battery-std':
-		u"\uf132",
+    'border-horizontal': u'',
 
-	'md-battery-unknown':
-		u"\uf133",
+    'border-inner': u'',
 
-	'md-bluetooth':
-		u"\uf134",
+    'border-left': u'',
 
-	'md-bluetooth-connected':
-		u"\uf135",
+    'border-outer': u'',
 
-	'md-bluetooth-disabled':
-		u"\uf136",
+    'border-right': u'',
 
-	'md-bluetooth-searching':
-		u"\uf137",
+    'border-style': u'',
 
-	'md-brightness-auto':
-		u"\uf138",
+    'border-top': u'',
 
-	'md-brightness-high':
-		u"\uf139",
+    'border-vertical': u'',
 
-	'md-brightness-low':
-		u"\uf13a",
+    'copy': u'',
 
-	'md-brightness-medium':
-		u"\uf13b",
+    'crop': u'',
 
-	'md-data-usage':
-		u"\uf13c",
+    'format-align-center': u'',
 
-	'md-developer-mode':
-		u"\uf13d",
+    'format-align-justify': u'',
 
-	'md-devices':
-		u"\uf13e",
+    'format-align-left': u'',
 
-	'md-dvr':
-		u"\uf13f",
+    'format-align-right': u'',
 
-	'md-gps-fixed':
-		u"\uf140",
+    'format-bold': u'',
 
-	'md-gps-not-fixed':
-		u"\uf141",
+    'format-clear-all': u'',
 
-	'md-gps-off':
-		u"\uf142",
+    'format-clear': u'',
 
-	'md-location-disabled':
-		u"\uf143",
+    'format-color-fill': u'',
 
-	'md-location-searching':
-		u"\uf144",
+    'format-color-reset': u'',
 
-	'md-multitrack-audio':
-		u"\uf145",
+    'format-color-text': u'',
 
-	'md-network-cell':
-		u"\uf146",
+    'format-indent-decrease': u'',
 
-	'md-network-wifi':
-		u"\uf147",
+    'format-indent-increase': u'',
 
-	'md-nfc':
-		u"\uf148",
+    'format-italic': u'',
 
-	'md-now-wallpaper':
-		u"\uf149",
+    'format-line-spacing': u'',
 
-	'md-now-widgets':
-		u"\uf14a",
+    'format-list-bulleted': u'',
 
-	'md-screen-lock-landscape':
-		u"\uf14b",
+    'format-list-numbered': u'',
 
-	'md-screen-lock-portrait':
-		u"\uf14c",
+    'format-ltr': u'',
 
-	'md-screen-lock-rotation':
-		u"\uf14d",
+    'format-rtl': u'',
 
-	'md-screen-rotation':
-		u"\uf14e",
+    'format-size': u'',
 
-	'md-sd-storage':
-		u"\uf14f",
+    'format-strikethrough-s': u'',
 
-	'md-settings-system-daydream':
-		u"\uf150",
+    'format-strikethrough': u'',
 
-	'md-signal-cellular-0-bar':
-		u"\uf151",
+    'format-subject': u'',
 
-	'md-signal-cellular-1-bar':
-		u"\uf152",
+    'format-underlined': u'',
 
-	'md-signal-cellular-2-bar':
-		u"\uf153",
+    'format-valign-bottom': u'',
 
-	'md-signal-cellular-3-bar':
-		u"\uf154",
+    'format-valign-center': u'',
 
-	'md-signal-cellular-4-bar':
-		u"\uf155",
+    'format-valign-top': u'',
 
-	'md-signal-cellular-connected-no-internet-0-bar':
-		u"\uf156",
+    'redo': u'',
 
-	'md-signal-cellular-connected-no-internet-1-bar':
-		u"\uf157",
+    'select-all': u'',
 
-	'md-signal-cellular-connected-no-internet-2-bar':
-		u"\uf158",
+    'space-bar': u'',
 
-	'md-signal-cellular-connected-no-internet-3-bar':
-		u"\uf159",
+    'text-format': u'',
 
-	'md-signal-cellular-connected-no-internet-4-bar':
-		u"\uf15a",
+    'transform': u'',
 
-	'md-signal-cellular-no-sim':
-		u"\uf15b",
+    'undo': u'',
 
-	'md-signal-cellular-null':
-		u"\uf15c",
+    'wrap-text': u'',
 
-	'md-signal-cellular-off':
-		u"\uf15d",
+    'comment-alert': u'',
 
-	'md-signal-wifi-0-bar':
-		u"\uf15e",
+    'comment-alt-text': u'',
 
-	'md-signal-wifi-1-bar':
-		u"\uf15f",
+    'comment-alt': u'',
 
-	'md-signal-wifi-2-bar':
-		u"\uf160",
+    'comment-edit': u'',
 
-	'md-signal-wifi-3-bar':
-		u"\uf161",
+    'comment-image': u'',
 
-	'md-signal-wifi-4-bar':
-		u"\uf162",
+    'comment-list': u'',
 
-	'md-signal-wifi-off':
-		u"\uf163",
+    'comment-more': u'',
 
-	'md-storage':
-		u"\uf164",
+    'comment-outline': u'',
 
-	'md-usb':
-		u"\uf165",
+    'comment-text-alt': u'',
 
-	'md-wifi-lock':
-		u"\uf166",
+    'comment-text': u'',
 
-	'md-wifi-tethering':
-		u"\uf167",
+    'comment-video': u'',
 
-	'md-attach-file':
-		u"\uf168",
+    'comment': u'',
 
-	'md-attach-money':
-		u"\uf169",
+    'comments': u'',
 
-	'md-border-all':
-		u"\uf16a",
+    'rm': u'F',
 
-	'md-border-bottom':
-		u"\uf16b",
+    'check-all': u'',
 
-	'md-border-clear':
-		u"\uf16c",
+    'check-circle-u': u'',
 
-	'md-border-color':
-		u"\uf16d",
+    'check-circle': u'',
 
-	'md-border-horizontal':
-		u"\uf16e",
+    'check-square': u'',
 
-	'md-border-inner':
-		u"\uf16f",
+    'check': u'',
 
-	'md-border-left':
-		u"\uf170",
+    'circle-o': u'',
 
-	'md-border-outer':
-		u"\uf171",
+    'circle': u'',
 
-	'md-border-right':
-		u"\uf172",
+    'dot-circle-alt': u'',
 
-	'md-border-style':
-		u"\uf173",
+    'dot-circle': u'',
 
-	'md-border-top':
-		u"\uf174",
+    'minus-circle-outline': u'',
 
-	'md-border-vertical':
-		u"\uf175",
+    'minus-circle': u'',
 
-	'md-format-align-center':
-		u"\uf176",
+    'minus-square': u'',
 
-	'md-format-align-justify':
-		u"\uf177",
+    'minus': u'',
 
-	'md-format-align-left':
-		u"\uf178",
+    'plus-circle-o-duplicate': u'',
 
-	'md-format-align-right':
-		u"\uf179",
+    'plus-circle-o': u'',
 
-	'md-format-bold':
-		u"\uf17a",
+    'plus-circle': u'',
 
-	'md-format-clear':
-		u"\uf17b",
+    'plus-square': u'',
 
-	'md-format-color-fill':
-		u"\uf17c",
+    'plus': u'',
 
-	'md-format-color-reset':
-		u"\uf17d",
+    'square-o': u'',
 
-	'md-format-color-text':
-		u"\uf17e",
+    'star-circle': u'',
 
-	'md-format-indent-decrease':
-		u"\uf17f",
+    'star-half': u'',
 
-	'md-format-indent-increase':
-		u"\uf180",
+    'star-outline': u'',
 
-	'md-format-italic':
-		u"\uf181",
+    'star': u'',
 
-	'md-format-line-spacing':
-		u"\uf182",
+    'bluetooth-connected': u'',
 
-	'md-format-list-bulleted':
-		u"\uf183",
+    'bluetooth-off': u'',
 
-	'md-format-list-numbered':
-		u"\uf184",
+    'bluetooth-search': u'',
 
-	'md-format-paint':
-		u"\uf185",
+    'bluetooth-setting': u'',
 
-	'md-format-quote':
-		u"\uf186",
+    'bluetooth': u'',
 
-	'md-format-size':
-		u"\uf187",
+    'camera-add': u'',
 
-	'md-format-strikethrough':
-		u"\uf188",
+    'camera-alt': u'',
 
-	'md-format-textdirection-l-to-r':
-		u"\uf189",
+    'camera-bw': u'',
 
-	'md-format-textdirection-r-to-l':
-		u"\uf18a",
+    'camera-front': u'',
 
-	'md-format-underline':
-		u"\uf18b",
+    'camera-mic': u'',
 
-	'md-functions':
-		u"\uf18c",
+    'camera-party-mode': u'',
 
-	'md-insert-chart':
-		u"\uf18d",
+    'camera-rear': u'',
 
-	'md-insert-comment':
-		u"\uf18e",
+    'camera-roll': u'',
 
-	'md-insert-drive-file':
-		u"\uf18f",
+    'camera-switch': u'',
 
-	'md-insert-emoticon':
-		u"\uf190",
+    'camera': u'',
 
-	'md-insert-invitation':
-		u"\uf191",
+    'card-alert': u'',
 
-	'md-insert-link':
-		u"\uf192",
+    'card-off': u'',
 
-	'md-insert-photo':
-		u"\uf193",
+    'card-sd': u'',
 
-	'md-merge-type':
-		u"\uf194",
+    'card-sim': u'',
 
-	'md-mode-comment':
-		u"\uf195",
+    'desktop-mac': u'',
 
-	'md-mode-edit':
-		u"\uf196",
+    'desktop-windows': u'',
 
-	'md-publish':
-		u"\uf197",
+    'device-hub': u'',
 
-	'md-vertical-align-bottom':
-		u"\uf198",
+    'devices-off': u'',
 
-	'md-vertical-align-center':
-		u"\uf199",
+    'devices': u'',
 
-	'md-vertical-align-top':
-		u"\uf19a",
+    'dock': u'',
 
-	'md-wrap-text':
-		u"\uf19b",
+    'floppy': u'',
 
-	'md-attachment':
-		u"\uf19c",
+    'gamepad': u'',
 
-	'md-cloud':
-		u"\uf19d",
+    'gps-dot': u'',
 
-	'md-cloud-circle':
-		u"\uf19e",
+    'gps-off': u'',
 
-	'md-cloud-done':
-		u"\uf19f",
+    'gps': u'',
 
-	'md-cloud-download':
-		u"\uf1a0",
+    'headset-mic': u'',
 
-	'md-cloud-off':
-		u"\uf1a1",
+    'headset': u'',
 
-	'md-cloud-queue':
-		u"\uf1a2",
+    'input-antenna': u'',
 
-	'md-cloud-upload':
-		u"\uf1a3",
+    'input-composite': u'',
 
-	'md-file-download':
-		u"\uf1a4",
+    'input-hdmi': u'',
 
-	'md-file-upload':
-		u"\uf1a5",
+    'input-power': u'',
 
-	'md-folder':
-		u"\uf1a6",
+    'input-svideo': u'',
 
-	'md-folder-open':
-		u"\uf1a7",
+    'keyboard-hide': u'',
 
-	'md-folder-shared':
-		u"\uf1a8",
+    'keyboard': u'',
 
-	'md-cast':
-		u"\uf1a9",
+    'laptop-chromebook': u'',
 
-	'md-cast-connected':
-		u"\uf1aa",
+    'laptop-mac': u'',
 
-	'md-computer':
-		u"\uf1ab",
+    'laptop': u'',
 
-	'md-desktop-mac':
-		u"\uf1ac",
+    'mic-off': u'',
 
-	'md-desktop-windows':
-		u"\uf1ad",
+    'mic-outline': u'',
 
-	'md-dock':
-		u"\uf1ae",
+    'mic-setting': u'',
 
-	'md-gamepad':
-		u"\uf1af",
+    'mic': u'',
 
-	'md-headset':
-		u"\uf1b0",
+    'mouse': u'',
 
-	'md-headset-mic':
-		u"\uf1b1",
+    'network-alert': u'',
 
-	'md-keyboard':
-		u"\uf1b2",
+    'network-locked': u'',
 
-	'md-keyboard-alt':
-		u"\uf1b3",
+    'network-off': u'',
 
-	'md-keyboard-arrow-down':
-		u"\uf1b4",
+    'network-outline': u'',
 
-	'md-keyboard-arrow-left':
-		u"\uf1b5",
+    'network-setting': u'',
 
-	'md-keyboard-arrow-right':
-		u"\uf1b6",
+    'network': u'',
 
-	'md-keyboard-arrow-up':
-		u"\uf1b7",
+    'phone-bluetooth': u'',
 
-	'md-keyboard-backspace':
-		u"\uf1b8",
+    'phone-end': u'',
 
-	'md-keyboard-capslock':
-		u"\uf1b9",
+    'phone-forwarded': u'',
 
-	'md-keyboard-control':
-		u"\uf1ba",
+    'phone-in-talk': u'',
 
-	'md-keyboard-hide':
-		u"\uf1bb",
+    'phone-locked': u'',
 
-	'md-keyboard-return':
-		u"\uf1bc",
+    'phone-missed': u'',
 
-	'md-keyboard-tab':
-		u"\uf1bd",
+    'phone-msg': u'',
 
-	'md-keyboard-voice':
-		u"\uf1be",
+    'phone-paused': u'',
 
-	'md-laptop':
-		u"\uf1bf",
+    'phone-ring': u'',
 
-	'md-laptop-chromebook':
-		u"\uf1c0",
+    'phone-setting': u'',
 
-	'md-laptop-mac':
-		u"\uf1c1",
+    'phone-sip': u'',
 
-	'md-laptop-windows':
-		u"\uf1c2",
+    'phone': u'',
 
-	'md-memory':
-		u"\uf1c3",
+    'portable-wifi-changes': u'',
 
-	'md-mouse':
-		u"\uf1c4",
+    'portable-wifi-off': u'',
 
-	'md-phone-android':
-		u"\uf1c5",
+    'portable-wifi': u'',
 
-	'md-phone-iphone':
-		u"\uf1c6",
+    'radio': u'',
 
-	'md-phonelink':
-		u"\uf1c7",
+    'reader': u'',
 
-	'md-phonelink-off':
-		u"\uf1c8",
+    'remote-control-alt': u'',
 
-	'md-security':
-		u"\uf1c9",
+    'remote-control': u'',
 
-	'md-sim-card':
-		u"\uf1ca",
+    'router': u'',
 
-	'md-smartphone':
-		u"\uf1cb",
+    'scanner': u'',
 
-	'md-speaker':
-		u"\uf1cc",
+    'smartphone-android': u'',
 
-	'md-tablet':
-		u"\uf1cd",
+    'smartphone-download': u'',
 
-	'md-tablet-android':
-		u"\uf1ce",
+    'smartphone-erase': u'',
 
-	'md-tablet-mac':
-		u"\uf1cf",
+    'smartphone-info': u'',
 
-	'md-tv':
-		u"\uf1d0",
+    'smartphone-iphone': u'',
 
-	'md-watch':
-		u"\uf1d1",
+    'smartphone-landscape-lock': u'',
 
-	'md-add-to-photos':
-		u"\uf1d2",
+    'smartphone-landscape': u'',
 
-	'md-adjust':
-		u"\uf1d3",
+    'smartphone-lock': u'',
 
-	'md-assistant-photo':
-		u"\uf1d4",
+    'smartphone-portrait-lock': u'',
 
-	'md-audiotrack':
-		u"\uf1d5",
+    'smartphone-ring': u'',
 
-	'md-blur-circular':
-		u"\uf1d6",
+    'smartphone-setting': u'',
 
-	'md-blur-linear':
-		u"\uf1d7",
+    'smartphone-setup': u'',
 
-	'md-blur-off':
-		u"\uf1d8",
+    'smartphone': u'',
 
-	'md-blur-on':
-		u"\uf1d9",
+    'speaker': u'',
 
-	'md-brightness-1':
-		u"\uf1da",
+    'tablet-android': u'',
 
-	'md-brightness-2':
-		u"\uf1db",
+    'tablet-mac': u'',
 
-	'md-brightness-3':
-		u"\uf1dc",
+    'tablet': u'',
 
-	'md-brightness-4':
-		u"\uf1dd",
+    'tv-alt-play': u'',
 
-	'md-brightness-5':
-		u"\uf1de",
+    'tv-list': u'',
 
-	'md-brightness-6':
-		u"\uf1df",
+    'tv-play': u'',
 
-	'md-brightness-7':
-		u"\uf1e0",
+    'tv': u'',
 
-	'md-brush':
-		u"\uf1e1",
+    'usb': u'',
 
-	'md-camera':
-		u"\uf1e2",
+    'videocam-off': u'',
 
-	'md-camera-alt':
-		u"\uf1e3",
+    'videocam-switch': u'',
 
-	'md-camera-front':
-		u"\uf1e4",
+    'videocam': u'',
 
-	'md-camera-rear':
-		u"\uf1e5",
+    'watch': u'',
 
-	'md-camera-roll':
-		u"\uf1e6",
+    'wifi-alt-2': u'',
 
-	'md-center-focus-strong':
-		u"\uf1e7",
+    'wifi-alt': u'',
 
-	'md-center-focus-weak':
-		u"\uf1e8",
+    'wifi-info': u'',
 
-	'md-collections':
-		u"\uf1e9",
+    'wifi-lock': u'',
 
-	'md-colorize':
-		u"\uf1ea",
+    'wifi-off': u'',
 
-	'md-color-lens':
-		u"\uf1eb",
+    'wifi-outline': u'',
 
-	'md-compare':
-		u"\uf1ec",
+    'wifi': u'',
 
-	'md-control-point':
-		u"\uf1ed",
+    'arrow-left-bottom': u'',
 
-	'md-control-point-duplicate':
-		u"\uf1ee",
+    'arrow-left': u'',
 
-	'md-crop':
-		u"\uf1ef",
+    'arrow-merge': u'',
 
-	'md-crop-3-2':
-		u"\uf1f0",
+    'arrow-missed': u'',
 
-	'md-crop-5-4':
-		u"\uf1f1",
+    'arrow-right-top': u'',
 
-	'md-crop-7-5':
-		u"\uf1f2",
+    'arrow-right': u'',
 
-	'md-crop-16-9':
-		u"\uf1f3",
+    'arrow-split': u'',
 
-	'md-crop-din':
-		u"\uf1f4",
+    'arrows': u'',
 
-	'md-crop-free':
-		u"\uf1f5",
+    'caret-down-circle': u'',
 
-	'md-crop-landscape':
-		u"\uf1f6",
+    'caret-down': u'',
 
-	'md-crop-original':
-		u"\uf1f7",
+    'caret-left-circle': u'',
 
-	'md-crop-portrait':
-		u"\uf1f8",
+    'caret-left': u'',
 
-	'md-crop-square':
-		u"\uf1f9",
+    'caret-right-circle': u'',
 
-	'md-dehaze':
-		u"\uf1fa",
+    'caret-right': u'',
 
-	'md-details':
-		u"\uf1fb",
+    'caret-up-circle': u'',
 
-	'md-edit':
-		u"\uf1fc",
+    'caret-up': u'',
 
-	'md-exposure':
-		u"\uf1fd",
+    'chevron-down': u'',
 
-	'md-exposure-minus-1':
-		u"\uf1fe",
+    'chevron-left': u'',
 
-	'md-exposure-minus-2':
-		u"\uf1ff",
+    'chevron-right': u'',
 
-	'md-exposure-zero':
-		u"\uf200",
+    'chevron-up': u'',
 
-	'md-exposure-plus-1':
-		u"\uf201",
+    'forward': u'',
 
-	'md-exposure-plus-2':
-		u"\uf202",
+    'long-arrow-down': u'',
 
-	'md-filter':
-		u"\uf203",
+    'long-arrow-left': u'',
 
-	'md-filter-1':
-		u"\uf204",
+    'long-arrow-return': u'',
 
-	'md-filter-2':
-		u"\uf205",
+    'long-arrow-right': u'',
 
-	'md-filter-3':
-		u"\uf206",
+    'long-arrow-tab': u'',
 
-	'md-filter-4':
-		u"\uf207",
+    'long-arrow-up': u'',
 
-	'md-filter-5':
-		u"\uf208",
+    'rotate-ccw': u'',
 
-	'md-filter-6':
-		u"\uf209",
+    'rotate-cw': u'',
 
-	'md-filter-7':
-		u"\uf20a",
+    'rotate-left': u'',
 
-	'md-filter-8':
-		u"\uf20b",
+    'rotate-right': u'',
 
-	'md-filter-9':
-		u"\uf20c",
+    'square-down': u'',
 
-	'md-filter-9-plus':
-		u"\uf20d",
+    'square-right': u'',
 
-	'md-filter-b-and-w':
-		u"\uf20e",
+    'swap-alt': u'',
 
-	'md-filter-center-focus':
-		u"\uf20f",
+    'swap-vertical-circle': u'',
 
-	'md-filter-drama':
-		u"\uf210",
+    'swap-vertical': u'',
 
-	'md-filter-frames':
-		u"\uf211",
+    'swap': u'',
 
-	'md-filter-hdr':
-		u"\uf212",
+    'trending-down': u'',
 
-	'md-filter-none':
-		u"\uf213",
+    'trending-flat': u'',
 
-	'md-filter-tilt-shift':
-		u"\uf214",
+    'trending-up': u'',
 
-	'md-filter-vintage':
-		u"\uf215",
+    'unfold-less': u'',
 
-	'md-flare':
-		u"\uf216",
+    'unfold-more': u'',
 
-	'md-flash-auto':
-		u"\uf217",
+    'apps': u'',
 
-	'md-flash-off':
-		u"\uf218",
+    'grid-off': u'',
 
-	'md-flash-on':
-		u"\uf219",
+    'grid': u'',
 
-	'md-flip':
-		u"\uf21a",
+    'view-agenda': u'',
 
-	'md-gradient':
-		u"\uf21b",
+    'view-array': u'',
 
-	'md-grain':
-		u"\uf21c",
+    'view-carousel': u'',
 
-	'md-grid-off':
-		u"\uf21d",
+    'view-column': u'',
 
-	'md-grid-on':
-		u"\uf21e",
+    'view-comfy': u'',
 
-	'md-hdr-off':
-		u"\uf21f",
+    'view-compact': u'',
 
-	'md-hdr-on':
-		u"\uf220",
+    'view-dashboard': u'',
 
-	'md-hdr-strong':
-		u"\uf221",
+    'view-day': u'',
 
-	'md-hdr-weak':
-		u"\uf222",
+    'view-headline': u'',
 
-	'md-healing':
-		u"\uf223",
+    'view-list-alt': u'',
 
-	'md-image':
-		u"\uf224",
+    'view-list': u'',
 
-	'md-image-aspect-ratio':
-		u"\uf225",
+    'view-module': u'',
 
-	'md-iso':
-		u"\uf226",
+    'view-quilt': u'',
 
-	'md-landscape':
-		u"\uf227",
+    'view-stream': u'',
 
-	'md-leak-add':
-		u"\uf228",
+    'view-subtitles': u'',
 
-	'md-leak-remove':
-		u"\uf229",
+    'view-toc': u'',
 
-	'md-lens':
-		u"\uf22a",
+    'view-web': u'',
 
-	'md-looks':
-		u"\uf22b",
+    'view-week': u'',
 
-	'md-looks-1':
-		u"\uf22c",
+    'widgets': u'',
 
-	'md-looks-2':
-		u"\uf22d",
+    'alarm-check': u'',
 
-	'md-looks-3':
-		u"\uf22e",
+    'alarm-off': u'',
 
-	'md-looks-4':
-		u"\uf22f",
+    'alarm-plus': u'',
 
-	'md-looks-5':
-		u"\uf230",
+    'alarm-snooze': u'',
 
-	'md-looks-6':
-		u"\uf231",
+    'alarm': u'',
 
-	'md-loupe':
-		u"\uf232",
+    'calendar-alt': u'',
 
-	'md-movie-creation':
-		u"\uf233",
+    'calendar-check': u'',
 
-	'md-nature':
-		u"\uf234",
+    'calendar-close': u'',
 
-	'md-nature-people':
-		u"\uf235",
+    'calendar-note': u'',
 
-	'md-navigate-before':
-		u"\uf236",
+    'calendar': u'',
 
-	'md-navigate-next':
-		u"\uf237",
+    'time-countdown': u'',
 
-	'md-palette':
-		u"\uf238",
+    'time-interval': u'',
 
-	'md-panorama':
-		u"\uf239",
+    'time-restore-setting': u'',
 
-	'md-panorama-fisheye':
-		u"\uf23a",
+    'time-restore': u'',
 
-	'md-panorama-horizontal':
-		u"\uf23b",
+    'time': u'',
 
-	'md-panorama-vertical':
-		u"\uf23c",
+    'timer-off': u'',
 
-	'md-panorama-wide-angle':
-		u"\uf23d",
+    'timer': u'',
 
-	'md-photo':
-		u"\uf23e",
+    'android-alt': u'',
 
-	'md-photo-album':
-		u"\uf23f",
+    'android': u'',
 
-	'md-photo-camera':
-		u"\uf240",
+    'apple': u'',
 
-	'md-photo-library':
-		u"\uf241",
+    'behance': u'',
 
-	'md-portrait':
-		u"\uf242",
+    'codepen': u'',
 
-	'md-remove-red-eye':
-		u"\uf243",
+    'dribbble': u'',
 
-	'md-rotate-left':
-		u"\uf244",
+    'dropbox': u'',
 
-	'md-rotate-right':
-		u"\uf245",
+    'evernote': u'',
 
-	'md-slideshow':
-		u"\uf246",
+    'facebook-box': u'',
 
-	'md-straighten':
-		u"\uf247",
+    'facebook': u'',
 
-	'md-style':
-		u"\uf248",
+    'github-box': u'',
 
-	'md-switch-camera':
-		u"\uf249",
+    'github': u'',
 
-	'md-switch-video':
-		u"\uf24a",
+    'google-drive': u'',
 
-	'md-tag-faces':
-		u"\uf24b",
+    'google-earth': u'',
 
-	'md-texture':
-		u"\uf24c",
+    'google-glass': u'',
 
-	'md-timelapse':
-		u"\uf24d",
+    'google-maps': u'',
 
-	'md-timer':
-		u"\uf24e",
+    'google-pages': u'',
 
-	'md-timer-3':
-		u"\uf24f",
+    'google-play': u'',
 
-	'md-timer-10':
-		u"\uf250",
+    'google-plus-box': u'',
 
-	'md-timer-auto':
-		u"\uf251",
+    'google-plus': u'',
 
-	'md-timer-off':
-		u"\uf252",
+    'google': u'',
 
-	'md-tonality':
-		u"\uf253",
+    'instagram': u'',
 
-	'md-transform':
-		u"\uf254",
+    'language-css3': u'',
 
-	'md-tune':
-		u"\uf255",
+    'language-html5': u'',
 
-	'md-wb-auto':
-		u"\uf256",
+    'language-javascript': u'',
 
-	'md-wb-cloudy':
-		u"\uf257",
+    'language-python-alt': u'',
 
-	'md-wb-incandescent':
-		u"\uf258",
+    'language-python': u'',
 
-	'md-wb-irradescent':
-		u"\uf259",
+    'lastfm': u'',
 
-	'md-wb-sunny':
-		u"\uf25a",
+    'linkedin-box': u'',
 
-	'md-beenhere':
-		u"\uf25b",
+    'paypal': u'',
 
-	'md-directions':
-		u"\uf25c",
+    'pinterest-box': u'',
 
-	'md-directions-bike':
-		u"\uf25d",
+    'pocket': u'',
 
-	'md-directions-bus':
-		u"\uf25e",
+    'polymer': u'',
 
-	'md-directions-car':
-		u"\uf25f",
+    'rss': u'',
 
-	'md-directions-ferry':
-		u"\uf260",
+    'share': u'',
 
-	'md-directions-subway':
-		u"\uf261",
+    'stackoverflow': u'',
 
-	'md-directions-train':
-		u"\uf262",
+    'steam-square': u'',
 
-	'md-directions-transit':
-		u"\uf263",
+    'steam': u'',
 
-	'md-directions-walk':
-		u"\uf264",
+    'twitter-box': u'',
 
-	'md-flight':
-		u"\uf265",
+    'twitter': u'',
 
-	'md-hotel':
-		u"\uf266",
+    'vk': u'',
 
-	'md-layers':
-		u"\uf267",
+    'wikipedia': u'',
 
-	'md-layers-clear':
-		u"\uf268",
+    'windows': u'',
 
-	'md-local-airport':
-		u"\uf269",
+    '500px': u'',
 
-	'md-local-atm':
-		u"\uf26a",
+    '8tracks': u'',
 
-	'md-local-attraction':
-		u"\uf26b",
+    'amazon': u'',
 
-	'md-local-bar':
-		u"\uf26c",
+    'blogger': u'',
 
-	'md-local-cafe':
-		u"\uf26d",
+    'delicious': u'',
 
-	'md-local-car-wash':
-		u"\uf26e",
+    'disqus': u'',
 
-	'md-local-convenience-store':
-		u"\uf26f",
+    'flattr': u'',
 
-	'md-local-drink':
-		u"\uf270",
+    'flickr': u'',
 
-	'md-local-florist':
-		u"\uf271",
+    'github-alt': u'',
 
-	'md-local-gas-station':
-		u"\uf272",
+    'google-old': u'',
 
-	'md-local-grocery-store':
-		u"\uf273",
+    'linkedin': u'',
 
-	'md-local-hospital':
-		u"\uf274",
+    'odnoklassniki': u'',
 
-	'md-local-hotel':
-		u"\uf275",
+    'outlook': u'',
 
-	'md-local-laundry-service':
-		u"\uf276",
+    'paypal-alt': u'',
 
-	'md-local-library':
-		u"\uf277",
+    'pinterest': u'',
 
-	'md-local-mall':
-		u"\uf278",
+    'playstation': u'',
 
-	'md-local-movies':
-		u"\uf279",
+    'reddit': u'',
 
-	'md-local-offer':
-		u"\uf27a",
+    'skype': u'',
 
-	'md-local-parking':
-		u"\uf27b",
+    'slideshare': u'',
 
-	'md-local-pharmacy':
-		u"\uf27c",
+    'soundcloud': u'',
 
-	'md-local-phone':
-		u"\uf27d",
+    'tumblr': u'',
 
-	'md-local-pizza':
-		u"\uf27e",
+    'twitch': u'',
 
-	'md-local-play':
-		u"\uf27f",
+    'vimeo': u'',
 
-	'md-local-post-office':
-		u"\uf280",
+    'whatsapp': u'',
 
-	'md-local-print-shop':
-		u"\uf281",
+    'xbox': u'',
 
-	'md-local-restaurant':
-		u"\uf282",
+    'yahoo': u'',
 
-	'md-local-see':
-		u"\uf283",
+    'youtube-play': u'',
 
-	'md-local-shipping':
-		u"\uf284",
+    'youtube': u'',
 
-	'md-local-taxi':
-		u"\uf285",
+    'aspect-ratio-alt': u'',
 
-	'md-location-history':
-		u"\uf286",
+    'aspect-ratio': u'',
 
-	'md-map':
-		u"\uf287",
+    'blur-circular': u'',
 
-	'md-my-location':
-		u"\uf288",
+    'blur-linear': u'',
 
-	'md-navigation':
-		u"\uf289",
+    'blur-off': u'',
 
-	'md-pin-drop':
-		u"\uf28a",
+    'blur': u'',
 
-	'md-place':
-		u"\uf28b",
+    'brightness-2': u'',
 
-	'md-rate-review':
-		u"\uf28c",
+    'brightness-3': u'',
 
-	'md-restaurant-menu':
-		u"\uf28d",
+    'brightness-4': u'',
 
-	'md-satellite':
-		u"\uf28e",
+    'brightness-5': u'',
 
-	'md-store-mall-directory':
-		u"\uf28f",
+    'brightness-6': u'',
 
-	'md-terrain':
-		u"\uf290",
+    'brightness-7': u'',
 
-	'md-traffic':
-		u"\uf291",
+    'brightness-auto': u'',
 
-	'md-apps':
-		u"\uf292",
+    'brightness-setting': u'',
 
-	'md-cancel':
-		u"\uf293",
+    'broken-image': u'',
 
-	'md-arrow-drop-down-circle':
-		u"\uf294",
+    'center-focus-strong': u'',
 
-	'md-arrow-drop-down':
-		u"\uf295",
+    'center-focus-weak': u'',
 
-	'md-arrow-drop-up':
-		u"\uf296",
+    'compare': u'',
 
-	'md-arrow-back':
-		u"\uf297",
+    'crop-16-9': u'',
 
-	'md-arrow-forward':
-		u"\uf298",
+    'crop-3-2': u'',
 
-	'md-check':
-		u"\uf299",
+    'crop-5-4': u'',
 
-	'md-close':
-		u"\uf29a",
+    'crop-7-5': u'',
 
-	'md-chevron-left':
-		u"\uf29b",
+    'crop-din': u'',
 
-	'md-chevron-right':
-		u"\uf29c",
+    'crop-free': u'',
 
-	'md-expand-less':
-		u"\uf29d",
+    'crop-landscape': u'',
 
-	'md-expand-more':
-		u"\uf29e",
+    'crop-portrait': u'',
 
-	'md-fullscreen':
-		u"\uf29f",
+    'crop-square': u'',
 
-	'md-fullscreen-exit':
-		u"\uf2a0",
+    'exposure-alt': u'',
 
-	'md-menu':
-		u"\uf2a1",
+    'exposure': u'',
 
-	'md-more-horiz':
-		u"\uf2a2",
+    'filter-b-and-w': u'',
 
-	'md-more-vert':
-		u"\uf2a3",
+    'filter-center-focus': u'',
 
-	'md-refresh':
-		u"\uf2a4",
+    'filter-frames': u'',
 
-	'md-unfold-less':
-		u"\uf2a5",
+    'filter-tilt-shift': u'',
 
-	'md-unfold-more':
-		u"\uf2a6",
+    'gradient': u'',
 
-	'md-adb':
-		u"\uf2a7",
+    'grain': u'',
 
-	'md-bluetooth-audio':
-		u"\uf2a8",
+    'graphic-eq': u'',
 
-	'md-disc-full':
-		u"\uf2a9",
+    'hdr-off': u'',
 
-	'md-dnd-forwardslash':
-		u"\uf2aa",
+    'hdr-strong': u'',
 
-	'md-do-not-disturb':
-		u"\uf2ab",
+    'hdr-weak': u'',
 
-	'md-drive-eta':
-		u"\uf2ac",
+    'hdr': u'',
 
-	'md-event-available':
-		u"\uf2ad",
+    'iridescent': u'',
 
-	'md-event-busy':
-		u"\uf2ae",
+    'leak-off': u'',
 
-	'md-event-note':
-		u"\uf2af",
+    'leak': u'',
 
-	'md-folder-special':
-		u"\uf2b0",
+    'looks': u'',
 
-	'md-mms':
-		u"\uf2b1",
+    'loupe': u'',
 
-	'md-more':
-		u"\uf2b2",
+    'panorama-horizontal': u'',
 
-	'md-network-locked':
-		u"\uf2b3",
+    'panorama-vertical': u'',
 
-	'md-phone-bluetooth-speaker':
-		u"\uf2b4",
+    'panorama-wide-angle': u'',
 
-	'md-phone-forwarded':
-		u"\uf2b5",
+    'photo-size-select-large': u'',
 
-	'md-phone-in-talk':
-		u"\uf2b6",
+    'photo-size-select-small': u'',
 
-	'md-phone-locked':
-		u"\uf2b7",
+    'picture-in-picture': u'',
 
-	'md-phone-missed':
-		u"\uf2b8",
+    'slideshow': u'',
 
-	'md-phone-paused':
-		u"\uf2b9",
+    'texture': u'',
 
-	'md-play-download':
-		u"\uf2ba",
+    'tonality': u'',
 
-	'md-play-install':
-		u"\uf2bb",
+    'vignette': u'',
 
-	'md-sd-card':
-		u"\uf2bc",
+    'wb-auto': u'',
 
-	'md-sim-card-alert':
-		u"\uf2bd",
+    'eject-alt': u'',
 
-	'md-sms':
-		u"\uf2be",
+    'eject': u'',
 
-	'md-sms-failed':
-		u"\uf2bf",
+    'equalizer': u'',
 
-	'md-sync':
-		u"\uf2c0",
+    'fast-forward': u'',
 
-	'md-sync-disabled':
-		u"\uf2c1",
+    'fast-rewind': u'',
 
-	'md-sync-problem':
-		u"\uf2c2",
+    'forward-10': u'',
 
-	'md-system-update':
-		u"\uf2c3",
+    'forward-30': u'',
 
-	'md-tap-and-play':
-		u"\uf2c4",
+    'forward-5': u'',
 
-	'md-time-to-leave':
-		u"\uf2c5",
+    'hearing': u'',
 
-	'md-vibration':
-		u"\uf2c6",
+    'pause-circle-outline': u'',
 
-	'md-voice-chat':
-		u"\uf2c7",
+    'pause-circle': u'',
 
-	'md-vpn-lock':
-		u"\uf2c8",
+    'pause': u'',
 
-	'md-cake':
-		u"\uf2c9",
+    'play-circle-outline': u'',
 
-	'md-domain':
-		u"\uf2ca",
+    'play-circle': u'',
 
-	'md-location-city':
-		u"\uf2cb",
+    'play': u'',
 
-	'md-mood':
-		u"\uf2cc",
+    'playlist-audio': u'',
 
-	'md-notifications-none':
-		u"\uf2cd",
+    'playlist-plus': u'',
 
-	'md-notifications':
-		u"\uf2ce",
+    'repeat-one': u'',
 
-	'md-notifications-off':
-		u"\uf2cf",
+    'repeat': u'',
 
-	'md-notifications-on':
-		u"\uf2d0",
+    'replay-10': u'',
 
-	'md-notifications-paused':
-		u"\uf2d1",
+    'replay-30': u'',
 
-	'md-pages':
-		u"\uf2d2",
+    'replay-5': u'',
 
-	'md-party-mode':
-		u"\uf2d3",
+    'replay': u'',
 
-	'md-group':
-		u"\uf2d4",
+    'shuffle': u'',
 
-	'md-group-add':
-		u"\uf2d5",
+    'skip-next': u'',
 
-	'md-people':
-		u"\uf2d6",
+    'skip-previous': u'',
 
-	'md-people-outline':
-		u"\uf2d7",
+    'stop': u'',
 
-	'md-person':
-		u"\uf2d8",
+    'surround-sound': u'',
 
-	'md-person-add':
-		u"\uf2d9",
+    'tune': u'',
 
-	'md-person-outline':
-		u"\uf2da",
+    'volume-down': u'',
 
-	'md-plus-one':
-		u"\uf2db",
+    'volume-mute': u'',
 
-	'md-poll':
-		u"\uf2dc",
+    'volume-off': u'',
 
-	'md-public':
-		u"\uf2dd",
+    'volume-up': u'',
 
-	'md-school':
-		u"\uf2de",
+    'n-1-square': u'',
 
-	'md-share':
-		u"\uf2df",
+    'n-2-square': u'',
 
-	'md-whatshot':
-		u"\uf2e0",
+    'n-3-square': u'',
 
-	'md-check-box':
-		u"\uf2e1",
+    'n-4-square': u'',
 
-	'md-check-box-outline-blank':
-		u"\uf2e2",
+    'n-5-square': u'',
 
-	'md-radio-button-off':
-		u"\uf2e3",
+    'n-6-square': u'',
 
-	'md-radio-button-on':
-		u"\uf2e4",
+    'neg-1': u'',
 
-	'md-star':
-		u"\uf2e5",
+    'neg-2': u'',
 
-	'md-star-half':
-		u"\uf2e6",
+    'plus-1': u'',
 
-	'md-star-outline':
-		u"\uf2e7",
+    'plus-2': u'',
 
+    'sec-10': u'',
+
+    'sec-3': u'',
+
+    'zero': u'',
+
+    'airline-seat-flat-angled': u'',
+
+    'airline-seat-flat': u'',
+
+    'airline-seat-individual-suite': u'',
+
+    'airline-seat-legroom-extra': u'',
+
+    'airline-seat-legroom-normal': u'',
+
+    'airline-seat-legroom-reduced': u'',
+
+    'airline-seat-recline-extra': u'',
+
+    'airline-seat-recline-normal': u'',
+
+    'airplay': u'',
+
+    'closed-caption': u'',
+
+    'confirmation-number': u'',
+
+    'developer-board': u'',
+
+    'disc-full': u'',
+
+    'explicit': u'',
+
+    'flight-land': u'',
+
+    'flight-takeoff': u'',
+
+    'flip-to-back': u'',
+
+    'flip-to-front': u'',
+
+    'group-work': u'',
+
+    'hd': u'',
+
+    'hq': u'',
+
+    'markunread-mailbox': u'',
+
+    'memory': u'',
+
+    'nfc': u'',
+
+    'play-for-work': u'',
+
+    'power-input': u'',
+
+    'present-to-all': u'',
+
+    'satellite': u'',
+
+    'tap-and-play': u'',
+
+    'vibration': u'',
+
+    'voicemail': u'',
 }
