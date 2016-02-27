@@ -12,7 +12,7 @@ setup(name='kivymd',
       url='https://github.com/mixedCase/kivymd',
       packages=['kivymd'],
       package_data={
-	      'kivymd': ['images/*.png', 'images/*.jpg', 'images/*.atlas',
-	                 'fonts/*.ttf']},
+          'kivymd': ['images/*.png', 'images/*.jpg', 'images/*.atlas',
+                     'fonts/*.ttf']},
       requires=['kivy']
       )

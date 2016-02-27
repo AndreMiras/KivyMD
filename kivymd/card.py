@@ -7,21 +7,21 @@ from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <MDCard>
-	canvas:
-		Color:
-			rgba: self.background_color
-		RoundedRectangle:
-			size: self.size
-			pos: self.pos
-			radius: [dp(3)]
-	background_color: self.theme_cls.bg_light
+    canvas:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(3)]
+    background_color: self.theme_cls.bg_light
 ''')
 
 
 class MDCard(ThemableBehavior, ElevationBehavior, BoxLayout):
-	r = BoundedNumericProperty(1., min=0., max=1.)
-	g = BoundedNumericProperty(1., min=0., max=1.)
-	b = BoundedNumericProperty(1., min=0., max=1.)
-	a = BoundedNumericProperty(0., min=0., max=1.)
+    r = BoundedNumericProperty(1., min=0., max=1.)
+    g = BoundedNumericProperty(1., min=0., max=1.)
+    b = BoundedNumericProperty(1., min=0., max=1.)
+    a = BoundedNumericProperty(0., min=0., max=1.)
 
-	background_color = ReferenceListProperty(r, g, b, a)
+    background_color = ReferenceListProperty(r, g, b, a)
