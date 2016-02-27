@@ -3,7 +3,7 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import ListProperty, StringProperty
-from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.button import MDIconButton
 from kivymd.theming import ThemableBehavior
@@ -13,39 +13,33 @@ Builder.load_string('''
 #:import m_res kivymd.material_resources
 <Toolbar>
     size_hint_y: None
-    pos_hint: {'center_y': 0.5}
     height: root.theme_cls.standard_increment
     background_color: root.theme_cls.primary_color
+    padding: [root.theme_cls.horizontal_margins - dp(12), 0]
     elevation: 6
     BoxLayout:
         id: left_actions
         orientation: 'horizontal'
-        size_hint: (None, None)
-        height: dp(48)
-        x: root.x + root.theme_cls.horizontal_margins - dp(12)
-        y: root.y + root.height - (root.theme_cls.standard_increment - self.height)/2 - self.height
+        size_hint_x: None
+        padding: [0, (self.height - dp(48))/2]
+    BoxLayout:
+        padding: [dp(72) - left_actions.width - root.padding[0], 0]
+        MDLabel:
+            font_style: 'Title'
+            opposite_colors: True
+            text: root.title
+            shorten: True
+            shorten_from: 'right'
     BoxLayout:
         id: right_actions
         orientation: 'horizontal'
-        size_hint: (None, None)
-        height: dp(48)
-        x: root.width - root.theme_cls.horizontal_margins + dp(12) - self.width
-        y: root.y + root.height - (root.theme_cls.standard_increment - self.height)/2 - self.height
-    MDLabel:
         size_hint_x: None
-        width: right_actions.x - self.x - dp(12)
-        x: root.x + left_actions.width + dp(24)
-        y: root.y
-        font_style: 'Title'
-        opposite_colors: True
-        text: root.title
-        shorten: True
-        shorten_from: 'right'
+        padding: [0, (self.height - dp(48))/2]
 ''')
 
 
 class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
-              RelativeLayout):
+              BoxLayout):
     left_action_items = ListProperty()
     """The icons on the left of the toolbar.
 
