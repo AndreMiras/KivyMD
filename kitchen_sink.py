@@ -31,17 +31,17 @@ main_widget_kv = '''
 #:import MDDropdownMenu kivymd.menu.MDDropdownMenu
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
+#:import SmartTile kivymd.grid.SmartTile
 
-RelativeLayout:
+BoxLayout:
+    orientation: 'vertical'
     Toolbar:
         id: toolbar
         title: 'KivyMD Kitchen Sink'
         left_action_items: [['menu', lambda x: nav_drawer.toggle()]]
-        right_action_items: [['more-vert', lambda x: None]]
+        right_action_items: [['more-vert', lambda x: app.test()]]
     ScreenManager:
         id: scr_mngr
-        size_hint_y: None
-        height: root.height - toolbar.height
         Screen:
             name: 'bottomsheet'
             MDRaisedButton:
@@ -97,6 +97,39 @@ RelativeLayout:
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 opposite_colors: True
                 on_release: app.show_example_dialog()
+        Screen:
+            name: 'grid'
+            ScrollView:
+                do_scroll_x: False
+                GridLayout:
+                    cols: 3
+                    row_default_height: (self.width - self.cols*self.spacing[0])/self.cols
+                    row_force_default: True
+                    size_hint_y: None
+                    height: 8 * dp(100) # /1 * self.row_default_height
+                    padding: dp(4), dp(4)
+                    spacing: dp(4)
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/beautiful-931152_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/african-lion-951778_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/guitar-1139397_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/robin-944887_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/kitten-1049129_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/light-bulb-1042480_1280.jpg'
+                    SmartTile:
+                        mipmap: True
+                        source: './assets/tangerines-1111529_1280.jpg'
         Screen:
             name: 'list'
             ScrollView:
@@ -161,7 +194,6 @@ RelativeLayout:
                         AvatarSampleWidget:
                             source: './assets/avatar.png'
                         IconRightSampleWidget:
-
         Screen:
             name: 'menu'
             MDRaisedButton:
@@ -406,58 +438,64 @@ RelativeLayout:
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
 
-    NavigationDrawer:
-        id: nav_drawer
-        size_hint_y: None
-        height: root.height - toolbar.height
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Bottom sheets"
-            on_release: scr_mngr.current = 'bottomsheet'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Buttons"
-            on_release: scr_mngr.current = 'button'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Cards"
-            on_release: scr_mngr.current = 'card'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Dialogs"
-            on_release: scr_mngr.current = 'dialog'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Lists"
-            on_release: scr_mngr.current = 'list'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Menus"
-            on_release: scr_mngr.current = 'menu'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Progress & activity"
-            on_release: scr_mngr.current = 'progress'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Selection controls"
-            on_release: scr_mngr.current = 'selectioncontrols'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Snackbars"
-            on_release: scr_mngr.current = 'snackbar'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Text fields"
-            on_release: scr_mngr.current = 'textfields'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Themes"
-            on_release: scr_mngr.current = 'theming'
-        NavigationDrawerIconButton:
-            icon: 'circle'
-            text: "Toolbars"
-            on_release: scr_mngr.current = 'toolbar'
+    # NavigationDrawer:
+    #     id: nav_drawer
+        # size_hint: None, None
+        # height: root.height
+        # width: 20
+        # bind_to_window: True
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Bottom sheets"
+        #     on_release: scr_mngr.current = 'bottomsheet'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Buttons"
+        #     on_release: scr_mngr.current = 'button'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Cards"
+        #     on_release: scr_mngr.current = 'card'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Dialogs"
+        #     on_release: scr_mngr.current = 'dialog'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Grid lists"
+        #     on_release: scr_mngr.current = 'grid'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Lists"
+        #     on_release: scr_mngr.current = 'list'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Menus"
+        #     on_release: scr_mngr.current = 'menu'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Progress & activity"
+        #     on_release: scr_mngr.current = 'progress'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Selection controls"
+        #     on_release: scr_mngr.current = 'selectioncontrols'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Snackbars"
+        #     on_release: scr_mngr.current = 'snackbar'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Text fields"
+        #     on_release: scr_mngr.current = 'textfields'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Themes"
+        #     on_release: scr_mngr.current = 'theming'
+        # NavigationDrawerIconButton:
+        #     icon: 'circle'
+        #     text: "Toolbars"
+        #     on_release: scr_mngr.current = 'toolbar'
 '''
 
 
@@ -556,6 +594,9 @@ class KitchenSink(App):
 
     def on_stop(self):
         pass
+
+    def test(self):
+        self.root.ids['scr_mngr'].current = 'grid'
 
 
 class AvatarSampleWidget(ILeftBody, Image):
