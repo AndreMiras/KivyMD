@@ -2,7 +2,7 @@
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import ListProperty, StringProperty
+from kivy.properties import ListProperty, StringProperty, OptionProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.button import MDIconButton
@@ -16,6 +16,7 @@ Builder.load_string('''
     height: root.theme_cls.standard_increment
     background_color: root.theme_cls.primary_color
     padding: [root.theme_cls.horizontal_margins - dp(12), 0]
+    opposite_colors: True
     elevation: 6
     BoxLayout:
         id: left_actions
@@ -23,10 +24,12 @@ Builder.load_string('''
         size_hint_x: None
         padding: [0, (self.height - dp(48))/2]
     BoxLayout:
-        padding: [dp(72) - left_actions.width - root.padding[0], 0]
+        padding: (0,0) if left_actions.width == 0 else (dp(12), 0)
         MDLabel:
             font_style: 'Title'
-            opposite_colors: True
+            opposite_colors: root.opposite_colors
+            theme_text_color: root.title_theme_color
+            text_color: root.title_color
             text: root.title
             shorten: True
             shorten_from: 'right'
@@ -41,7 +44,7 @@ Builder.load_string('''
 class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
               BoxLayout):
     left_action_items = ListProperty()
-    """The icons on the left of the toolbar.
+    """The icons on the left of the Toolbar.
 
     To add one, append a list like the following:
 
@@ -52,12 +55,19 @@ class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
     """
 
     right_action_items = ListProperty()
-    """The icons on the left of the toolbar.
+    """The icons on the left of the Toolbar.
 
     Works the same way as :attr:`left_action_items`
     """
 
     title = StringProperty()
+    """The text displayed on the Toolbar."""
+
+    title_theme_color = OptionProperty(None, allownone=True,
+                                       options=['Primary', 'Secondary', 'Hint',
+                                                'Error', 'Custom'])
+
+    title_color = ListProperty(None, allownone=True)
 
     def __init__(self, **kwargs):
         super(Toolbar, self).__init__(**kwargs)

@@ -7,7 +7,6 @@ from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import AliasProperty, BooleanProperty
 from kivy.metrics import dp, sp
-from kivymd.ripplebehavior import CircularRippleBehavior
 from kivy.animation import Animation
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
@@ -17,7 +16,6 @@ from kivymd.elevationbehavior import RoundElevationBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.widget import Widget
-from kivy.clock import Clock
 
 Builder.load_string('''
 <MDCheckbox>:

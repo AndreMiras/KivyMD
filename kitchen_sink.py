@@ -3,11 +3,13 @@ import kivymd.snackbar as Snackbar
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.metrics import dp
+from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
 from kivymd.label import MDLabel
 from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch
+from kivymd.navigationdrawer import NavigationDrawer
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
@@ -38,8 +40,8 @@ BoxLayout:
     Toolbar:
         id: toolbar
         title: 'KivyMD Kitchen Sink'
-        left_action_items: [['menu', lambda x: nav_drawer.toggle()]]
-        right_action_items: [['more-vert', lambda x: app.test()]]
+        left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
+        right_action_items: [['more-vert', lambda x: app.nav_drawer.toggle()]]
     ScreenManager:
         id: scr_mngr
         Screen:
@@ -422,85 +424,82 @@ BoxLayout:
             name: 'toolbar'
             Toolbar:
                 title: "Simple toolbar"
-                pos_hint: {'center_x': 0.5, 'center_y': 0.38}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.75}
                 background_color: get_color_from_hex(colors['Teal']['500'])
             Toolbar:
                 title: "Toolbar with right buttons"
-                pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 background_color: get_color_from_hex(colors['Amber']['700'])
                 right_action_items: [['copy', lambda x: None]]
             Toolbar:
                 title: "Toolbar with left and right buttons"
-                pos_hint: {'center_x': 0.5, 'center_y': 0.12}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.25}
                 background_color: get_color_from_hex(colors['DeepPurple']['A400'])
                 left_action_items: [['arrow-left', lambda x: None]]
                 right_action_items: [['lock', lambda x: None], \
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
 
-    # NavigationDrawer:
-    #     id: nav_drawer
-        # size_hint: None, None
-        # height: root.height
-        # width: 20
-        # bind_to_window: True
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Bottom sheets"
-        #     on_release: scr_mngr.current = 'bottomsheet'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Buttons"
-        #     on_release: scr_mngr.current = 'button'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Cards"
-        #     on_release: scr_mngr.current = 'card'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Dialogs"
-        #     on_release: scr_mngr.current = 'dialog'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Grid lists"
-        #     on_release: scr_mngr.current = 'grid'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Lists"
-        #     on_release: scr_mngr.current = 'list'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Menus"
-        #     on_release: scr_mngr.current = 'menu'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Progress & activity"
-        #     on_release: scr_mngr.current = 'progress'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Selection controls"
-        #     on_release: scr_mngr.current = 'selectioncontrols'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Snackbars"
-        #     on_release: scr_mngr.current = 'snackbar'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Text fields"
-        #     on_release: scr_mngr.current = 'textfields'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Themes"
-        #     on_release: scr_mngr.current = 'theming'
-        # NavigationDrawerIconButton:
-        #     icon: 'circle'
-        #     text: "Toolbars"
-        #     on_release: scr_mngr.current = 'toolbar'
+<NavigationDrawer>
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Bottom sheets"
+        on_release: app.root.ids.scr_mngr.current = 'bottomsheet'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Buttons"
+        on_release: app.root.ids.scr_mngr.current = 'button'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Cards"
+        on_release: app.root.ids.scr_mngr.current = 'card'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Dialogs"
+        on_release: app.root.ids.scr_mngr.current = 'dialog'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Grid lists"
+        on_release: app.root.ids.scr_mngr.current = 'grid'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Lists"
+        on_release: app.root.ids.scr_mngr.current = 'list'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Menus"
+        on_release: app.root.ids.scr_mngr.current = 'menu'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Progress & activity"
+        on_release: app.root.ids.scr_mngr.current = 'progress'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Selection controls"
+        on_release: app.root.ids.scr_mngr.current = 'selectioncontrols'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Snackbars"
+        on_release: app.root.ids.scr_mngr.current = 'snackbar'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Text fields"
+        on_release: app.root.ids.scr_mngr.current = 'textfields'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Themes"
+        on_release: app.root.ids.scr_mngr.current = 'theming'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Toolbars"
+        on_release: app.root.ids.scr_mngr.current = 'toolbar'
 '''
+
 
 
 class KitchenSink(App):
     theme_cls = ThemeManager()
+    nav_drawer = ObjectProperty()
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
@@ -526,15 +525,17 @@ class KitchenSink(App):
         main_widget.ids.text_field.bind(
             on_text_validate=self.set_error_message,
             on_focus=self.set_error_message)
+
+        self.nav_drawer = NavigationDrawer()
         return main_widget
 
-    def show_example_snackbar(self, type):
-        if type == 'simple':
+    def show_example_snackbar(self, snack_type):
+        if snack_type == 'simple':
             Snackbar.make("This is a snackbar!")
-        elif type == 'button':
+        elif snack_type == 'button':
             Snackbar.make("This is a snackbar", button_text="with a button!",
                           button_callback=lambda *args: 2)
-        elif type == 'verylong':
+        elif snack_type == 'verylong':
             Snackbar.make("This is a very very very very very very very long "
                           "snackbar!",
                           button_text="Hello world")
@@ -542,7 +543,8 @@ class KitchenSink(App):
     def show_example_dialog(self):
         content = MDLabel(font_style='Body1',
                           theme_text_color='Secondary',
-                          text="This is a dialog with a title and some text. That's pretty awesome right!",
+                          text="This is a dialog with a title and some text. "
+                               "That's pretty awesome right!",
                           valign='top')
 
         content.bind(size=content.setter('text_size'))
@@ -558,7 +560,10 @@ class KitchenSink(App):
         self.dialog.open()
 
     def theme_swap(self):
-        self.theme_cls.theme_style = 'Dark' if self.theme_cls.theme_style == 'Light' else 'Light'
+        if self.theme_cls.theme_style == 'Light':
+            self.theme_cls.theme_style = 'Dark'
+        else:
+            self.theme_cls.theme_style = 'Light'
 
     def show_example_bottom_sheet(self):
         bs = MDListBottomSheet()

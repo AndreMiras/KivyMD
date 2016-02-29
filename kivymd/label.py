@@ -5,7 +5,6 @@ from kivy.properties import OptionProperty, DictProperty, ListProperty
 from kivy.uix.label import Label
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.theming import ThemableBehavior
-from kivymd.color_definitions import colors
 
 Builder.load_string('''
 <MDLabel>

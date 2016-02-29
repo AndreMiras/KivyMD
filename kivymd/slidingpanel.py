@@ -2,74 +2,83 @@
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import OptionProperty, NumericProperty, StringProperty, \
-    BooleanProperty
+    BooleanProperty, ListProperty
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.relativelayout import RelativeLayout
 
+Builder.load_string("""
+<SlidingPanel>
+    orientation: 'vertical'
+    size_hint_x: None
+    width: dp(320)
+    x: -1 * self.width if self.side == 'left' else Window.width
 
-class SlidingPanel(RelativeLayout):
-    side = OptionProperty('left', options=['left', 'right'])
-    animation_length_open = NumericProperty(0.3)
-    animation_length_close = NumericProperty(0.3)
+<PanelShadow>
+    canvas:
+        Color:
+            rgba: root.color
+        Rectangle:
+            size: Window.size
+""")
+
+
+class PanelShadow(BoxLayout):
+    color = ListProperty([0, 0, 0, 0])
+
+
+class SlidingPanel(BoxLayout):
+    anim_length_close = NumericProperty(0.3)
+    anim_length_open = NumericProperty(0.3)
     animation_t_open = StringProperty('out_sine')
     animation_t_close = StringProperty('out_sine')
-    nav_width = NumericProperty(dp(320))
-    bind_to_window = BooleanProperty(True)
+    side = OptionProperty('left', options=['left', 'right'])
 
     _open = False
-    _initial_x = 0
 
     def __init__(self, **kwargs):
         super(SlidingPanel, self).__init__(**kwargs)
-        self.size_hint_x = None
-        self.width = self.nav_width
-        Clock.schedule_once(self.bind_to_window_if_requested)
-
-    def bind_to_window_if_requested(self, _):
-        if self.bind_to_window:
-            Window.add_widget(self)
-
-    def on_parent(self, instance, value):
-        if value is None:
-            pass
-        elif issubclass(value.__class__, RelativeLayout) or value == Window:
-            self.y = 0
-            if self.side == 'left':
-                self.x = -self.nav_width
-            else:
-                self.x = value.width
-        else:
-            self.y = value.y
-            if self.side == 'left':
-                self.x = value.x - self.nav_width
-            else:
-                self.x = value.x + value.width
-        self._initial_x = self.x
+        self.shadow = PanelShadow()
+        Clock.schedule_once(lambda x: Window.add_widget(self.shadow, 89), 0)
+        Clock.schedule_once(lambda x: Window.add_widget(self, 90), 0)
 
     def toggle(self):
         Animation.stop_all(self, 'x')
-        anim = self.animation_for_toggling_state()
-        self._open = not self._open
-        anim.start(self)
-
-    def animation_for_toggling_state(self):
+        Animation.stop_all(self.shadow, 'color')
         if self._open:
-            duration = self.animation_length_close
-            t = self.animation_t_close
-            x = self._initial_x
-        else:
-            duration = self.animation_length_open
-            t = self.animation_t_open
             if self.side == 'left':
-                x = self._initial_x + self.nav_width
+                target_x = -1 * self.width
             else:
-                x = self._initial_x - self.nav_width
-        anim = Animation(duration=duration, t=t, x=x)
-        return anim
+                target_x = Window.width
+
+            sh_anim = Animation(duration=self.anim_length_open,
+                                t=self.animation_t_open,
+                                color=[0, 0, 0, 0])
+            sh_anim.start(self.shadow)
+            Animation(duration=self.anim_length_close, t=self.animation_t_close,
+                      x=target_x).start(self)
+            self._open = False
+        else:
+            if self.side == 'left':
+                target_x = 0
+            else:
+                target_x = Window.width - self.width
+            Animation(duration=self.anim_length_open, t=self.animation_t_open,
+                      color=[0, 0, 0, 0.5]).start(self.shadow)
+            Animation(duration=self.anim_length_open, t=self.animation_t_open,
+                      x=target_x).start(self)
+            self._open = True
 
     def on_touch_down(self, touch):
         # Prevents touch events from propagating to anything below the widget.
         super(SlidingPanel, self).on_touch_down(touch)
-        if self.collide_point(*touch.pos):
+        if self.collide_point(*touch.pos) or self._open:
             return True
+
+    def on_touch_up(self, touch):
+        if not self.collide_point(touch.x, touch.y) and self._open:
+            self.toggle()
+            return True
+        super(SlidingPanel, self).on_touch_up(touch)
