@@ -24,7 +24,7 @@ Builder.load_string('''
         size_hint_x: None
         padding: [0, (self.height - dp(48))/2]
     BoxLayout:
-        padding: (0,0) if left_actions.width == 0 else (dp(12), 0)
+        padding: dp(12), 0
         MDLabel:
             font_style: 'Title'
             opposite_colors: root.opposite_colors
