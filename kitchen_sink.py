@@ -440,7 +440,7 @@ BoxLayout:
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
 
-<NavigationDrawer>
+<KitchenSinkNavDrawer>
     NavigationDrawerIconButton:
         icon: 'circle'
         text: "Bottom sheets"
@@ -495,7 +495,8 @@ BoxLayout:
         on_release: app.root.ids.scr_mngr.current = 'toolbar'
 '''
 
-
+class KitchenSinkNavDrawer(NavigationDrawer):
+    pass
 
 class KitchenSink(App):
     theme_cls = ThemeManager()
@@ -526,7 +527,7 @@ class KitchenSink(App):
             on_text_validate=self.set_error_message,
             on_focus=self.set_error_message)
 
-        self.nav_drawer = NavigationDrawer()
+        self.nav_drawer = KitchenSinkNavDrawer()
         return main_widget
 
     def show_example_snackbar(self, snack_type):
