@@ -441,6 +441,7 @@ BoxLayout:
                     ['play', lambda x: None]]
 
 <KitchenSinkNavDrawer>
+    title: "NavigationDrawer"
     NavigationDrawerIconButton:
         icon: 'circle'
         text: "Bottom sheets"

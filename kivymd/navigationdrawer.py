@@ -25,7 +25,7 @@ Builder.load_string('''
             size: root.size
             pos: root.pos
     NavDrawerToolbar:
-        title: "NavigationDrawer"
+        title: root.title
         opposite_colors: False
         title_theme_color: 'Secondary'
         background_color: root.theme_cls.bg_light
@@ -45,6 +45,8 @@ Builder.load_string('''
 
 
 class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehavior):
+    title = StringProperty()
+
     _list = ObjectProperty()
 
     def add_widget(self, widget, index=0):
