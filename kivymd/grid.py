@@ -12,6 +12,7 @@ Builder.load_string("""
 <SmartTile>
     _img_widget: img
     _img_overlay: img_overlay
+    _box_overlay: box
     AsyncImage:
         id: img
         allow_stretch: root.allow_stretch
@@ -88,6 +89,7 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
 
     _img_widget = ObjectProperty()
     _img_overlay = ObjectProperty()
+    _box_overlay = ObjectProperty()
 
     def reload(self):
         self._img_widget.reload()
@@ -95,8 +97,17 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
     def add_widget(self, widget, index=0):
         if issubclass(widget.__class__, IOverlay):
             self._img_overlay.add_widget(widget, index)
+        elif issubclass(widget.__class__, IBoxOverlay):
+            self._box_overlay.add_widget(widget, index)
         else:
             super(SmartTile, self).add_widget(widget, index)
+
+
+class IBoxOverlay():
+    """An interface to specify widgets that belong to to the image overlay
+    in the :class:`SmartTile` widget when added as a child.
+    """
+    pass
 
 
 class IOverlay():
