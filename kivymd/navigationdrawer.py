@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from kivy.animation import Animation
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty
 from kivymd.elevationbehavior import ElevationBehavior
@@ -18,6 +19,7 @@ Builder.load_string('''
 
 <NavigationDrawer>
     _list: list
+    elevation: 0
     canvas:
         Color:
             rgba: root.theme_cls.bg_light
@@ -55,6 +57,11 @@ class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehavior):
             widget.bind(on_release=lambda x: self.toggle())
         else:
             super(NavigationDrawer, self).add_widget(widget, index)
+
+    def _get_main_animation(self, duration, t, x):
+        a = super(NavigationDrawer, self)._get_main_animation(duration, t, x)
+        a &= Animation(elevation=5, t=t, duration=duration)
+        return a
 
 
 class NDIconLabel(ILeftBody, MDLabel):

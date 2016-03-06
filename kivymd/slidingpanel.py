@@ -57,8 +57,9 @@ class SlidingPanel(BoxLayout):
                                 t=self.animation_t_open,
                                 color=[0, 0, 0, 0])
             sh_anim.start(self.shadow)
-            Animation(duration=self.anim_length_close, t=self.animation_t_close,
-                      x=target_x).start(self)
+            self._get_main_animation(duration=self.anim_length_close,
+                                     t=self.animation_t_close,
+                                     x=target_x).start(self)
             self._open = False
         else:
             if self.side == 'left':
@@ -67,9 +68,13 @@ class SlidingPanel(BoxLayout):
                 target_x = Window.width - self.width
             Animation(duration=self.anim_length_open, t=self.animation_t_open,
                       color=[0, 0, 0, 0.5]).start(self.shadow)
-            Animation(duration=self.anim_length_open, t=self.animation_t_open,
-                      x=target_x).start(self)
+            self._get_main_animation(duration=self.anim_length_open,
+                                     t=self.animation_t_open,
+                                     x=target_x).start(self)
             self._open = True
+
+    def _get_main_animation(self, duration, t, x):
+        return Animation(duration=duration, t=t, x=x)
 
     def on_touch_down(self, touch):
         # Prevents touch events from propagating to anything below the widget.
