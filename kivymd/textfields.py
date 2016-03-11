@@ -56,6 +56,8 @@ Builder.load_string('''
     bold:        False
     padding:    0, dp(16), 0, dp(10)
     multiline:    False
+    size_hint_y: None
+    height: dp(48)
 ''')
 
 
