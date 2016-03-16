@@ -34,6 +34,7 @@ main_widget_kv = '''
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
 #:import SmartTile kivymd.grid.SmartTile
+#:import MDPersistentSearch kivymd.search.MDPersistentSearch
 
 BoxLayout:
     orientation: 'vertical'
@@ -248,6 +249,16 @@ BoxLayout:
                 size: dp(46), dp(46)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 active: True if chkbox.active else False
+
+        Screen:
+            name: 'search'
+            MDRaisedButton:
+                size_hint: None, None
+                size: 3 * dp(48), dp(48)
+                text: "Open Persistent Search modal"
+                opposite_colors: True
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release: MDPersistentSearch().open()
 
         Screen:
             name: 'selectioncontrols'
@@ -474,6 +485,10 @@ BoxLayout:
         icon: 'circle'
         text: "Progress & activity"
         on_release: app.root.ids.scr_mngr.current = 'progress'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Search"
+        on_release: app.root.ids.scr_mngr.current = 'search'
     NavigationDrawerIconButton:
         icon: 'circle'
         text: "Selection controls"
