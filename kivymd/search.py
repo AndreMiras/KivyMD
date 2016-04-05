@@ -1,4 +1,24 @@
 # coding=utf-8
+'''
+Search Patterns
+===============
+
+`Material Design spec Search Patterns page <https://www.google.com/design/spec/patterns/search.html>`
+
+KivyMD currently only provides the Persistent Search pattern via the :class:`MDPersistentSearch:` widget.
+
+Persistent Search Example
+-------------------------
+
+.. note::
+
+    This widget is designed to be called from Python code only.
+
+.. code-block:: python
+
+    # TODO: ACTUALLY WRITE DOCUMENTATION
+
+'''
 from kivy.lang import Builder
 from kivy.metrics import sp, dp
 from kivy.properties import NumericProperty, ListProperty, ObjectProperty, \
@@ -27,19 +47,20 @@ Builder.load_string("""
             x: dp(8)
             orientation: 'horizontal'
             MDIconButton:
-                icon: 'arrow-left' if search_input.focus else 'search'
+                icon: 'arrow-left'# if search_input.focus else 'search'
                 theme_text_color: 'Secondary'
-                on_release: root.dismiss() if search_input.focus else None  # FIXME
+                on_release: root.dismiss()# if search_input.focus else None  # FIXME
             BoxLayout:
                 padding: dp(5), dp(4), 0, 0  # FIXME: NOT EXACT METRIC
                 SearchTextInput:
                     id: search_input
                     hint_text: "Search"  # TODO: i18n
                     theme_text_color: 'Primary'
+                    on_text_validate: root.search()
             MDIconButton:
                 icon: 'mic' if search_input.text == '' else 'close'
                 theme_text_color: 'Secondary'
-                on_release: root.mic_input() if search_input.focus else \
+                on_release: root.mic_input() if search_input.text == '' else \
                     root.clear_input()
 
 <SearchTextInput>
@@ -51,10 +72,6 @@ Builder.load_string("""
         Rectangle:
             pos: [int(x) for x in self.cursor_pos]
             size: 1, -self.line_height
-        Color:
-            rgba: self._hint_txt_color if not self.text and not self.focus \
-            else ((1, 1, 1, 0) if not self.text or self.focus \
-            else (1, 1, 1, 0))
         Rectangle:
             texture: self._hint_lbl.texture
             size: self._hint_lbl.texture_size
@@ -71,7 +88,10 @@ Builder.load_string("""
     MDLabel:
         id: _hint_lbl
         font_style: 'Caption'
-        theme_text_color: 'Hint'
+        theme_text_color: 'Custom'
+        text_color: root._hint_txt_color if not root.text and not root.focus \
+        else ((1, 1, 1, 0) if not root.text or root.focus \
+        else (1, 1, 1, 0))
 """)
 
 
@@ -97,4 +117,7 @@ class MDPersistentSearch(ThemableBehavior, ModalView):
 
     def mic_input(self):
         # Not Implemented
+        pass
+
+    def search(self):
         pass
