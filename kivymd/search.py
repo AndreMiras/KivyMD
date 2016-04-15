@@ -58,10 +58,18 @@ Builder.load_string("""
                     theme_text_color: 'Primary'
                     on_text_validate: root.search()
             MDIconButton:
-                icon: 'mic' if search_input.text == '' else 'close'
+                # icon: 'mic' if search_input.text == '' else 'close'
+                icon: 'close'
                 theme_text_color: 'Secondary'
-                on_release: root.mic_input() if search_input.text == '' else \
-                    root.clear_input()
+                # on_release: root.mic_input() if search_input.text == '' else \
+                #     root.clear_input()
+                on_release: root.clear_input()
+        BoxLayout:
+            orientation: 'vertical'
+            id: main_bl
+            size_hint_y: None
+            height: search_box.y
+            Button:
 
 <SearchTextInput>
     canvas.before:
@@ -116,8 +124,8 @@ class MDPersistentSearch(ThemableBehavior, ModalView):
         self.search_input.text = ""
 
     def mic_input(self):
-        # Not Implemented
-        pass
+        # TODO: Implement mic_input via Plyer.
+        raise NotImplementedError()
 
     def search(self):
         pass
