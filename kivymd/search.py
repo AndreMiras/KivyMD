@@ -1,5 +1,5 @@
 # coding=utf-8
-'''
+"""
 Search Patterns
 ===============
 
@@ -16,9 +16,7 @@ Persistent Search Example
 
 .. code-block:: python
 
-    # TODO: ACTUALLY WRITE DOCUMENTATION
-
-'''
+"""
 from kivy.lang import Builder
 from kivy.metrics import sp, dp
 from kivy.properties import NumericProperty, ListProperty, ObjectProperty, \
@@ -31,6 +29,7 @@ from kivymd.theming import ThemableBehavior
 Builder.load_string("""
 <MDPersistentSearch>
     search_input: search_input
+    main_bl: main_bl
     canvas:
         Color:
             rgba: self.theme_cls.bg_darkest
@@ -69,7 +68,6 @@ Builder.load_string("""
             id: main_bl
             size_hint_y: None
             height: search_box.y
-            Button:
 
 <SearchTextInput>
     canvas.before:
@@ -104,6 +102,7 @@ Builder.load_string("""
 
 
 class SearchTextInput(ThemableBehavior, TextInput):
+    main_bl = ObjectProperty()
     search_input = ObjectProperty()
 
     _hint_text = StringProperty()
