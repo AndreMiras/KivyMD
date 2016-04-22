@@ -13,6 +13,7 @@ Builder.load_string("""
     _img_widget: img
     _img_overlay: img_overlay
     _box_overlay: box
+    _box_label: boxlabel
     AsyncImage:
         id: img
         allow_stretch: root.allow_stretch
@@ -42,6 +43,12 @@ Builder.load_string("""
         height: dp(68) if root.lines == 2 else dp(48)
         x: root.x
         y: root.y if root.box_position == 'footer' else root.y + root.height - self.height
+        MDLabel:
+            id: boxlabel
+            font_style: "Caption"
+            halign: "center"
+            size_hint_y: None
+            text: root.text
 """)
 
 
@@ -78,6 +85,12 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
     overlap = BooleanProperty(True)
     """Determines if the header/footer overlaps on top of the image or not"""
 
+    # MDLabel properties
+    font_style = StringProperty("Caption")
+    theme_text_color = StringProperty("")
+    text = StringProperty("")
+    """Determines the text for the box footer/header"""
+
     # Img properties
     allow_stretch = BooleanProperty(True)
     anim_delay = NumericProperty(0.25)
@@ -90,6 +103,7 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
     _img_widget = ObjectProperty()
     _img_overlay = ObjectProperty()
     _box_overlay = ObjectProperty()
+    _box_label = ObjectProperty()
 
     def reload(self):
         self._img_widget.reload()
