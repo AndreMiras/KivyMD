@@ -27,6 +27,7 @@ from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string("""
+#:import MDCard kivymd.card.MDCard
 <MDPersistentSearch>
     search_input: search_input
     main_bl: main_bl
@@ -102,10 +103,6 @@ Builder.load_string("""
 
 
 class SearchTextInput(ThemableBehavior, TextInput):
-    main_bl = ObjectProperty()
-    search_input = ObjectProperty()
-
-    _hint_text = StringProperty()
     _hint_txt_color = ListProperty()
     _hint_lbl = ObjectProperty()
     _hint_lbl_font_size = NumericProperty(sp(16))
@@ -119,6 +116,11 @@ class SearchTextInput(ThemableBehavior, TextInput):
 
 
 class MDPersistentSearch(ThemableBehavior, ModalView):
+    main_bl = ObjectProperty()
+    search_input = ObjectProperty()
+
+    _hint_text = StringProperty()
+
     def clear_input(self):
         self.search_input.text = ""
 
@@ -127,4 +129,4 @@ class MDPersistentSearch(ThemableBehavior, ModalView):
         raise NotImplementedError()
 
     def search(self):
-        pass
+        raise NotImplementedError()
