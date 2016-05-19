@@ -62,6 +62,7 @@ Builder.load_string('''
             pos:            self.right - dp(16), self.center_y - dp(8)
             angle_start:    0
             angle_end:        180
+    on_release: thumb.trigger_action()
 
     Thumb:
         id:            thumb
@@ -127,7 +128,7 @@ class Thumb(RoundElevationBehavior, CircularRippleBehavior, ButtonBehavior,
             self.center_y - (self.height * self.ripple_scale) / 2)
 
 
-class MDSwitch(ThemableBehavior, FloatLayout):
+class MDSwitch(ThemableBehavior, ButtonBehavior, FloatLayout):
     active = BooleanProperty(False)
 
     _thumb_color = ListProperty(get_color_from_hex(colors['Grey']['50']))
