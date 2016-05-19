@@ -59,7 +59,8 @@ class SlidingPanel(BoxLayout):
             sh_anim.start(self.shadow)
             self._get_main_animation(duration=self.anim_length_close,
                                      t=self.animation_t_close,
-                                     x=target_x).start(self)
+                                     x=target_x,
+                                     is_closing=True).start(self)
             self._open = False
         else:
             if self.side == 'left':
@@ -70,10 +71,11 @@ class SlidingPanel(BoxLayout):
                       color=[0, 0, 0, 0.5]).start(self.shadow)
             self._get_main_animation(duration=self.anim_length_open,
                                      t=self.animation_t_open,
-                                     x=target_x).start(self)
+                                     x=target_x,
+                                     is_closing=False).start(self)
             self._open = True
 
-    def _get_main_animation(self, duration, t, x):
+    def _get_main_animation(self, duration, t, x, is_closing):
         return Animation(duration=duration, t=t, x=x)
 
     def on_touch_down(self, touch):

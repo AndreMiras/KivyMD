@@ -58,9 +58,10 @@ class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehavior):
         else:
             super(NavigationDrawer, self).add_widget(widget, index)
 
-    def _get_main_animation(self, duration, t, x):
-        a = super(NavigationDrawer, self)._get_main_animation(duration, t, x)
-        a &= Animation(elevation=5, t=t, duration=duration)
+    def _get_main_animation(self, duration, t, x, is_closing):
+        a = super(NavigationDrawer, self)._get_main_animation(duration, t, x,
+                                                              is_closing)
+        a &= Animation(elevation=0 if is_closing else 5, t=t, duration=duration)
         return a
 
 
