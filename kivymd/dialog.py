@@ -119,7 +119,7 @@ class MDDialog(ThemableBehavior, ElevationBehavior, ModalView):
         self._window.bind(on_resize=self._align_center,
                           on_keyboard=self._handle_keyboard)
         self.center = self._window.center
-        self.bind(size=self._update_center)
+        self.bind(size=self._align_center)
         a = Animation(_anim_alpha=1., d=self._anim_duration)
         a.bind(on_complete=lambda *x: self.dispatch('on_open'))
         a.start(self)
