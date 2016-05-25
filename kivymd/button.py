@@ -282,6 +282,9 @@ class MDRaisedButton(ThemableBehavior, RectangularRippleBehavior,
                 return super(ButtonBehavior, self).on_touch_up(touch)
             Animation.cancel_all(self, 'elevation')
             self.elevation_release_anim.start(self)
+        else:
+            Animation.cancel_all(self, 'elevation')
+            self.elevation = 0
         return super(MDRaisedButton, self).on_touch_up(touch)
 
     def on_text(self, instance, text):
