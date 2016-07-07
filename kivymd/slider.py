@@ -3,6 +3,7 @@
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ListProperty, NumericProperty,AliasProperty, BooleanProperty
 from kivy.utils import get_color_from_hex
+from kivy.metrics import dp, sp
 from kivymd.color_definitions import colors
 from kivymd.theming import ThemableBehavior
 from kivy.uix.slider import Slider
@@ -18,26 +19,45 @@ Builder.load_string('''
         Color:
             rgba: self._track_color_disabled if self.disabled else (self._track_color_active if self.active else self._track_color_normal)
         Rectangle:
-            size:    (self.width - self.padding*2, dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height - self.padding*2) 
-            pos:   (self.x + self.padding, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding)
+            size:    (self.width - self.padding*2 - self._offset[0], dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height - self.padding*2 - self._offset[1]) 
+            pos:   (self.x + self.padding + self._offset[0], self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding + self._offset[1])
+        
+        # If 0 draw circle
         Color:
-            rgba: self.thumb_color_down if not self.disabled else self._track_color_disabled
+            rgba: [0,0,0,0] if not self._is_off else (self._track_color_disabled if self.disabled else (self._track_color_active if self.active else self._track_color_normal)) 
+        Line:
+            width: 2
+            circle: (self.x+self.padding+dp(3),self.center_y-dp(2),8 if self.active else 6 ) if self.orientation == 'horizontal' else (self.center_x-dp(2),self.y+self.padding+dp(3),8 if self.active else 6)
+            
+        Color:
+            rgba: [0,0,0,0] if self._is_off else (self.thumb_color_down if not self.disabled else self._track_color_disabled)
         Rectangle:
             size:     (self.value_pos[0]-10, sp(4)) if slider.orientation == 'horizontal' else (sp(4), self.value_pos[1]-10)
             pos:    (self.x + self.padding, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding)
-
+        
+        
     Thumb:
         id:          thumb
         size_hint:   None, None
         size:        (dp(12), dp(12)) if root.disabled else ((dp(24), dp(24)) if root.active else (dp(16),dp(16)))
         pos:         (slider.value_pos[0] - dp(8), slider.center_y - sp(thumb.height/2+2)) if slider.orientation == 'horizontal' else (slider.center_x - sp(thumb.width/2+2), slider.value_pos[1]-dp(8))
-        color:       root._track_color_disabled if root.disabled else root.thumb_color_down
-        elevation:    4 if root.active else 2
-
+        color:       [0,0,0,0] if slider._is_off else (root._track_color_disabled if root.disabled else root.thumb_color_down)
+        elevation:    0 if slider._is_off else (4 if root.active else 2)
+        
 ''')
 
 class MDSlider(ThemableBehavior, Slider):
+    # If the slider is clicked
     active = BooleanProperty(False)
+    
+    # Show the "off" ring when set to minimum value
+    show_off = BooleanProperty(True)
+    
+    # Internal state of ring
+    _is_off = BooleanProperty(False)
+    
+    # Internal adjustment to reposition sliders for ring
+    _offset = ListProperty((0,0))
 
     _thumb_color = ListProperty(get_color_from_hex(colors['Grey']['50']))
     
@@ -126,6 +146,29 @@ class MDSlider(ThemableBehavior, Slider):
             self._track_color_disabled[3] = 0.26
             self.thumb_color_down = self.theme_cls.primary_color
             
+    def on_value_normalized(self,*args):
+        """ When the value == min set it to "off" state and make slider a ring """
+        self._update_is_off()
+        
+    def on_show_off(self,*args):
+        self._update_is_off()
+        
+    def _update_is_off(self):
+        self._is_off = self.show_off and (self.value_normalized==0)
+        
+    def on__is_off(self,*args):
+        self._update_offset()
+        
+    def on_active(self,*args):
+        self._update_offset()
+        
+    def _update_offset(self):
+        """ Offset is used to shift the sliders so the background color 
+            shows through the off circle.
+        """
+        d = 2 if self.active else 0
+        self._offset = (dp(11+d),dp(11+d)) if self._is_off else (0,0) 
+    
     def on_touch_down(self, touch):
         if super(MDSlider, self).on_touch_down(touch):
             self.active = True
@@ -137,7 +180,6 @@ class MDSlider(ThemableBehavior, Slider):
 #             if thumb.collide_point(*touch.pos):
 #                 thumb.on_touch_down(touch)
 #                 thumb.on_touch_up(touch)
-            
 
 if __name__ == '__main__':
     from kivy.app import App
@@ -156,7 +198,6 @@ BoxLayout:
             text:"Toggle disabled"
             color: [0,0,0,1]
         CheckBox:
-            id: cb
             on_press: slider.disabled = not slider.disabled
     BoxLayout:
         size_hint_y:None
@@ -165,8 +206,15 @@ BoxLayout:
             text:"Toggle active"
             color: [0,0,0,1]
         CheckBox:
-            id: cb
             on_press: slider.active = not slider.active
+    BoxLayout:
+        size_hint_y:None
+        height: '48dp'
+        Label:
+            text:"Toggle show off"
+            color: [0,0,0,1]
+        CheckBox:
+            on_press: slider.show_off = not slider.show_off
 
     MDSlider:
         id:slider
