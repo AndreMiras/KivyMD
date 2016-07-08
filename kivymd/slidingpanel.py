@@ -14,14 +14,14 @@ Builder.load_string("""
     orientation: 'vertical'
     size_hint_x: None
     width: dp(320)
-    x: -1 * self.width if self.side == 'left' else Window.width
+    x: -1 * self.width if self.side == 'left' else root.width
 
 <PanelShadow>
     canvas:
         Color:
             rgba: root.color
         Rectangle:
-            size: Window.size
+            size: root.size
 """)
 
 

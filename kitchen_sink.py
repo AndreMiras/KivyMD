@@ -34,6 +34,7 @@ main_widget_kv = '''
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
 #:import SmartTile kivymd.grid.SmartTile
+#:import MDSlider kivymd.slider.MDSlider
 
 BoxLayout:
     orientation: 'vertical'
@@ -89,7 +90,20 @@ BoxLayout:
                 size_hint: None, None
                 size: dp(320), dp(180)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
+        Screen:
+            name: 'slider'
+            BoxLayout:
+                MDSlider:
+                    id: hslider
+                    min:0
+                    max:100
+                    value: 10
+                MDSlider:
+                    id: vslider
+                    orientation:'vertical'
+                    min:0
+                    max:100
+                    value: hslider.value
         Screen:
             name: 'dialog'
             MDRaisedButton:
@@ -494,6 +508,10 @@ BoxLayout:
         icon: 'circle'
         text: "Toolbars"
         on_release: app.root.ids.scr_mngr.current = 'toolbar'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Sliders"
+        on_release: app.root.ids.scr_mngr.current = 'slider'
 '''
 
 class KitchenSinkNavDrawer(NavigationDrawer):
