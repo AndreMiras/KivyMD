@@ -6,14 +6,12 @@ ScreenManager is much better.
 
 @author: jrm
 '''
-from kivy.properties import StringProperty,BooleanProperty,DictProperty,ListProperty,AliasProperty,ObjectProperty,OptionProperty,BoundedNumericProperty
-from kivy.uix.screenmanager import ScreenManager,Screen
+from kivy.properties import StringProperty,DictProperty,ListProperty,ObjectProperty,OptionProperty,BoundedNumericProperty
+from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.metrics import sp,dp
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.stacklayout import StackLayout
 from kivymd.theming import ThemableBehavior
-from kivymd.button import MDFlatButton
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivy.uix.behaviors.button import ButtonBehavior
 from kivy.uix.anchorlayout import AnchorLayout
@@ -119,8 +117,10 @@ class MDTabHeader(ThemableBehavior,ButtonBehavior,BackgroundColorBehavior,Anchor
     
     def on_tab(self,*args):
         if self.tab:
-            self.text = self.tab.icon if self.panel.tab_display_mode=='icons' else self.tab.text
-            #self.panel.bind(tab_display_mode=self.on_text)
+            if self.panel.tab_display_mode=='icons':
+                self.on_icon(None,self.tab.icon)
+            else:
+                self.on_text(None,self.tab.text)
             self.tab.bind(text=self.on_text)
             self.tab.bind(icon=self.on_icon)
     

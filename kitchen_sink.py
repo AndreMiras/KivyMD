@@ -35,6 +35,9 @@ main_widget_kv = '''
 #:import colors kivymd.color_definitions.colors
 #:import SmartTile kivymd.grid.SmartTile
 #:import MDSlider kivymd.slider.MDSlider
+#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
+#:import MDTab kivymd.tabs.MDTab
+
 
 BoxLayout:
     orientation: 'vertical'
@@ -453,6 +456,44 @@ BoxLayout:
                 right_action_items: [['lock', lambda x: None], \
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
+        Screen:
+            name: 'tabs'
+            MDTabbedPanel:
+                id: tab_panel
+                tab_display_mode:'text'
+
+                MDTab:
+                    name: 'music' 
+                    text: "Music" # Why are these not set!!!
+                    icon: "playlist-audio"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Here is my music list :)"
+                        halign: 'center'
+                MDTab:
+                    name: 'movies'
+                    text: 'Movies'
+                    icon: "movie"
+                     
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Show movies here :)"
+                        halign: 'center'
+                        
+            BoxLayout:
+                size_hint_y:None
+                height: '48dp'
+                padding: '12dp'
+                MDLabel:
+                    font_style: 'Body1'
+                    theme_text_color: 'Primary'
+                    text: "Use icons"
+                    size_hint_x:None
+                    width: '64dp'
+                MDCheckbox:
+                    on_state: tab_panel.tab_display_mode = 'icons' if tab_panel.tab_display_mode=='text' else 'text'
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -512,6 +553,10 @@ BoxLayout:
         icon: 'circle'
         text: "Sliders"
         on_release: app.root.ids.scr_mngr.current = 'slider'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Tabs"
+        on_release: app.root.ids.scr_mngr.current = 'tabs'
 '''
 
 class KitchenSinkNavDrawer(NavigationDrawer):
