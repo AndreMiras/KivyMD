@@ -111,6 +111,10 @@ BoxLayout:
                     height: 8 * dp(100) # /1 * self.row_default_height
                     padding: dp(4), dp(4)
                     spacing: dp(4)
+                    SmartTileWithLabel:
+                        mipmap: True
+                        source: './assets/african-lion-951778_1280.jpg'
+                        text: "African Lion"
                     SmartTile:
                         mipmap: True
                         source: './assets/beautiful-931152_1280.jpg'

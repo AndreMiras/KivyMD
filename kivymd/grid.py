@@ -13,6 +13,40 @@ Builder.load_string("""
     _img_widget: img
     _img_overlay: img_overlay
     _box_overlay: box
+    AsyncImage:
+        id: img
+        allow_stretch: root.allow_stretch
+        anim_delay: root.anim_delay
+        anim_loop: root.anim_loop
+        color: root.img_color
+        keep_ratio: root.keep_ratio
+        mipmap: root.mipmap
+        source: root.source
+        size_hint_y: 1 if root.overlap else None
+        x: root.x
+        y: root.y if root.overlap or root.box_position == 'header' else box.top
+    BoxLayout:
+        id: img_overlay
+        size_hint: img.size_hint
+        size: img.size
+        pos: img.pos
+    BoxLayout:
+        canvas:
+            Color:
+                rgba: root.box_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        id: box
+        size_hint_y: None
+        height: dp(68) if root.lines == 2 else dp(48)
+        x: root.x
+        y: root.y if root.box_position == 'footer' else root.y + root.height - self.height
+
+<SmartTileWithLabel>
+    _img_widget: img
+    _img_overlay: img_overlay
+    _box_overlay: box
     _box_label: boxlabel
     AsyncImage:
         id: img
@@ -85,12 +119,6 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
     overlap = BooleanProperty(True)
     """Determines if the header/footer overlaps on top of the image or not"""
 
-    # MDLabel properties
-    font_style = StringProperty("Caption")
-    theme_text_color = StringProperty("")
-    text = StringProperty("")
-    """Determines the text for the box footer/header"""
-
     # Img properties
     allow_stretch = BooleanProperty(True)
     anim_delay = NumericProperty(0.25)
@@ -115,6 +143,16 @@ class SmartTile(ThemableBehavior, RectangularRippleBehavior, ButtonBehavior,
             self._box_overlay.add_widget(widget, index)
         else:
             super(SmartTile, self).add_widget(widget, index)
+
+
+class SmartTileWithLabel(SmartTile):
+    _box_label = ObjectProperty()
+
+    # MDLabel properties
+    font_style = StringProperty("Caption")
+    theme_text_color = StringProperty("")
+    text = StringProperty("")
+    """Determines the text for the box footer/header"""
 
 
 class IBoxOverlay():
