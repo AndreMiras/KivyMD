@@ -81,7 +81,6 @@ Builder.load_string("""
             id: boxlabel
             font_style: "Caption"
             halign: "center"
-            size_hint_y: None
             text: root.text
 """)
 
