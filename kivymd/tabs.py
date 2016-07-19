@@ -13,12 +13,8 @@ from kivy.metrics import sp,dp
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
-from kivy.uix.behaviors.button import ButtonBehavior
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.utils import get_color_from_hex
-from kivymd.color_definitions import colors
-from kivy.clock import Clock
 from kivymd.icon_definitions import md_icons
+from kivymd.button import MDFlatButton
 
 Builder.load_string("""
 <MDTabbedPanel>:
@@ -32,11 +28,11 @@ Builder.load_string("""
             id: tab_bar
             size_hint_y: None
             height: panel._tab_display_height[panel.tab_display_mode]
-            background_color: panel.tab_color
+            background_color: panel.theme_cls.primary_color
             canvas:
                 # Draw bottom border
                 Color:
-                    rgba: panel.bottom_border_color
+                    rgba: panel.theme_cls.primary_dark
                 Rectangle:
                     size: (self.width,dp(1))
     ScreenManager:
@@ -46,14 +42,14 @@ Builder.load_string("""
 <MDTabHeader>:
     canvas:
         Color:
-            rgba: self.background_color# if self.state == 'normal' else self._bg_color_down
+            rgba: self.panel.theme_cls.primary_color
         Rectangle:
             size: self.size
             pos: self.pos
             
         # Draw indicator
         Color:
-            rgba: self.panel.tab_indicator_color if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else [0,0,0,0]
+            rgba: self.panel.theme_cls.accent_color if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else [0,0,0,0]
         Rectangle:
             size: (self.width,dp(2))
             pos: self.pos
@@ -62,7 +58,7 @@ Builder.load_string("""
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
-    text_color: self.panel.tab_text_color_active if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else self.panel.tab_text_color
+    text_color: self.panel.theme_cls.bg_light if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else self.panel.theme_cls.primary_light
     on_press: self.tab.manager.current = self.tab.name
     
     MDLabel:
@@ -83,29 +79,12 @@ Builder.load_string("""
 class MDTabBar(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     pass
 
-class MDTabHeader(ThemableBehavior,ButtonBehavior,BackgroundColorBehavior,AnchorLayout):
+class MDTabHeader(MDFlatButton):
     """ Internal widget for headers based on MDFlatButton"""
     
     width = BoundedNumericProperty(dp(None), min=dp(72), max=dp(264), errorhandler=lambda x:dp(72))
-    text_color = ListProperty()
-    text = StringProperty('')
-    theme_text_color = OptionProperty(None, allownone=True, options=['Primary', 'Secondary', 'Hint', 'Error', 'Custom'])
-    text_color = ListProperty(None, allownone=True)
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
-    
-    _text = StringProperty('')
-    _bg_color_down = ListProperty([0, 0, 0, 0])
-    
-    
-    def __init__(self, **kwargs):
-        super(MDTabHeader, self).__init__(**kwargs)
-        self._bg_color_down = get_color_from_hex(
-            colors[self.theme_cls.theme_style]['FlatButtonDown'])
-        Clock.schedule_once(lambda x:self.ids._label.bind(texture_size=self.update_width_on_label_texture))
-    
-    def update_width_on_label_texture(self, instance, value):
-        self.ids._label.width = value[0]
     
     def on_text(self, instance, value):
         if self.panel.tab_display_mode=='text':
@@ -148,20 +127,8 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
         to a ScreenManager.
     
     """
-    # Tab background color
-    tab_color = ListProperty([0,0,0,0])
-    tab_color_active = ListProperty([])
-    
-    # Tab text color
-    tab_text_color = ListProperty([])
-    tab_text_color_active = ListProperty([])
-    tab_indicator_color = ListProperty([])
-    
-    # Border at the bottom of the tabs (useful for light themes)
-    bottom_border_color = ListProperty([0,0,0,0.2])
-    
     # If tabs should fill space
-    tab_width_mode = OptionProperty('fixed',options=['fixed','stacked'])
+    tab_width_mode = OptionProperty('stacked',options=['stacked','fixed'])
     
     # Where the tabs go
     tab_orientation = OptionProperty('top',options=['top'])#,'left','bottom','right'])
@@ -175,7 +142,6 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     
     def __init__(self,**kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
-        self._setup_colors()
         self._refresh_tabs()
         
     def on_tab_width_mode(self,*args):
@@ -198,22 +164,6 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
                                      )
             tab_bar.add_widget(tab_header)
         
-    def _setup_colors(self):
-        # TODO: is this right??
-        if self.theme_cls.theme_style == 'Dark':
-            self.tab_color = self.theme_cls.primary_color
-            self.tab_color_active = self.tab_color
-            self.tab_text_color = self.theme_cls.primary_light
-            self.tab_text_color_active = self.theme_cls.bg_dark
-            self.tab_indicator_color = self.theme_cls.accent_dark
-        else:
-            self.tab_color = self.theme_cls.primary_color
-            self.tab_color_active = self.tab_color
-            self.tab_text_color = self.theme_cls.primary_light
-            self.tab_text_color_active = self.theme_cls.bg_light
-            self.tab_indicator_color = self.theme_cls.accent_color
-            
-    
     def add_widget(self, widget):
         """ Add tabs to the screen or the layout."""
         if isinstance(widget, MDTab):
