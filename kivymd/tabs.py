@@ -37,6 +37,8 @@ Builder.load_string("""
                     size: (self.width,dp(1))
     ScreenManager:
         id: tab_manager
+        current: root.current
+        screens: root.tabs
             
 
 <MDTabHeader>:
@@ -59,11 +61,18 @@ Builder.load_string("""
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
     text_color: self.panel.theme_cls.bg_light if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else self.panel.theme_cls.primary_light
-    on_press: self.tab.manager.current = self.tab.name
+    on_press: 
+        self.tab.dispatch('on_tab_press') 
+        self.tab.manager.current = self.tab.name
+    on_release: self.tab.dispatch('on_tab_release')
+    on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
+    on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
+    on_touch_up: self.tab.dispatch('on_tab_touch_up',*args)
+    
     
     MDLabel:
         id: _label
-        text: root._text
+        text: root.tab.text if root.panel.tab_display_mode == 'text' else u"{}".format(md_icons[root.tab.icon])
         font_style: 'Button' if root.panel.tab_display_mode == 'text' else 'Icon'
         size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
         text_size: (None, root.height)
@@ -86,27 +95,12 @@ class MDTabHeader(MDFlatButton):
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
     
-    def on_text(self, instance, value):
-        if self.panel.tab_display_mode=='text':
-            self._text = value.upper()
-    
-    def on_icon(self, instance, value):
-        if self.panel.tab_display_mode=='icons':
-            self._text = u"{}".format(md_icons[self.tab.icon])
-    
-    def on_tab(self,*args):
-        if self.tab:
-            if self.panel.tab_display_mode=='icons':
-                self.on_icon(None,self.tab.icon)
-            else:
-                self.on_text(None,self.tab.text)
-            self.tab.bind(text=self.on_text)
-            self.tab.bind(icon=self.on_icon)
-    
 class MDTab(Screen):
     """ A tab is simply a screen with meta information
         that defines the content that goes in the tab header.
     """
+    __events__ = ('on_tab_touch_down','on_tab_touch_move','on_tab_touch_up','on_tab_press','on_tab_release')
+    
     # Tab header text
     text = StringProperty("")
     
@@ -119,8 +113,33 @@ class MDTab(Screen):
     # Tab dropdown menu (if you want to customize it)
     menu = ObjectProperty(None)
     
+    def __init__(self, **kwargs):
+        super(MDTab, self).__init__(**kwargs)
+        self.register_event_type('on_tab_touch_down')
+        self.register_event_type('on_tab_touch_move')
+        self.register_event_type('on_tab_touch_up')
+        self.register_event_type('on_tab_press')
+        self.register_event_type('on_tab_release')
+        
+    def on_tab_touch_down(self,*args):
+        pass
+    
+    def on_tab_touch_move(self,*args):
+        pass
+    
+    def on_tab_touch_up(self,*args):
+        pass
+
+    def on_tab_press(self,*args):
+        pass
+    
+    def on_tab_release(self,*args):
+        pass
+    
     def __repr__(self):
         return "<MDTab name='{}', text='{}'>".format(self.name,self.text)
+    
+    
 
 class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     """ A tab panel that is implemented by delegating all tabs
@@ -138,7 +157,8 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     _tab_display_height = DictProperty({'text':dp(46),'icons':dp(46),'both':dp(72)})
         
     # List of all the tabs so you can dynamically change them
-    #tabs = AliasProperty(get_tabs,set_tabs)
+    tabs = ListProperty([])
+    current = StringProperty(None)
     
     def __init__(self,**kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
