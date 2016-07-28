@@ -4,6 +4,7 @@ from kivy.properties import BoundedNumericProperty, ReferenceListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.elevationbehavior import ElevationBehavior
 from kivymd.theming import ThemableBehavior
+from kivy.metrics import dp
 
 Builder.load_string('''
 <MDCard>
@@ -13,7 +14,7 @@ Builder.load_string('''
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [dp(3)]
+            radius: [self.border_radius]
     background_color: self.theme_cls.bg_light
 ''')
 
@@ -23,5 +24,6 @@ class MDCard(ThemableBehavior, ElevationBehavior, BoxLayout):
     g = BoundedNumericProperty(1., min=0., max=1.)
     b = BoundedNumericProperty(1., min=0., max=1.)
     a = BoundedNumericProperty(0., min=0., max=1.)
-
+    
+    border_radius = BoundedNumericProperty(dp(3),min=0)
     background_color = ReferenceListProperty(r, g, b, a)
