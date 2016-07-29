@@ -174,14 +174,16 @@ Builder.load_string('''
             id: _lbl_primary
             text: root.text
             font_style: 'Subhead'
-            theme_text_color: 'Primary'
+            theme_text_color: root.theme_text_color
+            text_color: root.text_color
             size_hint_y: None
             height: self.texture_size[1]
         MDLabel:
             id: _lbl_secondary
             text: '' if root._num_lines == 1 else root.secondary_text
             font_style: 'Body1'
-            theme_text_color: 'Secondary'
+            theme_text_color: root.secondary_theme_text_color
+            text_color: root.secondary_text_color
             size_hint_y: None
             height: 0 if root._num_lines == 1 else self.texture_size[1]
             shorten: True if root._num_lines == 2 else False
@@ -293,6 +295,13 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     :attr:`text` is a :class:`~kivy.properties.StringProperty` and defaults
     to "".
     '''
+    
+    text_color = ListProperty(None)
+    ''' Text color used if theme_text_color is set to 'Custom' '''
+    
+    theme_text_color = StringProperty('Primary',allownone=True)
+    ''' Theme text color for primary text '''
+    
 
     secondary_text = StringProperty()
     '''Text shown in the second and potentially third line.
@@ -304,6 +313,13 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     :attr:`secondary_text` is a :class:`~kivy.properties.StringProperty` and
     defaults to "".
     '''
+    
+    secondary_text_color = ListProperty(None)
+    ''' Text color used for secondary text if secondary_theme_text_color 
+    is set to 'Custom' '''
+    
+    secondary_theme_text_color = StringProperty('Secondary',allownone=True)
+    ''' Theme text color for secondary primary text '''
 
     _txt_left_pad = NumericProperty(dp(16))
     _txt_top_pad = NumericProperty()
