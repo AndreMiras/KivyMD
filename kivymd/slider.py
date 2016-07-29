@@ -32,7 +32,7 @@ Builder.load_string('''
         Color:
             rgba: [0,0,0,0] if self._is_off else (self.thumb_color_down if not self.disabled else self._track_color_disabled)
         Rectangle:
-            size:     (self.value_pos[0]-10, sp(4)) if slider.orientation == 'horizontal' else (sp(4), self.value_pos[1]-10)
+            size:     ((self.width-self.padding*2)*self.value_normalized, sp(4)) if slider.orientation == 'horizontal' else (sp(4), (self.height-self.padding*2)*self.value_normalized)
             pos:    (self.x + self.padding, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding)
         
         
