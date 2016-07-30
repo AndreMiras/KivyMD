@@ -152,6 +152,7 @@ from kivymd.ripplebehavior import RectangularRippleBehavior
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
+#:import m_res kivymd.material_resources
 <MDList>
     cols: 1
     size_hint_y: None

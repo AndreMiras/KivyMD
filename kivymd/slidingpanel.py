@@ -10,6 +10,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.relativelayout import RelativeLayout
 
 Builder.load_string("""
+#: import Window kivy.core.window.Window
 <SlidingPanel>
     orientation: 'vertical'
     size_hint_x: None
