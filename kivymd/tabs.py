@@ -28,13 +28,13 @@ Builder.load_string("""
             id: tab_bar
             size_hint_y: None
             height: panel._tab_display_height[panel.tab_display_mode]
-            background_color: panel.theme_cls.primary_color
+            background_color: panel.tab_color or panel.theme_cls.primary_color
             canvas:
                 # Draw bottom border
                 Color:
-                    rgba: panel.theme_cls.primary_dark
+                    rgba: (panel.tab_border_color or panel.tab_color or panel.theme_cls.primary_dark)
                 Rectangle:
-                    size: (self.width,dp(1))
+                    size: (self.width,dp(2))
     ScreenManager:
         id: tab_manager
         current: root.current
@@ -44,14 +44,14 @@ Builder.load_string("""
 <MDTabHeader>:
     canvas:
         Color:
-            rgba: self.panel.theme_cls.primary_color
+            rgba: self.panel.tab_color or self.panel.theme_cls.primary_color
         Rectangle:
             size: self.size
             pos: self.pos
             
         # Draw indicator
         Color:
-            rgba: self.panel.theme_cls.accent_color if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else [0,0,0,0]
+            rgba: (self.panel.tab_indicator_color or self.panel.theme_cls.accent_color) if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else (self.panel.tab_border_color or self.panel.tab_color or self.panel.theme_cls.primary_dark)
         Rectangle:
             size: (self.width,dp(2))
             pos: self.pos
@@ -60,7 +60,7 @@ Builder.load_string("""
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
-    text_color: self.panel.theme_cls.bg_light if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else self.panel.theme_cls.primary_light
+    text_color: (self.panel.tab_text_color_active or self.panel.theme_cls.bg_light) if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color or self.panel.theme_cls.primary_light)
     on_press: 
         self.tab.dispatch('on_tab_press') 
         self.tab.manager.current = self.tab.name
@@ -155,9 +155,26 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     # How tabs are displayed
     tab_display_mode = OptionProperty('text',options=['text','icons'])#,'both'])
     _tab_display_height = DictProperty({'text':dp(46),'icons':dp(46),'both':dp(72)})
+    
+    # Tab background color (leave empty for theme color)
+    tab_color = ListProperty([])
+    
+    # Tab text color in normal state (leave empty for theme color)
+    tab_text_color = ListProperty([])
+    
+    # Tab text color in active state (leave empty for theme color)
+    tab_text_color_active = ListProperty([])
+    
+    # Tab indicator color  (leave empty for theme color)
+    tab_indicator_color = ListProperty([])
+    
+    # Tab bar bottom border color (leave empty for theme color)
+    tab_border_color = ListProperty([])
         
     # List of all the tabs so you can dynamically change them
     tabs = ListProperty([])
+    
+    # Current tab name
     current = StringProperty(None)
     
     def __init__(self,**kwargs):
