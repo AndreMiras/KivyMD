@@ -39,6 +39,8 @@ main_widget_kv = '''
 #:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
 #:import MDTab kivymd.tabs.MDTab
 #:import MDProgressBar kivymd.progressbar.MDProgressBar
+#:import MDAccordion kivymd.accordion.MDAccordion
+#:import MDAccordionItem kivymd.accordion.MDAccordionItem
 
 BoxLayout:
     orientation: 'vertical'
@@ -544,7 +546,70 @@ BoxLayout:
                     width: '64dp'
                 MDCheckbox:
                     on_state: tab_panel.tab_display_mode = 'icons' if tab_panel.tab_display_mode=='text' else 'text'
-
+        Screen:
+            name: 'accordion'
+            BoxLayout:
+                MDAccordion:
+                    orientation:'vertical'
+                    size_hint_x: None
+                    width: '240dp'
+                    MDAccordionItem:
+                        id: accordion_item
+                        title:'Item 1'
+                        icon: 'home'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 1"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 2"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 3"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                    MDAccordionItem:
+                        title:'Item 2'
+                        icon: 'globe'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 4"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 5"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 6"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                    MDAccordionItem:
+                        title:'Item 3'
+                        icon: 'account'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 7"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 8"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 9"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                MDLabel:
+                    text: 'Content'
+                    theme_text_color: 'Primary'
+                
+                
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
     NavigationDrawerIconButton:
@@ -611,6 +676,10 @@ BoxLayout:
         icon: 'circle'
         text: "Tabs"
         on_release: app.root.ids.scr_mngr.current = 'tabs'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Accordion"
+        on_release: app.root.ids.scr_mngr.current = 'accordion'
 '''
 
 class KitchenSinkNavDrawer(NavigationDrawer):
