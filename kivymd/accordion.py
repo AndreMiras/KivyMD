@@ -61,7 +61,11 @@ Builder.load_string('''
         Rectangle:
             size:self.size
             pos:self.pos
+        PushMatrix
+        Translate:
+            xy: (dp(2),0) if self.orientation == 'vertical' else (0,dp(2))
     canvas.after:
+        PopMatrix
         Color:
             rgba: self.divider_color or self.theme_cls.divider_color   
         Rectangle:
@@ -77,17 +81,23 @@ Builder.load_string('''
     padding: '12dp'
     orientation: 'horizontal' if ctx.item.orientation=='vertical' else 'vertical'
     canvas:
+        PushMatrix
+        Translate:
+            xy: (-dp(2),0) if ctx.item.orientation == 'vertical' else (0,-dp(2))
+            
         Color:
             rgba: self.background_color or self.theme_cls.primary_color
         Rectangle:
             size:self.size
             pos:self.pos
+        
     canvas.after:
         Color:
             rgba: [0,0,0,0] if ctx.item.collapse else (ctx.item.indicator_color or self.theme_cls.accent_color)   
         Rectangle:
             size:(dp(2),self.height) if ctx.item.orientation == 'vertical' else (self.width,dp(2)) 
             pos:self.pos
+        PopMatrix
     MDLabel:
         id:_label
         theme_text_color:ctx.item.title_theme_color
@@ -127,7 +137,7 @@ if __name__ == '__main__':
     class AccordionApp(App):
         theme_cls = ThemeManager()
         def build(self):
-            self.theme_cls.primary_palette = 'Indigo'
+            #self.theme_cls.primary_palette = 'Indigo'
             return Builder.load_string("""#:import MDLabel kivymd.label.MDLabel
 BoxLayout:
     spacing: '64dp'
