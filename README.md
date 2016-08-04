@@ -30,7 +30,7 @@ To install it on your desktop run the following in a terminal:
 
 If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git SSH address, like this example:
 
-    requirements = kivy==master,git+https://github.com/kivymd/KivyMD.git
+    requirements = kivy==master,git+https://gitlab.com/kivymd/KivyMD.git
 
 And add recycleview to your garden_requirements:
 

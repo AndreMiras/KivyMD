@@ -30,6 +30,7 @@ main_widget_kv = '''
 #:import SingleLineTextField kivymd.textfields.SingleLineTextField
 #:import MDSpinner kivymd.spinner.MDSpinner
 #:import MDCard kivymd.card.MDCard
+#:import MDSeparator kivymd.card.MDSeparator
 #:import MDDropdownMenu kivymd.menu.MDDropdownMenu
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
@@ -37,7 +38,7 @@ main_widget_kv = '''
 #:import MDSlider kivymd.slider.MDSlider
 #:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
 #:import MDTab kivymd.tabs.MDTab
-
+#:import MDProgressBar kivymd.progressbar.MDProgressBar
 
 BoxLayout:
     orientation: 'vertical'
@@ -91,8 +92,26 @@ BoxLayout:
             name: 'card'
             MDCard:
                 size_hint: None, None
+                size:     dp(320), dp(180)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            MDCard:
+                size_hint: None, None
                 size: dp(320), dp(180)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                BoxLayout:
+                    orientation:'vertical'
+                    padding: dp(8)
+                    MDLabel:
+                        text: 'Title'
+                        theme_text_color: 'Secondary'
+                        font_style:"Title"
+                        size_hint_y: None
+                        height: dp(36)
+                    MDSeparator:
+                        height: dp(1)
+                    MDLabel:
+                        text: 'Body'
+                        theme_text_color: 'Primary'
         Screen:
             name: 'slider'
             BoxLayout:
@@ -128,6 +147,10 @@ BoxLayout:
                     height: 8 * dp(100) # /1 * self.row_default_height
                     padding: dp(4), dp(4)
                     spacing: dp(4)
+                    SmartTileWithLabel:
+                        mipmap: True
+                        source: './assets/african-lion-951778_1280.jpg'
+                        text: "African Lion"
                     SmartTile:
                         mipmap: True
                         source: './assets/beautiful-931152_1280.jpg'
@@ -265,6 +288,33 @@ BoxLayout:
                 size: dp(46), dp(46)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 active: True if chkbox.active else False
+        Screen:
+            name: 'progressbars'
+            BoxLayout:
+                orientation:'vertical'
+                padding: '8dp'
+                
+                MDSlider:
+                    id:progress_slider
+                    min:0
+                    max:100
+                    value: 40
+                    
+                MDProgressBar:
+                    value: progress_slider.value
+                MDProgressBar:
+                    reversed: True
+                    value: progress_slider.value
+                
+                BoxLayout:
+                    MDProgressBar:
+                        orientation:"vertical"
+                        reversed: True
+                        value: progress_slider.value
+                        
+                    MDProgressBar:
+                        orientation:"vertical"
+                        value: progress_slider.value
 
         Screen:
             name: 'selectioncontrols'
@@ -529,6 +579,10 @@ BoxLayout:
         icon: 'circle'
         text: "Progress & activity"
         on_release: app.root.ids.scr_mngr.current = 'progress'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Progress bars"
+        on_release: app.root.ids.scr_mngr.current = 'progressbars'
     NavigationDrawerIconButton:
         icon: 'circle'
         text: "Selection controls"
