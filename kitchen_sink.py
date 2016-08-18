@@ -327,6 +327,7 @@ BoxLayout:
                             size_hint: 0.8, None
                             height: dp(48)
                             hint_text: "Write something"
+                            error_message: "Some text is required"
                     BoxLayout:
                         MDLabel:
                             font_style: 'Body1'
@@ -518,8 +519,10 @@ BoxLayout:
         on_release: app.root.ids.scr_mngr.current = 'slider'
 '''
 
+
 class KitchenSinkNavDrawer(NavigationDrawer):
     pass
+
 
 class KitchenSink(App):
     theme_cls = ThemeManager()
@@ -579,8 +582,7 @@ class KitchenSink(App):
                                auto_dismiss=False)
 
         self.dialog.add_action_button("Dismiss",
-                                      action=lambda
-                                          *x: self.dialog.dismiss())
+                                      action=lambda*x: self.dialog.dismiss())
         self.dialog.open()
 
     def theme_swap(self):
@@ -614,7 +616,6 @@ class KitchenSink(App):
     def set_error_message(self, *args):
         if len(self.root.ids.text_field.text) == 0:
             self.root.ids.text_field.error = True
-            self.root.ids.text_field.error_message = "Some text is required"
         else:
             self.root.ids.text_field.error = False
 
