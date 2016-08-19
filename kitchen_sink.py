@@ -327,7 +327,10 @@ BoxLayout:
                             size_hint: 0.8, None
                             height: dp(48)
                             hint_text: "Write something"
-                            error_message: "Some text is required"
+                            message: "Some text is required"
+                            message_mode: "on_error"
+                            #message_mode: "persistent"
+                            #message_mode: "on_focus"
                     BoxLayout:
                         MDLabel:
                             font_style: 'Body1'
