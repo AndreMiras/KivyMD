@@ -13,6 +13,7 @@ from kivymd.navigationdrawer import NavigationDrawer
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
+from kivymd.time_picker import MDTimeDialog
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -458,6 +459,15 @@ BoxLayout:
                 right_action_items: [['lock', lambda x: None], \
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
+        Screen:
+            name: 'time'
+            MDRaisedButton:
+                text: "Open time-picker"
+                size_hint: None, None
+                size: 3 * dp(48), dp(48)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                opposite_colors: True
+                on_release: app.show_example_time_picker()
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -517,6 +527,10 @@ BoxLayout:
         icon: 'circle'
         text: "Sliders"
         on_release: app.root.ids.scr_mngr.current = 'slider'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Time-picker"
+        on_release: app.root.ids.scr_mngr.current = 'time'
 '''
 
 
@@ -584,6 +598,9 @@ class KitchenSink(App):
         self.dialog.add_action_button("Dismiss",
                                       action=lambda*x: self.dialog.dismiss())
         self.dialog.open()
+
+    def show_example_time_picker(self):
+        self.time_dialog = MDTimeDialog(orientation='portrait')
 
     def theme_swap(self):
         if self.theme_cls.theme_style == 'Light':
