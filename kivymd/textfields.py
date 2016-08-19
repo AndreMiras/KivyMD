@@ -190,6 +190,5 @@ class SingleLineTextField(ThemableBehavior, TextInput):
 
     def _set_mode(self, instance, text):
         self.mode = text
-        print(text)
         if self.mode == "persistent":
             Animation(duration=.1, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
