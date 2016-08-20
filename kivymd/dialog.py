@@ -5,8 +5,8 @@ from kivy.properties import StringProperty, ObjectProperty, ListProperty
 from kivy.metrics import dp
 from kivy.uix.modalview import ModalView
 from kivy.animation import Animation
-from theming import ThemableBehavior
-from elevationbehavior import ElevationBehavior
+from kivymd.theming import ThemableBehavior
+from kivymd.elevationbehavior import ElevationBehavior
 from kivymd.button import MDFlatButton
 
 Builder.load_string('''
