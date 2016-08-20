@@ -9,9 +9,9 @@ The project's goal is to approximate Google's [Material Design spec](https://www
 
 Currently we're in **early alpha** status, so things are changing all the time and we cannot promise any kind of API stability. However, we're using KivyMD for deploying commercial applications to production environments, so rest assured it is safe to vendor now and make use of what's currently available; giving you freedom to upgrade when you're ready to do the necessary refactoring.
 
-Our roadmap is available at [our wiki](https://github.com/kivymd/KivyMD/wiki/Roadmap).
+Our roadmap is available at [our wiki](https://gitlab.com/kivymd/KivyMD/wikis/Roadmap).
 
-If you wish to contribute, [the project's coding style](https://github.com/kivymd/KivyMD/wiki/Coding-style) is available there as well. Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments.
+If you wish to contribute, [the project's coding style](https://gitlab.com/kivymd/KivyMD/wikis/Coding-style) is available there as well. Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments.
 
 Documentation
 =============
