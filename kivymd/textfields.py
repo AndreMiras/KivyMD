@@ -7,7 +7,7 @@ from kivy.properties import ObjectProperty, NumericProperty, StringProperty, \
 from kivy.metrics import sp, dp
 from kivy.animation import Animation
 from kivymd.label import MDLabel
-from theming import ThemableBehavior
+from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <SingleLineTextField>:
@@ -22,18 +22,18 @@ Builder.load_string('''
             dash_length: dp(3)
             dash_offset: 2 if self.disabled else 0
         Color:
-            rgba: self._current_color_1
+            rgba: self._current_line_color
         Rectangle:
             size: self._line_width, dp(2)
             pos: self.center_x - (self._line_width / 2), self.y + dp(8)
         Color:
-            rgba: self._current_color_2
+            rgba: self._current_error_color
         Rectangle:
             texture: self._msg_lbl.texture
             size: self._msg_lbl.texture_size
             pos: self.x, self.y - dp(8)
         Color:
-            rgba: (self._current_color_1 if self.focus and not self.cursor_blink \
+            rgba: (self._current_line_color if self.focus and not self.cursor_blink \
             else (0, 0, 0, 0))
         Rectangle:
             pos: [int(x) for x in self.cursor_pos]
@@ -42,7 +42,7 @@ Builder.load_string('''
             #rgba: self._hint_txt_color if not self.text and not self.focus\
             #else (self.line_color_focus if not self.text or self.focus\
             #else self.line_color_normal)
-            rgba: self._current_color_3
+            rgba: self._current_hint_text_color
         Rectangle:
             texture: self._hint_lbl.texture
             size: self._hint_lbl.texture_size
@@ -78,9 +78,9 @@ class SingleLineTextField(ThemableBehavior, TextInput):
     _error_label = ObjectProperty()
     _line_width = NumericProperty(0)
     _hint_txt = StringProperty('')
-    _current_color_1 = line_color_focus
-    _current_color_2 = ListProperty([0.0, 0.0, 0.0, 0.0])
-    _current_color_3 = _hint_txt_color
+    _current_line_color = line_color_focus
+    _current_error_color = ListProperty([0.0, 0.0, 0.0, 0.0])
+    _current_hint_text_color = _hint_txt_color
 
     def __init__(self, **kwargs):
         self._msg_lbl = MDLabel(font_style='Caption',
@@ -95,7 +95,7 @@ class SingleLineTextField(ThemableBehavior, TextInput):
         super(SingleLineTextField, self).__init__(**kwargs)
         self.line_color_normal = self.theme_cls.divider_color
         self.line_color_focus = list(self.theme_cls.primary_color)
-        self.bob = list(self.theme_cls.primary_color)
+        self.base_line_color_focus = list(self.theme_cls.primary_color)
         self.error_color = self.theme_cls.error_color
 
         self._hint_txt_color = self.theme_cls.disabled_hint_text_color
@@ -105,6 +105,13 @@ class SingleLineTextField(ThemableBehavior, TextInput):
                   hint_text=self._set_hint,
                   _hint_lbl_font_size=self._hint_lbl.setter('font_size'),
                   message_mode=self._set_mode)
+        self.hint_anim_in = Animation(_hint_y=dp(34),
+                                      _hint_lbl_font_size=sp(12), duration=.2,
+                                      t='out_quad')
+
+        self.hint_anim_out = Animation(_hint_y=dp(10),
+                                       _hint_lbl_font_size=sp(16), duration=.2,
+                                       t='out_quad')
 
     def on_hint_text_color(self, instance, color):
         self._hint_txt_color = self.theme_cls.disabled_hint_text_color
@@ -130,58 +137,54 @@ class SingleLineTextField(ThemableBehavior, TextInput):
             if len(self.text) == 0:
                 self.hint_anim_in.start(self)
             if self.error:
+                Animation(duration=.2, _current_hint_text_color=self.error_color).start(self)
                 if self.mode == "on_error":
-                    Animation(duration=.2, _current_color_2=self.error_color).start(self)
-                    Animation(duration=.2, _current_color_3=self.error_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.error_color).start(self)
                 elif self.mode == "persistent":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
-                    Animation(duration=.2, _current_color_3=self.error_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 elif self.mode == "on_focus":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
-                    Animation(duration=.2, _current_color_3=self.error_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 else:
-                    Animation(duration=.2, _current_color_3=self.error_color).start(self)
+                    pass
             elif not self.error:
                 self.on_width(None, self.width)
                 self.anim.start(self)
+                Animation(duration=.2, _current_hint_text_color=self.line_color_focus).start(self)
                 if self.mode == "on_error":
-                    Animation(duration=.2, _current_color_2=(0, 0, 0, 0)).start(self)
-                    Animation(duration=.2, _current_color_3=self.line_color_focus).start(self)
+                    Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
                 if self.mode == "persistent":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
-                    Animation(duration=.2, _current_color_3=self.line_color_focus).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 elif self.mode == "on_focus":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
-                    Animation(duration=.2, _current_color_3=self.line_color_focus).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 else:
-                    Animation(duration=.2, _current_color_3=self.line_color_focus).start(self)
+                    pass
         else:
             Animation.cancel_all(self, '_line_width', '_hint_y',
                                  '_hint_lbl_font_size')
             if len(self.text) == 0:
                 self.hint_anim_out.start(self)
             if not self.error:
-                self.line_color_focus = self.bob
-                Animation(duration=.2, _current_color_1=self.line_color_focus).start(self)
-                Animation(duration=.2, _current_color_3=self.theme_cls.disabled_hint_text_color).start(self)
+                self.line_color_focus = self.base_line_color_focus
+                Animation(duration=.2, _current_line_color=self.line_color_focus,
+                          _current_hint_text_color=self.theme_cls.disabled_hint_text_color).start(self)
                 if self.mode == "on_error":
-                    Animation(duration=.2, _current_color_2=(0, 0, 0, 0)).start(self)
+                    Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
                 elif self.mode == "persistent":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 elif self.mode == "on_focus":
-                    Animation(duration=.2, _current_color_2=(0, 0, 0, 0)).start(self)
+                    Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
 
                 self.on_width(None, 0)
                 self.anim.start(self)
             elif self.error:
-                Animation(duration=.2, _current_color_1=self.error_color).start(self)
-                Animation(duration=.2, _current_color_3=self.error_color).start(self)
+                Animation(duration=.2, _current_line_color=self.error_color,
+                          _current_hint_text_color=self.error_color).start(self)
                 if self.mode == "on_error":
-                    Animation(duration=.2, _current_color_2=self.error_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.error_color).start(self)
                 elif self.mode == "persistent":
-                    Animation(duration=.2, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
+                    Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
                 elif self.mode == "on_focus":
-                    Animation(duration=.2, _current_color_2=(0, 0, 0, 0)).start(self)
+                    Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
 
     def _set_hint(self, instance, text):
         self._hint_lbl.text = text
@@ -192,64 +195,5 @@ class SingleLineTextField(ThemableBehavior, TextInput):
 
     def _set_mode(self, instance, text):
         self.mode = text
-        print(self.mode)
         if self.mode == "persistent":
-            Animation(duration=.1, _current_color_2=self.theme_cls.disabled_hint_text_color).start(self)
-
-if __name__ == "__main__":
-    from kivy.app import App
-    from kivymd.theming import ThemeManager
-    from kivy.core.window import Window
-
-    class TextApp(App):
-        Window.size = (900, 140)
-        theme_cls = ThemeManager()
-
-        def set_error_message(self, *args):
-            if len(self.root.ids.text_field_error.text) == 0:
-                self.root.ids.text_field_error.error = True
-            else:
-                self.root.ids.text_field_error.error = False
-
-        def build(self):
-            main_widget = Builder.load_string("""
-BoxLayout:
-    size_hint_y: 1
-    padding: dp(48)
-    BoxLayout:
-        SingleLineTextField:
-            id: text_field
-            size_hint: 0.8, None
-            height: dp(48)
-            hint_text: "No helper text"
-    BoxLayout:
-        SingleLineTextField:
-            id: text_field
-            size_hint: 0.8, None
-            height: dp(48)
-            hint_text: "on_focus"
-            message: "Some text is required"
-            message_mode: "on_focus"
-    BoxLayout:
-        SingleLineTextField:
-            id: text_field
-            size_hint: 0.8, None
-            height: dp(48)
-            hint_text: "persistent"
-            message: "Text is always here"
-            message_mode: "persistent"
-    BoxLayout:
-        SingleLineTextField:
-            id: text_field_error
-            size_hint: 0.8, None
-            height: dp(48)
-            hint_text: "on_error (no text)"
-            message: "You must out something here"
-            message_mode: "on_error"
-""")
-            main_widget.ids.text_field_error.bind(
-                on_text_validate=self.set_error_message,
-                on_focus=self.set_error_message)
-            return main_widget
-
-    TextApp().run()
+            Animation(duration=.1, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
