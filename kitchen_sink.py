@@ -371,13 +371,25 @@ BoxLayout:
                     height: dp(1000)
                     BoxLayout:
                         size_hint_y: None
-                        height: dp(144)
+                        height: dp(250)
                         padding: dp(48)
+                        orientation: 'vertical'
                         SingleLineTextField:
-                            id: text_field
-                            size_hint: 0.8, None
-                            height: dp(48)
-                            hint_text: "Write something"
+                            hint_text: "No helper text"
+                        SingleLineTextField:
+                            hint_text: "on_focus"
+                            message: "This will disappear when you click off"
+                            message_mode: "on_focus"
+                        SingleLineTextField:
+                            hint_text: "persistent"
+                            message: "Text is always here"
+                            message_mode: "persistent"
+                        SingleLineTextField:
+                            id: text_field_error
+                            hint_text: "on_error (Hit Enter with no text here)"
+                            message: "You must put something here"
+                            message_mode: "on_error"
+
                     BoxLayout:
                         MDLabel:
                             font_style: 'Body1'
@@ -682,8 +694,10 @@ BoxLayout:
         on_release: app.root.ids.scr_mngr.current = 'accordion'
 '''
 
+
 class KitchenSinkNavDrawer(NavigationDrawer):
     pass
+
 
 class KitchenSink(App):
     theme_cls = ThemeManager()
@@ -710,7 +724,7 @@ class KitchenSink(App):
         main_widget = Builder.load_string(main_widget_kv)
         # self.theme_cls.theme_style = 'Dark'
 
-        main_widget.ids.text_field.bind(
+        main_widget.ids.text_field_error.bind(
             on_text_validate=self.set_error_message,
             on_focus=self.set_error_message)
 
@@ -743,8 +757,7 @@ class KitchenSink(App):
                                auto_dismiss=False)
 
         self.dialog.add_action_button("Dismiss",
-                                      action=lambda
-                                          *x: self.dialog.dismiss())
+                                      action=lambda*x: self.dialog.dismiss())
         self.dialog.open()
 
     def theme_swap(self):
@@ -776,11 +789,10 @@ class KitchenSink(App):
         bs.open()
 
     def set_error_message(self, *args):
-        if len(self.root.ids.text_field.text) == 0:
-            self.root.ids.text_field.error = True
-            self.root.ids.text_field.error_message = "Some text is required"
+        if len(self.root.ids.text_field_error.text) == 0:
+            self.root.ids.text_field_error.error = True
         else:
-            self.root.ids.text_field.error = False
+            self.root.ids.text_field_error.error = False
 
     def on_pause(self):
         return True
