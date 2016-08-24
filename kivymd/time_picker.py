@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
     class TimePickerApp(App):
         theme_cls = ThemeManager()
-        theme_cls.primary_palette = "DeepPurple"
+        # theme_cls.primary_palette = "DeepPurple"
         # last_time = datetime.datetime.now()
         last_time = None
 
