@@ -1,0 +1,8 @@
+[INFO              ] Logger: Record log in /storage/emulated/0/kivy/garden.circulardatetimepicker-master/.kivy/logs/kivy_16-08-24_1.txt
+[INFO              ] Kivy: v1.9.1
+[INFO              ] Python: v2.7.2 (default, Mar 20 2016, 23:30:13) 
+[GCC 4.8]
+[WARNING           ] stderr: Traceback (most recent call last):
+[WARNING           ] stderr:   File "main.py", line 50, in <module>
+[WARNING           ] stderr:     from garden.circularlayout import CircularLayout
+[WARNING           ] stderr: ImportError: No module named garden.circularlayout

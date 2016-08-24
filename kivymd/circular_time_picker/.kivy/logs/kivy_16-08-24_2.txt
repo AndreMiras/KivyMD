@@ -1,0 +1,84 @@
+[INFO              ] Logger: Record log in /storage/emulated/0/kivy/garden.circulardatetimepicker-master/.kivy/logs/kivy_16-08-24_2.txt
+[INFO              ] Kivy: v1.9.1
+[INFO              ] Python: v2.7.2 (default, Mar 20 2016, 23:30:13) 
+[GCC 4.8]
+[INFO              ] Factory: 179 symbols loaded
+[WARNING           ] stderr: /data/data/org.kivy.pygame/files/lib/python2.7/site-packages/kivy/core/image/img_pygame.py:13: RuntimeWarning: import cdrom: No module named cdrom
+[WARNING           ] stderr: (ImportError: No module named cdrom)
+[INFO              ] Image: Providers: img_tex, img_dds, img_gif, img_pygame, img_pil (img_ffpyplayer ignored)
+[INFO              ] Text: Provider: pygame
+[INFO              ] Window: Provider: pygame
+[INFO              ] GL: OpenGL version <OpenGL ES 3.0 V@84.0 AU@05.00.02.042.016 (CL@)>
+[INFO              ] GL: OpenGL vendor <Qualcomm>
+[INFO              ] GL: OpenGL renderer <Adreno (TM) 305>
+[INFO              ] GL: OpenGL parsed version: 3, 0
+[INFO              ] GL: Texture max size <4096>
+[INFO              ] GL: Texture max units <16>
+[INFO              ] Support: Android install hooks
+[INFO              ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO              ] OSC: using <thread> for socket
+[INFO              ] Base: Start application main loop
+[INFO              ] Android: found 17 joystick
+[INFO              ] Android: create joystick <0>
+[INFO              ] Android: discard joystick <0> cause no button
+[INFO              ] Android: create joystick <1>
+[INFO              ] Android: create joystick <2>
+[INFO              ] Android: create joystick <3>
+[INFO              ] Android: create joystick <4>
+[INFO              ] Android: create joystick <5>
+[INFO              ] Android: create joystick <6>
+[INFO              ] Android: create joystick <7>
+[INFO              ] Android: create joystick <8>
+[INFO              ] Android: create joystick <9>
+[INFO              ] Android: create joystick <10>
+[INFO              ] Android: create joystick <11>
+[INFO              ] Android: create joystick <12>
+[INFO              ] Android: create joystick <13>
+[INFO              ] Android: create joystick <14>
+[INFO              ] Android: create joystick <15>
+[INFO              ] Android: create joystick <16>
+[INFO              ] GL: NPOT texture support is available
+[INFO              ] Base: Leaving application in progress...
+[WARNING           ] stderr: Traceback (most recent call last):
+[WARNING           ] stderr:   File "main.py", line 688, in <module>
+[WARNING           ] stderr:     runTouchApp(c)
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/base.py", line 487, in runTouchApp
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/core/window/window_pygame.py", line 403, in mainloop
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/core/window/window_pygame.py", line 290, in _mainloop
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/base.py", line 330, in idle
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/base.py", line 315, in dispatch_input
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/base.py", line 221, in post_dispatch_input
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (kivy/_event.c:7699)
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/core/window/__init__.py", line 1030, in on_motion
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (kivy/_event.c:7699)
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/core/window/__init__.py", line 1046, in on_touch_down
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (kivy/_event.c:7699)
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/uix/widget.py", line 432, in on_touch_down
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (kivy/_event.c:7699)
+[WARNING           ] stderr:   File "/home/tito/code/python-for-android-upstream/build/python-install/lib/python2.7/site-packages/kivy/uix/widget.py", line 432, in on_touch_down
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 718, in kivy._event.EventDispatcher.dispatch (kivy/_event.c:7699)
+[WARNING           ] stderr:   File "main.py", line 306, in on_touch_down
+[WARNING           ] stderr:     self.selected = self.number_at_pos(*touch.pos)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 408, in kivy.properties.Property.__set__ (kivy/properties.c:5114)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 446, in kivy.properties.Property.set (kivy/properties.c:5876)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 501, in kivy.properties.Property.dispatch (kivy/properties.c:6557)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1224, in kivy._event.EventObservers.dispatch (kivy/_event.c:13497)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1130, in kivy._event.EventObservers._dispatch (kivy/_event.c:12696)
+[WARNING           ] stderr:   File "main.py", line 603, in on_selected
+[WARNING           ] stderr:     self.minutes = self._picker.selected
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 408, in kivy.properties.Property.__set__ (kivy/properties.c:5114)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 446, in kivy.properties.Property.set (kivy/properties.c:5876)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 501, in kivy.properties.Property.dispatch (kivy/properties.c:6557)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1224, in kivy._event.EventObservers.dispatch (kivy/_event.c:13497)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1130, in kivy._event.EventObservers._dispatch (kivy/_event.c:12696)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 1215, in kivy.properties.ReferenceListProperty.trigger_change (kivy/properties.c:19595)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 1230, in kivy.properties.ReferenceListProperty.trigger_change (kivy/properties.c:19482)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 501, in kivy.properties.Property.dispatch (kivy/properties.c:6557)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1224, in kivy._event.EventObservers.dispatch (kivy/_event.c:13497)
+[WARNING           ] stderr:   File "kivy/_event.pyx", line 1130, in kivy._event.EventObservers._dispatch (kivy/_event.c:12696)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 1368, in kivy.properties.AliasProperty.trigger_change (kivy/properties.c:22563)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 1371, in kivy.properties.AliasProperty.trigger_change (kivy/properties.c:22411)
+[WARNING           ] stderr:   File "kivy/properties.pyx", line 1386, in kivy.properties.AliasProperty.get (kivy/properties.c:22820)
+[WARNING           ] stderr:   File "main.py", line 536, in _get_time
+[WARNING           ] stderr:     return datetime.time(*self.time_list)
+[WARNING           ] stderr: ValueError: minute must be in 0..59

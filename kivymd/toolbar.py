@@ -90,5 +90,7 @@ class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
             new_width += dp(48)
             action_bar.add_widget(MDIconButton(icon=item[0],
                                                on_release=item[1],
-                                               opposite_colors=True))
+                                               opposite_colors=True,
+                                               text_color=self.title_color,
+                                               theme_text_color=self.title_theme_color))
         action_bar.width = new_width

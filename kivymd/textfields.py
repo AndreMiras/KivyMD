@@ -7,7 +7,7 @@ from kivy.properties import ObjectProperty, NumericProperty, StringProperty, \
 from kivy.metrics import sp, dp
 from kivy.animation import Animation
 from kivymd.label import MDLabel
-from theming import ThemableBehavior
+from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <SingleLineTextField>:

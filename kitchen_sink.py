@@ -31,11 +31,17 @@ main_widget_kv = '''
 #:import SingleLineTextField kivymd.textfields.SingleLineTextField
 #:import MDSpinner kivymd.spinner.MDSpinner
 #:import MDCard kivymd.card.MDCard
+#:import MDSeparator kivymd.card.MDSeparator
 #:import MDDropdownMenu kivymd.menu.MDDropdownMenu
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import colors kivymd.color_definitions.colors
 #:import SmartTile kivymd.grid.SmartTile
 #:import MDSlider kivymd.slider.MDSlider
+#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
+#:import MDTab kivymd.tabs.MDTab
+#:import MDProgressBar kivymd.progressbar.MDProgressBar
+#:import MDAccordion kivymd.accordion.MDAccordion
+#:import MDAccordionItem kivymd.accordion.MDAccordionItem
 
 BoxLayout:
     orientation: 'vertical'
@@ -89,8 +95,26 @@ BoxLayout:
             name: 'card'
             MDCard:
                 size_hint: None, None
+                size:     dp(320), dp(180)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            MDCard:
+                size_hint: None, None
                 size: dp(320), dp(180)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                BoxLayout:
+                    orientation:'vertical'
+                    padding: dp(8)
+                    MDLabel:
+                        text: 'Title'
+                        theme_text_color: 'Secondary'
+                        font_style:"Title"
+                        size_hint_y: None
+                        height: dp(36)
+                    MDSeparator:
+                        height: dp(1)
+                    MDLabel:
+                        text: 'Body'
+                        theme_text_color: 'Primary'
         Screen:
             name: 'slider'
             BoxLayout:
@@ -267,6 +291,33 @@ BoxLayout:
                 size: dp(46), dp(46)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 active: True if chkbox.active else False
+        Screen:
+            name: 'progressbars'
+            BoxLayout:
+                orientation:'vertical'
+                padding: '8dp'
+
+                MDSlider:
+                    id:progress_slider
+                    min:0
+                    max:100
+                    value: 40
+
+                MDProgressBar:
+                    value: progress_slider.value
+                MDProgressBar:
+                    reversed: True
+                    value: progress_slider.value
+
+                BoxLayout:
+                    MDProgressBar:
+                        orientation:"vertical"
+                        reversed: True
+                        value: progress_slider.value
+
+                    MDProgressBar:
+                        orientation:"vertical"
+                        value: progress_slider.value
 
         Screen:
             name: 'selectioncontrols'
@@ -328,7 +379,6 @@ BoxLayout:
                             size_hint: 0.8, None
                             height: dp(48)
                             hint_text: "Write something"
-                            error_message: "Some text is required"
                     BoxLayout:
                         MDLabel:
                             font_style: 'Body1'
@@ -460,6 +510,108 @@ BoxLayout:
                     ['camera', lambda x: None], \
                     ['play', lambda x: None]]
         Screen:
+            name: 'tabs'
+            MDTabbedPanel:
+                id: tab_panel
+                tab_display_mode:'text'
+
+                MDTab:
+                    name: 'music'
+                    text: "Music" # Why are these not set!!!
+                    icon: "playlist-audio"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Here is my music list :)"
+                        halign: 'center'
+                MDTab:
+                    name: 'movies'
+                    text: 'Movies'
+                    icon: "movie"
+
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Show movies here :)"
+                        halign: 'center'
+
+            BoxLayout:
+                size_hint_y:None
+                height: '48dp'
+                padding: '12dp'
+                MDLabel:
+                    font_style: 'Body1'
+                    theme_text_color: 'Primary'
+                    text: "Use icons"
+                    size_hint_x:None
+                    width: '64dp'
+                MDCheckbox:
+                    on_state: tab_panel.tab_display_mode = 'icons' if tab_panel.tab_display_mode=='text' else 'text'
+        Screen:
+            name: 'accordion'
+            BoxLayout:
+                MDAccordion:
+                    orientation:'vertical'
+                    size_hint_x: None
+                    width: '240dp'
+                    MDAccordionItem:
+                        id: accordion_item
+                        title:'Item 1'
+                        icon: 'home'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 1"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 2"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 3"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                    MDAccordionItem:
+                        title:'Item 2'
+                        icon: 'globe'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 4"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 5"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 6"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                    MDAccordionItem:
+                        title:'Item 3'
+                        icon: 'account'
+                        ScrollView:
+                            MDList:
+                                OneLineListItem:
+                                    text: "Subitem 7"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 8"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                                OneLineListItem:
+                                    text: "Subitem 9"
+                                    theme_text_color: 'Custom'
+                                    text_color: [1,1,1,1]
+                MDLabel:
+                    text: 'Content'
+                    theme_text_color: 'Primary'
+
+
+        Screen:
             name: 'time'
             MDRaisedButton:
                 text: "Open time-picker"
@@ -505,6 +657,10 @@ BoxLayout:
         on_release: app.root.ids.scr_mngr.current = 'progress'
     NavigationDrawerIconButton:
         icon: 'circle'
+        text: "Progress bars"
+        on_release: app.root.ids.scr_mngr.current = 'progressbars'
+    NavigationDrawerIconButton:
+        icon: 'circle'
         text: "Selection controls"
         on_release: app.root.ids.scr_mngr.current = 'selectioncontrols'
     NavigationDrawerIconButton:
@@ -531,6 +687,14 @@ BoxLayout:
         icon: 'circle'
         text: "Time-picker"
         on_release: app.root.ids.scr_mngr.current = 'time'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Tabs"
+        on_release: app.root.ids.scr_mngr.current = 'tabs'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Accordion"
+        on_release: app.root.ids.scr_mngr.current = 'accordion'
 '''
 
 
@@ -633,6 +797,7 @@ class KitchenSink(App):
     def set_error_message(self, *args):
         if len(self.root.ids.text_field.text) == 0:
             self.root.ids.text_field.error = True
+            self.root.ids.text_field.error_message = "Some text is required"
         else:
             self.root.ids.text_field.error = False
 
