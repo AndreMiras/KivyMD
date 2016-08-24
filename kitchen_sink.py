@@ -13,7 +13,7 @@ from kivymd.navigationdrawer import NavigationDrawer
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
-from kivymd.time_picker import MDTimeDialog
+from kivymd.time_picker import MDTimePicker
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -764,7 +764,8 @@ class KitchenSink(App):
         self.dialog.open()
 
     def show_example_time_picker(self):
-        self.time_dialog = MDTimeDialog(orientation='portrait')
+        self.time_dialog = MDTimePicker()
+        self.time_dialog.bind()
 
     def theme_swap(self):
         if self.theme_cls.theme_style == 'Light':

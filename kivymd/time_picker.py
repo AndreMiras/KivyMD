@@ -1,132 +1,133 @@
+# -*- coding: utf-8 -*-
+
 from kivy.lang import Builder
-from kivy.uix.widget import Widget
 from kivy.uix.modalview import ModalView
-from kivy.properties import StringProperty, ObjectProperty, ListProperty, NumericProperty
+from kivy.uix.floatlayout import FloatLayout
+from kivymd.button import MDFlatButton
+from kivymd.theming import ThemableBehavior
+from kivymd.elevationbehavior import ElevationBehavior
+from kivy.properties import ObjectProperty, ListProperty
+from kivymd.label import MDLabel
 from kivy.metrics import dp
 from kivy.animation import Animation
-from kivymd.dialog import MDDialog
-from theming import ThemableBehavior
-from elevationbehavior import ElevationBehavior
-from kivymd.button import MDFlatButton
-import math
+from kivymd.circular_time_picker import CircularTimePicker
 
-Builder.load_string('''
-<MDTimeDialog>:
-    Dial
-    MDRaisedButton:
-        text: "Open time-picker"
-        size_hint: None, None
-        size: 3 * dp(48), dp(48)
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        opposite_colors: True
-        on_release: root.dismiss()
-
-<Dial>:
-    circle_id: circle_id
-    size: root.size
-    pos: 0, 0
+Builder.load_string("""
+#:import SingleLineTextField kivymd.textfields.SingleLineTextField
+<MDTimePicker>:
+    size_hint: (None, None)
+    size: dp(270), dp(335)+dp(95)
+    pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
-        Rotate:
-            angle: self.angle
-            origin: self.center
         Color:
-            rgb: 1, 0, 0
+            rgba: 1, 0, 0, 0.3
+        Rectangle:
+            size: root.size
+            pos: root.pos
+        Color:
+            rgba: self.theme_cls.bg_dark
+        Rectangle:
+            size: dp(270), dp(335)
+            pos: root.pos[0], root.pos[1] + root.height - dp(335) - dp(95)
+        Color:
+            rgba: self.theme_cls.primary_color
+        Rectangle:
+            size: dp(270), dp(95)
+            pos: root.pos[0], root.pos[1] + root.height - dp(95)
+        Color:
+            rgba: self.theme_cls.bg_light
         Ellipse:
-            size: min(self.size), min(self.size)
-            pos: 0.5*self.size[0] - 0.5*min(self.size), 0.5*self.size[1] - 0.5*min(self.size)
-    Circle:
-        id: circle_id
-        size_hint: 0, 0
-        size: 50, 50
-        pos: 0.5*root.size[0]-25, 0.9*root.size[1]-25
-        canvas:
-            Color:
-                rgb: 0, 1, 0
-            Ellipse:
-                size: 50, 50
-                pos: self.pos
-''')
+            size: dp(220), dp(220)
+            pos: root.pos[0]+dp(270)/2-dp(220)/2, root.pos[1] + root.height - (dp(335)/2+dp(95)) - dp(220)/2 + dp(35)
+        #Color:
+            #rgba: (1, 0, 0, 1)
+        #Line:
+            #width: 4
+            #points: dp(270)/2, root.height, dp(270)/2, 0
+    CircularTimePicker:
+        color: app.theme_cls.text_color
+        # selector_color: 0, 0, 0
+        id: time_picker
+        pos: (dp(270)/2)-(self.width/2), root.height-self.height
+        size_hint: .8, .8
+        pos_hint: {'center_x': 0.5, 'center_y': 0.585}
+    MDFlatButton:
+        pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(10)
+        text: "Cancel"
+        on_release: root.close_cancel()
+    MDFlatButton:
+        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(10)
+        text: "OK"
+        on_release: root.close_ok()
+""")
 
 
-class Circle(Widget):
-    def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
-            print "small circle clicked"
-
-
-class MDTimeDialog(ThemableBehavior, ElevationBehavior, ModalView):
-    angle = NumericProperty(0)
+class MDTimePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
+    background_color = ListProperty([0, 0, 0, 0])
+    time = ObjectProperty()
 
     def __init__(self, **kwargs):
-        super(MDTimeDialog, self).__init__(**kwargs)
-        if self._window is not None:
-            # Logger.warning('ModalView: you can only open once.')
-            return self
-        # search window
-        self._window = self._search_window()
-        if not self._window:
-            # Logger.warning('ModalView: cannot open view, no window found.')
-            return self
-        self._window.add_widget(self)
+        super(MDTimePicker, self).__init__(**kwargs)
+        self.current_time = self.ids.time_picker.time
 
-    def dismiss(self, *largs, **kwargs):
-        '''Close the view if it is open. If you really want to close the
-            view, whatever the on_dismiss event returns, you can use the *force*
-            argument:
-            ::
+    def set_time(self, time):
+        try:
+            self.ids.time_picker._set_time(time)
+        except AttributeError:
+            raise TypeError("MDTimePicker._set_time must receive a datetime object, not a \"" + type(time).__name__ + "\"")
 
-                view = ModalView(...)
-                view.dismiss(force=True)
+    def close_cancel(self):
+        self.dismiss()
 
-            When the view is dismissed, it will be faded out before being
-            removed from the parent. If you don't want animation, use::
+    def close_ok(self):
+        self.current_time = self.ids.time_picker.time
+        self.time = self.current_time
+        self.dismiss()
 
-                view.dismiss(animation=False)
+if __name__ == "__main__":
+    from kivy.app import App
+    from kivymd.theming import ThemeManager
+    import datetime
 
-            '''
-        if self._window is None:
-            return self
-        if self.dispatch('on_dismiss') is True:
-            if kwargs.get('force', False) is not True:
-                return self
-        if kwargs.get('animation', True):
-            Animation(_anim_alpha=0., d=2).start(self)
-        else:
-            self._anim_alpha = 0
-            self._real_remove_widget()
-        return self
+    class TimePickerApp(App):
+        theme_cls = ThemeManager()
+        theme_cls.primary_palette = "DeepPurple"
+        # last_time = datetime.datetime.now()
+        last_time = None
 
+        def get_time(self, instance, time):
+            print("Got time: " + str(time))
+            self.last_time = time
 
-class Dial(Widget):
-    angle = NumericProperty(0)
+        def open_dialog(self):
+            self.time_picker = MDTimePicker()
+            self.time_picker.bind(time=self.get_time)
+            try:
+                self.time_picker.set_time(self.last_time)
+            except TypeError:
+                pass
+            self.time_picker.open()
 
-    def __int__(self):
-        self.start_on_small = False
+        def build(self):
+            main_widget = Builder.load_string("""
+#:import MDRaisedButton kivymd.button.MDRaisedButton
+FloatLayout:
+    MDRaisedButton:
+        size_hint: None, None
+        size: 3 * dp(48), dp(48)
+        center_x: self.parent.center_x
+        text: 'Switch theme style'
+        on_release: app.theme_cls.theme_style = 'Dark' if app.theme_cls.theme_style == 'Light' else 'Light'
+        opposite_colors: True
+    MDRaisedButton:
+        size_hint: None, None
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        size: 3 * dp(48), dp(48)
+        center_x: self.parent.center_x
+        text: 'Open time picker'
+        on_release: app.open_dialog()
+        opposite_colors: True
+""")
+            return main_widget
 
-    def on_touch_down(self, touch):
-        if not self.circle_id.collide_point(*touch.pos):
-            self.start_on_small = False
-            print "big circle clicked"
-        else:
-            self.start_on_small = True
-            y = (touch.y - self.center[1])
-            x = (touch.x - self.center[0])
-            calc = math.degrees(math.atan2(y, x))
-            self.prev_angle = calc if calc > 0 else 360+calc
-            self.tmp = self.angle
-
-            return super(Dial, self).on_touch_down(touch) # dispatch touch event futher
-
-    def on_touch_move(self, touch):
-        if self.start_on_small:
-            y = (touch.y - self.center[1])
-            x = (touch.x - self.center[0])
-            calc = math.degrees(math.atan2(y, x))
-            new_angle = calc if calc > 0 else 360+calc
-
-            self.angle = self.tmp + (new_angle-self.prev_angle)%360
-
-    def on_touch_up(self, touch):
-        self.start_on_small = False
-        Animation(angle=0).start(self)
-
+    TimePickerApp().run()
