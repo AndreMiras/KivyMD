@@ -322,11 +322,15 @@ class CircularNumberPicker(CircularLayout):
             return
         touch.grab(self)
         self.selected = self.number_at_pos(*touch.pos)
+        if self.selected == 60:
+            self.selected = 0
 
     def on_touch_move(self, touch):
         if touch.grab_current is not self:
             return super(CircularNumberPicker, self).on_touch_move(touch)
         self.selected = self.number_at_pos(*touch.pos)
+        if self.selected == 60:
+            self.selected = 0
 
     def on_touch_up(self, touch):
         if touch.grab_current is not self:
