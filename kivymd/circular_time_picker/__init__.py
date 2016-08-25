@@ -64,7 +64,10 @@ try:
     xrange(1, 2)
 except NameError:
     def xrange(first, second, third=None):
-        return range(first, second, third)
+        if third:
+            return range(first, second, third)
+        else:
+            return range(first, second)
 
 
 def map_number(x, in_min, in_max, out_min, out_max):

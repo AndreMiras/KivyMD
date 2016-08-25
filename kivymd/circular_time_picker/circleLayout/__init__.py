@@ -30,8 +30,11 @@ from math import sin, cos, pi, radians, degrees
 try:
     xrange(1, 2)
 except NameError:
-    def xrange(first, second):
-        return range(first, second)
+    def xrange(first, second, third=None):
+        if third:
+            return range(first, second, third)
+        else:
+            return range(first, second)
 
 
 class CircularLayout(Layout):
