@@ -45,8 +45,6 @@ Builder.load_string("""
             #width: 4
             #points: dp(270)/2, root.height, dp(270)/2, 0
     CircularTimePicker:
-        color: app.theme_cls.text_color
-        # selector_color: 0, 0, 0
         id: time_picker
         pos: (dp(270)/2)-(self.width/2), root.height-self.height
         size_hint: .8, .8
@@ -91,7 +89,10 @@ if __name__ == "__main__":
 
     class TimePickerApp(App):
         theme_cls = ThemeManager()
-        # theme_cls.primary_palette = "DeepPurple"
+        print(ThemeManager.primary_palette.options)
+        # theme_cls.primary_palette = "Cyan"
+        # theme_cls.primary_hue = "700"
+        # theme_cls.theme_style = "Dark"
         # last_time = datetime.datetime.now()
         last_time = None
 
@@ -115,9 +116,16 @@ FloatLayout:
     MDRaisedButton:
         size_hint: None, None
         size: 3 * dp(48), dp(48)
+        # center_x: self.parent.center_x
+        text: 'Switch theme color (debug)'
+        on_release: app.theme_cls.primary_palette = 'Teal' if app.theme_cls.primary_palette != 'Teal' else 'DeepOrange'
+        opposite_colors: True
+    MDRaisedButton:
+        size_hint: None, None
+        size: 3 * dp(48), dp(48)
         center_x: self.parent.center_x
         text: 'Switch theme style'
-        on_release: app.theme_cls.theme_style = 'Dark' if app.theme_cls.theme_style == 'Light' else 'Light'
+        on_release: app.theme_cls.theme_style = 'Dark' if app.theme_cls.theme_style != 'Dark' else 'Light'
         opposite_colors: True
     MDRaisedButton:
         size_hint: None, None

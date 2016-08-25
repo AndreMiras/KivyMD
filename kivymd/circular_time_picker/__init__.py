@@ -57,14 +57,14 @@ from kivy.properties import NumericProperty, BoundedNumericProperty, \
     ReferenceListProperty, AliasProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-
+from kivymd.theming import ThemableBehavior
 from math import atan, pi, radians, sin, cos
 import datetime
 try:
     xrange(1, 2)
 except NameError:
-    def xrange(first, second):
-        return range(first, second)
+    def xrange(first, second, third=None):
+        return range(first, second, third)
 
 
 def map_number(x, in_min, in_max, out_min, out_max):
@@ -476,13 +476,15 @@ class CircularHourPicker(CircularNumberPicker):
         self.start_angle = (360. / self.shown_items / 2) - 90
 
 
-class CircularTimePicker(BoxLayout):
+class CircularTimePicker(BoxLayout, ThemableBehavior):
     """Widget that makes use of :class:`CircularHourPicker` and
     :class:`CircularMinutePicker` to create a user-friendly, animated
     time picker like the one seen on Android.
 
     See module documentation for more details.
     """
+
+    primary_dark = ListProperty([1, 1, 1])
 
     hours = NumericProperty(0)
     """The hours, in military format (0-23).
@@ -506,11 +508,10 @@ class CircularTimePicker(BoxLayout):
 
     # military = BooleanProperty(False)
     time_format = StringProperty(
-        "[color={hours_color}][ref=hours]{hours}[/ref][/color]:[color={minutes_color}][ref=minutes]{minutes:02d}[/ref][/color]")
+        "[color={hours_color}][ref=hours]{hours}[/ref][/color][color={primary_dark}][ref=colon]:[/ref][/color][color={minutes_color}][ref=minutes]{minutes:02d}[/ref][/color]")
     """String that will be formatted with the time and shown in the time label.
     Can be anything supported by :meth:`str.format`. Make sure you don't
     remove the refs. See the default for the arguments passed to format.
-
     :attr:`time_format` is a :class:`~kivy.properties.StringProperty` and
     defaults to "[color={hours_color}][ref=hours]{hours}[/ref][/color]:[color={minutes_color}][ref=minutes]{minutes:02d}[/ref][/color]".
     """
@@ -585,27 +586,30 @@ class CircularTimePicker(BoxLayout):
     _picker = AliasProperty(_get_picker, None)
 
     def _get_time_text(self):
-        hc = rgb_to_hex(*self.selector_color) if self.picker == "hours" else rgb_to_hex(1, 1, 1)
-        mc = rgb_to_hex(*self.selector_color) if self.picker == "minutes" else rgb_to_hex(1, 1, 1)
+        hc = rgb_to_hex(0, 0, 0) if self.picker == "hours" else rgb_to_hex(*self.primary_dark)
+        mc = rgb_to_hex(0, 0, 0) if self.picker == "minutes" else rgb_to_hex(*self.primary_dark)
         h = self.hours == 0 and 12 or self.hours <= 12 and self.hours or self.hours - 12
         m = self.minutes
-        return self.time_format.format(hours_color=hc, minutes_color=mc, hours=h, minutes=m)
-
+        primary_dark = rgb_to_hex(*self.primary_dark)
+        return self.time_format.format(hours_color=hc, minutes_color=mc, hours=h, minutes=m, primary_dark=primary_dark)
     time_text = AliasProperty(_get_time_text, None, bind=("hours", "minutes", "time_format", "picker"))
 
     def _get_ampm_text(self, *args):
-        amc = rgb_to_hex(*self.selector_color) if self._am else rgb_to_hex(1, 1, 1)
-        pmc = rgb_to_hex(*self.selector_color) if not self._am else rgb_to_hex(1, 1, 1)
+        amc = rgb_to_hex(0, 0, 0) if self._am else rgb_to_hex(*self.primary_dark)
+        pmc = rgb_to_hex(0, 0, 0) if not self._am else rgb_to_hex(*self.primary_dark)
         return self.ampm_format.format(am_color=amc, pm_color=pmc)
 
     ampm_text = AliasProperty(_get_ampm_text, None, bind=("hours", "ampm_format", "_am"))
 
     def __init__(self, **kw):
         super(CircularTimePicker, self).__init__(**kw)
+        self.selector_color = self.theme_cls.primary_color[0], self.theme_cls.primary_color[1], self.theme_cls.primary_color[2]
+        self.color = self.theme_cls.text_color
+        self.primary_dark = self.theme_cls.primary_dark[0] / 2, self.theme_cls.primary_dark[1] / 2, self.theme_cls.primary_dark[2] / 2
         self.on_ampm()
         if self.hours >= 12:
             self._am = False
-        self.bind(time_list=self.on_time_list, picker=self._switch_picker, _am=self.on_ampm, color=self._get_ampm_text)
+        self.bind(time_list=self.on_time_list, picker=self._switch_picker, _am=self.on_ampm, primary_dark=self._get_ampm_text)
         self._h_picker = CircularHourPicker()
         self._m_picker = CircularMinutePicker()
         self.animating = False
