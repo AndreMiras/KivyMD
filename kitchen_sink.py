@@ -703,7 +703,6 @@ class KitchenSinkNavDrawer(NavigationDrawer):
 
 class KitchenSink(App):
     theme_cls = ThemeManager()
-    print(theme_cls.bg_normal, theme_cls.bg_dark)
     nav_drawer = ObjectProperty()
 
     menu_items = [

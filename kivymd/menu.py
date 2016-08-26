@@ -113,7 +113,7 @@ class MDDropdownMenu(ThemableBehavior, BoxLayout):
 
         target_height = sum([dp(48) for i in self.items])
         # If we're over max_height...
-        if self.max_height > 0 and target_height > self.max_height:
+        if 0 < self.max_height < target_height:
             target_height = self.max_height
 
         # ---ESTABLISH VERTICAL GROWTH DIRECTION---

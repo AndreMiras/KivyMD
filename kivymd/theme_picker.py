@@ -10,8 +10,6 @@ from kivymd.elevationbehavior import ElevationBehavior
 from kivy.properties import ObjectProperty, ListProperty
 from kivymd.label import MDLabel
 from kivy.metrics import dp
-from kivy.animation import Animation
-from kivy.graphics import *
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
 
