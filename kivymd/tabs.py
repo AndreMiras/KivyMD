@@ -63,7 +63,8 @@ Builder.load_string("""
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
-    text_color: (self.panel.tab_text_color_active or self.panel.theme_cls.bg_light) if self.tab and self.tab.manager \
+    text_color: (self.panel.tab_text_color_active or app.theme_cls.bg_light if app.theme_cls.theme_style == "Light" \
+            else app.theme_cls.opposite_bg_light) if self.tab and self.tab.manager \
             and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color \
             or self.panel.theme_cls.primary_light)
     on_press: 
