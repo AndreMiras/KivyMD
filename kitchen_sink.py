@@ -41,12 +41,14 @@ main_widget_kv = '''
 #:import MDProgressBar kivymd.progressbar.MDProgressBar
 #:import MDAccordion kivymd.accordion.MDAccordion
 #:import MDAccordionItem kivymd.accordion.MDAccordionItem
+#:import MDThemePicker kivymd.theme_picker.MDThemePicker
 
 BoxLayout:
     orientation: 'vertical'
     Toolbar:
         id: toolbar
         title: 'KivyMD Kitchen Sink'
+        background_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
         right_action_items: [['more-vert', lambda x: app.nav_drawer.toggle()]]
     ScreenManager:
@@ -61,7 +63,7 @@ BoxLayout:
                 pos_hint: {'center_x': 0.5, 'center_y': 0.6}
                 on_release: app.show_example_bottom_sheet()
             MDRaisedButton:
-                text: "Open list bottom sheet"
+                text: "Open grid bottom sheet"
                 opposite_colors: True
                 size_hint: None, None
                 size: 4 * dp(48), dp(48)
@@ -491,12 +493,12 @@ BoxLayout:
                     size_hint: None, None
                     size: 3 * dp(48), dp(48)
                     center_x: self.parent.center_x
-                    text: 'Switch theme style'
-                    on_release: app.theme_cls.theme_style = 'Dark' if app.theme_cls.theme_style == 'Light' else 'Light'
+                    text: 'Change theme'
+                    on_release: MDThemePicker().open()
                     opposite_colors: True
                     pos_hint: {'center_x': 0.5}
                 MDLabel:
-                    text: "Current: " + app.theme_cls.theme_style
+                    text: "Current: " + app.theme_cls.theme_style + ", " + app.theme_cls.primary_palette
                     theme_text_color: 'Primary'
                     pos_hint: {'center_x': 0.5}
                     halign: 'center'

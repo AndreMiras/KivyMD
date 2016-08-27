@@ -50,7 +50,8 @@ Builder.load_string('''
 <MDFlatButton>
     canvas:
         Color:
-            rgba: self.background_color if self.state == 'normal' else self._bg_color_down
+            #rgba: self.background_color if self.state == 'normal' else self._bg_color_down
+            rgba: self._current_button_color
         Rectangle:
             size: self.size
             pos: self.pos
@@ -160,9 +161,11 @@ class MDFlatButton(ThemableBehavior, RectangularRippleBehavior,
 
     _text = StringProperty('')
     _bg_color_down = ListProperty([0, 0, 0, 0])
+    _current_button_color = ListProperty([0, 0, 0, 0])
 
     def __init__(self, **kwargs):
         super(MDFlatButton, self).__init__(**kwargs)
+        self._current_button_color = self.background_color
         self._bg_color_down = get_color_from_hex(
             colors[self.theme_cls.theme_style]['FlatButtonDown'])
 
@@ -174,6 +177,27 @@ class MDFlatButton(ThemableBehavior, RectangularRippleBehavior,
 
     def on_text(self, instance, value):
         self._text = value.upper()
+
+    def on_touch_down(self, touch):
+        if touch.is_mouse_scrolling:
+            return False
+        elif not self.collide_point(touch.x, touch.y):
+            return False
+        elif self in touch.ud:
+            return False
+        elif self.disabled:
+            return False
+        else:
+            self.fade_bg = Animation(duration=.2, _current_button_color=get_color_from_hex(
+                                     colors[self.theme_cls.theme_style]['FlatButtonDown']))
+            self.fade_bg.start(self)
+            return super(MDFlatButton, self).on_touch_down(touch)
+
+    def on_touch_up(self, touch):
+        if touch.grab_current is self:
+            self.fade_bg.stop_property(self, '_current_button_color')
+            Animation(duration=.05, _current_button_color=self.background_color).start(self)
+        return super(MDFlatButton, self).on_touch_up(touch)
 
 
 class MDRaisedButton(ThemableBehavior, RectangularRippleBehavior,
@@ -359,7 +383,8 @@ class MDFloatingActionButton(ThemableBehavior, CircularRippleBehavior,
     elevation_normal = AliasProperty(_get_elev_norm, _set_elev_norm,
                                      bind=('_elev_norm',))
 
-    _elev_raised = NumericProperty(12)
+    # _elev_raised = NumericProperty(12)
+    _elev_raised = NumericProperty(6)
 
     def _get_elev_raised(self):
         return self._elev_raised

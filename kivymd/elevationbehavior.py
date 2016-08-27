@@ -92,16 +92,19 @@ class ElevationBehavior(object):
                 height = self.height + dp(ratio)
                 soft_height = self.height + dp(ratio) + dp(self.elevation) * .5
             else:
-                self._shadow = App.get_running_app().theme_cls.rec_shadow
-                ratio = abs(ratio)
-                if ratio > 5:
-                    ratio = ratio * 22
-                else:
-                    ratio = ratio * 11.5
-
-                width = self.width + dp(ratio)
-                soft_width = self.width + dp(ratio) + dp(self.elevation) * .9
-                height = soft_height = self.height * 1.9
+                self._shadow = App.get_running_app().theme_cls.quad_shadow
+                width = soft_width = self.width * 1.8
+                height = soft_height = self.height * 1.8
+                #                 self._shadow = App.get_running_app().theme_cls.rec_shadow
+                #                 ratio = abs(ratio)
+                #                 if ratio > 5:
+                #                     ratio = ratio * 22
+                #                 else:
+                #                     ratio = ratio * 11.5
+                #
+                #                 width = self.width + dp(ratio)
+                #                 soft_width = self.width + dp(ratio) + dp(self.elevation) * .9
+                #                 height = soft_height = self.height * 1.9
 
             x = self.center_x - width / 2
             soft_x = self.center_x - soft_width / 2

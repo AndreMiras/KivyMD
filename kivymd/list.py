@@ -308,7 +308,6 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     
     theme_text_color = StringProperty('Primary',allownone=True)
     ''' Theme text color for primary text '''
-    
 
     secondary_text = StringProperty()
     '''Text shown in the second and potentially third line.
@@ -340,7 +339,7 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     _num_lines = 2
 
 
-class ILeftBody():
+class ILeftBody:
     '''Pseudo-interface for widgets that go in the left container for
     ListItems that support it.
 
@@ -349,14 +348,14 @@ class ILeftBody():
     pass
 
 
-class ILeftBodyTouch():
+class ILeftBodyTouch:
     '''Same as :class:`~ILeftBody`, but allows the widget to receive touch
     events instead of triggering the ListItem's ripple effect
     '''
     pass
 
 
-class IRightBody():
+class IRightBody:
     '''Pseudo-interface for widgets that go in the right container for
     ListItems that support it.
 
@@ -365,14 +364,14 @@ class IRightBody():
     pass
 
 
-class IRightBodyTouch():
+class IRightBodyTouch:
     '''Same as :class:`~IRightBody`, but allows the widget to receive touch
     events instead of triggering the ListItem's ripple effect
     '''
     pass
 
 
-class ContainerSupport():
+class ContainerSupport:
     '''Overrides add_widget in a ListItem to include support for I*Body
     widgets when the appropiate containers are present.
     '''
