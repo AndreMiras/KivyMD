@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.properties import StringProperty,ListProperty,OptionProperty
+from kivy.properties import StringProperty, ListProperty, OptionProperty
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
 from kivymd.theming import ThemableBehavior
@@ -9,13 +9,16 @@ from kivy.uix.accordion import Accordion, AccordionItem
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivy.uix.boxlayout import BoxLayout
 
-class MDAccordionItemTitleLayout(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
+
+class MDAccordionItemTitleLayout(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     pass
 
-class MDAccordion(ThemableBehavior,BackgroundColorBehavior, Accordion):
+
+class MDAccordion(ThemableBehavior, BackgroundColorBehavior, Accordion):
     pass
 
-class MDAccordionItem(ThemableBehavior,AccordionItem):
+
+class MDAccordionItem(ThemableBehavior, AccordionItem):
     title_theme_color = OptionProperty(None, allownone=True,
                                        options=['Primary', 'Secondary', 'Hint',
                                                 'Error', 'Custom'])
@@ -115,7 +118,8 @@ Builder.load_string('''
         text: md_icons[ctx.item.icon if ctx.item.icon else 'menu']
         font_style:'Icon'
         size_hint: (None,1) if ctx.item.orientation == 'vertical' else (1,None)
-        size: ((self.texture_size[0],1) if ctx.item.orientation == 'vertical' else (1,self.texture_size[1])) if ctx.item.icon else (0,0)
+        size: ((self.texture_size[0],1) if ctx.item.orientation == 'vertical' else (1,self.texture_size[1])) \
+            if ctx.item.icon else (0,0)
         text_size: (self.width, None) if ctx.item.orientation=='vertical' else (None,self.width)
         canvas.before:
             PushMatrix
@@ -165,9 +169,11 @@ if __name__ == '__main__':
     
     class AccordionApp(App):
         theme_cls = ThemeManager()
+
         def build(self):
-            #self.theme_cls.primary_palette = 'Indigo'
-            return Builder.load_string("""#:import MDLabel kivymd.label.MDLabel
+            # self.theme_cls.primary_palette = 'Indigo'
+            return Builder.load_string("""
+#:import MDLabel kivymd.label.MDLabel
 #:import MDList kivymd.list.MDList
 #:import OneLineListItem kivymd.list.OneLineListItem
 BoxLayout:

@@ -27,6 +27,7 @@ Builder.load_string('''
         
 ''')
 
+
 class MDProgressBar(ThemableBehavior, ProgressBar):
     reversed = BooleanProperty(False)
     ''' Reverse the direction the progressbar moves. '''
@@ -41,6 +42,7 @@ if __name__ == '__main__':
     
     class ProgressBarApp(App):
         theme_cls = ThemeManager()
+
         def build(self):
             return Builder.load_string("""#:import MDSlider kivymd.slider.MDSlider
 BoxLayout:

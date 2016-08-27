@@ -5,6 +5,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ListProperty, BooleanProperty
 from kivy.animation import Animation
 from kivymd.theming import ThemableBehavior
+from kivy.clock import Clock
 
 Builder.load_string('''
 <MDSpinner>:
@@ -68,6 +69,7 @@ class MDSpinner(ThemableBehavior, Widget):
 
     def __init__(self, **kwargs):
         super(MDSpinner, self).__init__(**kwargs)
+        Clock.schedule_interval(self._update_color, 5)
         self.color = self.theme_cls.primary_color
         self._alpha_anim_in = Animation(_alpha=1, duration=.8, t='out_quad')
         self._alpha_anim_out = Animation(_alpha=0, duration=.3, t='out_quad')
@@ -77,6 +79,9 @@ class MDSpinner(ThemableBehavior, Widget):
             self._start_determinate()
         else:
             self._start_loop()
+
+    def _update_color(self, *args):
+        self.color = self.theme_cls.primary_color
 
     def _start_determinate(self, *args):
         self._alpha_anim_in.start(self)

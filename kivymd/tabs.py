@@ -6,10 +6,11 @@ ScreenManager is much better.
 
 @author: jrm
 '''
-from kivy.properties import StringProperty,DictProperty,ListProperty,ObjectProperty,OptionProperty,BoundedNumericProperty
+from kivy.properties import StringProperty, DictProperty, ListProperty, \
+    ObjectProperty, OptionProperty, BoundedNumericProperty
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.metrics import sp,dp
+from kivy.metrics import sp, dp
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
@@ -51,7 +52,9 @@ Builder.load_string("""
             
         # Draw indicator
         Color:
-            rgba: (self.panel.tab_indicator_color or self.panel.theme_cls.accent_color) if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else (self.panel.tab_border_color or self.panel.tab_color or self.panel.theme_cls.primary_dark)
+            rgba: (self.panel.tab_indicator_color or self.panel.theme_cls.accent_color) if self.tab \
+                and self.tab.manager and self.tab.manager.current==self.tab.name else (self.panel.tab_border_color  \
+                or self.panel.tab_color or self.panel.theme_cls.primary_dark)
         Rectangle:
             size: (self.width,dp(2))
             pos: self.pos
@@ -60,7 +63,10 @@ Builder.load_string("""
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
-    text_color: (self.panel.tab_text_color_active or self.panel.theme_cls.bg_light) if self.tab and self.tab.manager and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color or self.panel.theme_cls.primary_light)
+    text_color: (self.panel.tab_text_color_active or app.theme_cls.bg_light if app.theme_cls.theme_style == "Light" \
+            else app.theme_cls.opposite_bg_light) if self.tab and self.tab.manager \
+            and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color \
+            or self.panel.theme_cls.primary_light)
     on_press: 
         self.tab.dispatch('on_tab_press') 
         self.tab.manager.current = self.tab.name
@@ -82,24 +88,26 @@ Builder.load_string("""
         valign: 'middle'
         halign: 'center'
         opposite_colors: root.opposite_colors
-   
 """)
 
-class MDTabBar(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
+
+class MDTabBar(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     pass
+
 
 class MDTabHeader(MDFlatButton):
     """ Internal widget for headers based on MDFlatButton"""
     
-    width = BoundedNumericProperty(dp(None), min=dp(72), max=dp(264), errorhandler=lambda x:dp(72))
+    width = BoundedNumericProperty(dp(None), min=dp(72), max=dp(264), errorhandler=lambda x: dp(72))
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
-    
+
+
 class MDTab(Screen):
     """ A tab is simply a screen with meta information
         that defines the content that goes in the tab header.
     """
-    __events__ = ('on_tab_touch_down','on_tab_touch_move','on_tab_touch_up','on_tab_press','on_tab_release')
+    __events__ = ('on_tab_touch_down', 'on_tab_touch_move', 'on_tab_touch_up', 'on_tab_press', 'on_tab_release')
     
     # Tab header text
     text = StringProperty("")
@@ -121,40 +129,39 @@ class MDTab(Screen):
         self.register_event_type('on_tab_press')
         self.register_event_type('on_tab_release')
         
-    def on_tab_touch_down(self,*args):
+    def on_tab_touch_down(self, *args):
         pass
     
-    def on_tab_touch_move(self,*args):
+    def on_tab_touch_move(self, *args):
         pass
     
-    def on_tab_touch_up(self,*args):
+    def on_tab_touch_up(self, *args):
         pass
 
-    def on_tab_press(self,*args):
+    def on_tab_press(self, *args):
         pass
     
-    def on_tab_release(self,*args):
+    def on_tab_release(self, *args):
         pass
     
     def __repr__(self):
-        return "<MDTab name='{}', text='{}'>".format(self.name,self.text)
-    
+        return "<MDTab name='{}', text='{}'>".format(self.name, self.text)
     
 
-class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
+class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     """ A tab panel that is implemented by delegating all tabs
         to a ScreenManager.
     
     """
     # If tabs should fill space
-    tab_width_mode = OptionProperty('stacked',options=['stacked','fixed'])
+    tab_width_mode = OptionProperty('stacked', options=['stacked', 'fixed'])
     
     # Where the tabs go
-    tab_orientation = OptionProperty('top',options=['top'])#,'left','bottom','right'])
+    tab_orientation = OptionProperty('top', options=['top'])  # ,'left','bottom','right'])
     
     # How tabs are displayed
-    tab_display_mode = OptionProperty('text',options=['text','icons'])#,'both'])
-    _tab_display_height = DictProperty({'text':dp(46),'icons':dp(46),'both':dp(72)})
+    tab_display_mode = OptionProperty('text',options=['text', 'icons'])  # ,'both'])
+    _tab_display_height = DictProperty({'text': dp(46), 'icons': dp(46), 'both': dp(72)})
     
     # Tab background color (leave empty for theme color)
     tab_color = ListProperty([])
@@ -177,14 +184,14 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
     # Current tab name
     current = StringProperty(None)
     
-    def __init__(self,**kwargs):
+    def __init__(self, **kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
         self._refresh_tabs()
         
-    def on_tab_width_mode(self,*args):
+    def on_tab_width_mode(self, *args):
         self._refresh_tabs()
     
-    def on_tab_display_mode(self,*args):
+    def on_tab_display_mode(self, *args):
         self._refresh_tabs()
     
     def _refresh_tabs(self):
@@ -209,7 +216,7 @@ class MDTabbedPanel(ThemableBehavior,BackgroundColorBehavior,BoxLayout):
         else:
             super(MDTabbedPanel, self).add_widget(widget)
         
-    def remove_widget(self,widget):
+    def remove_widget(self, widget):
         """ Remove tabs from the screen or the layout."""
         if isinstance(widget, MDTab):
             self.ids.tab_manager.remove_widget(widget)
@@ -224,17 +231,20 @@ if __name__ == '__main__':
     
     class TabsApp(App):
         theme_cls = ThemeManager()
+
         def build(self):
             from kivy.core.window import Window
-            Window.size = (540,720) 
-            #self.theme_cls.theme_style = 'Dark'
+            Window.size = (540, 720)
+            # self.theme_cls.theme_style = 'Dark'
 
-            return Builder.load_string("""#:import Toolbar kivymd.toolbar.Toolbar
+            return Builder.load_string("""
+#:import Toolbar kivymd.toolbar.Toolbar
 BoxLayout:
     orientation:'vertical'
     Toolbar:
         id: toolbar
         title: 'Page title'
+        background_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: '']]
         right_action_items: [['search', lambda x: ''],['more-vert',lambda x:'']]
     MDTabbedPanel:
@@ -266,4 +276,3 @@ BoxLayout:
             
 
     TabsApp().run()
-    
