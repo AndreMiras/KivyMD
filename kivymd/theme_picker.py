@@ -45,8 +45,8 @@ Builder.load_string("""
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
     MDTabbedPanel:
         size_hint: (None, None)
-        size: dp(260), root.height-dp(150)
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        size: dp(260), root.height-dp(135)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.475}
         id: tab_panel
         tab_display_mode:'text'
 
@@ -54,8 +54,10 @@ Builder.load_string("""
             name: 'color'
             text: "Theme Color"
             BoxLayout:
+                spacing: dp(4)
                 size_hint: (None, None)
-                size: dp(270), root.height-dp(150)
+                size: dp(270), root.height  # -dp(120)
+                pos_hint: {'center_x': 0.532, 'center_y': 0.89}
                 orientation: 'vertical'
                 BoxLayout:
                     size_hint: (None, None)
@@ -174,6 +176,7 @@ Builder.load_string("""
                     pos: self.pos
                     halign: 'center'
                     orientation: 'horizontal'
+                    padding: 0, 0, 0, dp(1)
                     BoxLayout:
                         MDIconButton:
                             size: dp(40), dp(40)
@@ -229,6 +232,7 @@ Builder.load_string("""
                     pos: self.pos
                     orientation: 'horizontal'
                     halign: 'center'
+                    padding: 0, 0, 0, dp(1)
                     BoxLayout:
                         MDIconButton:
                             size: dp(40), dp(40)
@@ -283,6 +287,7 @@ Builder.load_string("""
                     size: dp(230), dp(40)
                     #pos: self.pos
                     orientation: 'horizontal'
+                    padding: 0, 0, 0, dp(1)
                     BoxLayout:
                         MDIconButton:
                             size: dp(40), dp(40)
@@ -339,6 +344,7 @@ Builder.load_string("""
                 size: self.size
                 pos: self.pos
                 halign: 'center'
+                spacing: dp(10)
                 BoxLayout:
                     halign: 'center'
                     size_hint: (None, None)
