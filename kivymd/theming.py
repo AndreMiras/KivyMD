@@ -62,7 +62,7 @@ class ThemeManager(Widget):
         return get_color_from_hex(
             colors[self.primary_palette][self.primary_dark_hue])
 
-    primary_dark = AliasProperty(_get_primary_color,
+    primary_dark = AliasProperty(_get_primary_dark,
                                  bind=('primary_palette', 'primary_dark_hue'))
 
     accent_palette = OptionProperty(
