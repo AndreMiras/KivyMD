@@ -626,14 +626,33 @@ BoxLayout:
 
 
         Screen:
-            name: 'time'
+            name: 'pickers'
             MDRaisedButton:
-                text: "Open time-picker"
+                text: "Open time picker"
                 size_hint: None, None
                 size: 3 * dp(48), dp(48)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 opposite_colors: True
                 on_release: app.show_example_time_picker()
+            MDLabel:
+                id: time_picker_label
+                theme_text_color: 'Primary'
+                size_hint: None, None
+                size: dp(48), dp(48)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            BoxLayout:
+                size: dp(48)*3, dp(48)
+                size_hint: (None, None)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                MDLabel:
+                    theme_text_color: 'Primary'
+                    text: "Start on previous time"
+                    size_hint: None, None
+                    size: dp(130), dp(48)
+                MDCheckbox:
+                    id: time_picker_use_previous_time
+                    size_hint: None, None
+                    size: dp(48), dp(48)
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -699,16 +718,16 @@ BoxLayout:
         on_release: app.root.ids.scr_mngr.current = 'slider'
     NavigationDrawerIconButton:
         icon: 'circle'
-        text: "Time-picker"
-        on_release: app.root.ids.scr_mngr.current = 'time'
-    NavigationDrawerIconButton:
-        icon: 'circle'
         text: "Tabs"
         on_release: app.root.ids.scr_mngr.current = 'tabs'
     NavigationDrawerIconButton:
         icon: 'circle'
         text: "Accordion"
         on_release: app.root.ids.scr_mngr.current = 'accordion'
+    NavigationDrawerIconButton:
+        icon: 'circle'
+        text: "Pickers"
+        on_release: app.root.ids.scr_mngr.current = 'pickers'
 '''
 
 
@@ -777,9 +796,19 @@ class KitchenSink(App):
                                       action=lambda*x: self.dialog.dismiss())
         self.dialog.open()
 
+    def get_time_picker_data(self, instance, time):
+        self.root.ids.time_picker_label.text = str(time)
+        self.previous_time = time
+
     def show_example_time_picker(self):
         self.time_dialog = MDTimePicker()
-        self.time_dialog.bind()
+        self.time_dialog.bind(time=self.get_time_picker_data)
+        if self.root.ids.time_picker_use_previous_time.active:
+            try:
+                self.time_dialog.set_time(self.previous_time)
+            except AttributeError:
+                pass
+        self.time_dialog.open()
 
     def theme_swap(self):
         if self.theme_cls.theme_style == 'Light':

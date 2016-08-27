@@ -46,7 +46,7 @@ in Kv language:
 
 from kivy.animation import Animation
 from kivy.clock import Clock
-from kivymd.circular_time_picker.circleLayout import CircularLayout
+from kivymd.MDTimePicker.circleLayout import CircularLayout
 # from kivy.garden.recycleview import RecycleView
 from kivy.graphics import Line, Color, Ellipse
 from kivy.lang import Builder
@@ -573,13 +573,13 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
         except Exception:
             pass
 
-    def _set_time(self, dt):
+    def set_time(self, dt):
         if dt.hour >= 12:
             dt.strftime("%I:%M")
             self._am = False
         self.time_list = [dt.hour, dt.minute]
 
-    time = AliasProperty(_get_time, _set_time, bind=("time_list",))
+    time = AliasProperty(_get_time, set_time, bind=("time_list",))
     """Selected time as a datetime.time object.
 
     :attr:`time` is an :class:`~kivy.properties.AliasProperty`.
