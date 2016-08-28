@@ -34,13 +34,11 @@ Builder.load_string('''
         Rectangle:
             size:     ((self.width-self.padding*2)*self.value_normalized, sp(4)) if slider.orientation == 'horizontal' else (sp(4), (self.height-self.padding*2)*self.value_normalized)
             pos:    (self.x + self.padding, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding)
-        
-        
     Thumb:
         id:          thumb
         size_hint:   None, None
         size:        (dp(12), dp(12)) if root.disabled else ((dp(24), dp(24)) if root.active else (dp(16),dp(16)))
-        pos:         (slider.value_pos[0] - dp(8), slider.center_y - sp(thumb.height/2+2)) if slider.orientation == 'horizontal' else (slider.center_x - sp(thumb.width/2+2), slider.value_pos[1]-dp(8))
+        pos:         (slider.value_pos[0] - dp(8), slider.center_y - thumb.height/2 - dp(2)) if slider.orientation == 'horizontal' else (slider.center_x - thumb.width/2 - dp(2), slider.value_pos[1]-dp(8))
         color:       [0,0,0,0] if slider._is_off else (root._track_color_disabled if root.disabled else root.thumb_color_down)
         elevation:    0 if slider._is_off else (4 if root.active else 2)
         
