@@ -11,7 +11,7 @@ size_hint
 ---------
 
 size_hint_x is used as an angle-quota hint (widget with higher
-size_hint_x will be farther from each other, and viceversa), while
+size_hint_x will be farther from each other, and vice versa), while
 size_hint_y is used as a widget size hint (widgets with a higher size
 hint will be bigger).size_hint_x cannot be None.
 
@@ -21,12 +21,13 @@ difference between the outer and the inner circle's radii. To make the
 widgets bigger you can just decrease inner_radius_hint.
 """
 
-__all__ = ('CircularLayout')
-
 from kivy.uix.layout import Layout
 from kivy.properties import NumericProperty, ReferenceListProperty, OptionProperty, \
                             BoundedNumericProperty, VariableListProperty, AliasProperty
-from math import sin, cos, pi, radians, degrees
+from math import sin, cos, pi, radians
+
+__all__ = ('CircularLayout')
+
 try:
     xrange(1, 2)
 except NameError:
@@ -38,7 +39,8 @@ except NameError:
 
 
 class CircularLayout(Layout):
-    '''Circular layout class. See module documentation for more information.
+    '''
+    Circular layout class. See module documentation for more information.
     '''
 
     padding = VariableListProperty([0, 0, 0, 0])
@@ -48,7 +50,7 @@ class CircularLayout(Layout):
     padding also accepts a two argument form [padding_horizontal,
     padding_vertical] and a one argument form [padding].
 
-    .. versionchanged:: 1.7.0
+    .. version changed:: 1.7.0
         Replaced NumericProperty with VariableListProperty.
 
     :attr:`padding` is a :class:`~kivy.properties.VariableListProperty` and
@@ -131,8 +133,6 @@ class CircularLayout(Layout):
         selfcy = self.center_y
         direction = self.direction
         cquota = radians(self.circle_quota)
-        # selfw = self.width
-        # selfh = self.height
         start_angle_r = radians(self.start_angle)
         padding_left = self.padding[0]
         padding_top = self.padding[1]
@@ -147,7 +147,6 @@ class CircularLayout(Layout):
         middle_r = radius * sum(self.radius_hint) / 2.
         delta_r = outer_r - inner_r
 
-        # calculate maximum space used by size_hint
         stretch_weight_angle = 0.
         for w in self.children:
             sha = w.size_hint_x
@@ -174,8 +173,6 @@ class CircularLayout(Layout):
             ccx = cos(angle) * middle_r + selfcx + padding_left - padding_right
             ccy = sin(angle) * middle_r + selfcy + padding_bottom - padding_top
 
-
-
             c.center_x = ccx
             c.center_y = ccy
             if shs:
@@ -197,4 +194,3 @@ if __name__ == "__main__":
             return cly
 
     CircLayoutApp().run()
-

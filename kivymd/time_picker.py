@@ -58,7 +58,7 @@ Builder.load_string("""
 
 
 class MDTimePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
-    background_color = ListProperty((0, 0, 0, 0.4))
+    background_color = ListProperty((0, 0, 0, 0))
     time = ObjectProperty()
 
     def __init__(self, **kwargs):

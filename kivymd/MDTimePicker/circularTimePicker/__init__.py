@@ -47,10 +47,8 @@ in Kv language:
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivymd.MDTimePicker.circleLayout import CircularLayout
-# from kivy.garden.recycleview import RecycleView
 from kivy.graphics import Line, Color, Ellipse
 from kivy.lang import Builder
-# from kivy.metrics import dp
 from kivy.properties import NumericProperty, BoundedNumericProperty, \
     ObjectProperty, StringProperty, DictProperty, \
     ListProperty, OptionProperty, BooleanProperty, \
@@ -598,13 +596,18 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
         h = self.hours == 0 and 12 or self.hours <= 12 and self.hours or self.hours - 12
         m = self.minutes
         primary_dark = rgb_to_hex(*self.primary_dark)
-        return self.time_format.format(hours_color=hc, minutes_color=mc, hours=h, minutes=m, primary_dark=primary_dark)
+        return self.time_format.format(hours_color=hc,
+                                       minutes_color=mc,
+                                       hours=h,
+                                       minutes=m,
+                                       primary_dark=primary_dark)
     time_text = AliasProperty(_get_time_text, None, bind=("hours", "minutes", "time_format", "picker"))
 
     def _get_ampm_text(self, *args):
         amc = rgb_to_hex(0, 0, 0) if self._am else rgb_to_hex(*self.primary_dark)
         pmc = rgb_to_hex(0, 0, 0) if not self._am else rgb_to_hex(*self.primary_dark)
-        return self.ampm_format.format(am_color=amc, pm_color=pmc)
+        return self.ampm_format.format(am_color=amc,
+                                       pm_color=pmc)
 
     ampm_text = AliasProperty(_get_ampm_text, None, bind=("hours", "ampm_format", "_am"))
 
@@ -616,7 +619,10 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
         self.on_ampm()
         if self.hours >= 12:
             self._am = False
-        self.bind(time_list=self.on_time_list, picker=self._switch_picker, _am=self.on_ampm, primary_dark=self._get_ampm_text)
+        self.bind(time_list=self.on_time_list,
+                  picker=self._switch_picker,
+                  _am=self.on_ampm,
+                  primary_dark=self._get_ampm_text)
         self._h_picker = CircularHourPicker()
         self._m_picker = CircularMinutePicker()
         self.animating = False
@@ -655,12 +661,9 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
             self.minutes = self._picker.selected
 
     def on_time_list(self, *a):
-        # print "TIME", self.time
         if not self._picker:
             return
-        # if self.picker == "hours":
         self._h_picker.selected = self.hours == 0 and 12 or self._am and self.hours or self.hours - 12
-        # elif self.picker == "minutes":
         self._m_picker.selected = self.minutes
         self.on_selected()
 
@@ -713,9 +716,7 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
         picker.selector_color = self.selector_color
         picker.color = self.color
         picker.selector_alpha = self.selector_alpha
-        # Animation.cancel_all(self, picker, prevpicker, 'scale', 'opacity')
         if noanim:
-            # print "no anim"
             if prevpicker in container.children:
                 container.remove_widget(prevpicker)
             if picker.parent:
