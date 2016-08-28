@@ -289,20 +289,24 @@ class MDDatePicker(FloatLayout,
 
     def close_ok(self):
         self.date = datetime.datetime.strptime("".join([str(self.day),
-                                                        str(self.month),
-                                                        str(self.year)]), "%d%m%Y").date()
+                                                        str(self.selected_month),
+                                                        str(self.selected_year)]), "%d%m%Y").date()
         self.dismiss()
 
     def set_date_str(self, day, month, year):
         self.day = day
         self.month = month
         self.year = year
+        self.selected_month = self.month
+        self.selected_year = self.year
 
     def set_date(self, the_date):
         try:
             self.day = the_date.day
             self.month = the_date.month
             self.year = the_date.year
+            self.selected_month = self.month
+            self.selected_year = self.year
         except AttributeError:
             raise TypeError("<DatePicker>.set_date requires a datetime.date, if you would prefer you can pass in <day>,"
                             " <month>, <year> separately as strings with <DatePicker>.set_date_str")
@@ -332,6 +336,8 @@ class MDDatePicker(FloatLayout,
         self.ids.label_date.text = str(int(instance.text))
         self.ids.label_short_month.text = calendar.month_abbr[self.month].upper()
         self.ids.label_year.text = str(self.year)
+        self.selected_month = self.month
+        self.selected_year = self.year
         self.day = instance.text
 
     def next_month(self):
