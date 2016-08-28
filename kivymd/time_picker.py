@@ -9,7 +9,7 @@ from kivy.properties import ObjectProperty, ListProperty
 
 Builder.load_string("""
 #:import MDFlatButton kivymd.button.MDFlatButton
-#:import CircularTimePicker kivymd.MDTimePicker.circularTimePicker
+#:import CircularTimePicker kivymd.vendor.circularTimePicker.CircularTimePicker
 #:import dp kivy.metrics.dp
 <MDTimePicker>:
     size_hint: (None, None)
