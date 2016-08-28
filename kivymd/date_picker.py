@@ -21,27 +21,28 @@ from kivy.animation import Animation
 from kivymd.color_definitions import colors
 from kivy.utils import get_color_from_hex
 from kivy.uix.widget import WidgetException
+from kivy.core.window import Window
 
 Builder.load_string("""
 <MDDatePicker>:
     size_hint: (None, None)
-    size: dp(300), dp(30)+dp(130)+dp(300)
+    size: dp(280), dp(30)+dp(130)+dp(300)
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
             rgb: app.theme_cls.primary_dark
         Rectangle:
-            size: dp(300), dp(30)
+            size: dp(280), dp(30)
             pos: root.pos[0], root.pos[1] + root.height-dp(30)
         Color:
             rgb: app.theme_cls.primary_color
         Rectangle:
-            size: dp(300), dp(130)
+            size: dp(280), dp(130)
             pos: root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130))
         Color:
             rgb: app.theme_cls.bg_normal
         Rectangle:
-            size: dp(300), dp(300)
+            size: dp(280), dp(300)
             pos: root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130)+dp(300))
 
     MDLabel:
@@ -92,18 +93,18 @@ Builder.load_string("""
         size: root.width, dp(30)
         pos: root.pos
         theme_text_color: 'Primary'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.61}
         valign: "middle"
         halign: "center"
 
     MDIconButton:
         icon: 'arrow-left'
-        pos_hint: {'center_x': 0.275, 'center_y': 0.6}
+        pos_hint: {'center_x': 0.275, 'center_y': 0.61}
         on_release: root.prev_month()
 
     MDIconButton:
         icon: 'arrow-right'
-        pos_hint: {'center_x': 0.725, 'center_y': 0.6}
+        pos_hint: {'center_x': 0.725, 'center_y': 0.61}
         on_release: root.next_month()
 
     MDFlatButton:
@@ -237,6 +238,7 @@ class CalendarSelector(CalendarButton):
         self.disabled = True
         self.theme_color_with_alpha = self.theme_cls.primary_color
         self.theme_color_with_alpha[3] = 0.4
+        Window.bind(on_resize=self.move_resize)
 
     def update(self, cls):
         if self.selected_month == cls.month and self.selected_year == cls.year:
@@ -251,7 +253,17 @@ class CalendarSelector(CalendarButton):
             except WidgetException:
                 pass
 
-    def move(self, cls, inst):
+    def move_resize(self, window, width, height, do_again=True):
+        self.pos = self.current_button.pos
+        self.size = self.current_button.size
+        if do_again:
+            Clock.schedule_once(lambda x: self.move_resize(window=window,
+                                                           width=width,
+                                                           height=height,
+                                                           do_again=False), 0.01)
+
+    def move(self, cls, inst=None):
+        print(inst)
         if not inst:
             pass
         else:
@@ -260,12 +272,15 @@ class CalendarSelector(CalendarButton):
             self.selected_year = cls.year
             self.pos = inst.pos
             self.size = inst.size
+            Clock.schedule_once(lambda x: self.move_resize(window=None,
+                                                           width=None,
+                                                           height=None,
+                                                           do_again=True), 0.01)
 
     def receive_lookout(self, inst, cls):
         self.current_button = inst
         self.move(cls, self.current_button)
         self.update(cls)
-        # cls.add_widget(self)
 
     def get_lookout(self):
         return self.selected_day
@@ -341,6 +356,7 @@ class MDDatePicker(FloatLayout,
         self.day = instance.text
 
     def next_month(self):
+        look = None
         self.month += 1
         if self.month == 13:
             self.month = 1
@@ -348,8 +364,12 @@ class MDDatePicker(FloatLayout,
         self.selector.update(self)
         self.remove_widget(self.layout)
         del self.layout
+        if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
+            look = self.day
+        print(look)
         self.generate_calendar(year=self.year,
-                               month=self.month)
+                               month=self.month,
+                               lookout=look)
         self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
 
     def prev_month(self):
@@ -360,8 +380,12 @@ class MDDatePicker(FloatLayout,
         self.selector.update(self)
         self.remove_widget(self.layout)
         del self.layout
+        if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
+            look = self.day
+        print(look)
         self.generate_calendar(year=self.year,
-                               month=self.month)
+                               month=self.month,
+                               lookout=look)
         self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
 
     def generate_calendar(self, year, month, lookout=None):
