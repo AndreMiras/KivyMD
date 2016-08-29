@@ -13,28 +13,25 @@ Builder.load_string("""
 #:import dp kivy.metrics.dp
 <MDTimePicker>:
     size_hint: (None, None)
-    size: dp(270), dp(335)+dp(95)
+    size: [dp(270), dp(335)+dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(520), dp(300)]
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
-            rgba: 1, 0, 0, 0.3
-        Rectangle:
-            size: root.size
-            pos: root.pos
-        Color:
-            rgba: self.theme_cls.bg_dark
+            rgba: self.theme_cls.bg_light
         Rectangle:
             size: dp(270), dp(335)
-            pos: root.pos[0], root.pos[1] + root.height - dp(335) - dp(95)
+            pos: [root.pos[0], root.pos[1] + root.height - dp(335) - dp(95)] if root.theme_cls.device_orientation == 'portrait' else\
+                [root.pos[0], root.pos[1]]
         Color:
             rgba: self.theme_cls.primary_color
         Rectangle:
-            size: dp(270), dp(95)
-            pos: root.pos[0], root.pos[1] + root.height - dp(95)
+            size: [dp(270), dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(270), dp(240)]
+            pos: [root.pos[0], root.pos[1] + root.height - dp(95)] if root.theme_cls.device_orientation == 'portrait' else\
+                [root.pos[0], root.pos[1]]
         Color:
-            rgba: self.theme_cls.bg_light
+            rgba: self.theme_cls.bg_dark
         Ellipse:
-            size: dp(220), dp(220)
+            size: [dp(220), dp(220)] if root.theme_cls.device_orientation == 'portrait' else [dp(195), dp(195)]
             pos: root.pos[0]+dp(270)/2-dp(220)/2, root.pos[1] + root.height - (dp(335)/2+dp(95)) - dp(220)/2 + dp(35)
         #Color:
             #rgba: (1, 0, 0, 1)

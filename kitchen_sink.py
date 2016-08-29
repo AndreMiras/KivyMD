@@ -851,7 +851,7 @@ class KitchenSink(App):
         pass
 
     def test(self):
-        self.root.ids['scr_mngr'].current = 'grid'
+        self.root.ids['scr_mngr'].current = 'pickers'
 
 
 class AvatarSampleWidget(ILeftBody, Image):
