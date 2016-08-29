@@ -7,7 +7,6 @@ from kivy.metrics import dp
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.gridlayout import GridLayout
 from kivymd.elevationbehavior import ElevationBehavior
 import calendar
 from datetime import date
@@ -24,101 +23,10 @@ from kivy.uix.widget import WidgetException
 from kivy.core.window import Window
 
 Builder.load_string("""
-<MDDatePicker>:
-    size_hint: (None, None)
-    size: dp(280), dp(30)+dp(130)+dp(300)
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    canvas:
-        Color:
-            rgb: app.theme_cls.primary_dark
-        Rectangle:
-            size: dp(280), dp(30)
-            pos: root.pos[0], root.pos[1] + root.height-dp(30)
-        Color:
-            rgb: app.theme_cls.primary_color
-        Rectangle:
-            size: dp(280), dp(130)
-            pos: root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130))
-        Color:
-            rgb: app.theme_cls.bg_normal
-        Rectangle:
-            size: dp(280), dp(300)
-            pos: root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130)+dp(300))
-
-    MDLabel:
-        id: label_weekday
-        font_style: "Headline"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.97}
-        valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_date
-        font_style: "Display3"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.85}
-        valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_short_month
-        font_style: "Headline"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.75}
-        valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_year
-        font_style: "Headline"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
-        valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_current_month
-        font_style: "Body2"
-        text: "September 2016"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        theme_text_color: 'Primary'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.61}
-        valign: "middle"
-        halign: "center"
-
-    MDIconButton:
-        icon: 'arrow-left'
-        pos_hint: {'center_x': 0.275, 'center_y': 0.61}
-        on_release: root.prev_month()
-
-    MDIconButton:
-        icon: 'arrow-right'
-        pos_hint: {'center_x': 0.725, 'center_y': 0.61}
-        on_release: root.next_month()
-
-    MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(10)
-        text: "Cancel"
-        on_release: root.close_cancel()
-    MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(10)
-        text: "OK"
-        on_release: root.close_ok()
+#:import GridLayout kivy.uix.gridlayout.GridLayout
 <CalendarButton>
     canvas:
         Color:
-            #rgba: self.background_color if self.state == 'normal' else self._bg_color_down
             rgba: self._current_button_color
         Rectangle:
             size: self.size
@@ -149,6 +57,119 @@ Builder.load_string("""
         Ellipse:
             size: self.size
             pos: self.pos
+<MDDatePicker>:
+    size_hint: (None, None)
+    size: [dp(280), dp(30)+dp(130)+dp(300)] if self.theme_cls.device_orientation == 'portrait'\
+        else [dp(30) + dp(130) + dp(325), dp(300)]
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    canvas:
+        Color:
+            rgb: app.theme_cls.primary_dark
+        Rectangle:
+            size: [dp(280), dp(30)] if self.theme_cls.device_orientation == 'portrait'\
+                else [dp(200), dp(30)]
+            pos: root.pos[0], root.pos[1] + root.height-dp(30)
+        Color:
+            rgb: app.theme_cls.primary_color
+        Rectangle:
+            size: [dp(280), dp(130)] if self.theme_cls.device_orientation == 'portrait' else\
+                [dp(200), root.height - dp(30)]
+            pos: [root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130))] \
+                if self.theme_cls.device_orientation == 'portrait' else [root.pos[0], root.pos[1]]
+        Color:
+            rgb: app.theme_cls.bg_normal
+        Rectangle:
+            size: [dp(280), dp(300)] if self.theme_cls.device_orientation == 'portrait'\
+                else [root.width-dp(200), root.height]
+            pos: [root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130)+dp(300))]\
+                if self.theme_cls.device_orientation == 'portrait' else [root.pos[0]+dp(200), root.pos[1]]
+
+    GridLayout:
+        id: main_layout
+        cols: 7
+        size: (dp(250), dp(35*8))
+        size_hint: (None, None)
+        pos: (dp(200), dp(50))
+        pos_hint: {'center_x': .5075, 'center_y': .275} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': .71, 'center_y': .4}
+
+    MDLabel:
+        id: label_weekday
+        font_style: "Headline"
+        size_hint: (None, None)
+        size: root.width, dp(30)
+        pos: root.pos
+        pos_hint: {'center_x': 0.5, 'center_y': 0.97} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.22, 'center_y': 0.95}
+        valign: "middle"
+        halign: "center"
+
+    MDLabel:
+        id: label_date
+        font_style: "Display3"
+        size_hint: (None, None)
+        size: root.width, dp(30)
+        pos: root.pos
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.22, 'center_y': 0.6}
+        valign: "middle"
+        halign: "center"
+
+    MDLabel:
+        id: label_short_month
+        font_style: "Headline"
+        size_hint: (None, None)
+        size: root.width, dp(30)
+        pos: root.pos
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.22, 'center_y': 0.45}
+        valign: "middle"
+        halign: "center"
+
+    MDLabel:
+        id: label_year
+        font_style: "Headline"
+        size_hint: (None, None)
+        size: root.width, dp(30)
+        pos: root.pos
+        pos_hint: {'center_x': 0.5, 'center_y': 0.7} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.22, 'center_y': 0.375}
+        valign: "middle"
+        halign: "center"
+
+    MDLabel:
+        id: label_current_month
+        font_style: "Body2"
+        text: "September 2016"
+        size_hint: (None, None)
+        size: root.width, dp(30)
+        pos: root.pos
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.61} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.71, 'center_y': 0.925}
+        valign: "middle"
+        halign: "center"
+
+    MDIconButton:
+        icon: 'arrow-left'
+        pos_hint: {'center_x': 0.125, 'center_y': 0.61} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.475, 'center_y': 0.925}
+        on_release: root.prev_month()
+
+    MDIconButton:
+        icon: 'arrow-right'
+        pos_hint: {'center_x': 0.875, 'center_y': 0.61} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.94, 'center_y': 0.925}
+        on_release: root.next_month()
+
+    MDFlatButton:
+        pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(10)
+        text: "Cancel"
+        on_release: root.close_cancel()
+    MDFlatButton:
+        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(10)
+        text: "OK"
+        on_release: root.close_ok()
 """)
 
 
@@ -263,7 +284,6 @@ class CalendarSelector(CalendarButton):
                                                            do_again=False), 0.01)
 
     def move(self, cls, inst=None):
-        print(inst)
         if not inst:
             pass
         else:
@@ -290,7 +310,6 @@ class MDDatePicker(FloatLayout,
                    ThemableBehavior,
                    ElevationBehavior,
                    ModalView):
-    background_color = ListProperty([0, 0, 0, 0])
     date = ObjectProperty()
 
     def __init__(self, **kwargs):
@@ -361,40 +380,35 @@ class MDDatePicker(FloatLayout,
         if self.month == 13:
             self.month = 1
             self.year += 1
+        self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
         self.selector.update(self)
-        self.remove_widget(self.layout)
-        del self.layout
         if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
             look = self.day
-        print(look)
+        self.layout.clear_widgets()
         self.generate_calendar(year=self.year,
                                month=self.month,
                                lookout=look)
-        self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
 
     def prev_month(self):
+        # self.layout.clear_widgets()
+        look = None
         self.month -= 1
         if self.month == 0:
             self.month = 12
             self.year -= 1
+        self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
         self.selector.update(self)
-        self.remove_widget(self.layout)
-        del self.layout
         if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
             look = self.day
-        print(look)
+        self.layout.clear_widgets()
         self.generate_calendar(year=self.year,
                                month=self.month,
                                lookout=look)
-        self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
 
     def generate_calendar(self, year, month, lookout=None):
         actual_date = datetime.date(year, month, 1)
         cal = calendar.Calendar()
-        self.layout = GridLayout(cols=7, size=(dp(250), dp(35*8)),
-                                 size_hint=(None, None),
-                                 pos=(dp(200), dp(50)),
-                                 pos_hint={'center_x': .5, 'center_y': .275})
+        self.layout = self.ids.main_layout
         for i in range(0, 2):
             self.layout.add_widget(MDLabel(size=(dp(35), dp(35)),
                                            size_hint=(None, None), text="S",
@@ -439,64 +453,3 @@ class MDDatePicker(FloatLayout,
                         Clock.schedule_once(lambda x: self.selector.move(cls=self,
                                                                          inst=self.actual_start_lookout),
                                             0.0000001)
-        self.add_widget(self.layout)
-
-
-if __name__ == "__main__":
-    from kivy.app import App
-    from kivymd.theming import ThemeManager
-
-    class DatePickerApp(App):
-        theme_cls = ThemeManager()
-
-        def get_date(self, instance, the_date):
-            print(the_date)
-            self.last_date = the_date
-
-        def open_dialog(self):
-            self.date_picker = MDDatePicker()
-            self.day = 19
-            self.month = 9
-            self.year = 2020
-            # self.date_picker.set_date(datetime.datetime.strptime("".join([str(self.day),
-            #                                                              str(self.month),
-            #                                                              str(self.year)]), "%d%m%Y").date())'''
-            # self.date_picker.set_date_str(self.day, self.month, self.year)
-            self.date_picker.bind(date=self.get_date)
-            try:
-                self.date_picker.set_date(self.last_date)
-            except AttributeError:
-                pass
-            self.date_picker.open()
-
-        def build(self):
-            main_widget = Builder.load_string("""
-#:import MDRaisedButton kivymd.button.MDRaisedButton
-#:import MDThemePicker kivymd.theme_picker.MDThemePicker
-FloatLayout:
-    MDRaisedButton:
-        size_hint: None, None
-        size: 3 * dp(48), dp(48)
-        # center_x: self.parent.center_x
-        text: 'Switch theme color (debug)'
-        on_release: MDThemePicker().open()
-        opposite_colors: True
-    MDRaisedButton:
-        size_hint: None, None
-        size: 3 * dp(48), dp(48)
-        center_x: self.parent.center_x
-        text: 'Switch theme style'
-        on_release: app.theme_cls.theme_style = 'Dark' if app.theme_cls.theme_style != 'Dark' else 'Light'
-        opposite_colors: True
-    MDRaisedButton:
-        size_hint: None, None
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        size: 3 * dp(48), dp(48)
-        center_x: self.parent.center_x
-        text: 'Open date picker'
-        on_release: app.open_dialog()
-        opposite_colors: True
-""")
-            return main_widget
-
-    DatePickerApp().run()
