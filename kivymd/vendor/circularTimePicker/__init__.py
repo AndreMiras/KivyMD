@@ -46,7 +46,7 @@ in Kv language:
 
 from kivy.animation import Animation
 from kivy.clock import Clock
-from kivymd.MDTimePicker.circleLayout import CircularLayout
+from kivymd.vendor.circleLayout import CircularLayout
 from kivy.graphics import Line, Color, Ellipse
 from kivy.lang import Builder
 from kivy.properties import NumericProperty, BoundedNumericProperty, \
