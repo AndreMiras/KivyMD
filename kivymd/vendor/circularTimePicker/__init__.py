@@ -102,17 +102,26 @@ Builder.load_string("""
     orientation: "vertical"
     spacing: "20dp"
 
-    AnchorLayout:
+    FloatLayout:
         anchor_x: "center"
         anchor_y: "center"
         size_hint_y: 1./3
+        size_hint_x: 2
+        size: root.size
+        pos: root.pos
+        canvas:
+            Color:
+                rgba: 1, 0, 0, 0.3
+            Rectangle:
+                size: self.size
+                pos: self.pos
 
         GridLayout:
             cols: 2
             spacing: "10dp"
             size_hint_x: None
             width: self.minimum_width
-            #pos_hint: {"center_x": 0.5}
+            pos_hint: {'center_x': .1, 'center_y': .5}
 
             Label:
                 id: timelabel
@@ -631,6 +640,7 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
         Clock.schedule_once(self._init_later)
         Clock.schedule_once(lambda *a: self._switch_picker(noanim=True))
         # print "TIMEee", self.time
+        # self.picker = "hours"
 
     def _init_later(self, *args):
         self.ids.timelabel.bind(on_ref_press=self.on_ref_press)
@@ -642,10 +652,10 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
                 self.picker = "hours"
             elif ref == "minutes":
                 self.picker = "minutes"
-            elif ref == "am":
-                self._am = True
-            elif ref == "pm":
-                self._am = False
+        if ref == "am":
+             self._am = True
+        elif ref == "pm":
+            self._am = False
 
     def on_selected(self, *a):
         if not self._picker:
@@ -678,6 +688,26 @@ class CircularTimePicker(BoxLayout, ThemableBehavior):
 
     def is_not_animating(self, *args):
         self.animating = False
+
+    def on_touch_down(self, touch):
+        if not self._h_picker.collide_point(*touch.pos):
+            self.h_picker_touch = False
+        else:
+            self.h_picker_touch = True
+        super(CircularTimePicker, self).on_touch_down(touch)
+
+    def on_touch_up(self, touch):
+        try:
+            print(self.h_picker_touch)
+            if not self.h_picker_touch:
+                return
+            if not self.animating:
+                if touch.grab_current is not self:
+                    if self.picker == "hours":
+                        self.picker = "minutes"
+        except AttributeError:
+            pass
+        super(CircularTimePicker, self).on_touch_up(touch)
 
     def _switch_picker(self, *a, **kw):
         noanim = "noanim" in kw

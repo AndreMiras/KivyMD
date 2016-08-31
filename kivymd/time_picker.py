@@ -13,19 +13,19 @@ Builder.load_string("""
 #:import dp kivy.metrics.dp
 <MDTimePicker>:
     size_hint: (None, None)
-    size: [dp(270), dp(335)+dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(520), dp(300)]
+    size: [dp(270), dp(335)+dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(520), dp(325)]
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
             rgba: self.theme_cls.bg_light
         Rectangle:
-            size: dp(270), dp(335)
+            size: [dp(270), dp(335)] if root.theme_cls.device_orientation == 'portrait' else [dp(250), root.height]
             pos: [root.pos[0], root.pos[1] + root.height - dp(335) - dp(95)] if root.theme_cls.device_orientation == 'portrait' else\
-                [root.pos[0], root.pos[1]]
+                [root.pos[0]+dp(270), root.pos[1]]
         Color:
             rgba: self.theme_cls.primary_color
         Rectangle:
-            size: [dp(270), dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(270), dp(240)]
+            size: [dp(270), dp(95)] if root.theme_cls.device_orientation == 'portrait' else [dp(270), root.height]
             pos: [root.pos[0], root.pos[1] + root.height - dp(95)] if root.theme_cls.device_orientation == 'portrait' else\
                 [root.pos[0], root.pos[1]]
         Color:
@@ -41,8 +41,9 @@ Builder.load_string("""
     CircularTimePicker:
         id: time_picker
         pos: (dp(270)/2)-(self.width/2), root.height-self.height
-        size_hint: .8, .8
-        pos_hint: {'center_x': 0.5, 'center_y': 0.585}
+        size_hint: [.8, .8] if root.theme_cls.device_orientation == 'portrait' else [0.35, 0.9]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.585} if root.theme_cls.device_orientation == 'portrait' else \
+            {'center_x': 0.75, 'center_y': 0.7}
     MDFlatButton:
         pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(10)
         text: "Cancel"
@@ -55,7 +56,7 @@ Builder.load_string("""
 
 
 class MDTimePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
-    background_color = ListProperty((0, 0, 0, 0))
+    # background_color = ListProperty((0, 0, 0, 0))
     time = ObjectProperty()
 
     def __init__(self, **kwargs):
