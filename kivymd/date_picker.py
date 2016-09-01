@@ -95,7 +95,7 @@ Builder.load_string("""
 
     MDLabel:
         id: label_weekday
-        font_style: "Headline"
+        font_style: "Title"
         size_hint: (None, None)
         size: root.width, dp(30)
         pos: root.pos
@@ -444,8 +444,7 @@ class MDDatePicker(FloatLayout,
             month_start_col = -2
         elif month_start_col == 6:
             month_start_col = -1
-        month_start_col = range(-2, month_start_col)
-        for i in month_start_col:
+        for i in range(-2, month_start_col):
             add_label()
         for i in self.cal.itermonthdays2(year, month):
             if i[0] != 0:
