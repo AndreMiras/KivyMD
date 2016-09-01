@@ -39,7 +39,7 @@ Builder.load_string("""
     text_color: root.theme_cls.primary_color
     MDLabel:
         id: _label
-        size: self.size
+        size: dp(35), dp(35)
         text: root._text
         font_style: 'Button'
         size_hint_x: None
@@ -428,10 +428,10 @@ class MDDatePicker(FloatLayout,
 
     def add_label(self, text=""):
         self.layout.add_widget(MDLabel(size=(dp(35), dp(35)),
-                               size_hint=(None, None),
-                               text=text,
-                               halign='center',
-                               theme_text_color='Primary'))
+                                       size_hint=(None, None),
+                                       text=text,
+                                       halign='center',
+                                       theme_text_color='Primary'))
 
     def generate_calendar(self, year, month, lookout=None):
         add_label = self.add_label
