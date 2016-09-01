@@ -360,7 +360,7 @@ class MDDatePicker(FloatLayout,
             self.month
             self.day
         except AttributeError:
-            self.set_date_str(date.today().day, date.today().month, date.today().year)
+            self.set_date(date.today())
         self.ids.label_weekday.text = str(datetime.date(self.year, self.month, self.day).strftime("%A"))
         self.ids.label_date.text = str(self.day)
         self.ids.label_short_month.text = calendar.month_name[self.month][:3].upper()
@@ -375,7 +375,7 @@ class MDDatePicker(FloatLayout,
         self.selector.move(instance)
         self.selector.update()
         self.ids.label_weekday.text = str(datetime.date(self.year, self.month, int(instance.text)).strftime("%A"))
-        self.ids.label_date.text = str(int(instance.text))
+        self.ids.label_date.text = str(instance.text)
         self.ids.label_short_month.text = calendar.month_abbr[self.month].upper()
         self.ids.label_year.text = str(self.year)
         self.selected_month = self.month
@@ -414,6 +414,7 @@ class MDDatePicker(FloatLayout,
 
     def add_button(self, lookout, i):
         date_button = DateButton(self, text=str(i[0]),
+                                 size_hint=(None, None),
                                  size=(dp(35), dp(35)))
 
         date_button.bind(on_press=self.get_touch)
@@ -432,10 +433,10 @@ class MDDatePicker(FloatLayout,
     def generate_calendar(self, year, month, lookout=None):
         add_label = self.add_label
         add_button = self.add_button
-        add_label(text="S")
-        add_label(text="S")
+        add_label(text=calendar.day_abbr[5][0])
+        add_label(text=calendar.day_abbr[6][0])
         for i in self.cal.iterweekdays():
-            if calendar.day_abbr[i][0] != "S":
+            if calendar.day_abbr[i][0] != calendar.day_abbr[5][0] and calendar.day_abbr[6][0]:
                 add_label(text=calendar.day_abbr[i][0])
 
         month_start_col = date(year, month, 1).weekday()
