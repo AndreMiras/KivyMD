@@ -39,6 +39,7 @@ Builder.load_string("""
     text_color: root.theme_cls.primary_color
     MDLabel:
         id: _label
+        size: self.size
         text: root._text
         font_style: 'Button'
         size_hint_x: None
@@ -236,8 +237,8 @@ class CalendarButton(ThemableBehavior,
 class DateButton(CalendarButton):
     def __init__(self, cls, **kwargs):
         super(CalendarButton, self).__init__(**kwargs)
-        self.width = kwargs['size'][0]
-        self.size = kwargs['size']
+        self.width = dp(35)
+        self.size = dp(35), dp(35)
         self.text = kwargs['text']
         if self.text == str(date.today().day) \
                 and cls.month == date.today().month \
@@ -252,6 +253,8 @@ class CalendarSelector(CalendarButton):
 
     def __init__(self, cls):
         super(CalendarButton, self).__init__(disabled=True)
+        self.size = dp(35), dp(35)
+        self.width = dp(35)
         self.parent_class = cls
         self.selected_month = cls.month
         self.selected_year = cls.year
@@ -283,7 +286,7 @@ class CalendarSelector(CalendarButton):
 
     def move_resize(self, window, width, height, do_again=True):
         self.pos = self.current_button.pos
-        self.size = self.current_button.size
+        # self.size = self.current_button.size
         if do_again:
             Clock.schedule_once(lambda x: self.move_resize(window=window,
                                                            width=width,
@@ -298,7 +301,7 @@ class CalendarSelector(CalendarButton):
             self.selected_month = self.parent_class.month
             self.selected_year = self.parent_class.year
             self.pos = inst.pos
-            self.size = inst.size
+            # self.size = inst.size
             Clock.schedule_once(lambda x: self.move_resize(window=None,
                                                            width=None,
                                                            height=None,
@@ -413,9 +416,9 @@ class MDDatePicker(FloatLayout,
                                lookout=look)
 
     def add_button(self, lookout, i):
-        date_button = DateButton(self, text=str(i[0]),
-                                 size_hint=(None, None),
-                                 size=(dp(35), dp(35)))
+        date_button = DateButton(self,
+                                 text=str(i[0]),
+                                 size_hint=(None, None))
 
         date_button.bind(on_press=self.get_touch)
         self.layout.add_widget(date_button)
@@ -427,7 +430,7 @@ class MDDatePicker(FloatLayout,
         self.layout.add_widget(MDLabel(size=(dp(35), dp(35)),
                                size_hint=(None, None),
                                text=text,
-                               halign="center",
+                               halign='center',
                                theme_text_color='Primary'))
 
     def generate_calendar(self, year, month, lookout=None):
@@ -436,7 +439,7 @@ class MDDatePicker(FloatLayout,
         add_label(text=calendar.day_abbr[5][0])
         add_label(text=calendar.day_abbr[6][0])
         for i in self.cal.iterweekdays():
-            if calendar.day_abbr[i][0] != calendar.day_abbr[5][0] and calendar.day_abbr[6][0]:
+            if calendar.day_abbr[i][0] not in [calendar.day_abbr[5][0], calendar.day_abbr[6][0]]:
                 add_label(text=calendar.day_abbr[i][0])
 
         month_start_col = date(year, month, 1).weekday()
