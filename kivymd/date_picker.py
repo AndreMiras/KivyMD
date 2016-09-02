@@ -404,12 +404,12 @@ class MDDatePicker(FloatLayout,
                 last_row.append(item)
             self.all_rows.append(last_row)
             del current_row[:]
-        self.all_rows[0][0] = label(text=calendar.day_abbr[5][0])
-        self.all_rows[0][1] = label(text=calendar.day_abbr[6][0])
+        self.all_rows[0][0] = label(text=calendar.day_abbr[5][0].upper())
+        self.all_rows[0][1] = label(text=calendar.day_abbr[6][0].upper())
         count = 2
         for i in self.cal.iterweekdays():
             if calendar.day_abbr[i][0] not in [calendar.day_abbr[5][0], calendar.day_abbr[6][0]]:
-                self.all_rows[0][count] = label(text=calendar.day_abbr[i][0])
+                self.all_rows[0][count] = label(text=calendar.day_abbr[i][0].upper())
                 count += 1
 
         month_start_col = date(year, month, 1).weekday()
