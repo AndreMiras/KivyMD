@@ -95,11 +95,12 @@ Builder.load_string("""
         size_hint: (None, None)
         size: [root.width, dp(30)] if root.theme_cls.device_orientation == 'portrait'\
             else [dp(168), dp(30)]
-        pos: [root.pos[0]+dp(15), root.pos[1] + root.height - dp(75)] if root.theme_cls.device_orientation == 'portrait'\
-            else [root.pos[0], root.pos[1] + root.height - dp(110)]
+        pos: [root.pos[0]+dp(15), root.pos[1] + root.height - dp(75)] \
+            if root.theme_cls.device_orientation == 'portrait' \
+            else [root.pos[0]+dp(3), root.pos[1] + root.height - dp(110)]
         valign: "middle"
         text_size: [root.width, None] if root.theme_cls.device_orientation == 'portrait'\
-            else [dp(140), None]
+            else [dp(149), None]
 
     MDLabel:
         id: label_year
@@ -125,13 +126,13 @@ Builder.load_string("""
     MDIconButton:
         icon: 'arrow-left'
         pos_hint: {'center_x': 0.09, 'center_y': 0.75} if root.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.385, 'center_y': 0.93}
+            else {'center_x': 0.4, 'center_y': 0.93}
         on_release: root.prev_month()
 
     MDIconButton:
         icon: 'arrow-right'
         pos_hint: {'center_x': 0.91, 'center_y': 0.75} if root.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.945, 'center_y': 0.93}
+            else {'center_x': 0.925, 'center_y': 0.93}
         on_release: root.next_month()
 
     MDFlatButton:
@@ -288,6 +289,12 @@ class MDDatePicker(FloatLayout,
     date = ObjectProperty()
 
     def __init__(self, **kwargs):
+        self.day = None
+        self.month = None
+        self.year = None
+        self.selected_month = None
+        self.selected_year = None
+        self.all_rows = []
         super(MDDatePicker, self).__init__(**kwargs)
         self.date = None
         self.layout = self.ids.main_layout
@@ -323,11 +330,7 @@ class MDDatePicker(FloatLayout,
 
     def open(self, *args):
         super(MDDatePicker, self).open(*args)
-        try:
-            self.year
-            self.month
-            self.day
-        except AttributeError:
+        if not self.day:
             self.set_date(date.today())
         self.ids.label_combined.text = "%s, %s %s" % \
             (str(datetime.date(self.year, self.month, self.day).strftime("%A")[:3]),
@@ -371,14 +374,14 @@ class MDDatePicker(FloatLayout,
         self.update_array(year=self.year,
                           month=self.month)
 
-    def label(self, text=""):
+    def add_label(self, text=""):
         return MDLabel(text=text,
                        size=(dp(45), dp(45)),
                        size_hint=(None, None),
                        halign='center',
                        theme_text_color='Primary')
 
-    def button(self, lookout, i, disabled=False):
+    def add_button(self, lookout, i, disabled=False):
         date_button = DateButton(self,
                                  text=str(i[0]),
                                  size_hint=(None, None),
@@ -391,21 +394,22 @@ class MDDatePicker(FloatLayout,
 
     def generate_array(self, year, month, lookout):
         current_row = []
-        self.all_rows = []
+        label = self.add_label
+        button = self.add_button
         for y in range(7):
             for x in range(7):
-                current_row.append(self.button(i=("", ""), disabled=True, lookout=lookout))
-            temp = []
+                current_row.append(button(i=("", ""), disabled=True, lookout=lookout))
+            last_row = []
             for item in current_row:
-                temp.append(item)
-            self.all_rows.append(temp)
+                last_row.append(item)
+            self.all_rows.append(last_row)
             del current_row[:]
-        self.all_rows[0][0] = self.label(text=calendar.day_abbr[5][0])
-        self.all_rows[0][1] = self.label(text=calendar.day_abbr[6][0])
+        self.all_rows[0][0] = label(text=calendar.day_abbr[5][0])
+        self.all_rows[0][1] = label(text=calendar.day_abbr[6][0])
         count = 2
         for i in self.cal.iterweekdays():
             if calendar.day_abbr[i][0] not in [calendar.day_abbr[5][0], calendar.day_abbr[6][0]]:
-                self.all_rows[0][count] = self.label(text=calendar.day_abbr[i][0])
+                self.all_rows[0][count] = label(text=calendar.day_abbr[i][0])
                 count += 1
 
         month_start_col = date(year, month, 1).weekday()
@@ -416,15 +420,15 @@ class MDDatePicker(FloatLayout,
         count = 0
         row = 1
         for i in range(-2, month_start_col):
-            self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+            self.all_rows[row][count] = button(i=("", ""), disabled=True, lookout=lookout)
             count += 1
         for i in self.cal.itermonthdays2(year, month):
             if i[0] == 0 and row < 3:
-                self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+                self.all_rows[row][count] = button(i=("", ""), disabled=True, lookout=lookout)
             elif i[0] == 0 and row > 3:
-                self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+                self.all_rows[row][count] = button(i=("", ""), disabled=True, lookout=lookout)
             else:
-                self.all_rows[row][count] = self.button(i=i, lookout=lookout)
+                self.all_rows[row][count] = button(i=i, lookout=lookout)
                 count += 1
                 if count == 7:
                     count = 0
@@ -435,6 +439,12 @@ class MDDatePicker(FloatLayout,
                     self.layout.add_widget(item)
 
     def update_array(self, year, month):
+        for row in self.all_rows:
+            for item in row:
+                if item:
+                    if str(item.__class__.__name__) == "DateButton":
+                        item.disabled = True
+                        item.text = ""
         month_start_col = date(year, month, 1).weekday()
         if month_start_col == 5:
             month_start_col = -2
