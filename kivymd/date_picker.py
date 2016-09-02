@@ -32,15 +32,15 @@ Builder.load_string("""
             size: self.size
             pos: self.pos
     size_hint: (None, None)
-    height: dp(35)
+    height: dp(45)
     #width: _label.texture_size[0] + dp(16)
-    width: dp(35)
+    width: dp(45)
     padding: (dp(8), 0)
     theme_text_color: 'Custom'
     text_color: root.theme_cls.primary_color
     MDLabel:
         id: _label
-        size: dp(35), dp(35)
+        size: dp(45), dp(45)
         text: root._text
         font_style: 'Button'
         size_hint_x: None
@@ -61,83 +61,53 @@ Builder.load_string("""
             pos: self.pos
 <MDDatePicker>:
     size_hint: (None, None)
-    size: [dp(280), dp(30)+dp(130)+dp(300)] if self.theme_cls.device_orientation == 'portrait'\
-        else [dp(30) + dp(130) + dp(325), dp(300)]
+    size: [dp(328), dp(484)] if self.theme_cls.device_orientation == 'portrait'\
+        else [dp(512), dp(354)]
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
-            rgb: app.theme_cls.primary_dark
-        Rectangle:
-            size: [dp(280), dp(30)] if self.theme_cls.device_orientation == 'portrait'\
-                else [dp(200), dp(30)]
-            pos: root.pos[0], root.pos[1] + root.height-dp(30)
-        Color:
             rgb: app.theme_cls.primary_color
         Rectangle:
-            size: [dp(280), dp(130)] if self.theme_cls.device_orientation == 'portrait' else\
-                [dp(200), root.height - dp(30)]
-            pos: [root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130))] \
-                if self.theme_cls.device_orientation == 'portrait' else [root.pos[0], root.pos[1]]
+            size: [dp(328), dp(96)] if self.theme_cls.device_orientation == 'portrait'\
+                else [dp(168), dp(354)]
+            pos: [root.pos[0], root.pos[1] + root.height-dp(96)] if self.theme_cls.device_orientation == 'portrait'\
+                else [root.pos[0], root.pos[1] + root.height-dp(354)]  #]
         Color:
             rgb: app.theme_cls.bg_normal
         Rectangle:
-            size: [dp(280), dp(300)] if self.theme_cls.device_orientation == 'portrait'\
-                else [root.width-dp(200), root.height]
-            pos: [root.pos[0], root.pos[1] + root.height-(dp(30)+dp(130)+dp(300))]\
-                if self.theme_cls.device_orientation == 'portrait' else [root.pos[0]+dp(200), root.pos[1]]
+            size: [dp(328), dp(484)-dp(96)] if self.theme_cls.device_orientation == 'portrait'\
+                else [dp(344), dp(354)]
+            pos: [root.pos[0], root.pos[1] + root.height-dp(96)-(dp(484)-dp(96))]\
+                if self.theme_cls.device_orientation == 'portrait' else [root.pos[0]+dp(168), root.pos[1]]  #+dp(334)
 
     GridLayout:
         id: main_layout
         cols: 7
-        size: (dp(250), dp(35*8))
+        size: (dp(250), dp(45*8))
         size_hint: (None, None)
         pos: (dp(200), dp(50))
-        pos_hint: {'center_x': .5075, 'center_y': .275} if root.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': .71, 'center_y': .4}
+        pos_hint: {'center_x': .4, 'center_y': .35} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': .6, 'center_y': .4}
 
     MDLabel:
-        id: label_weekday
-        font_style: "Title"
+        id: label_combined
+        font_style: "Display2"
         size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.97} if self.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.22, 'center_y': 0.95}
+        size: [root.width, dp(30)] if root.theme_cls.device_orientation == 'portrait'\
+            else [dp(168), dp(30)]
+        pos: [root.pos[0]+dp(15), root.pos[1] + root.height - dp(75)] if root.theme_cls.device_orientation == 'portrait'\
+            else [root.pos[0], root.pos[1] + root.height - dp(110)]
         valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_date
-        font_style: "Display3"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.85} if self.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.22, 'center_y': 0.6}
-        valign: "middle"
-        halign: "center"
-
-    MDLabel:
-        id: label_short_month
-        font_style: "Headline"
-        size_hint: (None, None)
-        size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.75} if self.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.22, 'center_y': 0.45}
-        valign: "middle"
-        halign: "center"
+        text_size: [root.width, None] if root.theme_cls.device_orientation == 'portrait'\
+            else [dp(140), None]
 
     MDLabel:
         id: label_year
-        font_style: "Headline"
+        font_style: "Title"
         size_hint: (None, None)
         size: root.width, dp(30)
-        pos: root.pos
-        pos_hint: {'center_x': 0.5, 'center_y': 0.7} if self.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.22, 'center_y': 0.375}
+        pos: root.pos[0]+dp(15), root.pos[1] + root.height - dp(30) - dp(10)
         valign: "middle"
-        halign: "center"
 
     MDLabel:
         id: label_current_month
@@ -147,21 +117,21 @@ Builder.load_string("""
         size: root.width, dp(30)
         pos: root.pos
         theme_text_color: 'Primary'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.61} if self.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.71, 'center_y': 0.925}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.75} if self.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.655, 'center_y': 0.93}
         valign: "middle"
         halign: "center"
 
     MDIconButton:
         icon: 'arrow-left'
-        pos_hint: {'center_x': 0.125, 'center_y': 0.61} if root.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.475, 'center_y': 0.925}
+        pos_hint: {'center_x': 0.09, 'center_y': 0.75} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.385, 'center_y': 0.93}
         on_release: root.prev_month()
 
     MDIconButton:
         icon: 'arrow-right'
-        pos_hint: {'center_x': 0.875, 'center_y': 0.61} if root.theme_cls.device_orientation == 'portrait'\
-            else {'center_x': 0.94, 'center_y': 0.925}
+        pos_hint: {'center_x': 0.91, 'center_y': 0.75} if root.theme_cls.device_orientation == 'portrait'\
+            else {'center_x': 0.945, 'center_y': 0.93}
         on_release: root.next_month()
 
     MDFlatButton:
@@ -180,7 +150,7 @@ class CalendarButton(ThemableBehavior,
                      ButtonBehavior,
                      BackgroundColorBehavior,
                      AnchorLayout):
-    width = NumericProperty(dp(35))
+    width = NumericProperty(dp(45))
     text_color = ListProperty()
     text = StringProperty('')
     theme_text_color = OptionProperty(None,
@@ -235,8 +205,8 @@ class CalendarButton(ThemableBehavior,
 class DateButton(CalendarButton):
     def __init__(self, cls, **kwargs):
         super(CalendarButton, self).__init__(**kwargs)
-        self.size = dp(35), dp(35)
-        self.width = dp(35)
+        self.size = dp(45), dp(45)
+        self.width = dp(45)
         self.text = kwargs['text']
         if self.text == str(date.today().day) \
                 and cls.month == date.today().month \
@@ -251,8 +221,8 @@ class CalendarSelector(CalendarButton):
 
     def __init__(self, cls):
         super(CalendarButton, self).__init__(disabled=True)
-        self.size = dp(35), dp(35)
-        self.width = dp(35)
+        self.size = dp(45), dp(45)
+        self.width = dp(45)
         self.parent_class = cls
         self.selected_month = cls.month
         self.selected_year = cls.year
@@ -359,11 +329,11 @@ class MDDatePicker(FloatLayout,
             self.day
         except AttributeError:
             self.set_date(date.today())
-        self.ids.label_weekday.text = str(datetime.date(self.year, self.month, self.day).strftime("%A"))
-        self.ids.label_date.text = str(self.day)
-        self.ids.label_short_month.text = calendar.month_name[self.month][:3].upper()
+        self.ids.label_combined.text = "%s, %s %s" % \
+            (str(datetime.date(self.year, self.month, self.day).strftime("%A")[:3]),
+             calendar.month_abbr[self.month],
+             str(self.day))
         self.ids.label_year.text = str(self.year)
-        self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
         self.selector = CalendarSelector(self)
         self.generate_array(year=self.year,
                             month=self.month,
@@ -372,9 +342,10 @@ class MDDatePicker(FloatLayout,
     def get_touch(self, instance):
         self.selector.move(instance)
         self.selector.update()
-        self.ids.label_weekday.text = str(datetime.date(self.year, self.month, int(instance.text)).strftime("%A"))
-        self.ids.label_date.text = str(instance.text)
-        self.ids.label_short_month.text = calendar.month_abbr[self.month].upper()
+        self.ids.label_combined.text = "%s, %s %s" % \
+            (str(datetime.date(self.year, self.month, int(instance.text)).strftime("%A")[:3]),
+             calendar.month_abbr[self.month],
+             str(instance.text))
         self.ids.label_year.text = str(self.year)
         self.selected_month = self.month
         self.selected_year = self.year
@@ -402,7 +373,7 @@ class MDDatePicker(FloatLayout,
 
     def label(self, text=""):
         return MDLabel(text=text,
-                       size=(dp(35), dp(35)),
+                       size=(dp(45), dp(45)),
                        size_hint=(None, None),
                        halign='center',
                        theme_text_color='Primary')
@@ -412,13 +383,10 @@ class MDDatePicker(FloatLayout,
                                  text=str(i[0]),
                                  size_hint=(None, None),
                                  disabled=disabled)
-
         date_button.bind(on_press=self.get_touch)
-
         if lookout:
             if str(lookout) == str(i[0]):
                 self.selector.receive_lookout(date_button)
-
         return date_button
 
     def generate_array(self, year, month, lookout):
@@ -451,9 +419,9 @@ class MDDatePicker(FloatLayout,
             self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
             count += 1
         for i in self.cal.itermonthdays2(year, month):
-            if i[0] == 0 and row < 2:
+            if i[0] == 0 and row < 3:
                 self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
-            elif i[0] == 0 and row > 2:
+            elif i[0] == 0 and row > 3:
                 self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
             else:
                 self.all_rows[row][count] = self.button(i=i, lookout=lookout)
