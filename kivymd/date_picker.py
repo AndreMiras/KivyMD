@@ -32,8 +32,9 @@ Builder.load_string("""
             size: self.size
             pos: self.pos
     size_hint: (None, None)
-    height: dp(36)
-    width: _label.texture_size[0] + dp(16)
+    height: dp(35)
+    #width: _label.texture_size[0] + dp(16)
+    width: dp(35)
     padding: (dp(8), 0)
     theme_text_color: 'Custom'
     text_color: root.theme_cls.primary_color
@@ -179,10 +180,7 @@ class CalendarButton(ThemableBehavior,
                      ButtonBehavior,
                      BackgroundColorBehavior,
                      AnchorLayout):
-    width = NumericProperty(dp(64),
-                            min=dp(64),
-                            max=None,
-                            errorhandler=lambda x: dp(64))
+    width = NumericProperty(dp(35))
     text_color = ListProperty()
     text = StringProperty('')
     theme_text_color = OptionProperty(None,
@@ -237,8 +235,8 @@ class CalendarButton(ThemableBehavior,
 class DateButton(CalendarButton):
     def __init__(self, cls, **kwargs):
         super(CalendarButton, self).__init__(**kwargs)
-        self.width = dp(35)
         self.size = dp(35), dp(35)
+        self.width = dp(35)
         self.text = kwargs['text']
         if self.text == str(date.today().day) \
                 and cls.month == date.today().month \
@@ -274,7 +272,6 @@ class CalendarSelector(CalendarButton):
         if self.selected_month == self.parent_class.month and self.selected_year == self.parent_class.year:
             try:
                 self.move(self.current_button)
-                # cls.add_widget(self)
                 Clock.schedule_once(lambda x: self.add())
             except WidgetException:
                 pass
@@ -286,7 +283,6 @@ class CalendarSelector(CalendarButton):
 
     def move_resize(self, window, width, height, do_again=True):
         self.pos = self.current_button.pos
-        # self.size = self.current_button.size
         if do_again:
             Clock.schedule_once(lambda x: self.move_resize(window=window,
                                                            width=width,
@@ -301,7 +297,6 @@ class CalendarSelector(CalendarButton):
             self.selected_month = self.parent_class.month
             self.selected_year = self.parent_class.year
             self.pos = inst.pos
-            # self.size = inst.size
             Clock.schedule_once(lambda x: self.move_resize(window=None,
                                                            width=None,
                                                            height=None,
@@ -370,9 +365,9 @@ class MDDatePicker(FloatLayout,
         self.ids.label_year.text = str(self.year)
         self.ids.label_current_month.text = calendar.month_name[self.month] + " " + str(self.year)
         self.selector = CalendarSelector(self)
-        self.generate_calendar(year=self.year,
-                               month=self.month,
-                               lookout=self.selector.get_lookout())
+        self.generate_array(year=self.year,
+                            month=self.month,
+                            lookout=self.selector.get_lookout())
 
     def get_touch(self, instance):
         self.selector.move(instance)
@@ -386,69 +381,130 @@ class MDDatePicker(FloatLayout,
         self.day = instance.text
 
     def next_month(self):
-        look = None
         self.month += 1
         if self.month == 13:
             self.month = 1
             self.year += 1
         self.ids.label_current_month.text = "%s %s" % (calendar.month_name[self.month], self.year)
         self.selector.update()
-        if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
-            look = self.day
-        self.layout.clear_widgets()
-        self.generate_calendar(year=self.year,
-                               month=self.month,
-                               lookout=look)
+        self.update_array(year=self.year,
+                          month=self.month)
 
     def prev_month(self):
-        look = None
         self.month -= 1
         if self.month == 0:
             self.month = 12
             self.year -= 1
         self.ids.label_current_month.text = "%s %s" % (calendar.month_name[self.month], self.year)
         self.selector.update()
-        if self.selector.selected_month == self.month and self.selector.selected_year == self.year:
-            look = self.day
-        self.layout.clear_widgets()
-        self.generate_calendar(year=self.year,
-                               month=self.month,
-                               lookout=look)
+        self.update_array(year=self.year,
+                          month=self.month)
 
-    def add_button(self, lookout, i):
+    def label(self, text=""):
+        return MDLabel(text=text,
+                       size=(dp(35), dp(35)),
+                       size_hint=(None, None),
+                       halign='center',
+                       theme_text_color='Primary')
+
+    def button(self, lookout, i, disabled=False):
         date_button = DateButton(self,
                                  text=str(i[0]),
-                                 size_hint=(None, None))
+                                 size_hint=(None, None),
+                                 disabled=disabled)
 
         date_button.bind(on_press=self.get_touch)
-        self.layout.add_widget(date_button)
+
         if lookout:
             if str(lookout) == str(i[0]):
                 self.selector.receive_lookout(date_button)
 
-    def add_label(self, text=""):
-        self.layout.add_widget(MDLabel(size=(dp(35), dp(35)),
-                                       size_hint=(None, None),
-                                       text=text,
-                                       halign='center',
-                                       theme_text_color='Primary'))
+        return date_button
 
-    def generate_calendar(self, year, month, lookout=None):
-        add_label = self.add_label
-        add_button = self.add_button
-        add_label(text=calendar.day_abbr[5][0])
-        add_label(text=calendar.day_abbr[6][0])
+    def generate_array(self, year, month, lookout):
+        current_row = []
+        self.all_rows = []
+        for y in range(7):
+            for x in range(7):
+                current_row.append(self.button(i=("", ""), disabled=True, lookout=lookout))
+            temp = []
+            for item in current_row:
+                temp.append(item)
+            self.all_rows.append(temp)
+            del current_row[:]
+        self.all_rows[0][0] = self.label(text=calendar.day_abbr[5][0])
+        self.all_rows[0][1] = self.label(text=calendar.day_abbr[6][0])
+        count = 2
         for i in self.cal.iterweekdays():
             if calendar.day_abbr[i][0] not in [calendar.day_abbr[5][0], calendar.day_abbr[6][0]]:
-                add_label(text=calendar.day_abbr[i][0])
+                self.all_rows[0][count] = self.label(text=calendar.day_abbr[i][0])
+                count += 1
 
         month_start_col = date(year, month, 1).weekday()
         if month_start_col == 5:
             month_start_col = -2
         elif month_start_col == 6:
             month_start_col = -1
+        count = 0
+        row = 1
         for i in range(-2, month_start_col):
-            add_label()
+            self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+            count += 1
         for i in self.cal.itermonthdays2(year, month):
-            if i[0] != 0:
-                add_button(lookout=lookout, i=i)
+            if i[0] == 0 and row < 2:
+                self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+            elif i[0] == 0 and row > 2:
+                self.all_rows[row][count] = self.button(i=("", ""), disabled=True, lookout=lookout)
+            else:
+                self.all_rows[row][count] = self.button(i=i, lookout=lookout)
+                count += 1
+                if count == 7:
+                    count = 0
+                    row += 1
+        for row in self.all_rows:
+            for item in row:
+                if item:
+                    self.layout.add_widget(item)
+
+    def update_array(self, year, month):
+        month_start_col = date(year, month, 1).weekday()
+        if month_start_col == 5:
+            month_start_col = -2
+        elif month_start_col == 6:
+            month_start_col = -1
+        count = 0
+        for i in range(-2, month_start_col):
+            self.all_rows[1][count].text = ""
+            self.all_rows[1][count].disabled = True
+            count += 1
+        row = 1
+        for i in self.cal.itermonthdays2(year, month):
+            if self.all_rows[row][count] is not None:
+                if i[0] == 0 and row < 3:
+                    self.all_rows[row][count].text = ""
+                    self.all_rows[row][count].disabled = True
+                    if count == 7:
+                        count = 0
+                        row += 1
+                elif i[0] == 0 and row > 3:
+                    self.all_rows[row][count].text = ""
+                    self.all_rows[row][count].disabled = True
+                    count += 1
+                    if count == 7:
+                        count = 0
+                        row += 1
+                else:
+                    self.all_rows[row][count].text = str(i[0])
+                    self.all_rows[row][count].disabled = False
+                    if month == date.today().month and year == date.today().year:
+                        if str(i[0]) == str(date.today().day):
+                            self.all_rows[row][count].theme_text_color = 'Custom'
+                            self.all_rows[row][count].text_color = self.theme_cls.primary_color
+                        else:
+                            self.all_rows[row][count].theme_text_color = 'Primary'
+                    else:
+                        self.all_rows[row][count].theme_text_color = 'Primary'
+                    count += 1
+                    if count == 7:
+                        count = 0
+                        row += 1
