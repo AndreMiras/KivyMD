@@ -624,8 +624,6 @@ BoxLayout:
                 MDLabel:
                     text: 'Content'
                     theme_text_color: 'Primary'
-
-
         Screen:
             name: 'pickers'
             BoxLayout:
@@ -664,7 +662,6 @@ BoxLayout:
                             size: dp(48), dp(48)
                 BoxLayout:
                     orientation: 'vertical'
-                    # size_hint: (None, None)
                     MDRaisedButton:
                         text: "Open date picker"
                         size_hint: None, None
@@ -776,6 +773,7 @@ class KitchenSinkNavDrawer(NavigationDrawer):
 class KitchenSink(App):
     theme_cls = ThemeManager()
     nav_drawer = ObjectProperty()
+    previous_date = ObjectProperty()
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
@@ -831,7 +829,7 @@ class KitchenSink(App):
                                auto_dismiss=False)
 
         self.dialog.add_action_button("Dismiss",
-                                      action=lambda*x: self.dialog.dismiss())
+                                      action=lambda *x: self.dialog.dismiss())
         self.dialog.open()
 
     def get_time_picker_data(self, instance, time):
@@ -848,19 +846,16 @@ class KitchenSink(App):
                 pass
         self.time_dialog.open()
 
-    def get_date_picker_data(self, instance, date):
-        self.root.ids.date_picker_label.text = str(date)
-        self.previous_date = date
+    def set_previous_date(self, date_obj):
+        self.previous_date = date_obj
 
     def show_example_date_picker(self):
-        self.date_dialog = MDDatePicker()
-        self.date_dialog.bind(date=self.get_date_picker_data)
         if self.root.ids.date_picker_use_previous_date.active:
-            try:
-                self.date_dialog.set_date(self.previous_date)
-            except AttributeError:
-                pass
-        self.date_dialog.open()
+            pd = self.previous_date
+            MDDatePicker(self.set_previous_date,
+                         pd.year, pd.month, pd.day).open()
+        else:
+            MDDatePicker(self.set_previous_date).open()
 
     def theme_swap(self):
         if self.theme_cls.theme_style == 'Light':
