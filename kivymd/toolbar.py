@@ -69,12 +69,10 @@ class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
 
     title_color = ListProperty(None, allownone=True)
 
-    background_color = ListProperty(None, allownone=True)
+    background_color = ListProperty([0, 0, 0, 1])
 
     def __init__(self, **kwargs):
         super(Toolbar, self).__init__(**kwargs)
-        if self.background_color == []:
-            self.background_color = self.theme_cls.primary_color
         Clock.schedule_once(
             lambda x: self.on_left_action_items(0, self.left_action_items))
         Clock.schedule_once(
