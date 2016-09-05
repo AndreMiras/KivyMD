@@ -558,7 +558,7 @@ Builder.load_string("""
         spacing: (dp(2), 0) if root.theme_cls.device_orientation == 'portrait'\
             else (dp(7), 0)
         pos: (root.pos[0]+dp(10), root.pos[1]+dp(60)) if root.theme_cls.device_orientation == 'portrait'\
-            else (root.pos[0]+dp(168)+dp(8), root.pos[1]+dp(48))
+            else (root.pos[0]+dp(168)+dp(11), root.pos[1]+dp(48))
     MDLabel:
         id: label_month_selector
         font_style: 'Body2'
