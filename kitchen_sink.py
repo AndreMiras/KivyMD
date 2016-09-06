@@ -14,6 +14,7 @@ from kivymd.selectioncontrols import MDCheckbox
 from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
 from kivymd.time_picker import MDTimePicker
+from kivymd.date_picker import MDDatePicker
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -623,36 +624,70 @@ BoxLayout:
                 MDLabel:
                     text: 'Content'
                     theme_text_color: 'Primary'
-
-
         Screen:
             name: 'pickers'
-            MDRaisedButton:
-                text: "Open time picker"
-                size_hint: None, None
-                size: 3 * dp(48), dp(48)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                opposite_colors: True
-                on_release: app.show_example_time_picker()
-            MDLabel:
-                id: time_picker_label
-                theme_text_color: 'Primary'
-                size_hint: None, None
-                size: dp(48), dp(48)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
             BoxLayout:
-                size: dp(48)*3, dp(48)
-                size_hint: (None, None)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-                MDLabel:
-                    theme_text_color: 'Primary'
-                    text: "Start on previous time"
-                    size_hint: None, None
-                    size: dp(130), dp(48)
-                MDCheckbox:
-                    id: time_picker_use_previous_time
-                    size_hint: None, None
-                    size: dp(48), dp(48)
+                spacing: dp(40)
+                orientation: 'vertical'
+                size_hint_x: None
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                BoxLayout:
+                    orientation: 'vertical'
+                    # size_hint: (None, None)
+                    MDRaisedButton:
+                        text: "Open time picker"
+                        size_hint: None, None
+                        size: 3 * dp(48), dp(48)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        opposite_colors: True
+                        on_release: app.show_example_time_picker()
+                    MDLabel:
+                        id: time_picker_label
+                        theme_text_color: 'Primary'
+                        size_hint: None, None
+                        size: dp(48)*3, dp(48)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        size: dp(48)*3, dp(48)
+                        size_hint: (None, None)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        MDLabel:
+                            theme_text_color: 'Primary'
+                            text: "Start on previous time"
+                            size_hint: None, None
+                            size: dp(130), dp(48)
+                        MDCheckbox:
+                            id: time_picker_use_previous_time
+                            size_hint: None, None
+                            size: dp(48), dp(48)
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDRaisedButton:
+                        text: "Open date picker"
+                        size_hint: None, None
+                        size: 3 * dp(48), dp(48)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        opposite_colors: True
+                        on_release: app.show_example_date_picker()
+                    MDLabel:
+                        id: date_picker_label
+                        theme_text_color: 'Primary'
+                        size_hint: None, None
+                        size: dp(48)*3, dp(48)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        size: dp(48)*3, dp(48)
+                        size_hint: (None, None)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        MDLabel:
+                            theme_text_color: 'Primary'
+                            text: "Start on previous date"
+                            size_hint: None, None
+                            size: dp(130), dp(48)
+                        MDCheckbox:
+                            id: date_picker_use_previous_date
+                            size_hint: None, None
+                            size: dp(48), dp(48)
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -738,6 +773,7 @@ class KitchenSinkNavDrawer(NavigationDrawer):
 class KitchenSink(App):
     theme_cls = ThemeManager()
     nav_drawer = ObjectProperty()
+    previous_date = ObjectProperty()
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
@@ -793,7 +829,7 @@ class KitchenSink(App):
                                auto_dismiss=False)
 
         self.dialog.add_action_button("Dismiss",
-                                      action=lambda*x: self.dialog.dismiss())
+                                      action=lambda *x: self.dialog.dismiss())
         self.dialog.open()
 
     def get_time_picker_data(self, instance, time):
@@ -809,6 +845,20 @@ class KitchenSink(App):
             except AttributeError:
                 pass
         self.time_dialog.open()
+
+    def set_previous_date(self, date_obj):
+        self.previous_date = date_obj
+
+    def show_example_date_picker(self):
+        if self.root.ids.date_picker_use_previous_date.active:
+            pd = self.previous_date
+            try:
+                MDDatePicker(self.set_previous_date,
+                            pd.year, pd.month, pd.day).open()
+            except AttributeError:
+                MDDatePicker(self.set_previous_date).open()
+        else:
+            MDDatePicker(self.set_previous_date).open()
 
     def theme_swap(self):
         if self.theme_cls.theme_style == 'Light':
