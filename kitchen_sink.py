@@ -852,8 +852,11 @@ class KitchenSink(App):
     def show_example_date_picker(self):
         if self.root.ids.date_picker_use_previous_date.active:
             pd = self.previous_date
-            MDDatePicker(self.set_previous_date,
-                         pd.year, pd.month, pd.day).open()
+            try:
+                MDDatePicker(self.set_previous_date,
+                            pd.year, pd.month, pd.day).open()
+            except AttributeError:
+                MDDatePicker(self.set_previous_date).open()
         else:
             MDDatePicker(self.set_previous_date).open()
 

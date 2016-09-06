@@ -13,6 +13,8 @@ from kivy.properties import StringProperty, NumericProperty, ObjectProperty, \
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior
+from kivy.clock import Clock
+from kivy.core.window import Window
 
 """
 Builder.load_string(
@@ -546,6 +548,12 @@ Builder.load_string("""
         valign: 'middle'
         text: str(root.sel_year)
     GridLayout:
+        canvas:
+            Color:
+                rgba: 1, 0, 0, 0.3
+            Rectangle:
+                size: self.size
+                pos: self.pos
         id: cal_layout
         cols: 7
         size: (dp(44*7), dp(40*7)) if root.theme_cls.device_orientation == 'portrait'\
@@ -562,7 +570,7 @@ Builder.load_string("""
     MDLabel:
         id: label_month_selector
         font_style: 'Body2'
-        text: calendar.month_name[root.sel_month].capitalize() + ' ' + str(root.sel_year)
+        text: calendar.month_name[root.month].capitalize() + ' ' + str(root.year)
         size_hint: (None, None)
         size: root.width, dp(30)
         pos: root.pos
@@ -600,7 +608,8 @@ Builder.load_string("""
         font_style: 'Caption'
         theme_text_color: 'Custom' if root.is_today and not root.is_selected else 'Primary'
         text_color: root.theme_cls.primary_color
-        opposite_colors: root.is_selected
+        opposite_colors: root.is_selected if root.owner.sel_month == root.owner.month \
+            and root.owner.sel_year == root.owner.year else False
         size_hint_x: None
         valign: 'middle'
         halign: 'center'
@@ -615,7 +624,52 @@ Builder.load_string("""
     text_size: self.size
     valign: 'middle' if root.theme_cls.device_orientation == 'portrait' else 'bottom'
     halign: 'center'
+
+<DaySelector>
+    size: (dp(40), dp(40)) if root.theme_cls.device_orientation == 'portrait'\
+                else (dp(32), dp(32))
+    size_hint: (None, None)
+    canvas:
+        Color:
+            rgba: self.theme_cls.primary_color if self.shown else [0, 0, 0, 0]
+        Ellipse:
+            size: (dp(40), dp(40)) if root.theme_cls.device_orientation == 'portrait'\
+                else (dp(32), dp(32))
+            pos: self.pos if root.theme_cls.device_orientation == 'portrait'\
+                else [self.pos[0] + dp(3), self.pos[1]]
 """)
+
+
+class DaySelector(ThemableBehavior, AnchorLayout):
+    shown = BooleanProperty(False)
+
+    def __init__(self, parent):
+        super(DaySelector, self).__init__()
+        self.parent_class = parent
+        self.parent_class.add_widget(self, index=7)
+        self.selected_widget = None
+        Window.bind(on_resize=self.move_resize)
+
+    def update(self):
+        parent = self.parent_class
+        if parent.sel_month == parent.month and parent.sel_year == parent.year:
+            self.shown = True
+        else:
+            self.shown = False
+
+    def set_widget(self, widget):
+        self.selected_widget = widget
+        self.pos = widget.pos
+        self.move_resize(None, None, None, True)
+        self.update()
+
+    def move_resize(self, window, width, height, do_again=True):
+        self.pos = self.selected_widget.pos
+        if do_again:
+            Clock.schedule_once(lambda x: self.move_resize(window=window,
+                                                           width=width,
+                                                           height=height,
+                                                           do_again=False), 0.01)
 
 
 class DayButton(ThemableBehavior, CircularRippleBehavior, ButtonBehavior,
@@ -641,6 +695,9 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
     sel_year = NumericProperty()
     sel_month = NumericProperty()
     sel_day = NumericProperty()
+    day = NumericProperty()
+    month = NumericProperty()
+    year = NumericProperty()
     today = date.today()
     callback = ObjectProperty()
 
@@ -652,11 +709,15 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
         self.sel_year = year if year else self.today.year
         self.sel_month = month if month else self.today.month
         self.sel_day = day if day else self.today.day
+        self.month = self.sel_month
+        self.year = self.sel_year
+        self.day = self.sel_day
         super(MDDatePicker, self).__init__(**kwargs)
+        self.selector = DaySelector(self)
         self.generate_cal_widgets()
-        self.update_cal_matrix(self.sel_year, self.sel_month,
-                               sel_date=date(self.sel_year, self.sel_month,
-                                             self.sel_day))
+        self.update_cal_matrix(self.sel_year, self.sel_month)
+        self.set_month_day(self.sel_day)
+        self.selector.update()
 
     def ok_click(self):
         self.callback(date(self.sel_year, self.sel_month, self.sel_day))
@@ -672,13 +733,28 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
         if self._sel_day_widget:
             self._sel_day_widget.is_selected = False
         widget.is_selected = True
+        self.sel_month = int(self.month)
+        self.sel_year = int(self.year)
         self.sel_day = int(widget.text)
         self._sel_day_widget = widget
+        self.selector.set_widget(widget)
 
-    def update_cal_matrix(self, year, month, sel_date=False):
+    def set_month_day(self, day):
+        for idx in range(len(self.cal_list)):
+            if str(day) == str(self.cal_list[idx].text):
+                self._sel_day_widget = self.cal_list[idx]
+                self.sel_day = int(self.cal_list[idx].text)
+                if self._sel_day_widget:
+                    self._sel_day_widget.is_selected = False
+                self.cal_list[idx].is_selected = True
+                self.selector.set_widget(self.cal_list[idx])
+
+    def update_cal_matrix(self, year, month):
         dates = [x for x in self.cal.itermonthdates(year, month)]
-        self.sel_year = year
-        self.sel_month = month
+        # self.sel_year = year
+        # self.sel_month = month
+        self.year = year
+        self.month = month
         for idx in range(len(self.cal_list)):
             if idx >= len(dates) or dates[idx].month != month:
                 self.cal_list[idx].disabled = True
@@ -686,9 +762,8 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
             else:
                 self.cal_list[idx].disabled = False
                 self.cal_list[idx].text = str(dates[idx].day)
-                if dates[idx] == sel_date:
-                    self.set_selected_widget(self.cal_list[idx])
                 self.cal_list[idx].is_today = dates[idx] == self.today
+        self.selector.update()
 
     def generate_cal_widgets(self):
         cal_list = []
@@ -702,7 +777,7 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
 
     def change_month(self, operation):
         op = 1 if operation is 'next' else -1
-        sl, sy = self.sel_month, self.sel_year
+        sl, sy = self.month, self.year
         m = 12 if sl + op == 0 else 1 if sl + op == 13 else sl + op
         y = sy - 1 if sl + op == 0 else sy + 1 if sl + op == 13 else sy
-        self.update_cal_matrix(y, m, sel_date=date(y, m, self.sel_day))
+        self.update_cal_matrix(y, m)
