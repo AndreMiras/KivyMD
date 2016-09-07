@@ -124,7 +124,7 @@ Builder.load_string("""
         theme_text_color: 'Custom' if root.is_today and not root.is_selected else 'Primary'
         text_color: root.theme_cls.primary_color
         opposite_colors: root.is_selected if root.owner.sel_month == root.owner.month \
-            and root.owner.sel_year == root.owner.year else False
+            and root.owner.sel_year == root.owner.year and str(self.text) == str(root.owner.sel_day) else False
         size_hint_x: None
         valign: 'middle'
         halign: 'center'
@@ -213,6 +213,9 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
     today = date.today()
     callback = ObjectProperty()
 
+    class SetDateError(Exception):
+        pass
+
     def __init__(self, callback, year=None, month=None, day=None,
                  firstweekday=0,
                  **kwargs):
@@ -241,6 +244,29 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
         return d.strftime('%a,').capitalize() + separator + d.strftime(
             '%b').capitalize() + ' ' + str(day).lstrip('0')
 
+    def set_date(self, year, month, day):
+        try:
+            date(year, month, day)
+        except Exception as e:
+            print(e)
+            if str(e) == "day is out of range for month":
+                raise self.SetDateError(" Day %s day is out of range for month %s" % (day, month))
+            elif str(e) == "month must be in 1..12":
+                raise self.SetDateError("Month must be between 1 and 12, got %s" % month)
+            elif str(e) == "year is out of range":
+                raise self.SetDateError("Year must be between %s and %s, got %s" %
+                                        (datetime.MINYEAR, datetime.MAXYEAR, year))
+        else:
+            self.sel_year = year
+            self.sel_month = month
+            self.sel_day = day
+            self.month = self.sel_month
+            self.year = self.sel_year
+            self.day = self.sel_day
+            self.update_cal_matrix(self.sel_year, self.sel_month)
+            self.set_month_day(self.sel_day)
+            self.selector.update()
+
     def set_selected_widget(self, widget):
         if self._sel_day_widget:
             self._sel_day_widget.is_selected = False
@@ -258,22 +284,28 @@ class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
                 self.sel_day = int(self.cal_list[idx].text)
                 if self._sel_day_widget:
                     self._sel_day_widget.is_selected = False
+                self._sel_day_widget = self.cal_list[idx]
                 self.cal_list[idx].is_selected = True
                 self.selector.set_widget(self.cal_list[idx])
 
     def update_cal_matrix(self, year, month):
-        dates = [x for x in self.cal.itermonthdates(year, month)]
-        self.year = year
-        self.month = month
-        for idx in range(len(self.cal_list)):
-            if idx >= len(dates) or dates[idx].month != month:
-                self.cal_list[idx].disabled = True
-                self.cal_list[idx].text = ''
-            else:
-                self.cal_list[idx].disabled = False
-                self.cal_list[idx].text = str(dates[idx].day)
-                self.cal_list[idx].is_today = dates[idx] == self.today
-        self.selector.update()
+        try:
+            dates = [x for x in self.cal.itermonthdates(year, month)]
+        except ValueError as e:
+            if str(e) == "year is out of range":
+                pass
+        else:
+            self.year = year
+            self.month = month
+            for idx in range(len(self.cal_list)):
+                if idx >= len(dates) or dates[idx].month != month:
+                    self.cal_list[idx].disabled = True
+                    self.cal_list[idx].text = ''
+                else:
+                    self.cal_list[idx].disabled = False
+                    self.cal_list[idx].text = str(dates[idx].day)
+                    self.cal_list[idx].is_today = dates[idx] == self.today
+            self.selector.update()
 
     def generate_cal_widgets(self):
         cal_list = []
