@@ -854,7 +854,7 @@ class KitchenSink(App):
             pd = self.previous_date
             try:
                 MDDatePicker(self.set_previous_date,
-                            pd.year, pd.month, pd.day).open()
+                             pd.year, pd.month, pd.day).open()
             except AttributeError:
                 MDDatePicker(self.set_previous_date).open()
         else:
