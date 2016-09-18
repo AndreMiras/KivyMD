@@ -132,7 +132,7 @@ class SingleLineTextField(ThemableBehavior, TextInput):
         self.hint_text_color = (1, 1, 1, 0)
 
     def on_width(self, instance, width):
-        if self.focus or self.error and instance is not None:
+        if self.focus and instance is not None or self.error and instance is not None:
             self._line_width = width
         self.anim = Animation(_line_width=width, duration=.2, t='out_quad')
         self._msg_lbl.width = self.width
