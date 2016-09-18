@@ -1,20 +1,18 @@
-'''
-Created on Jul 8, 2016
+# Created on Jul 8, 2016
+#
+# The default kivy tab implementation seems like a stupid design to me. The
+# ScreenManager is much better.
+#
+# @author: jrm
 
-The default kivy tab implementation seems like a stupid design to me. The
-ScreenManager is much better. 
-
-@author: jrm
-'''
 from kivy.properties import StringProperty, DictProperty, ListProperty, \
     ObjectProperty, OptionProperty, BoundedNumericProperty
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.metrics import sp, dp
+from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
-from kivymd.icon_definitions import md_icons
 from kivymd.button import MDFlatButton
 
 Builder.load_string("""
@@ -69,7 +67,7 @@ Builder.load_string("""
             or self.panel.theme_cls.primary_light)
     on_press: 
         self.tab.dispatch('on_tab_press') 
-        self.tab.manager.current = self.tab.name
+        # self.tab.manager.current = self.tab.name
     on_release: self.tab.dispatch('on_tab_release')
     on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
     on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
@@ -123,11 +121,16 @@ class MDTab(Screen):
     
     def __init__(self, **kwargs):
         super(MDTab, self).__init__(**kwargs)
+        self.index = 0
+        self.parent_widget = None
         self.register_event_type('on_tab_touch_down')
         self.register_event_type('on_tab_touch_move')
         self.register_event_type('on_tab_touch_up')
         self.register_event_type('on_tab_press')
         self.register_event_type('on_tab_release')
+
+    def on_leave(self, *args):
+        self.parent_widget.ids.tab_manager.transition.direction = self.parent_widget.prev_dir
         
     def on_tab_touch_down(self, *args):
         pass
@@ -139,7 +142,15 @@ class MDTab(Screen):
         pass
 
     def on_tab_press(self, *args):
-        pass
+        par = self.parent_widget
+        if par.previous_tab is not self:
+            par.prev_dir = str(par.ids.tab_manager.transition.direction)
+            if par.previous_tab.index > self.index:
+                par.ids.tab_manager.transition.direction = "right"
+            elif par.previous_tab.index < self.index:
+                par.ids.tab_manager.transition.direction = "left"
+            par.ids.tab_manager.current = self.name
+            par.previous_tab = self
     
     def on_tab_release(self, *args):
         pass
@@ -151,7 +162,6 @@ class MDTab(Screen):
 class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     """ A tab panel that is implemented by delegating all tabs
         to a ScreenManager.
-    
     """
     # If tabs should fill space
     tab_width_mode = OptionProperty('stacked', options=['stacked', 'fixed'])
@@ -160,7 +170,7 @@ class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     tab_orientation = OptionProperty('top', options=['top'])  # ,'left','bottom','right'])
     
     # How tabs are displayed
-    tab_display_mode = OptionProperty('text',options=['text', 'icons'])  # ,'both'])
+    tab_display_mode = OptionProperty('text', options=['text', 'icons'])  # ,'both'])
     _tab_display_height = DictProperty({'text': dp(46), 'icons': dp(46), 'both': dp(72)})
     
     # Tab background color (leave empty for theme color)
@@ -186,6 +196,9 @@ class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
     
     def __init__(self, **kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
+        self.previous_tab = None
+        self.prev_dir = None
+        self.index = 0
         self._refresh_tabs()
         
     def on_tab_width_mode(self, *args):
@@ -195,6 +208,7 @@ class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
         self._refresh_tabs()
     
     def _refresh_tabs(self):
+        """ Refresh all tabs """
         # if fixed width, use a box layout
         if not self.ids:
             return
@@ -208,16 +222,27 @@ class MDTabbedPanel(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
                                      )
             tab_bar.add_widget(tab_header)
         
-    def add_widget(self, widget):
-        """ Add tabs to the screen or the layout."""
+    def add_widget(self, widget, **kwargs):
+        """ Add tabs to the screen or the layout.
+        :param widget: The widget to add.
+        """
+        d = {}
         if isinstance(widget, MDTab):
+            self.index += 1
+            if self.index == 1:
+                self.previous_tab = widget
+            widget.index = self.index
+            widget.parent_widget = self
             self.ids.tab_manager.add_widget(widget)
             self._refresh_tabs()
         else:
             super(MDTabbedPanel, self).add_widget(widget)
         
     def remove_widget(self, widget):
-        """ Remove tabs from the screen or the layout."""
+        """ Remove tabs from the screen or the layout.
+        :param widget: The widget to remove.
+        """
+        self.index -= 1
         if isinstance(widget, MDTab):
             self.ids.tab_manager.remove_widget(widget)
             self._refresh_tabs()
