@@ -33,18 +33,19 @@ Builder.load_string('''
 ''')
 
 
-class MDSeparator(ThemableBehavior,BoxLayout):
+class MDSeparator(ThemableBehavior, BoxLayout):
     """ A separator line """
-    def __init__(self,*args,**kwargs):
-        super(MDSeparator, self).__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super(MDSeparator, self).__init__(*args, **kwargs)
         self.on_orientation()
     
     def on_orientation(self,*args):
-        self.size_hint = (1,None) if self.orientation=='horizontal' else (None,1)
-        if self.orientation=='horizontal':
+        self.size_hint = (1, None) if self.orientation == 'horizontal' else (None, 1)
+        if self.orientation == 'horizontal':
             self.height = dp(1)
         else:
             self.width = dp(1)
+
 
 class MDCard(ThemableBehavior, ElevationBehavior, BoxLayout):
     r = BoundedNumericProperty(1., min=0., max=1.)

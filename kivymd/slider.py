@@ -34,17 +34,16 @@ Builder.load_string('''
         Rectangle:
             size:     ((self.width-self.padding*2)*self.value_normalized, sp(4)) if slider.orientation == 'horizontal' else (sp(4), (self.height-self.padding*2)*self.value_normalized)
             pos:    (self.x + self.padding, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding)
-        
-        
     Thumb:
         id:          thumb
         size_hint:   None, None
         size:        (dp(12), dp(12)) if root.disabled else ((dp(24), dp(24)) if root.active else (dp(16),dp(16)))
-        pos:         (slider.value_pos[0] - dp(8), slider.center_y - sp(thumb.height/2+2)) if slider.orientation == 'horizontal' else (slider.center_x - sp(thumb.width/2+2), slider.value_pos[1]-dp(8))
+        pos:         (slider.value_pos[0] - dp(8), slider.center_y - thumb.height/2 - dp(2)) if slider.orientation == 'horizontal' else (slider.center_x - thumb.width/2 - dp(2), slider.value_pos[1]-dp(8))
         color:       [0,0,0,0] if slider._is_off else (root._track_color_disabled if root.disabled else root.thumb_color_down)
         elevation:    0 if slider._is_off else (4 if root.active else 2)
         
 ''')
+
 
 class MDSlider(ThemableBehavior, Slider):
     # If the slider is clicked
@@ -57,7 +56,7 @@ class MDSlider(ThemableBehavior, Slider):
     _is_off = BooleanProperty(False)
     
     # Internal adjustment to reposition sliders for ring
-    _offset = ListProperty((0,0))
+    _offset = ListProperty((0, 0))
 
     _thumb_color = ListProperty(get_color_from_hex(colors['Grey']['50']))
     
@@ -146,20 +145,20 @@ class MDSlider(ThemableBehavior, Slider):
             self._track_color_disabled[3] = 0.26
             self.thumb_color_down = self.theme_cls.primary_color
             
-    def on_value_normalized(self,*args):
+    def on_value_normalized(self, *args):
         """ When the value == min set it to "off" state and make slider a ring """
         self._update_is_off()
         
-    def on_show_off(self,*args):
+    def on_show_off(self, *args):
         self._update_is_off()
         
     def _update_is_off(self):
-        self._is_off = self.show_off and (self.value_normalized==0)
+        self._is_off = self.show_off and (self.value_normalized == 0)
         
-    def on__is_off(self,*args):
+    def on__is_off(self, *args):
         self._update_offset()
         
-    def on_active(self,*args):
+    def on_active(self, *args):
         self._update_offset()
         
     def _update_offset(self):
@@ -167,7 +166,7 @@ class MDSlider(ThemableBehavior, Slider):
             shows through the off circle.
         """
         d = 2 if self.active else 0
-        self._offset = (dp(11+d),dp(11+d)) if self._is_off else (0,0) 
+        self._offset = (dp(11+d), dp(11+d)) if self._is_off else (0, 0)
     
     def on_touch_down(self, touch):
         if super(MDSlider, self).on_touch_down(touch):
@@ -187,6 +186,7 @@ if __name__ == '__main__':
     
     class SliderApp(App):
         theme_cls = ThemeManager()
+
         def build(self):
             return Builder.load_string("""
 BoxLayout:

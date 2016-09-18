@@ -67,14 +67,14 @@ class MDLabel(ThemableBehavior, Label):
             t.bind(**c)
             self.color = t.text_color if not op else t.opposite_text_color
         elif value == 'Secondary':
-            c = {'secondary_text_color' if not op else \
-                     'opposite_secondary_text_color': setter}
+            c = {'secondary_text_color' if not op else
+                 'opposite_secondary_text_color': setter}
             t.bind(**c)
             self.color = t.secondary_text_color if not op else \
                 t.opposite_secondary_text_color
         elif value == 'Hint':
-            c = {'disabled_hint_text_color' if not op else \
-                     'opposite_disabled_hint_text_color': setter}
+            c = {'disabled_hint_text_color' if not op else
+                 'opposite_disabled_hint_text_color': setter}
             t.bind(**c)
             self.color = t.disabled_hint_text_color if not op else \
                 t.opposite_disabled_hint_text_color

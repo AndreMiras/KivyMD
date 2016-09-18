@@ -8,6 +8,7 @@ from kivy.metrics import sp, dp
 from kivy.animation import Animation
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
+from kivy.clock import Clock
 
 Builder.load_string('''
 <SingleLineTextField>:
@@ -53,6 +54,7 @@ Builder.load_string('''
             self.foreground_color)
 
     font_name:    'Roboto'
+    foreground_color: app.theme_cls.text_color
     font_size:    sp(16)
     bold:        False
     padding:    0, dp(16), 0, dp(10)
@@ -83,6 +85,7 @@ class SingleLineTextField(ThemableBehavior, TextInput):
     _current_hint_text_color = _hint_txt_color
 
     def __init__(self, **kwargs):
+        Clock.schedule_interval(self._update_color, 5)
         self._msg_lbl = MDLabel(font_style='Caption',
                                 theme_text_color='Error',
                                 halign='left',
@@ -112,6 +115,17 @@ class SingleLineTextField(ThemableBehavior, TextInput):
         self.hint_anim_out = Animation(_hint_y=dp(10),
                                        _hint_lbl_font_size=sp(16), duration=.2,
                                        t='out_quad')
+
+    def _update_color(self, *args):
+        self.line_color_normal = self.theme_cls.divider_color
+        self.base_line_color_focus = list(self.theme_cls.primary_color)
+        if not self.focus and not self.error:
+            self.line_color_focus = self.theme_cls.primary_color
+            Animation(duration=.2, _current_hint_text_color=self.theme_cls.disabled_hint_text_color).start(self)
+            if self.mode == "persistent":
+                Animation(duration=.1, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
+        if self.focus and not self.error:
+            self.cursor_color = self.theme_cls.primary_color
 
     def on_hint_text_color(self, instance, color):
         self._hint_txt_color = self.theme_cls.disabled_hint_text_color
