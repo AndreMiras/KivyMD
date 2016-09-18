@@ -13,6 +13,7 @@ setup(name='kivymd',
       packages=['kivymd'],
       package_data={
           'kivymd': ['images/*.png', 'images/*.jpg', 'images/*.atlas',
-                     'fonts/*.ttf']},
+                     'fonts/*.ttf', 'vendor/circularLayout/*.py',
+                     'vendor/circleTimePicker/*.py']},
       requires=['kivy']
       )
