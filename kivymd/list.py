@@ -299,12 +299,11 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     
     text_color = ListProperty(None)
     ''' Text color used if theme_text_color is set to 'Custom' '''
-    
-    
+
     font_style = OptionProperty(
         'Subhead', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
-                          'Headline', 'Display1', 'Display2', 'Display3',
-                          'Display4', 'Button', 'Icon'])
+                            'Headline', 'Display1', 'Display2', 'Display3',
+                            'Display4', 'Button', 'Icon'])
     
     theme_text_color = StringProperty('Primary',allownone=True)
     ''' Theme text color for primary text '''
@@ -389,7 +388,7 @@ class ContainerSupport:
             self.ids['_right_container'].add_widget(widget)
             self._touchable_widgets.append(widget)
         else:
-            return super(BaseListItem, self).add_widget(widget, index)
+            return super(BaseListItem, self).add_widget(widget,index)
 
     def remove_widget(self, widget):
         super(BaseListItem, self).remove_widget(widget)

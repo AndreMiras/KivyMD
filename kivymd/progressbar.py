@@ -16,14 +16,18 @@ Builder.load_string('''
             rgba:  self.theme_cls.divider_color
         Rectangle:
             size:    (self.width , dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height) 
-            pos:   (self.x, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y)
+            pos:   (self.x, self.center_y - dp(4)) if self.orientation == 'horizontal' \
+                else (self.center_x - dp(4),self.y)
         
             
         Color:
             rgba:  self.theme_cls.primary_color
         Rectangle:
-            size:     (self.width*self.value_normalized, sp(4)) if self.orientation == 'horizontal' else (sp(4), self.height*self.value_normalized)
-            pos:    (self.width*(1-self.value_normalized)+self.x if self.reversed else self.x, self.center_y - dp(4)) if self.orientation == 'horizontal' else (self.center_x - dp(4),self.height*(1-self.value_normalized)+self.y if self.reversed else self.y)
+            size:     (self.width*self.value_normalized, sp(4)) if self.orientation == 'horizontal' else (sp(4), \
+                self.height*self.value_normalized)
+            pos:    (self.width*(1-self.value_normalized)+self.x if self.reversed else self.x, self.center_y - dp(4)) \
+                if self.orientation == 'horizontal' else \
+                (self.center_x - dp(4),self.height*(1-self.value_normalized)+self.y if self.reversed else self.y)
         
 ''')
 
@@ -32,7 +36,7 @@ class MDProgressBar(ThemableBehavior, ProgressBar):
     reversed = BooleanProperty(False)
     ''' Reverse the direction the progressbar moves. '''
     
-    orientation = OptionProperty('horizontal',options=['horizontal','vertical'])
+    orientation = OptionProperty('horizontal', options=['horizontal', 'vertical'])
     ''' Orientation of progressbar'''
             
     

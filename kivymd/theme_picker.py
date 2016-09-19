@@ -386,7 +386,7 @@ Builder.load_string("""
 
 
 class MDThemePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
-    background_color = ListProperty([0, 0, 0, 0])
+    # background_color = ListProperty([0, 0, 0, 0])
     time = ObjectProperty()
 
     def __init__(self, **kwargs):

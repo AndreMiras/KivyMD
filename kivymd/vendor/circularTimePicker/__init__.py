@@ -280,7 +280,7 @@ class CircularNumberPicker(CircularLayout):
                   size=self.on_selected)
 
         cx = self.center_x + self.padding[0] - self.padding[2]
-        cy = self.center_y + self.padding[3] - self.padding[1] - 200
+        cy = self.center_y + self.padding[3] - self.padding[1]
         sx, sy = self.pos_for_number(self.selected)
         epos = [i - (self.delta_radii * self.number_size_factor) for i in (sx, sy)]
         esize = [self.delta_radii * self.number_size_factor * 2] * 2

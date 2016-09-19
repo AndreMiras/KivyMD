@@ -42,8 +42,8 @@ class SlidingPanel(BoxLayout):
     def __init__(self, **kwargs):
         super(SlidingPanel, self).__init__(**kwargs)
         self.shadow = PanelShadow()
-        Clock.schedule_once(lambda x: Window.add_widget(self.shadow, 89), 0)
-        Clock.schedule_once(lambda x: Window.add_widget(self, 90), 0)
+        Clock.schedule_once(lambda x: Window.add_widget(self.shadow,89), 0)
+        Clock.schedule_once(lambda x: Window.add_widget(self,90), 0)
 
     def toggle(self):
         Animation.stop_all(self, 'x')
