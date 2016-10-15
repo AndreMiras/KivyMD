@@ -75,7 +75,7 @@ class ElevationBehavior(object):
 
     def _update_shadow(self, *args):
         if self.elevation > 0:
-            ratio = self.width / self.height
+            ratio = self.width / (self.height if self.height != 0 else 1)
             if ratio > -2 and ratio < 2:
                 self._shadow = App.get_running_app().theme_cls.quad_shadow
                 width = soft_width = self.width * 1.9
