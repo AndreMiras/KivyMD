@@ -3,7 +3,7 @@ from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.garden.recycleview import RecycleView
+from kivy.uix.recycleview import RecycleView
 from kivy.metrics import dp
 from kivy.properties import NumericProperty, ListProperty, OptionProperty, \
     StringProperty
@@ -57,7 +57,7 @@ class MDMenu(RecycleView):
 
 class MDDropdownMenu(ThemableBehavior, BoxLayout):
     items = ListProperty()
-    '''See :attr:`~kivy.garden.recycleview.RecycleView.data`
+    '''See :attr:`~kivy.uix.recycleview.RecycleView.data`
     '''
 
     width_mult = NumericProperty(1)

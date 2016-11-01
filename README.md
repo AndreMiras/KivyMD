@@ -21,20 +21,9 @@ Some very early documentation can be found at our project's website, other than 
 Installation and use with Buildozer
 ===================================
 
-KivyMD currently depends on `recycleview` from the Kivy garden.
-
-To install it on your desktop run the following in a terminal:
-
-    pip install kivy-garden
-	garden install recycleview
-
-If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git SSH address, like this example:
+If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
 
     requirements = kivy==master,git+https://gitlab.com/kivymd/KivyMD.git
-
-And add recycleview to your garden_requirements:
-
-    garden_requirements = recycleview
 
 License
 =======
