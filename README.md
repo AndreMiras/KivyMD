@@ -7,11 +7,13 @@ KivyMD is a collection of Material Design compliant widgets for use with [Kivy](
 
 The project's goal is to approximate Google's [Material Design spec](https://www.google.com/design/spec/material-design/introduction.html) as close as possible without sacrificing ease of use or application performance.
 
-Currently we're in **early alpha** status, so things are changing all the time and we cannot promise any kind of API stability. However, we're using KivyMD for deploying commercial applications to production environments, so rest assured it is safe to vendor now and make use of what's currently available; giving you freedom to upgrade when you're ready to do the necessary refactoring.
+Currently we're in **alpha** status, so things are changing all the time and we cannot promise any kind of API stability. However it is safe to vendor now and make use of what's currently available; giving you freedom to upgrade when you're ready to do the necessary refactoring.
 
-Our roadmap is available at [our wiki](https://gitlab.com/kivymd/KivyMD/wikis/Roadmap).
+Roadmap is available on [the project's wiki](https://gitlab.com/kivymd/KivyMD/wikis/Roadmap).
 
-If you wish to contribute, [the project's coding style](https://gitlab.com/kivymd/KivyMD/wikis/Coding-style) is available there as well. Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments.
+If you wish to contribute, [the project's coding style](https://gitlab.com/kivymd/KivyMD/wikis/Coding-style) is available there as well. Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments or access to your for may be requested to outright submit them.
+
+If you wish to become a project developer (permission to create branches on the project without forking for easier collaboration), have at least one PR approved and ask for it. If you contribute regularly to the project the role may be offered to you without asking too.
 
 Documentation
 =============
