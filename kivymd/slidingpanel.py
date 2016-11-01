@@ -89,4 +89,6 @@ class SlidingPanel(BoxLayout):
         if not self.collide_point(touch.x, touch.y) and self._open:
             self.toggle()
             return True
+        elif self.collide_point(touch.x, touch.y):
+            return True
         super(SlidingPanel, self).on_touch_up(touch)
