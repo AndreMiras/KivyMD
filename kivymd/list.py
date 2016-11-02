@@ -163,7 +163,7 @@ Builder.load_string('''
     size_hint_y: None
     canvas:
         Color:
-            rgba: self.theme_cls.divider_color if root.divider != 'None' else (0, 0, 0, 0)
+            rgba: self.theme_cls.divider_color if root.divider is not None else (0, 0, 0, 0)
         Line:
             points: (root.x ,root.y, root.x+self.width, root.y)\
                     if root.divider == 'Full' else\
@@ -335,7 +335,7 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
                           'Headline', 'Display1', 'Display2', 'Display3',
                           'Display4', 'Button', 'Icon'])
 
-    divider = OptionProperty('Full', options=['Full', 'Inset', 'None'])
+    divider = OptionProperty('Full', options=['Full', 'Inset', None], allownone=True)
 
     _txt_left_pad = NumericProperty(dp(16))
     _txt_top_pad = NumericProperty()
