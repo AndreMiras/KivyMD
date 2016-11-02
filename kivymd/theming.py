@@ -252,10 +252,10 @@ class ThemeManager(Widget):
         theme_style = self._get_theme_style(opposite)
         if theme_style == 'Light':
             color = get_color_from_hex('000000')
-            color[3] = .26
+            color[3] = .38
         elif theme_style == 'Dark':
             color = get_color_from_hex('FFFFFF')
-            color[3] = .30
+            color[3] = .50
         return color
 
     disabled_hint_text_color = AliasProperty(_get_disabled_hint_text_color,
