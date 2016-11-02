@@ -163,9 +163,13 @@ Builder.load_string('''
     size_hint_y: None
     canvas:
         Color:
-            rgba: self.theme_cls.divider_color
+            rgba: self.theme_cls.divider_color if root.divider != None else (0, 0, 0, 0)
         Line:
-            points: root.x,root.y, root.x+self.width,root.y
+            points: (root.x ,root.y, root.x+self.width, root.y)\
+                    if root.divider == 'Full' else\
+                    (root.x+root._txt_left_pad, root.y,\
+                    root.x+self.width-root._txt_left_pad-root._txt_right_pad,\
+                    root.y)
     BoxLayout:
         id: _text_container
         orientation: 'vertical'
@@ -330,6 +334,8 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
         'Body1', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
                           'Headline', 'Display1', 'Display2', 'Display3',
                           'Display4', 'Button', 'Icon'])
+
+    divider = OptionProperty('Full', options=['Full', 'Inset', 'None'])
 
     _txt_left_pad = NumericProperty(dp(16))
     _txt_top_pad = NumericProperty()
