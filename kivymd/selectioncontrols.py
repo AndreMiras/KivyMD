@@ -81,9 +81,10 @@ class MDCheckbox(ThemableBehavior, CircularRippleBehavior,
     active = BooleanProperty(False)
 
     _checkbox_icon = StringProperty(
-        u"{}".format(md_icons['square-o']))
-    _radio_icon = StringProperty(u"{}".format(md_icons['circle-o']))
-    _icon_active = StringProperty(u"{}".format(md_icons['check-square']))
+        u"{}".format(md_icons['checkbox-blank-outline']))
+    _radio_icon = StringProperty(u"{}".format(
+        md_icons['checkbox-blank-circle-outline']))
+    _icon_active = StringProperty(u"{}".format(md_icons['checkbox-marked']))
 
     def __init__(self, **kwargs):
         super(MDCheckbox, self).__init__(**kwargs)
@@ -98,15 +99,18 @@ class MDCheckbox(ThemableBehavior, CircularRippleBehavior,
         if self.state == 'down':
             self.check_anim_in.cancel(self)
             self.check_anim_out.start(self)
-            self._radio_icon = u"{}".format(md_icons['dot-circle'])
-            self._checkbox_icon = u"{}".format(md_icons['check-square'])
+            self._radio_icon = u"{}".format(
+                md_icons['checkbox-marked-circle-outline'])
+            self._checkbox_icon = u"{}".format(
+                md_icons['checkbox-marked-outline'])
             self.active = True
         else:
             self.check_anim_in.cancel(self)
             self.check_anim_out.start(self)
-            self._radio_icon = u"{}".format(md_icons['circle-o'])
+            self._radio_icon = u"{}".format(
+                md_icons['checkbox-blank-circle-outline'])
             self._checkbox_icon = u"{}".format(
-                md_icons['square-o'])
+                md_icons['checkbox-blank-outline'])
             self.active = False
 
     def on_active(self, instance, value):
