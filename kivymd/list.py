@@ -163,7 +163,7 @@ Builder.load_string('''
     size_hint_y: None
     canvas:
         Color:
-            rgba: self.theme_cls.divider_color if root.divider != None else (0, 0, 0, 0)
+            rgba: self.theme_cls.divider_color if root.divider != 'None' else (0, 0, 0, 0)
         Line:
             points: (root.x ,root.y, root.x+self.width, root.y)\
                     if root.divider == 'Full' else\
