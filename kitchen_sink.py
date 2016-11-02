@@ -52,7 +52,7 @@ BoxLayout:
         title: 'KivyMD Kitchen Sink'
         background_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
-        right_action_items: [['more-vert', lambda x: app.nav_drawer.toggle()]]
+        right_action_items: [['dots-vertical', lambda x: app.nav_drawer.toggle()]]
     ScreenManager:
         id: scr_mngr
         Screen:
@@ -218,13 +218,13 @@ BoxLayout:
                         secondary_text: "...with left icon"
                         IconLeftSampleWidget:
                             id: li_icon_2
-                            icon: 'comment-text-alt'
+                            icon: 'comment-text'
                     ThreeLineIconListItem:
                         text: "Three-line item..."
                         secondary_text: "...with left icon..." + '\\n' + "and third line!"
                         IconLeftSampleWidget:
                             id: li_icon_3
-                            icon: 'card-sd'
+                            icon: 'sd'
                     OneLineAvatarIconListItem:
                         text: "Single-line + avatar&icon"
                         AvatarSampleWidget:
@@ -515,7 +515,7 @@ BoxLayout:
                 title: "Toolbar with right buttons"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 background_color: get_color_from_hex(colors['Amber']['700'])
-                right_action_items: [['copy', lambda x: None]]
+                right_action_items: [['content-copy', lambda x: None]]
             Toolbar:
                 title: "Toolbar with left and right buttons"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.25}
@@ -533,7 +533,7 @@ BoxLayout:
                 MDTab:
                     name: 'music' 
                     text: "Music" # Why are these not set!!!
-                    icon: "playlist-audio"
+                    icon: "playlist-play"
                     MDLabel:
                         font_style: 'Body1'
                         theme_text_color: 'Primary'
@@ -589,7 +589,7 @@ BoxLayout:
                                     text_color: [1,1,1,1]
                     MDAccordionItem:
                         title:'Item 2'
-                        icon: 'globe'
+                        icon: 'earth'
                         ScrollView:
                             MDList:
                                 OneLineListItem:
@@ -692,75 +692,75 @@ BoxLayout:
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Bottom sheets"
         on_release: app.root.ids.scr_mngr.current = 'bottomsheet'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Buttons"
         on_release: app.root.ids.scr_mngr.current = 'button'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Cards"
         on_release: app.root.ids.scr_mngr.current = 'card'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Dialogs"
         on_release: app.root.ids.scr_mngr.current = 'dialog'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Grid lists"
         on_release: app.root.ids.scr_mngr.current = 'grid'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Lists"
         on_release: app.root.ids.scr_mngr.current = 'list'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Menus"
         on_release: app.root.ids.scr_mngr.current = 'menu'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Progress & activity"
         on_release: app.root.ids.scr_mngr.current = 'progress'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Progress bars"
         on_release: app.root.ids.scr_mngr.current = 'progressbars'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Selection controls"
         on_release: app.root.ids.scr_mngr.current = 'selectioncontrols'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Snackbars"
         on_release: app.root.ids.scr_mngr.current = 'snackbar'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Text fields"
         on_release: app.root.ids.scr_mngr.current = 'textfields'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Themes"
         on_release: app.root.ids.scr_mngr.current = 'theming'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Toolbars"
         on_release: app.root.ids.scr_mngr.current = 'toolbar'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Sliders"
         on_release: app.root.ids.scr_mngr.current = 'slider'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Tabs"
         on_release: app.root.ids.scr_mngr.current = 'tabs'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Accordion"
         on_release: app.root.ids.scr_mngr.current = 'accordion'
     NavigationDrawerIconButton:
-        icon: 'circle'
+        icon: 'account-circle'
         text: "Pickers"
         on_release: app.root.ids.scr_mngr.current = 'pickers'
 '''
@@ -870,7 +870,7 @@ class KitchenSink(App):
         bs = MDListBottomSheet()
         bs.add_item("Here's an item with text only", lambda x: x)
         bs.add_item("Here's an item with an icon", lambda x: x,
-                    icon='account-calendar')
+                    icon='clipboard-account')
         bs.add_item("Here's another!", lambda x: x, icon='nfc')
         bs.open()
 

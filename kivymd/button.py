@@ -138,7 +138,7 @@ Builder.load_string('''
 
 
 class MDIconButton(CircularRippleBehavior, ButtonBehavior, BoxLayout):
-    icon = StringProperty('circle')
+    icon = StringProperty('checkbox-blank-circle')
     theme_text_color = OptionProperty(None, allownone=True,
                                       options=['Primary', 'Secondary', 'Hint',
                                                'Error', 'Custom'])

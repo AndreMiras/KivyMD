@@ -45,6 +45,6 @@ FONTS = [
     },
     {
         "name": "Icons",
-        "fn_regular": fonts_path + 'Material-Design-Iconic-Font.ttf'
+        "fn_regular": fonts_path + 'materialdesignicons-webfont.ttf'
     }
 ]
