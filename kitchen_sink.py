@@ -375,28 +375,24 @@ BoxLayout:
                     height: dp(1000)
                     BoxLayout:
                         size_hint_y: None
-                        height: dp(350)
+                        height: dp(250)
                         padding: dp(48)
                         orientation: 'vertical'
-                        spacing: 10
                         SingleLineTextField:
                             hint_text: "No helper text"
                         SingleLineTextField:
-                            hint_text: "Helper text on focus"
+                            hint_text: "on_focus"
                             message: "This will disappear when you click off"
                             message_mode: "on_focus"
                         SingleLineTextField:
-                            hint_text: "Persistent helper text"
+                            hint_text: "persistent"
                             message: "Text is always here"
                             message_mode: "persistent"
                         SingleLineTextField:
                             id: text_field_error
-                            hint_text: "Helper text on error (Hit Enter with no text here)"
+                            hint_text: "on_error (Hit Enter with no text here)"
                             message: "You must put something here"
                             message_mode: "on_error"
-                        SingleLineTextField:
-                            hint_text: "Max text length = 10"
-                            max_text_length: 10
 
                     BoxLayout:
                         MDLabel:
