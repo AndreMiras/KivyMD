@@ -848,6 +848,7 @@ class KitchenSink(App):
 
     def set_previous_date(self, date_obj):
         self.previous_date = date_obj
+        self.root.ids.date_picker_label.text = str(date_obj)
 
     def show_example_date_picker(self):
         if self.root.ids.date_picker_use_previous_date.active:
