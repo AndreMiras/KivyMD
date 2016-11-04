@@ -6,7 +6,7 @@ from kivy.metrics import dp
 from kivy.uix.modalview import ModalView
 from kivy.animation import Animation
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.button import MDFlatButton
 
 Builder.load_string('''
@@ -58,7 +58,7 @@ Builder.load_string('''
 ''')
 
 
-class MDDialog(ThemableBehavior, ElevationBehavior, ModalView):
+class MDDialog(ThemableBehavior, RectangularElevationBehavior, ModalView):
     title = StringProperty('')
 
     content = ObjectProperty(None)

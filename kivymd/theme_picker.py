@@ -6,7 +6,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.button import MDFlatButton, MDIconButton
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivy.properties import ObjectProperty, ListProperty
 from kivymd.label import MDLabel
 from kivy.metrics import dp
@@ -385,7 +385,8 @@ Builder.load_string("""
 """)
 
 
-class MDThemePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
+class MDThemePicker(ThemableBehavior, FloatLayout, ModalView,
+                    RectangularElevationBehavior):
     # background_color = ListProperty([0, 0, 0, 0])
     time = ObjectProperty()
 

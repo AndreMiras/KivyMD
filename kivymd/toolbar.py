@@ -7,7 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.button import MDIconButton
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 
 Builder.load_string('''
 #:import m_res kivymd.material_resources
@@ -41,8 +41,8 @@ Builder.load_string('''
 ''')
 
 
-class Toolbar(ThemableBehavior, ElevationBehavior, BackgroundColorBehavior,
-              BoxLayout):
+class Toolbar(ThemableBehavior, RectangularElevationBehavior,
+              BackgroundColorBehavior, BoxLayout):
     left_action_items = ListProperty()
     """The icons on the left of the Toolbar.
 

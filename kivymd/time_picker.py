@@ -4,7 +4,7 @@ from kivy.lang import Builder
 from kivy.uix.modalview import ModalView
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivy.properties import ObjectProperty, ListProperty
 
 Builder.load_string("""
@@ -60,7 +60,8 @@ Builder.load_string("""
 """)
 
 
-class MDTimePicker(ThemableBehavior, FloatLayout, ModalView, ElevationBehavior):
+class MDTimePicker(ThemableBehavior, FloatLayout, ModalView,
+                   RectangularElevationBehavior):
     # background_color = ListProperty((0, 0, 0, 0))
     time = ObjectProperty()
 

@@ -4,7 +4,7 @@ from kivy.uix.modalview import ModalView
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 from kivy.uix.floatlayout import FloatLayout
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 import calendar
 from datetime import date
 import datetime
@@ -199,7 +199,7 @@ class WeekdayLabel(MDLabel):
     pass
 
 
-class MDDatePicker(FloatLayout, ThemableBehavior, ElevationBehavior,
+class MDDatePicker(FloatLayout, ThemableBehavior, RectangularElevationBehavior,
                    ModalView):
     _sel_day_widget = ObjectProperty()
     cal_list = None

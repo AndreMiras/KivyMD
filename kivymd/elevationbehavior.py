@@ -7,7 +7,7 @@ from kivy.properties import AliasProperty
 from kivy.metrics import dp
 
 Builder.load_string('''
-<ElevationBehavior>
+<RectangularElevationBehavior>
     canvas.before:
         Color:
             a: self._soft_shadow_a
@@ -24,7 +24,7 @@ Builder.load_string('''
         Color:
             a: 1
 
-<RoundElevationBehavior>
+<CircularElevationBehavior>
     canvas.before:
         Color:
             a: self._soft_shadow_a
@@ -43,7 +43,7 @@ Builder.load_string('''
 ''')
 
 
-class ElevationBehavior(object):
+class CommonElevationBehavior(object):
     _elevation = NumericProperty(1)
 
     def _get_elevation(self):
@@ -68,11 +68,15 @@ class ElevationBehavior(object):
     _hard_shadow_a = NumericProperty(0)
 
     def __init__(self, **kwargs):
-        super(ElevationBehavior, self).__init__(**kwargs)
+        super(CommonElevationBehavior, self).__init__(**kwargs)
         self.bind(elevation=self._update_shadow,
                   pos=self._update_shadow,
                   size=self._update_shadow)
 
+    def _update_shadow(self, *args):
+        raise NotImplemented
+
+class RectangularElevationBehavior(CommonElevationBehavior):
     def _update_shadow(self, *args):
         if self.elevation > 0:
             ratio = self.width / (self.height if self.height != 0 else 1)
@@ -129,36 +133,10 @@ class ElevationBehavior(object):
             self._hard_shadow_a = 0
 
 
-class RoundElevationBehavior(object):
-    _elevation = NumericProperty(1)
-
-    def _get_elevation(self):
-        return self._elevation
-
-    def _set_elevation(self, elevation):
-        try:
-            self._elevation = elevation
-        except:
-            self._elevation = 1
-
-    elevation = AliasProperty(_get_elevation, _set_elevation,
-                              bind=('_elevation',))
-
-    _soft_shadow_texture = ObjectProperty()
-    _soft_shadow_size = ListProperty([0, 0])
-    _soft_shadow_pos = ListProperty([0, 0])
-    _soft_shadow_a = NumericProperty(0)
-    _hard_shadow_texture = ObjectProperty()
-    _hard_shadow_size = ListProperty([0, 0])
-    _hard_shadow_pos = ListProperty([0, 0])
-    _hard_shadow_a = NumericProperty(0)
-
+class CircularElevationBehavior(CommonElevationBehavior):
     def __init__(self, **kwargs):
-        super(RoundElevationBehavior, self).__init__(**kwargs)
+        super(CircularElevationBehavior, self).__init__(**kwargs)
         self._shadow = App.get_running_app().theme_cls.round_shadow
-        self.bind(elevation=self._update_shadow,
-                  pos=self._update_shadow,
-                  size=self._update_shadow)
 
     def _update_shadow(self, *args):
         if self.elevation > 0:
