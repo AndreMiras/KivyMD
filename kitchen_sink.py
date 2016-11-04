@@ -359,7 +359,7 @@ BoxLayout:
                 opposite_colors: True
                 on_release: app.show_example_snackbar('button')
             MDRaisedButton:
-                text: "Create snackbar with a lot of text and a button"
+                text: "Create snackbar with a lot of text"
                 size_hint: None, None
                 size: 5 * dp(48), dp(48)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.25}
