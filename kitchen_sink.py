@@ -865,12 +865,6 @@ class KitchenSink(App):
         else:
             MDDatePicker(self.set_previous_date).open()
 
-    def theme_swap(self):
-        if self.theme_cls.theme_style == 'Light':
-            self.theme_cls.theme_style = 'Dark'
-        else:
-            self.theme_cls.theme_style = 'Light'
-
     def show_example_bottom_sheet(self):
         bs = MDListBottomSheet()
         bs.add_item("Here's an item with text only", lambda x: x)
@@ -904,9 +898,6 @@ class KitchenSink(App):
 
     def on_stop(self):
         pass
-
-    def test(self):
-        self.root.ids['scr_mngr'].current = 'pickers'
 
 
 class AvatarSampleWidget(ILeftBody, Image):
