@@ -92,26 +92,20 @@ BoxLayout:
                 disabled: disable_the_buttons.active
             MDFlatButton:
                 text: 'MDFlatButton'
-                size_hint: None, None
-                size: 3 * dp(48), dp(48)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
                 disabled: disable_the_buttons.active
             MDRaisedButton:
                 text: "MDRaisedButton"
                 elevation_normal: 2
                 opposite_colors: True
-                size_hint: None, None
-                size: 3 * dp(48), dp(48)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
                 disabled: disable_the_buttons.active
             MDFloatingActionButton:
                 id:                    float_act_btn
                 icon:                'plus'
-                size_hint:            None, None
-                size:                dp(56), dp(56)
                 opposite_colors:    True
                 elevation_normal:    8
-                pos_hint:            {'center_x': 0.5, 'center_y': 0.25}
+                pos_hint:            {'center_x': 0.5, 'center_y': 0.2}
                 disabled: disable_the_buttons.active
         Screen:
             name: 'card'
