@@ -73,11 +73,29 @@ BoxLayout:
                 on_release: app.show_example_grid_bottom_sheet()
         Screen:
             name: 'button'
+            BoxLayout:
+                size_hint: None, None
+                size: '88dp', '48dp'
+                padding: '12dp'
+                pos_hint: {'center_x': 0.75, 'center_y': 0.8}
+                MDLabel:
+                    font_style: 'Body1'
+                    theme_text_color: 'Primary'
+                    text: "Disable buttons"
+                    size_hint_x:None
+                    width: '56dp'
+                MDCheckbox:
+                    id: disable_the_buttons
+            MDIconButton:
+                icon: 'sd'
+                pos_hint: {'center_x': 0.25, 'center_y': 0.8}
+                disabled: disable_the_buttons.active
             MDFlatButton:
                 text: 'MDFlatButton'
                 size_hint: None, None
                 size: 3 * dp(48), dp(48)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+                disabled: disable_the_buttons.active
             MDRaisedButton:
                 text: "MDRaisedButton"
                 elevation_normal: 2
@@ -85,6 +103,7 @@ BoxLayout:
                 size_hint: None, None
                 size: 3 * dp(48), dp(48)
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                disabled: disable_the_buttons.active
             MDFloatingActionButton:
                 id:                    float_act_btn
                 icon:                'plus'
@@ -93,7 +112,7 @@ BoxLayout:
                 opposite_colors:    True
                 elevation_normal:    8
                 pos_hint:            {'center_x': 0.5, 'center_y': 0.25}
-
+                disabled: disable_the_buttons.active
         Screen:
             name: 'card'
             MDCard:
