@@ -184,7 +184,7 @@ class BaseButton(ThemableBehavior, ButtonBehavior, AnchorLayout):
         elif self.disabled:
             return False
         else:
-            self.fade_bg = Animation(duration=.3,
+            self.fade_bg = Animation(duration=.5,
                     _current_button_color=self.background_color_down)
             self.fade_bg.start(self)
             return super(BaseButton, self).on_touch_down(touch)
