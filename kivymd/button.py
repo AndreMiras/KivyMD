@@ -174,6 +174,12 @@ class BaseButton(ThemableBehavior, ButtonBehavior, AnchorLayout):
             self._current_button_color = self.background_color
         super(BaseButton, self).on_disabled(instance, value)
 
+
+class BasePressedButton(BaseButton):
+    '''
+    Abstract base class for those button which fade to a background color on
+    press.
+    '''
     def on_touch_down(self, touch):
         if touch.is_mouse_scrolling:
             return False
@@ -341,16 +347,16 @@ class BaseRectangularButton(RectangularRippleBehavior, BaseButton):
         self._capitalized_text = value.upper()
 
 
-class MDIconButton(BaseRoundButton, BaseFlatButton):
+class MDIconButton(BaseRoundButton, BaseFlatButton, BasePressedButton):
     icon = StringProperty('checkbox-blank-circle')
 
 
-class MDFlatButton(BaseRectangularButton, BaseFlatButton):
+class MDFlatButton(BaseRectangularButton, BaseFlatButton, BasePressedButton):
     pass
 
 
 class MDRaisedButton(BaseRectangularButton, RectangularElevationBehavior,
-                     BaseRaisedButton):
+                     BaseRaisedButton, BasePressedButton):
     pass
 
 
