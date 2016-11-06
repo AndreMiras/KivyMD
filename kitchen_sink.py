@@ -375,7 +375,7 @@ BoxLayout:
                     height: dp(1000)
                     BoxLayout:
                         size_hint_y: None
-                        height: dp(350)
+                        height: dp(400)
                         padding: dp(48)
                         orientation: 'vertical'
                         spacing: 10
@@ -391,12 +391,16 @@ BoxLayout:
                             message_mode: "persistent"
                         SingleLineTextField:
                             id: text_field_error
-                            hint_text: "Helper text on error (Hit Enter with no text here)"
-                            message: "You must put something here"
+                            hint_text: "Helper text on error (Hit Enter with two characters here)"
+                            message: "Two is my least favorite number"
                             message_mode: "on_error"
                         SingleLineTextField:
                             hint_text: "Max text length = 10"
                             max_text_length: 10
+                        SingleLineTextField:
+                            hint_text: "required = True"
+                            required: True
+                            message_mode: "on_error"
 
                     BoxLayout:
                         MDLabel:
@@ -888,10 +892,11 @@ class KitchenSink(App):
         bs.open()
 
     def set_error_message(self, *args):
-        if len(self.root.ids.text_field_error.text) == 0:
+        if len(self.root.ids.text_field_error.text) == 2:
             self.root.ids.text_field_error.error = True
         else:
             self.root.ids.text_field_error.error = False
+        print("Error: {}".format(self.root.ids.text_field_error.error))
 
     def on_pause(self):
         return True
