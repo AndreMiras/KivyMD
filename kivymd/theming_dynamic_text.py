@@ -78,4 +78,3 @@ if __name__ == '__main__':
                 text_color = text_colors[c][h]
                 print("   The {} hue gives {} using color brightness, {} using contrast ratio, and {} from the MD spec"
                       .format(h, col_bri, con_rat, text_color))
-
