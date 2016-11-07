@@ -61,30 +61,24 @@ class MDLabel(ThemableBehavior, Label):
         op = self.opposite_colors
         setter = self.setter('color')
         t.unbind(**self._currently_bound_property)
-        c = {}
-        if value == 'Primary':
-            c = {'text_color' if not op else 'opposite_text_color': setter}
+        attr_name = {'Primary': 'text_color' if not op else
+                                'opposite_text_color',
+                     'Secondary': 'secondary_text_color' if not op else
+                                  'opposite_secondary_text_color',
+                     'Hint': 'disabled_hint_text_color' if not op else
+                             'opposite_disabled_hint_text_color',
+                     'Error': 'error_color',
+                     'Custom': None,
+                     None: None,
+                    }.get(value, None)
+        if attr_name:
+            c = {attr_name: setter}
             t.bind(**c)
-            self.color = t.text_color if not op else t.opposite_text_color
-        elif value == 'Secondary':
-            c = {'secondary_text_color' if not op else
-                 'opposite_secondary_text_color': setter}
-            t.bind(**c)
-            self.color = t.secondary_text_color if not op else \
-                t.opposite_secondary_text_color
-        elif value == 'Hint':
-            c = {'disabled_hint_text_color' if not op else
-                 'opposite_disabled_hint_text_color': setter}
-            t.bind(**c)
-            self.color = t.disabled_hint_text_color if not op else \
-                t.opposite_disabled_hint_text_color
-        elif value == 'Error':
-            c = {'error_color': setter}
-            t.bind(**c)
-            self.color = t.error_color
-        elif value == 'Custom':
-            self.color = self.text_color if self.text_color else (0, 0, 0, 1)
-        self._currently_bound_property = c
+            self._currently_bound_property = c
+            self.color = getattr(t, attr_name)
+        else:
+            if value == 'Custom':
+                self.color = self.text_color if self.text_color else (0, 0, 0, 1)
 
     def on_text_color(self, *args):
         if self.theme_text_color == 'Custom':
