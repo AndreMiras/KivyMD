@@ -11,11 +11,13 @@
 # is both newer and the current 'correct' recommendation, so is included here
 # as an option.
 
-''' Implementation of color brightness method '''
-def _color_brightness(c):
-    brightness = c[0] * 299 + c[1] * 587 + c[2] * 114
+
+def _color_brightness(color):
+    # Implementation of color brightness method
+    brightness = color[0] * 299 + color[1] * 587 + color[2] * 114
     brightness = brightness
     return brightness
+
 
 def _black_or_white_by_color_brightness(color):
     if _color_brightness(color) >= 500:
@@ -23,18 +25,21 @@ def _black_or_white_by_color_brightness(color):
     else:
         return 'white'
 
-''' Implementation of contrast ratio and relative luminance method '''
-def _normalized_channel(c):
-    if c <= 0.03928:
-        return c/12.92
+
+def _normalized_channel(color):
+    # Implementation of contrast ratio and relative luminance method
+    if color <= 0.03928:
+        return color / 12.92
     else:
-        return ((c + 0.055) / 1.055) ** 2.4
+        return ((color + 0.055) / 1.055) ** 2.4
+
 
 def _luminance(color):
     rg = _normalized_channel(color[0])
     gg = _normalized_channel(color[1])
     bg = _normalized_channel(color[2])
     return 0.2126*rg + 0.7152*gg + 0.0722*bg
+
 
 def _black_or_white_by_contrast_ratio(color):
     l_color = _luminance(color)
@@ -44,31 +49,32 @@ def _black_or_white_by_contrast_ratio(color):
     w_contrast = (l_white + 0.05) / (l_color + 0.05)
     return 'white' if w_contrast >= b_contrast else 'black'
 
+
 def get_contrast_text_color(color, use_color_brightness=True):
     if use_color_brightness:
-        c = _black_or_white_by_color_brightness(color)
+        contrast_color = _black_or_white_by_color_brightness(color)
     else:
-        c = _black_or_white_by_contrast_ratio(color)
-    if c == 'white':
-        return (1, 1, 1, 1)
+        contrast_color = _black_or_white_by_contrast_ratio(color)
+    if contrast_color == 'white':
+        return 1, 1, 1, 1
     else:
-        return (0, 0, 0, 1)
+        return 0, 0, 0, 1
 
 if __name__ == '__main__':
     from kivy.utils import get_color_from_hex
     from kivymd.color_definitions import colors, text_colors
     for c in ['Red', 'Pink', 'Purple', 'DeepPurple', 'Indigo', 'Blue',
-            'LightBlue', 'Cyan', 'Teal', 'Green', 'LightGreen', 'Lime',
-            'Yellow', 'Amber', 'Orange', 'DeepOrange', 'Brown', 'Grey',
-            'BlueGrey']:
+              'LightBlue', 'Cyan', 'Teal', 'Green', 'LightGreen', 'Lime',
+              'Yellow', 'Amber', 'Orange', 'DeepOrange', 'Brown', 'Grey',
+              'BlueGrey']:
         print("For the {} color palette:".format(c))
         for h in ['50', '100', '200', '300', '400', '500', '600', '700',
-                '800', '900', 'A100', 'A200', 'A400', 'A700']:
-            hex = colors[c].get(h)
-            if hex:
-                col = get_color_from_hex(hex)
+                  '800', '900', 'A100', 'A200', 'A400', 'A700']:
+            hex_color = colors[c].get(h)
+            if hex_color:
+                col = get_color_from_hex(hex_color)
                 col_bri = get_contrast_text_color(col)
                 con_rat = get_contrast_text_color(col, use_color_brightness=False)
                 text_color = text_colors[c][h]
                 print("   The {} hue gives {} using color brightness, {} using contrast ratio, and {} from the MD spec"
-                        .format(h, col_bri, con_rat, text_color))
+                      .format(h, col_bri, con_rat, text_color))
