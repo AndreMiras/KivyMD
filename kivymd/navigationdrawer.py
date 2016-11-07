@@ -2,7 +2,7 @@
 from kivy.animation import Animation
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.icon_definitions import md_icons
 from kivymd.label import MDLabel
 from kivymd.list import OneLineIconListItem, ILeftBody, BaseListItem
@@ -46,7 +46,8 @@ Builder.load_string('''
 ''')
 
 
-class NavigationDrawer(SlidingPanel, ThemableBehavior, ElevationBehavior):
+class NavigationDrawer(SlidingPanel, ThemableBehavior,
+                       RectangularElevationBehavior):
     title = StringProperty()
 
     _list = ObjectProperty()

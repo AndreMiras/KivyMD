@@ -6,7 +6,7 @@ from kivy.metrics import dp
 from kivy.uix.modalview import ModalView
 from kivy.animation import Animation
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.button import MDFlatButton
 
 Builder.load_string('''
@@ -58,7 +58,7 @@ Builder.load_string('''
 ''')
 
 
-class MDDialog(ThemableBehavior, ElevationBehavior, ModalView):
+class MDDialog(ThemableBehavior, RectangularElevationBehavior, ModalView):
     title = StringProperty('')
 
     content = ObjectProperty(None)
@@ -171,6 +171,6 @@ class MDDialog(ThemableBehavior, ElevationBehavior, ModalView):
     def _update_action_buttons(self, *args):
         self._action_area.clear_widgets()
         for btn in self._action_buttons:
-            btn.ids._label.texture_update()
-            btn.width = btn.ids._label.texture_size[0] + dp(16)
+            btn.content.texture_update()
+            btn.width = btn.content.texture_size[0] + dp(16)
             self._action_area.add_widget(btn)

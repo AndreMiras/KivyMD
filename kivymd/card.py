@@ -2,7 +2,7 @@
 from kivy.lang import Builder
 from kivy.properties import BoundedNumericProperty, ReferenceListProperty, ListProperty,BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
-from kivymd.elevationbehavior import ElevationBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.theming import ThemableBehavior
 from kivy.metrics import dp
 from kivy.uix.widget import Widget
@@ -47,7 +47,7 @@ class MDSeparator(ThemableBehavior, BoxLayout):
             self.width = dp(1)
 
 
-class MDCard(ThemableBehavior, ElevationBehavior, BoxLayout):
+class MDCard(ThemableBehavior, RectangularElevationBehavior, BoxLayout):
     r = BoundedNumericProperty(1., min=0., max=1.)
     g = BoundedNumericProperty(1., min=0., max=1.)
     b = BoundedNumericProperty(1., min=0., max=1.)

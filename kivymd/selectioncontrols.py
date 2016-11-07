@@ -12,7 +12,7 @@ from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
 from kivymd.icon_definitions import md_icons
 from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import RoundElevationBehavior
+from kivymd.elevationbehavior import CircularElevationBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.widget import Widget
@@ -117,7 +117,7 @@ class MDCheckbox(ThemableBehavior, CircularRippleBehavior,
         self.state = 'down' if value else 'normal'
 
 
-class Thumb(RoundElevationBehavior, CircularRippleBehavior, ButtonBehavior,
+class Thumb(CircularElevationBehavior, CircularRippleBehavior, ButtonBehavior,
             Widget):
     ripple_scale = NumericProperty(2)
 
