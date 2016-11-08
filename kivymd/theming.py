@@ -9,7 +9,7 @@ from kivy.properties import OptionProperty, AliasProperty, ObjectProperty, \
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
 from kivy.atlas import Atlas
-from kivymd.color_definitions import colors
+from kivymd.color_definitions import colors, text_colors
 from kivymd.material_resources import FONTS, DEVICE_TYPE
 from kivymd import images_path
 
@@ -272,6 +272,54 @@ class ThemeManager(Widget):
         return get_color_from_hex(colors['Red']['A700'])
 
     error_color = AliasProperty(_get_error_color)
+
+    def _get_contrast_palette_primary_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.primary_palette][self.primary_hue])
+
+    contrast_palette_primary_text_color = AliasProperty(
+            _get_contrast_palette_primary_text_color,
+            bind=['theme_style', 'primary_palette', 'primary_hue'])
+
+    def _get_contrast_palette_primary_light_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.primary_palette][self.primary_light_hue])
+
+    contrast_palette_primary_light_text_color = AliasProperty(
+            _get_contrast_palette_primary_light_text_color,
+            bind=['theme_style', 'primary_palette', 'primary_light_hue'])
+
+    def _get_contrast_palette_primary_dark_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.primary_palette][self.primary_dark_hue])
+
+    contrast_palette_primary_dark_text_color = AliasProperty(
+            _get_contrast_palette_primary_dark_text_color,
+            bind=['theme_style', 'primary_palette', 'primary_dark_hue'])
+
+    def _get_contrast_palette_accent_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.accent_palette][self.accent_hue])
+
+    contrast_palette_accent_text_color = AliasProperty(
+            _get_contrast_palette_accent_text_color,
+            bind=['theme_style', 'accent_palette', 'accent_hue'])
+
+    def _get_contrast_palette_accent_light_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.accent_palette][self.accent_light_hue])
+
+    contrast_palette_accent_light_text_color = AliasProperty(
+            _get_contrast_palette_accent_light_text_color,
+            bind=['theme_style', 'accent_palette', 'accent_light_hue'])
+
+    def _get_contrast_palette_accent_dark_text_color(self):
+        return get_color_from_hex(
+            text_colors[self.accent_palette][self.accent_dark_hue])
+
+    contrast_palette_accent_dark_text_color = AliasProperty(
+            _get_contrast_palette_accent_dark_text_color,
+            bind=['theme_style', 'accent_palette', 'accent_dark_hue'])
 
     def _get_ripple_color(self):
         return self._ripple_color
