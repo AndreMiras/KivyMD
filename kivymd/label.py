@@ -5,6 +5,7 @@ from kivy.properties import OptionProperty, DictProperty, ListProperty
 from kivy.uix.label import Label
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.theming import ThemableBehavior
+from kivymd.theming_dynamic_text import get_contrast_text_color
 
 Builder.load_string('''
 <MDLabel>
@@ -34,10 +35,17 @@ class MDLabel(ThemableBehavior, Label):
                                  'Icon': ['Icons', False, 24, None]})
 
     theme_text_color = OptionProperty(None, allownone=True,
-                                      options=['Primary', 'Secondary', 'Hint',
-                                               'Error', 'Custom'])
+            options=['Primary', 'Secondary', 'Hint', 'Error', 'Custom',
+                     'ContrastPalettePrimary', 'ContrastPalettePrimaryLight',
+                     'ContrastPalettePrimaryDark',
+                     'ContrastAccentPrimary', 'ContrastAccentPrimaryLight',
+                     'ContrastAccentPrimaryDark',
+                     'ContrastParentBackground']
+            )
 
     text_color = ListProperty(None, allownone=True)
+
+    parent_background = ListProperty(None, allownone=True)
 
     _currently_bound_property = {}
 
@@ -67,9 +75,19 @@ class MDLabel(ThemableBehavior, Label):
                                   'opposite_secondary_text_color',
                      'Hint': 'disabled_hint_text_color' if not op else
                              'opposite_disabled_hint_text_color',
+                     'ContrastPalettePrimary':
+                        'contrast_palette_primary_text_color',
+                     'ContrastPalettePrimaryLight':
+                        'contrast_palette_primary_light_text_color',
+                     'ContrastPalettePrimaryDark':
+                        'contrast_palette_primary_dark_text_color',
+                     'ContrastPaletteAccent':
+                        'contrast_palette_accent_text_color',
+                     'ContrastPaletteAccentLight':
+                        'contrast_palette_accent_light_text_color',
+                     'ContrastPaletteAccentDark':
+                        'contrast_palette_accent_dark_text_color',
                      'Error': 'error_color',
-                     'Custom': None,
-                     None: None,
                     }.get(value, None)
         if attr_name:
             c = {attr_name: setter}
@@ -77,8 +95,12 @@ class MDLabel(ThemableBehavior, Label):
             self._currently_bound_property = c
             self.color = getattr(t, attr_name)
         else:
-            if value == 'Custom':
-                self.color = self.text_color if self.text_color else (0, 0, 0, 1)
+            # 'Custom' and 'ContrastParentBackground' lead here, as well as the
+            # generic None value it's not yet been set
+            if value == 'Custom' and self.text_color:
+                self.color = self.text_color
+            elif value == 'ContrastParentBackground' and self.parent_background:
+                self.color = get_contrast_text_color(self.parent_background)
 
     def on_text_color(self, *args):
         if self.theme_text_color == 'Custom':
