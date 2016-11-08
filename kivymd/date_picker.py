@@ -108,13 +108,16 @@ Builder.load_string("""
             else {'center_x': 0.94, 'center_y': 0.925}
         on_release: root.change_month('next')
     MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(7)
-        text: "Cancel"
-        on_release: root.dismiss()
-    MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(7)
+        width: dp(32)
+        id: ok_button
+        pos: root.pos[0]+root.size[0]-self.width-dp(10), root.pos[1] + dp(10)
         text: "OK"
         on_release: root.ok_click()
+    MDFlatButton:
+        id: cancel_button
+        pos: root.pos[0]+root.size[0]-self.width-ok_button.width-dp(10), root.pos[1] + dp(10)
+        text: "Cancel"
+        on_release: root.dismiss()
 
 <DayButton>
     size_hint: None, None

@@ -34,7 +34,7 @@ Builder.load_string("""
             pos: root.pos[0], root.pos[1] + root.height-(dp(120)+dp(290))
 
     MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(10)
+        pos: root.pos[0]+root.size[0]-self.width-dp(10), root.pos[1] + dp(10)
         text: "Close"
         on_release: root.dismiss()
     MDLabel:

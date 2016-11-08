@@ -50,13 +50,16 @@ Builder.load_string("""
         pos_hint: {'center_x': 0.5, 'center_y': 0.585}
             #if root.theme_cls.device_orientation == 'portrait' else {'center_x': 0.75, 'center_y': 0.7}
     MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72)*2, root.pos[1] + dp(10)
-        text: "Cancel"
-        on_release: root.close_cancel()
-    MDFlatButton:
-        pos: root.pos[0]+root.size[0]-dp(72), root.pos[1] + dp(10)
+        width: dp(32)
+        id: ok_button
+        pos: root.pos[0]+root.size[0]-self.width-dp(10), root.pos[1] + dp(10)
         text: "OK"
         on_release: root.close_ok()
+    MDFlatButton:
+        id: cancel_button
+        pos: root.pos[0]+root.size[0]-self.width-ok_button.width-dp(10), root.pos[1] + dp(10)
+        text: "Cancel"
+        on_release: root.close_cancel()
 """)
 
 
