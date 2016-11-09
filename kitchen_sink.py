@@ -909,7 +909,6 @@ class KitchenSink(App):
             self.root.ids.text_field_error.error = True
         else:
             self.root.ids.text_field_error.error = False
-        print("Error: {}".format(self.root.ids.text_field_error.error))
 
     def on_pause(self):
         return True
