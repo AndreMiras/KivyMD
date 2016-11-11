@@ -116,7 +116,6 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                                  halign='left',
                                  valign='middle')
         super(SingleLineTextField, self).__init__(**kwargs)
-        self._theme_color = self.theme_cls.primary_color
         self.line_color_normal = self.theme_cls.divider_color
         self.line_color_focus = list(self.theme_cls.primary_color)
         self.base_line_color_focus = list(self.theme_cls.primary_color)
