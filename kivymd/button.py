@@ -38,10 +38,8 @@ Builder.load_string('''
     anchor_y: 'center'
 
 <BaseFlatButton>:
-    background_color: (0., 0., 0., 0.,)
 
 <BaseRaisedButton>:
-    background_color: self.theme_cls.primary_color
 
 <BaseRoundButton>:
     canvas:
@@ -132,6 +130,12 @@ class BaseButton(ThemableBehavior, ButtonBehavior, AnchorLayout):
         Clock.schedule_once(self._finish_init)
 
     def _finish_init(self, dt):
+        self._update_color()
+
+    def on_background_color(self, instance, value):
+        self._update_color()
+
+    def _update_color(self):
         if not self.disabled:
             self._current_button_color = self.background_color
         else:
@@ -209,6 +213,11 @@ class BaseFlatButton(BaseButton):
 
     Enforces the recommended down/disabled colors for flat buttons
     '''
+
+    def __init__(self, **kwargs):
+        super(BaseFlatButton, self).__init__(**kwargs)
+        self.background_color = (0., 0., 0., 0.)
+
     def _get_background_color_down(self):
         if self.theme_cls.theme_style == 'Dark':
             c = get_color_from_hex('cccccc')
