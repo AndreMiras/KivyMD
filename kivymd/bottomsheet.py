@@ -49,6 +49,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.modalview import ModalView
 from kivy.uix.scrollview import ScrollView
+from kivymd import images_path
 from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
 from kivymd.label import MDLabel
 from kivymd.list import MDList, OneLineListItem, ILeftBody, \
@@ -57,7 +58,6 @@ from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <MDBottomSheet>
-    background: 'atlas://data/images/defaulttheme/action_group_disabled'
     background_color: 0,0,0,.8
     sv: sv
     upper_padding: upper_padding
@@ -92,6 +92,7 @@ class BottomSheetContent(BackgroundColorBehavior, GridLayout):
 
 
 class MDBottomSheet(ThemableBehavior, ModalView):
+    background = "{}transparent.png".format(images_path)
     sv = ObjectProperty()
     upper_padding = ObjectProperty()
     gl_content = ObjectProperty()
