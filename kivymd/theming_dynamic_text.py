@@ -63,18 +63,15 @@ def get_contrast_text_color(color, use_color_brightness=True):
 if __name__ == '__main__':
     from kivy.utils import get_color_from_hex
     from kivymd.color_definitions import colors, text_colors
-    for c in ['Red', 'Pink', 'Purple', 'DeepPurple', 'Indigo', 'Blue',
-              'LightBlue', 'Cyan', 'Teal', 'Green', 'LightGreen', 'Lime',
-              'Yellow', 'Amber', 'Orange', 'DeepOrange', 'Brown', 'Grey',
-              'BlueGrey']:
-        print("For the {} color palette:".format(c))
-        for h in ['50', '100', '200', '300', '400', '500', '600', '700',
-                  '800', '900', 'A100', 'A200', 'A400', 'A700']:
-            hex_color = colors[c].get(h)
+    for c in colors.items():
+        if c[0] in ['Light', 'Dark']:
+            continue
+        print("For the {} color palette:".format(c[0]))
+        for name, hex_color in c[1].items():
             if hex_color:
                 col = get_color_from_hex(hex_color)
                 col_bri = get_contrast_text_color(col)
                 con_rat = get_contrast_text_color(col, use_color_brightness=False)
-                text_color = text_colors[c][h]
+                text_color = text_colors[c[0]][name]
                 print("   The {} hue gives {} using color brightness, {} using contrast ratio, and {} from the MD spec"
-                      .format(h, col_bri, con_rat, text_color))
+                      .format(name, col_bri, con_rat, text_color))
