@@ -111,7 +111,7 @@ class MDTab(Screen):
     text = StringProperty("")
     
     # Tab header icon
-    icon = StringProperty("circle")
+    icon = StringProperty("checkbox-blank-circle")
     
     # Tab dropdown menu items
     menu_items = ListProperty()
@@ -271,15 +271,15 @@ BoxLayout:
         title: 'Page title'
         background_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: '']]
-        right_action_items: [['search', lambda x: ''],['more-vert',lambda x:'']]
+        right_action_items: [['magnify', lambda x: ''],['dots-vertical',lambda x:'']]
     MDTabbedPanel:
         id: tab_mgr
         tab_display_mode:'icons'
         
         MDTab:
-            name: 'music' 
+            name: 'music'
             text: "Music" # Why are these not set!!!
-            icon: "playlist-audio"
+            icon: "playlist-play"
             MDLabel:
                 font_style: 'Body1'
                 theme_text_color: 'Primary'
@@ -289,7 +289,6 @@ BoxLayout:
             name: 'movies'
             text: 'Movies'
             icon: "movie"
-             
             MDLabel:
                 font_style: 'Body1'
                 theme_text_color: 'Primary'

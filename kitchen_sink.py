@@ -713,75 +713,75 @@ BoxLayout:
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Bottom sheets"
         on_release: app.root.ids.scr_mngr.current = 'bottomsheet'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Buttons"
         on_release: app.root.ids.scr_mngr.current = 'button'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Cards"
         on_release: app.root.ids.scr_mngr.current = 'card'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Dialogs"
         on_release: app.root.ids.scr_mngr.current = 'dialog'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Grid lists"
         on_release: app.root.ids.scr_mngr.current = 'grid'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Lists"
         on_release: app.root.ids.scr_mngr.current = 'list'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Menus"
         on_release: app.root.ids.scr_mngr.current = 'menu'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Progress & activity"
         on_release: app.root.ids.scr_mngr.current = 'progress'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Progress bars"
         on_release: app.root.ids.scr_mngr.current = 'progressbars'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Selection controls"
         on_release: app.root.ids.scr_mngr.current = 'selectioncontrols'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Snackbars"
         on_release: app.root.ids.scr_mngr.current = 'snackbar'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Text fields"
         on_release: app.root.ids.scr_mngr.current = 'textfields'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Themes"
         on_release: app.root.ids.scr_mngr.current = 'theming'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Toolbars"
         on_release: app.root.ids.scr_mngr.current = 'toolbar'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Sliders"
         on_release: app.root.ids.scr_mngr.current = 'slider'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Tabs"
         on_release: app.root.ids.scr_mngr.current = 'tabs'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Accordion"
         on_release: app.root.ids.scr_mngr.current = 'accordion'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Pickers"
         on_release: app.root.ids.scr_mngr.current = 'pickers'
 '''
