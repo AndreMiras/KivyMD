@@ -370,7 +370,7 @@ class MDTabbedPanel(TabbedPanelBase):
 
     # Tab bar bottom border color (leave empty for theme color)
     tab_border_color = ListProperty([])
-    
+
     def __init__(self, **kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
         self.prev_dir = None
@@ -494,7 +494,7 @@ class MDBottomNavigation(TabbedPanelBase):
         else:
             super(MDBottomNavigation, self).add_widget(widget)
 
-        
+
 if __name__ == '__main__':
     from kivy.app import App
     from kivymd.theming import ThemeManager
@@ -518,13 +518,13 @@ BoxLayout:
         title: 'Page title'
         background_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: '']]
-        right_action_items: [['account-search', lambda x: ''],['dots-vertical',lambda x:'']]
+        right_action_items: [['magnify', lambda x: ''],['dots-vertical',lambda x:'']]
     MDTabbedPanel:
         id: tab_mgr
         tab_display_mode:'icons'
         
         MDTab:
-            name: 'music' 
+            name: 'music'
             text: "Music"
             icon: "playlist-play"
             MDLabel:
@@ -536,7 +536,6 @@ BoxLayout:
             name: 'movies'
             text: 'Movies'
             icon: "movie"
-             
             MDLabel:
                 font_style: 'Body1'
                 theme_text_color: 'Primary'
@@ -590,7 +589,7 @@ BoxLayout:
                 theme_text_color: 'Primary'
                 text: "all of the files"
                 halign: 'center'
-     
+
         
 """)
             
