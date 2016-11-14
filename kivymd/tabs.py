@@ -195,7 +195,7 @@ class MDBottomNavigationErrorCache:
 
 
 def small_error_warn(x):
-    if x < dp(80):
+    if dp(x) <= dp(80):
         if MDBottomNavigationErrorCache.last_size_warning != x:
             MDBottomNavigationErrorCache.last_size_warning = x
             Logger.warning("MDBottomNavigation: {}dp is less than the minimum size of 80dp for a "
@@ -203,7 +203,6 @@ def small_error_warn(x):
             # Did you come here to find out what the bug is?
             # The bug is that on startup, this function returning dp(80) breaks the way it displays until you resize
             # I don't know why, this may or may not get fixed in the future
-        # return dp(80)
     return dp(168)
 
 

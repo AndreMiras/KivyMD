@@ -44,6 +44,8 @@ main_widget_kv = '''
 #:import MDAccordion kivymd.accordion.MDAccordion
 #:import MDAccordionItem kivymd.accordion.MDAccordionItem
 #:import MDThemePicker kivymd.theme_picker.MDThemePicker
+#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
+#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
 
 BoxLayout:
     orientation: 'vertical'
@@ -712,34 +714,6 @@ BoxLayout:
         Screen:
             name: 'bottom_navigation'
             MDBottomNavigation:
-                MDBottomNavigationItem:
-                    name: 'music'
-                    text: "Music"
-                    icon: "playlist-play"
-                    FloatLayout:
-                        MDRaisedButton:
-                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                            text: "Open theme picker"
-                            on_release: MDThemePicker().open()
-                            text: "Open theme picker"
-                MDBottomNavigationItem:
-                    name: 'movies'
-                    text: 'Movies'
-                    icon: "movie"
-                    MDLabel:
-                        font_style: 'Body1'
-                        theme_text_color: 'Primary'
-                        text: "Show movies here :)"
-                        halign: 'center'
-                MDBottomNavigationItem:
-                    name: 'files'
-                    text: "Files"
-                    icon: "file"
-                    MDLabel:
-                        font_style: 'Body1'
-                        theme_text_color: 'Primary'
-                        text: "Imagine all of the files that you could put here"
-                        halign: 'center'
                 MDBottomNavigationItem:
                     name: 'octagon'
                     text: "Warning"
