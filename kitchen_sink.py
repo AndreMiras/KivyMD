@@ -709,6 +709,59 @@ BoxLayout:
                             id: date_picker_use_previous_date
                             size_hint: None, None
                             size: dp(48), dp(48)
+        Screen:
+            name: 'bottom_navigation'
+            MDBottomNavigation:
+                MDBottomNavigationItem:
+                    name: 'music'
+                    text: "Music"
+                    icon: "playlist-play"
+                    FloatLayout:
+                        MDRaisedButton:
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            text: "Open theme picker"
+                            on_release: MDThemePicker().open()
+                            text: "Open theme picker"
+                MDBottomNavigationItem:
+                    name: 'movies'
+                    text: 'Movies'
+                    icon: "movie"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Show movies here :)"
+                        halign: 'center'
+                MDBottomNavigationItem:
+                    name: 'files'
+                    text: "Files"
+                    icon: "file"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Imagine all of the files that you could put here"
+                        halign: 'center'
+                MDBottomNavigationItem:
+                    name: 'octagon'
+                    text: "Warning"
+                    icon: "alert-octagon"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Warning!"
+                        halign: 'center'
+                MDBottomNavigationItem:
+                    name: 'banking'
+                    text: "Bank"
+                    icon: 'bank'
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        padding: dp(48)
+                        spacing: 10
+                        SingleLineTextField:
+                            hint_text: "You can put any widgets here"
+                            message: "Hello :)"
+                            message_mode: "on_focus"
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -784,6 +837,10 @@ BoxLayout:
         icon: 'checkbox-blank-circle'
         text: "Pickers"
         on_release: app.root.ids.scr_mngr.current = 'pickers'
+    NavigationDrawerIconButton:
+        icon: 'checkbox-blank-circle'
+        text: "Bottom Navigation"
+        on_release: app.root.ids.scr_mngr.current = 'bottom_navigation'
 '''
 
 

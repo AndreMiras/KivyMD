@@ -6,7 +6,7 @@
 # @author: jrm
 
 from kivy.properties import StringProperty, DictProperty, ListProperty, \
-    ObjectProperty, OptionProperty, BoundedNumericProperty, NumericProperty
+    ObjectProperty, OptionProperty, BoundedNumericProperty, NumericProperty, BooleanProperty
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.metrics import dp, sp
@@ -20,8 +20,6 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.logger import Logger
-
-KIVYMD_BOTTOMNAV_LAST_SIZE = 0
 
 Builder.load_string("""
 #:import sm kivy.uix.screenmanager
@@ -75,8 +73,7 @@ Builder.load_string("""
             and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color \
             or self.panel.theme_cls.primary_light)
     on_press: 
-        self.tab.dispatch('on_tab_press') 
-        # self.tab.manager.current = self.tab.name
+        self.tab.dispatch('on_tab_press')
     on_release: self.tab.dispatch('on_tab_release')
     on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
     on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
@@ -103,15 +100,13 @@ Builder.load_string("""
     height: dp(56)  # Spec
     ScreenManager:
         id: tab_manager
-        # transition: sm.FadeTransition() TODO: Should use FadeTransition, but it doesn't like KivyMD
+        transition: sm.FadeTransition(duration=.2)
         current: root.current
         screens: root.tabs
     MDBottomNavigationBar:
         size_hint_y: None
         height: dp(56)  # Spec
         background_color: root.theme_cls.bg_dark
-        # anchor_x: 'center'
-        # anchor_y: 'center'
         BoxLayout:
             pos_hint: {'center_x': .5, 'center_y': .5}
             id: tab_bar
@@ -130,10 +125,8 @@ Builder.load_string("""
             pos: self.pos
 
 
-    # size_hint: (None,None) #(1, None)  if self.panel.tab_width_mode=='fixed' else (None,None)
     width: root.panel.width / len(root.panel.ids.tab_manager.screens) if len(root.panel.ids.tab_manager.screens) != 0 else root.panel.width
     padding: (dp(12), dp(12))
-    # width: dp(1000)
     on_press:
         self.tab.dispatch('on_tab_press')
     on_release: self.tab.dispatch('on_tab_release')
@@ -141,63 +134,43 @@ Builder.load_string("""
     on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
     on_touch_up: self.tab.dispatch('on_tab_touch_up',*args)
 
+    FloatLayout:
+        MDLabel:
+            id: _label_icon
+            text: u"{}".format(md_icons[root.tab.icon])
+            font_style: 'Icon'
+            size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
+            text_size: (None, root.height)
+            height: self.texture_size[1]
+            theme_text_color: 'Custom'
+            text_color: root._current_color
+            valign: 'middle'
+            halign: 'center'
+            opposite_colors: root.opposite_colors
+            pos: [self.pos[0], self.pos[1]]
+            font_size: dp(24)
+            pos_hint: {'center_x': .5, 'center_y': .7}
 
-    MDLabel:
-        id: _label_icon
-        text: u"{}".format(md_icons[root.tab.icon])
-        font_style: 'Icon'
-        size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
-        text_size: (None, root.height)
-        height: self.texture_size[1]
-        theme_text_color: 'Custom'
-        text_color: root._current_color
-        valign: 'middle'
-        halign: 'center'
-        opposite_colors: root.opposite_colors
-        pos: [self.pos[0], self.pos[1]]
-
-    MDLabel:
-        id: _label
-        text: root.tab.text
-        font_style: 'Button'
-        size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
-        text_size: (None, root.height)
-        height: self.texture_size[1]
-        theme_text_color: 'Custom'
-        text_color: root._current_color
-        valign: 'bottom'
-        halign: 'center'
-        opposite_colors: root.opposite_colors
-        font_size: root._label_font_size
-
-
-
-
-
-<BaseRectangularButtonHACKED>:
+        MDLabel:
+            id: _label
+            text: root.tab.text
+            font_style: 'Button'
+            size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
+            text_size: (None, root.height)
+            height: self.texture_size[1]
+            theme_text_color: 'Custom'
+            text_color: root._current_color
+            valign: 'bottom'
+            halign: 'center'
+            opposite_colors: root.opposite_colors
+            font_size: root._label_font_size
+            pos_hint: {'center_x': .5, 'center_y': 0.6}
+<MDTab>
     canvas:
         Color:
-            rgba: self._current_button_color
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: (dp(2),)
-    content: content
-    theme_text_color: 'Primary'
-    MDLabel:
-        id: content
-        text: root._capitalized_text
-        font_style: 'Button'
-        size_hint_x: None
-        text_size: (None, root.height)
-        height: self.texture_size[1]
-        theme_text_color: root.theme_text_color
-        text_color: root.text_color
-        disabled: root.disabled
-        valign: 'middle'
-        halign: 'center'
-        opposite_colors: root.opposite_colors
-
+            rgba: root.theme_cls.bg_normal
+        Rectangle:
+            size: root.size
 """)
 
 
@@ -217,14 +190,20 @@ class MDTabHeader(MDFlatButton):
     panel = ObjectProperty(None)
 
 
+class MDBottomNavigationErrorCache:
+    last_size_warning = 0
+
+
 def small_error_warn(x):
-    global KIVYMD_BOTTOMNAV_LAST_SIZE
     if x < dp(80):
-        if KIVYMD_BOTTOMNAV_LAST_SIZE != x:
-            KIVYMD_BOTTOMNAV_LAST_SIZE = x
+        if MDBottomNavigationErrorCache.last_size_warning != x:
+            MDBottomNavigationErrorCache.last_size_warning = x
             Logger.warning("MDBottomNavigation: {}dp is less than the minimum size of 80dp for a "
-                           "MDBottomNavigationItem, keeping the size at 80dp".format(x))
-        return dp(80)
+                           "MDBottomNavigationItem. Due to a bug, we must now expand to 168dp.".format(x))
+            # Did you come here to find out what the bug is?
+            # The bug is that on startup, this function returning dp(80) breaks the way it displays until you resize
+            # I don't know why, this may or may not get fixed in the future
+        # return dp(80)
     return dp(168)
 
 
@@ -237,6 +216,7 @@ class MDBottomNavigationHeader(BaseFlatButton, BasePressedButton):
     _current_color = ListProperty([0.0, 0.0, 0.0, 0.0])
     text = StringProperty('')
     _capitalized_text = StringProperty('')
+    active = BooleanProperty(False)
 
     def on_text(self, instance, value):
         self._capitalized_text = value.upper()
@@ -248,15 +228,25 @@ class MDBottomNavigationHeader(BaseFlatButton, BasePressedButton):
         super(MDBottomNavigationHeader, self).__init__()
         self._current_color = self.theme_cls.disabled_hint_text_color
         self._label = self.ids._label
-        # self.bind(_label_font_size=self._label.setter('font_size'))
         self._label_font_size = sp(12)
+        self.theme_cls.bind(primary_color=self._update_theme_color,
+                            disabled_hint_text_color=self._update_theme_style)
+        self.active = False
 
     def on_press(self):
         Animation(_label_font_size=sp(14), d=0.1).start(self)
         Animation(_current_color=self.theme_cls.primary_color, d=0.1).start(self)
 
+    def _update_theme_color(self, instance, color):
+        if self.active:
+            self._current_color = self.theme_cls.primary_color
 
-class MDTab(Screen):
+    def _update_theme_style(self, instance, color):
+        if not self.active:
+            self._current_color = self.theme_cls.disabled_hint_text_color
+
+
+class MDTab(Screen, ThemableBehavior):
     """ A tab is simply a screen with meta information
         that defines the content that goes in the tab header.
     """
@@ -323,6 +313,8 @@ class MDBottomNavigationItem(MDTab):
         if par.previous_tab is not self:
             Animation(_label_font_size=sp(12), d=0.1).start(par.previous_tab.header)
             Animation(_current_color=par.previous_tab.header.theme_cls.disabled_hint_text_color, d=0.1).start(par.previous_tab.header)
+            par.previous_tab.header.active = False
+            self.header.active = True
         par.previous_tab = self
 
     def on_leave(self, *args):
@@ -430,6 +422,7 @@ class MDBottomNavigation(TabbedPanelBase):
     first_widget = ObjectProperty()
 
     # TODO: Future shifting mode: https://material-design.storage.googleapis.com/publish/material_v_9/0B3321sZLoP_HUEw4c19NVjFxNDQ/components_bottomnavigation_spec_shiftingbottomnav.webm
+    # Good luck to whoever decides they want to implement that
     # mode = OptionProperty('fixed', options=['fixed', 'shifting'])
 
     def __init__(self, **kwargs):
@@ -438,10 +431,10 @@ class MDBottomNavigation(TabbedPanelBase):
         self.widget_index = 0
         self._refresh_tabs()
         Window.bind(on_resize=self.on_resize)
+        Clock.schedule_once(lambda x: self.on_resize(), 2)
 
     def _refresh_tabs(self):
         """ Refresh all tabs """
-        # if fixed width, use a box layout
         if not self.ids:
             return
         tab_bar = self.ids.tab_bar
@@ -456,6 +449,7 @@ class MDBottomNavigation(TabbedPanelBase):
             if tab is self.first_widget:
                 tab_header._current_color = self.theme_cls.primary_color
                 tab_header._label_font_size = sp(14)
+                tab_header.active = True
             else:
                 tab_header._label_font_size = sp(12)
         self.on_resize()
@@ -486,6 +480,7 @@ class MDBottomNavigation(TabbedPanelBase):
                 self.previous_tab = widget
                 tab_header._current_color = self.theme_cls.primary_color
                 tab_header._label_font_size = sp(14)
+                tab_header.active = True
                 self.first_widget = widget
             else:
                 tab_header._label_font_size = sp(12)
@@ -522,7 +517,6 @@ BoxLayout:
     MDTabbedPanel:
         id: tab_mgr
         tab_display_mode:'icons'
-        
         MDTab:
             name: 'music'
             text: "Music"
@@ -551,9 +545,9 @@ BoxLayout:
                 MDRaisedButton:
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     text: "Open theme picker"
-                    # on_release: MDThemePicker().open()
+                    on_release: MDThemePicker().open()
                     text: "Open test snackbar"
-                    on_press: Snackbar(text="This is a test snackbar")
+                    # on_release: Snackbar(text="This is a test snackbar")
         MDBottomNavigationItem:
             name: 'movies'
             text: 'Movies'
@@ -589,8 +583,6 @@ BoxLayout:
                 theme_text_color: 'Primary'
                 text: "all of the files"
                 halign: 'center'
-
-        
 """)
             
 
