@@ -15,6 +15,7 @@ from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
 from kivymd.time_picker import MDTimePicker
 from kivymd.date_picker import MDDatePicker
+from kivymd.material_resources import DEVICE_TYPE
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -714,6 +715,7 @@ BoxLayout:
         Screen:
             name: 'bottom_navigation'
             MDBottomNavigation:
+                id: bottom_navigation_demo
                 MDBottomNavigationItem:
                     name: 'octagon'
                     text: "Warning"
@@ -736,6 +738,28 @@ BoxLayout:
                             hint_text: "You can put any widgets here"
                             message: "Hello :)"
                             message_mode: "on_focus"
+                MDBottomNavigationItem:
+                    name: 'bottom_navigation_desktop_1'
+                    text: "Hello"
+                    icon: 'alert'
+                    id: bottom_navigation_desktop_1
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        padding: dp(48)
+                        spacing: 10
+                        SingleLineTextField:
+                            hint_text: "Hello again"
+                MDBottomNavigationItem:
+                    name: 'bottom_navigation_desktop_2'
+                    text: "Food"
+                    icon: 'food'
+                    id: bottom_navigation_desktop_2
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Cheese!"
+                        halign: 'center'
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
@@ -853,7 +877,15 @@ class KitchenSink(App):
             on_focus=self.set_error_message)
 
         self.nav_drawer = KitchenSinkNavDrawer()
+        self.bottom_navigation_remove_mobile(main_widget)
         return main_widget
+
+    def bottom_navigation_remove_mobile(self, widget):
+        # Removes some items from bottom-navigation demo when on mobile
+        if DEVICE_TYPE == 'mobile':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_2)
+        if DEVICE_TYPE == 'mobile' or DEVICE_TYPE == 'tablet':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_1)
 
     def show_example_snackbar(self, snack_type):
         if snack_type == 'simple':

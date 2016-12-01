@@ -139,7 +139,7 @@ Builder.load_string("""
             id: _label_icon
             text: u"{}".format(md_icons[root.tab.icon])
             font_style: 'Icon'
-            size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
+            size_hint_x: None
             text_size: (None, root.height)
             height: self.texture_size[1]
             theme_text_color: 'Custom'
@@ -155,7 +155,7 @@ Builder.load_string("""
             id: _label
             text: root.tab.text
             font_style: 'Button'
-            size_hint_x: None# if root.panel.tab_width_mode=='fixed' else 1
+            size_hint_x: None
             text_size: (None, root.height)
             height: self.texture_size[1]
             theme_text_color: 'Custom'
@@ -199,7 +199,7 @@ def small_error_warn(x):
         if MDBottomNavigationErrorCache.last_size_warning != x:
             MDBottomNavigationErrorCache.last_size_warning = x
             Logger.warning("MDBottomNavigation: {}dp is less than the minimum size of 80dp for a "
-                           "MDBottomNavigationItem. Due to a bug, we must now expand to 168dp.".format(x))
+                           "MDBottomNavigationItem. We must now expand to 168dp.".format(x))
             # Did you come here to find out what the bug is?
             # The bug is that on startup, this function returning dp(80) breaks the way it displays until you resize
             # I don't know why, this may or may not get fixed in the future
@@ -417,12 +417,7 @@ class MDTabbedPanel(TabbedPanelBase):
 
 class MDBottomNavigation(TabbedPanelBase):
     """ A bottom navigation that is implemented by delegating all items to a ScreenManager."""
-
     first_widget = ObjectProperty()
-
-    # TODO: Future shifting mode: https://material-design.storage.googleapis.com/publish/material_v_9/0B3321sZLoP_HUEw4c19NVjFxNDQ/components_bottomnavigation_spec_shiftingbottomnav.webm
-    # Good luck to whoever decides they want to implement that
-    # mode = OptionProperty('fixed', options=['fixed', 'shifting'])
 
     def __init__(self, **kwargs):
         super(MDBottomNavigation, self).__init__(**kwargs)
@@ -488,6 +483,16 @@ class MDBottomNavigation(TabbedPanelBase):
         else:
             super(MDBottomNavigation, self).add_widget(widget)
 
+    def remove_widget(self, widget):
+        """ Remove tabs from the screen or the layout.
+        :param widget: The widget to remove.
+        """
+        if isinstance(widget, MDTab):
+            self.ids.tab_manager.remove_widget(widget)
+            self._refresh_tabs()
+        else:
+            super(MDBottomNavigation, self).remove_widget(widget)
+
 
 if __name__ == '__main__':
     from kivy.app import App
@@ -536,17 +541,6 @@ BoxLayout:
                 halign: 'center'
 
     MDBottomNavigation:
-        MDBottomNavigationItem:
-            name: 'music'
-            text: "Music"
-            icon: "playlist-play"
-            FloatLayout:
-                MDRaisedButton:
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    text: "Open theme picker"
-                    on_release: MDThemePicker().open()
-                    text: "Open test snackbar"
-                    # on_release: Snackbar(text="This is a test snackbar")
         MDBottomNavigationItem:
             name: 'movies'
             text: 'Movies'
