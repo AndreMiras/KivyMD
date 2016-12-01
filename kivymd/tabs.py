@@ -487,7 +487,7 @@ class MDBottomNavigation(TabbedPanelBase):
         """ Remove tabs from the screen or the layout.
         :param widget: The widget to remove.
         """
-        if isinstance(widget, MDTab):
+        if isinstance(widget, MDBottomNavigationItem):
             self.ids.tab_manager.remove_widget(widget)
             self._refresh_tabs()
         else:
