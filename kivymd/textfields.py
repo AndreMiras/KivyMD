@@ -8,7 +8,6 @@ from kivy.metrics import sp, dp
 from kivy.animation import Animation
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
-from kivy.clock import Clock
 
 Builder.load_string('''
 <SingleLineTextField>:
@@ -103,7 +102,6 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
     _current_right_lbl_color = ListProperty([0.0, 0.0, 0.0, 0.0])
 
     def __init__(self, **kwargs):
-        Clock.schedule_interval(self._update_color, 5)
         self._msg_lbl = MDLabel(font_style='Caption',
                                 halign='left',
                                 valign='middle',
@@ -131,6 +129,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                   message_mode=self._set_message_mode,
                   max_text_length=self._set_max_text_length,
                   text=self.on_text)
+        self.theme_cls.bind(primary_color=self._update_color)
         self.has_had_text = False
 
     def _update_color(self, *args):

@@ -15,6 +15,7 @@ from kivymd.theming import ThemeManager
 from kivymd.dialog import MDDialog
 from kivymd.time_picker import MDTimePicker
 from kivymd.date_picker import MDDatePicker
+from kivymd.material_resources import DEVICE_TYPE
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -44,6 +45,8 @@ main_widget_kv = '''
 #:import MDAccordion kivymd.accordion.MDAccordion
 #:import MDAccordionItem kivymd.accordion.MDAccordionItem
 #:import MDThemePicker kivymd.theme_picker.MDThemePicker
+#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
+#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
 
 BoxLayout:
     orientation: 'vertical'
@@ -709,81 +712,133 @@ BoxLayout:
                             id: date_picker_use_previous_date
                             size_hint: None, None
                             size: dp(48), dp(48)
+        Screen:
+            name: 'bottom_navigation'
+            MDBottomNavigation:
+                id: bottom_navigation_demo
+                MDBottomNavigationItem:
+                    name: 'octagon'
+                    text: "Warning"
+                    icon: "alert-octagon"
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Warning!"
+                        halign: 'center'
+                MDBottomNavigationItem:
+                    name: 'banking'
+                    text: "Bank"
+                    icon: 'bank'
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        padding: dp(48)
+                        spacing: 10
+                        SingleLineTextField:
+                            hint_text: "You can put any widgets here"
+                            message: "Hello :)"
+                            message_mode: "on_focus"
+                MDBottomNavigationItem:
+                    name: 'bottom_navigation_desktop_1'
+                    text: "Hello"
+                    icon: 'alert'
+                    id: bottom_navigation_desktop_1
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        padding: dp(48)
+                        spacing: 10
+                        SingleLineTextField:
+                            hint_text: "Hello again"
+                MDBottomNavigationItem:
+                    name: 'bottom_navigation_desktop_2'
+                    text: "Food"
+                    icon: 'food'
+                    id: bottom_navigation_desktop_2
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Primary'
+                        text: "Cheese!"
+                        halign: 'center'
 
 <KitchenSinkNavDrawer>
     title: "NavigationDrawer"
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Bottom sheets"
         on_release: app.root.ids.scr_mngr.current = 'bottomsheet'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Buttons"
         on_release: app.root.ids.scr_mngr.current = 'button'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Cards"
         on_release: app.root.ids.scr_mngr.current = 'card'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Dialogs"
         on_release: app.root.ids.scr_mngr.current = 'dialog'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Grid lists"
         on_release: app.root.ids.scr_mngr.current = 'grid'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Lists"
         on_release: app.root.ids.scr_mngr.current = 'list'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Menus"
         on_release: app.root.ids.scr_mngr.current = 'menu'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Progress & activity"
         on_release: app.root.ids.scr_mngr.current = 'progress'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Progress bars"
         on_release: app.root.ids.scr_mngr.current = 'progressbars'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Selection controls"
         on_release: app.root.ids.scr_mngr.current = 'selectioncontrols'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Snackbars"
         on_release: app.root.ids.scr_mngr.current = 'snackbar'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Text fields"
         on_release: app.root.ids.scr_mngr.current = 'textfields'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Themes"
         on_release: app.root.ids.scr_mngr.current = 'theming'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Toolbars"
         on_release: app.root.ids.scr_mngr.current = 'toolbar'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Sliders"
         on_release: app.root.ids.scr_mngr.current = 'slider'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Tabs"
         on_release: app.root.ids.scr_mngr.current = 'tabs'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Accordion"
         on_release: app.root.ids.scr_mngr.current = 'accordion'
     NavigationDrawerIconButton:
-        icon: 'account-circle'
+        icon: 'checkbox-blank-circle'
         text: "Pickers"
         on_release: app.root.ids.scr_mngr.current = 'pickers'
+    NavigationDrawerIconButton:
+        icon: 'checkbox-blank-circle'
+        text: "Bottom Navigation"
+        on_release: app.root.ids.scr_mngr.current = 'bottom_navigation'
 '''
 
 
@@ -822,7 +877,15 @@ class KitchenSink(App):
             on_focus=self.set_error_message)
 
         self.nav_drawer = KitchenSinkNavDrawer()
+        self.bottom_navigation_remove_mobile(main_widget)
         return main_widget
+
+    def bottom_navigation_remove_mobile(self, widget):
+        # Removes some items from bottom-navigation demo when on mobile
+        if DEVICE_TYPE == 'mobile':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_2)
+        if DEVICE_TYPE == 'mobile' or DEVICE_TYPE == 'tablet':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_1)
 
     def show_example_snackbar(self, snack_type):
         if snack_type == 'simple':

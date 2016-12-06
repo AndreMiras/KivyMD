@@ -87,11 +87,11 @@ class MDCheckbox(ThemableBehavior, CircularRippleBehavior,
     _icon_active = StringProperty(u"{}".format(md_icons['checkbox-marked']))
 
     def __init__(self, **kwargs):
-        super(MDCheckbox, self).__init__(**kwargs)
-        self.register_event_type('on_active')
         self.check_anim_out = Animation(font_size=0, duration=.1, t='out_quad')
         self.check_anim_in = Animation(font_size=sp(24), duration=.1,
                                        t='out_quad')
+        super(MDCheckbox, self).__init__(**kwargs)
+        self.register_event_type('on_active')
         self.check_anim_out.bind(
             on_complete=lambda *x: self.check_anim_in.start(self))
 
