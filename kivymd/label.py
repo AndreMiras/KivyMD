@@ -101,6 +101,8 @@ class MDLabel(ThemableBehavior, Label):
                 self.color = self.text_color
             elif value == 'ContrastParentBackground' and self.parent_background:
                 self.color = get_contrast_text_color(self.parent_background)
+            else:
+                self.color = [0, 0, 0, 1]
 
     def on_text_color(self, *args):
         if self.theme_text_color == 'Custom':

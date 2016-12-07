@@ -199,7 +199,7 @@ BoxLayout:
                         text_color: [1,1,1,1]
         MDAccordionItem:
             title:'Item 2'
-            icon: 'globe'
+            icon: 'earth'
             ScrollView:
                 MDList:
                     OneLineListItem:
