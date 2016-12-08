@@ -75,18 +75,6 @@ class MDLabel(ThemableBehavior, Label):
                                   'opposite_secondary_text_color',
                      'Hint': 'disabled_hint_text_color' if not op else
                              'opposite_disabled_hint_text_color',
-                     'ContrastPalettePrimary':
-                        'contrast_palette_primary_text_color',
-                     'ContrastPalettePrimaryLight':
-                        'contrast_palette_primary_light_text_color',
-                     'ContrastPalettePrimaryDark':
-                        'contrast_palette_primary_dark_text_color',
-                     'ContrastPaletteAccent':
-                        'contrast_palette_accent_text_color',
-                     'ContrastPaletteAccentLight':
-                        'contrast_palette_accent_light_text_color',
-                     'ContrastPaletteAccentDark':
-                        'contrast_palette_accent_dark_text_color',
                      'Error': 'error_color',
                     }.get(value, None)
         if attr_name:
