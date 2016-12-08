@@ -54,6 +54,8 @@ BoxLayout:
         id: toolbar
         title: 'KivyMD Kitchen Sink'
         background_color: app.theme_cls.primary_color
+        background_palette: 'Primary'
+        background_hue: '500'
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
         right_action_items: [['dots-vertical', lambda x: app.nav_drawer.toggle()]]
     ScreenManager:
@@ -535,15 +537,21 @@ BoxLayout:
                 title: "Simple toolbar"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.75}
                 background_color: get_color_from_hex(colors['Teal']['500'])
+                background_palette: 'Teal'
+                background_hue: '500'
             Toolbar:
                 title: "Toolbar with right buttons"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 background_color: get_color_from_hex(colors['Amber']['700'])
+                background_palette: 'Amber'
+                background_hue: '700'
                 right_action_items: [['content-copy', lambda x: None]]
             Toolbar:
                 title: "Toolbar with left and right buttons"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.25}
                 background_color: get_color_from_hex(colors['DeepPurple']['A400'])
+                background_palette: 'DeepPurple'
+                background_hue: 'A400'
                 left_action_items: [['arrow-left', lambda x: None]]
                 right_action_items: [['lock', lambda x: None], \
                     ['camera', lambda x: None], \

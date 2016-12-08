@@ -39,6 +39,8 @@ Builder.load_string('''
         MDLabel:
             id: _label
             text: root.text
+            theme_text_color: 'Custom'
+            text_color: get_color_from_hex('ffffff')
             size: self.texture_size
     BoxLayout:
         id: _spacer
@@ -48,6 +50,8 @@ Builder.load_string('''
     MDFlatButton:
         id: _button
         text: root.button_text
+        theme_text_color: 'Custom'
+        text_color: get_color_from_hex('ffffff')
         size_hint_x: None
         x: _spacer.right if root.button_text != '' else root.right
         center_y: root.height/2
