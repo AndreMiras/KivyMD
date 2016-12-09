@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from kivy.lang import Builder
-from kivy.uix.textinput import TextInput
-from kivy.properties import ObjectProperty, NumericProperty, StringProperty, \
-    ListProperty, BooleanProperty, OptionProperty
-from kivy.metrics import sp, dp
 from kivy.animation import Animation
-from kivymd.label import MDLabel
-from kivymd.theming import ThemableBehavior
-# -*- coding: utf-8 -*-
+from kivy.clock import Clock
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.metrics import sp
-from kivy.properties import OptionProperty, DictProperty, ListProperty
-from kivy.uix.label import Label
-from kivymd.material_resources import DEVICE_TYPE
+from kivy.properties import ObjectProperty, NumericProperty, StringProperty, \
+    BooleanProperty
+from kivy.properties import OptionProperty, ListProperty
+from kivy.uix.textinput import TextInput
+from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
@@ -172,19 +168,29 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                   message_mode=self._set_message_mode,
                   max_text_length=self._set_max_text_length,
                   text=self.on_text)
-        self.theme_cls.bind(primary_color=self._update_color)
+        self.theme_cls.bind(primary_color=self._update_primary_color,
+                            theme_style=self._update_primary_color,)
+                            # divider_color=self.theme_cls.divider_color,         # For some reasson can't be bound to?
+                            # disabled_hint_text_color=self._update_disabled_hint_text_color)
         self.has_had_text = False
 
-    def _update_color(self, *args):
+    def _update_divider_color(self, *args):
         self.line_color_normal = self.theme_cls.divider_color
+
+    def _update_primary_color(self, *args):
         self.base_line_color_focus = list(self.theme_cls.primary_color)
         if not self.focus and not self.error and not self.text_len_error:
             self.line_color_focus = self.theme_cls.primary_color
+        if self.focus and not self.error and not self.text_len_error:
+            self.cursor_color = self.theme_cls.primary_color
+        Clock.schedule_once(lambda x: self._update_divider_color(), 0.01)   # For some reasson can't be bound to?
+        Clock.schedule_once(lambda x: self._update_disabled_hint_text_color(), 0.01)
+
+    def _update_disabled_hint_text_color(self, *args):
+        if not self.focus and not self.error and not self.text_len_error:
             Animation(duration=.2, _current_hint_text_color=self.theme_cls.disabled_hint_text_color).start(self)
             if self.message_mode == "persistent":
                 Animation(duration=.1, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
-        if self.focus and not self.error and not self.text_len_error:
-            self.cursor_color = self.theme_cls.primary_color
 
     def on_width(self, instance, width):
         if self.focus and instance is not None or self.error and instance is not None or self.text_len_error and instance is not None:
