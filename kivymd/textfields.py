@@ -8,6 +8,13 @@ from kivy.metrics import sp, dp
 from kivy.animation import Animation
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
+# -*- coding: utf-8 -*-
+from kivy.lang import Builder
+from kivy.metrics import sp
+from kivy.properties import OptionProperty, DictProperty, ListProperty
+from kivy.uix.label import Label
+from kivymd.material_resources import DEVICE_TYPE
+from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <SingleLineTextField>:
@@ -66,6 +73,10 @@ Builder.load_string('''
     multiline:    False
     size_hint_y: None
     height: dp(48)
+
+<TextfieldLabel>
+    disabled_color: self.theme_cls.disabled_hint_text_color
+    text_size: (self.width, None)
 ''')
 
 
@@ -77,6 +88,38 @@ class FixedHintTextInput(TextInput):
 
     def _refresh_hint_text(self):
         pass
+
+
+class TextfieldLabel(MDLabel):
+    def on_theme_text_color(self, instance, value):
+        t = self.theme_cls
+        op = self.opposite_colors
+        setter = self.setter('color')
+        t.unbind(**self._currently_bound_property)
+        c = {}
+        if value == 'Primary':
+            c = {'text_color' if not op else 'opposite_text_color': setter}
+            t.bind(**c)
+            self.color = t.text_color if not op else t.opposite_text_color
+        elif value == 'Secondary':
+            c = {'secondary_text_color' if not op else
+                 'opposite_secondary_text_color': setter}
+            t.bind(**c)
+            self.color = t.secondary_text_color if not op else \
+                t.opposite_secondary_text_color
+        elif value == 'Hint':
+            c = {'disabled_hint_text_color' if not op else
+                 'opposite_disabled_hint_text_color': setter}
+            t.bind(**c)
+            self.color = t.disabled_hint_text_color if not op else \
+                t.opposite_disabled_hint_text_color
+        elif value == 'Error':
+            c = {'error_color': setter}
+            t.bind(**c)
+            self.color = t.error_color
+        elif value == 'Custom':
+            self.color = self.text_color if self.text_color else (0, 0, 0, 1)
+        self._currently_bound_property = c
 
 
 class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
@@ -102,19 +145,19 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
     _current_right_lbl_color = ListProperty([0.0, 0.0, 0.0, 0.0])
 
     def __init__(self, **kwargs):
-        self._msg_lbl = MDLabel(font_style='Caption',
-                                halign='left',
-                                valign='middle',
-                                text=self.message)
+        self._msg_lbl = TextfieldLabel(font_style='Caption',
+                                       halign='left',
+                                       valign='middle',
+                                       text=self.message)
 
-        self._right_msg_lbl = MDLabel(font_style='Caption',
-                                      halign='right',
-                                      valign='middle',
-                                      text="")
+        self._right_msg_lbl = TextfieldLabel(font_style='Caption',
+                                             halign='right',
+                                             valign='middle',
+                                             text="")
 
-        self._hint_lbl = MDLabel(font_style='Subhead',
-                                 halign='left',
-                                 valign='middle')
+        self._hint_lbl = TextfieldLabel(font_style='Subhead',
+                                        halign='left',
+                                        valign='middle')
         super(SingleLineTextField, self).__init__(**kwargs)
         self.line_color_normal = self.theme_cls.divider_color
         self.line_color_focus = list(self.theme_cls.primary_color)

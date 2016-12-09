@@ -43,6 +43,9 @@ Builder.load_string("""
         size_hint: (None, None)
         size: dp(160), dp(50)
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        theme_text_color: 'Custom'
+        text_color: (app.theme_cls.bg_light if app.theme_cls.theme_style == "Light" \
+            else app.theme_cls.opposite_bg_light)
     MDTabbedPanel:
         size_hint: (None, None)
         size: dp(260), root.height-dp(135)
