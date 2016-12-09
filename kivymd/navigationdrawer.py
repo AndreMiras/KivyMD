@@ -10,7 +10,9 @@ from kivymd.slidingpanel import SlidingPanel
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
+#:import Toolbar kivymd.toolbar.Toolbar
 <NavDrawerToolbar@Toolbar>
+    specific_text_color: root.theme_cls.secondary_text_color
     canvas:
         Color:
             rgba: root.theme_cls.divider_color
