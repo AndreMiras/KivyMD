@@ -97,3 +97,10 @@ class Toolbar(ThemableBehavior, RectangularElevationBehavior,
             child.text_color = self.specific_text_color
         for child in self.ids['right_actions'].children:
             child.text_color = self.specific_text_color
+
+    def _update_specific_text_color(self, instance, value):
+        from kivymd.navigationdrawer import NavigationDrawer  # Here so no error
+        if isinstance(instance, NavigationDrawer):
+            pass
+        else:
+            super(Toolbar, self)._update_specific_text_color(instance, value)
