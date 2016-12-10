@@ -20,7 +20,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.animation import Animation
-from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
+from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior, \
     RectangularRippleBehavior
 from kivymd.elevationbehavior import CommonElevationBehavior, \
@@ -93,7 +93,8 @@ Builder.load_string('''
 
 <MDRaisedButton>:
     background_color: root.theme_cls.primary_color
-    theme_text_color: 'Primary'
+    theme_text_color: 'Custom'
+    text_color: root.specific_text_color
 
 <MDFloatingActionButton>:
     # Defaults to 56-by-56 and a backround of the accent color according to
@@ -101,21 +102,18 @@ Builder.load_string('''
     size: (dp(56), dp(56))
     background_color: root.theme_cls.accent_color
     background_color_disabled: (0, 0, 0, 1)
-    theme_text_color: 'Primary'
+    theme_text_color: 'Custom'
+    text_color: root.specific_text_color
 ''')
 
 
-class BaseButton(ThemableBehavior, ButtonBehavior, AnchorLayout):
+class BaseButton(ThemableBehavior, ButtonBehavior,
+                 SpecificBackgroundColorBehavior, AnchorLayout):
     '''
     Abstract base class for all MD buttons. This class handles the button's
     colors (disabled/down colors handled in children classes as those depend on
     type of button) as well as the disabled state.
     '''
-    _bg_c_r = BoundedNumericProperty(0., min=0, max=None)
-    _bg_c_g = BoundedNumericProperty(0., min=0, max=None)
-    _bg_c_b = BoundedNumericProperty(0., min=0, max=None)
-    _bg_c_a = BoundedNumericProperty(0., min=0, max=None)
-    background_color = ReferenceListProperty(_bg_c_r, _bg_c_g, _bg_c_b, _bg_c_a)
     _background_color_down = ListProperty(None, allownone=True)
     _background_color_disabled = ListProperty(None, allownone=True)
     _current_button_color = ListProperty([0., 0., 0., 0.])
