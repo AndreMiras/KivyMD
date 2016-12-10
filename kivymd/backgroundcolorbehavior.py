@@ -41,7 +41,8 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
             options=['50', '100', '200', '300', '400', '500', '600', '700',
                      '800', '900', 'A100', 'A200', 'A400', 'A700'])
 
-    specific_text_color = ListProperty([0, 0, 0, 1])
+    specific_text_color = ListProperty([0, 0, 0, 0.87])
+    specific_secondary_text_color = ListProperty([0, 0, 0, 0.87])
 
     def _update_specific_text_color(self, instance, value):
         if hasattr(self, 'theme_cls'):
@@ -53,13 +54,22 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
                        'Accent': 'Amber'
                        }.get(self.background_palette, self.background_palette)
         if text_colors[palette].get(self.background_hue):
-            self.specific_text_color = get_color_from_hex(text_colors[palette]
-                                                          [self.background_hue])
+            color = get_color_from_hex(text_colors[palette]
+                                       [self.background_hue])
         else:
             # Some palettes do not have 'A100', 'A200', 'A400', 'A700'
             # In that situation just default to using 100/200/400/700
             hue = self.background_hue[1:]
-            self.specific_text_color = get_color_from_hex(text_colors[palette][hue])
+            color = get_color_from_hex(text_colors[palette][hue])
+        secondary_color = color[:]
+        # Check for black text (need to adjust opacity)
+        if (color[0] + color[1] + color[2]) == 0:
+            color[3] = 0.87
+            secondary_color[3] = 0.54
+        else:
+            secondary_color[3] = 0.7
+        self.specific_text_color = color
+        self.specific_secondary_text_color = secondary_color
 
     def __init__(self, **kwargs):
         super(SpecificBackgroundColorBehavior, self).__init__(**kwargs)
