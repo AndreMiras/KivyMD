@@ -37,18 +37,18 @@ Builder.load_string("""
 
 <MDThemePicker>:
     size_hint: (None, None)
-    size: dp(260), dp(120)+dp(290)
+    size: dp(290), dp(120)+dp(290)
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
             rgb: app.theme_cls.primary_color
         Rectangle:
-            size: dp(260), dp(120)
+            size: self.width, dp(120)
             pos: root.pos[0], root.pos[1] + root.height-dp(120)
         Color:
             rgb: app.theme_cls.bg_normal
         Rectangle:
-            size: dp(260), dp(290)
+            size: self.width, dp(290)
             pos: root.pos[0], root.pos[1] + root.height-(dp(120)+dp(290))
 
     MDFlatButton:
@@ -65,7 +65,7 @@ Builder.load_string("""
         text_color: root.specific_text_color
     MDTabbedPanel:
         size_hint: (None, None)
-        size: dp(260), root.height-dp(135)
+        size: root.width, root.height-dp(135)
         pos_hint: {'center_x': 0.5, 'center_y': 0.475}
         id: tab_panel
         tab_display_mode:'text'
