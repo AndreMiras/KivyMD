@@ -367,7 +367,7 @@ class ColorSelector(MDIconButton):
 class MDThemePicker(ThemableBehavior, FloatLayout, ModalView,
                     SpecificBackgroundColorBehavior,
                     RectangularElevationBehavior):
-    time = ObjectProperty()
+    pass
 
 
 if __name__ == "__main__":
