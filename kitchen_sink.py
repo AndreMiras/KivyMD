@@ -561,6 +561,8 @@ BoxLayout:
             MDTabbedPanel:
                 id: tab_panel
                 tab_display_mode:'text'
+                tab_text_color: self.specific_secondary_text_color
+                tab_text_color_active: self.specific_text_color
 
                 MDTab:
                     name: 'music' 

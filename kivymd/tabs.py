@@ -12,7 +12,8 @@ from kivy.lang import Builder
 from kivy.metrics import dp, sp
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
-from kivymd.backgroundcolorbehavior import BackgroundColorBehavior
+from kivymd.backgroundcolorbehavior import (BackgroundColorBehavior,
+                                            SpecificBackgroundColorBehavior)
 from kivymd.button import MDFlatButton, BaseFlatButton, BasePressedButton
 from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivy.animation import Animation
@@ -320,7 +321,7 @@ class MDBottomNavigationItem(MDTab):
         pass
 
 
-class TabbedPanelBase(ThemableBehavior, BackgroundColorBehavior, BoxLayout):
+class TabbedPanelBase(ThemableBehavior, SpecificBackgroundColorBehavior, BoxLayout):
     """
     A class that contains all variables a TabPannel must have
     It is here so I (zingballyhoo) don't get mad about the TabbedPannels not being DRY
