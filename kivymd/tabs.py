@@ -275,7 +275,7 @@ class MDTab(Screen, ThemableBehavior):
         self.register_event_type('on_tab_release')
 
     def on_leave(self, *args):
-        self.parent_widget.ids.tab_manager.transition.direction = self.parent_widget.prev_dir
+        self.parent_widget.ids.tab_manager.transition.direction = self.parent_widget.normal_dir
         
     def on_tab_touch_down(self, *args):
         pass
@@ -368,6 +368,10 @@ class MDTabbedPanel(TabbedPanelBase):
         self.prev_dir = None
         self.index = 0
         self._refresh_tabs()
+        Clock.schedule_once(self._set_normal_dir, 0)
+
+    def _set_normal_dir(self, *args):
+        self.normal_dir = str(self.ids.tab_manager.transition.direction)
         
     def on_tab_width_mode(self, *args):
         self._refresh_tabs()
