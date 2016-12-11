@@ -113,8 +113,8 @@ Builder.load_string('''
         PopMatrix
     MDLabel:
         id:_icon
-        theme_text_color:ctx.item.title_theme_color if ctx.item.icon else 'Custom'
-        text_color:ctx.item.title_color if ctx.item.icon else [0,0,0,0]
+        theme_text_color: 'Custom'
+        text_color: [1,1,1,1]
         text: md_icons[ctx.item.icon if ctx.item.icon else 'menu']
         font_style:'Icon'
         size_hint: (None,1) if ctx.item.orientation == 'vertical' else (1,None)
@@ -130,8 +130,8 @@ Builder.load_string('''
             PopMatrix
     MDLabel:
         id:_label
-        theme_text_color:ctx.item.title_theme_color
-        text_color:ctx.item.title_color
+        theme_text_color: 'Custom'
+        text_color: [1,1,1,1]
         text: ctx.item.title
         font_style:ctx.item.font_style
         text_size: (self.width, None) if ctx.item.orientation=='vertical' else (None,self.width)
@@ -145,8 +145,8 @@ Builder.load_string('''
         
     MDLabel:
         id:_expand_icon
-        theme_text_color:ctx.item.title_theme_color
-        text_color:ctx.item.title_color
+        theme_text_color: 'Custom'
+        text_color: [1,1,1,1]
         font_style:'Icon'
         size_hint: (None,1) if ctx.item.orientation == 'vertical' else (1,None)
         size: (self.texture_size[0],1) if ctx.item.orientation == 'vertical' else (1,self.texture_size[1])
