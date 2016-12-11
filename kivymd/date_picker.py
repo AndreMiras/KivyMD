@@ -10,7 +10,7 @@ import calendar
 from datetime import date
 import datetime
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, \
-    BooleanProperty
+    BooleanProperty, ListProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior
@@ -99,7 +99,7 @@ Builder.load_string("""
     MDIconButton:
         icon: 'chevron-left'
         theme_text_color: 'Secondary'
-        pos_hint: {'center_x': 0.09, 'center_y': 0.745} if root.theme_cls.device_orientation == 'portrait'\
+        pos_hint: {'center_x': 0.08, 'center_y': 0.745} if root.theme_cls.device_orientation == 'portrait'\
             else {'center_x': 0.39, 'center_y': 0.925}
         on_release: root.change_month('prev')
     MDIconButton:
@@ -217,6 +217,7 @@ class MDDatePicker(FloatLayout, ThemableBehavior, RectangularElevationBehavior,
     year = NumericProperty()
     today = date.today()
     callback = ObjectProperty()
+    background_color = ListProperty([0, 0, 0, 0.7])
 
     class SetDateError(Exception):
         pass
