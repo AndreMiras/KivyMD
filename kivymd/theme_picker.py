@@ -37,7 +37,7 @@ Builder.load_string("""
 
 <MDThemePicker>:
     size_hint: (None, None)
-    size: dp(290), dp(120)+dp(290)
+    size: dp(284), dp(120)+dp(290)
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
