@@ -305,22 +305,19 @@ Builder.load_string("""
         MDTab:
             name: 'style'
             text: "Theme Style"
-            BoxLayout:
-                size_hint: (None, None)
-                pos_hint: {'center_x': .3, 'center_y': 0.5}
+            FloatLayout:
                 size: self.size
                 pos: self.pos
-                halign: 'center'
-                spacing: dp(10)
                 BoxLayout:
-                    halign: 'center'
                     size_hint: (None, None)
-                    size: dp(100), dp(100)
-                    pos: self.pos
-                    pos_hint: {'center_x': .3, 'center_y': 0.5}
+                    pos_hint: {'center_x': .5, 'center_y': .6}
+                    halign: 'center'
+                    valign: 'center'
+                    spacing: dp(10)
+                    width: dp(210)
+                    height: dp(100)
                     MDIconButton:
                         size: dp(100), dp(100)
-                        pos: self.pos
                         size_hint: (None, None)
                         canvas:
                             Color:
@@ -332,12 +329,8 @@ Builder.load_string("""
                                 rgba: 0, 0, 0, 1
                             Line:
                                 width: 1.
-                                circle: (self.center_x, self.center_y, 50)
+                                circle: (self.center_x, self.center_y, dp(50))
                         on_release: app.theme_cls.theme_style = 'Light'
-                BoxLayout:
-                    halign: 'center'
-                    size_hint: (None, None)
-                    size: dp(100), dp(100)
                     MDIconButton:
                         size: dp(100), dp(100)
                         pos: self.pos
