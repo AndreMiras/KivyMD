@@ -48,6 +48,10 @@ Builder.load_string('''
 ''')
 
 
+class NavDrawerToolbar:
+    pass
+
+
 class NavigationDrawer(SlidingPanel, ThemableBehavior,
                        RectangularElevationBehavior):
     title = StringProperty()

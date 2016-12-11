@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from kivy.clock import Clock
+from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import ListProperty, StringProperty, OptionProperty
@@ -99,8 +100,7 @@ class Toolbar(ThemableBehavior, RectangularElevationBehavior,
             child.text_color = self.specific_text_color
 
     def _update_specific_text_color(self, instance, value):
-        from kivymd.navigationdrawer import NavigationDrawer  # Here so no error
-        if isinstance(instance, NavigationDrawer):
+        if isinstance(self, Factory.NavDrawerToolbar):
             pass
         else:
             super(Toolbar, self)._update_specific_text_color(instance, value)
