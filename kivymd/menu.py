@@ -4,6 +4,8 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.metrics import dp
 from kivy.properties import NumericProperty, ListProperty, OptionProperty, \
     StringProperty
@@ -27,7 +29,11 @@ Builder.load_string('''
     size_hint: None, None
     width: root.width_mult * STD_INC
     key_viewclass: 'viewclass'
-    key_size: 'height'
+    #key_size: 'height'
+    RecycleBoxLayout:
+        default_size: None, dp(48)
+        default_size_hint: 1, None
+        orientation: 'vertical'
 
 <MDDropdownMenu>
     FloatLayout:
@@ -47,7 +53,7 @@ Builder.load_string('''
 ''')
 
 
-class MDMenuItem(ButtonBehavior, BoxLayout):
+class MDMenuItem(RecycleDataViewBehavior, ButtonBehavior, BoxLayout):
     text = StringProperty()
 
 
