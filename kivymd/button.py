@@ -92,7 +92,7 @@ Builder.load_string('''
         opposite_colors: root.opposite_colors
 
 <MDRaisedButton>:
-    background_color: root.theme_cls.primary_color
+    md_bg_color: root.theme_cls.primary_color
     theme_text_color: 'Custom'
     text_color: root.specific_text_color
 
@@ -100,8 +100,8 @@ Builder.load_string('''
     # Defaults to 56-by-56 and a backround of the accent color according to
     # guidelines
     size: (dp(56), dp(56))
-    background_color: root.theme_cls.accent_color
-    background_color_disabled: (0, 0, 0, 1)
+    md_bg_color: root.theme_cls.accent_color
+    md_bg_color_disabled: (0, 0, 0, 1)
     theme_text_color: 'Custom'
     text_color: root.specific_text_color
 ''')
@@ -114,8 +114,8 @@ class BaseButton(ThemableBehavior, ButtonBehavior,
     colors (disabled/down colors handled in children classes as those depend on
     type of button) as well as the disabled state.
     '''
-    _background_color_down = ListProperty(None, allownone=True)
-    _background_color_disabled = ListProperty(None, allownone=True)
+    _md_bg_color_down = ListProperty(None, allownone=True)
+    _md_bg_color_disabled = ListProperty(None, allownone=True)
     _current_button_color = ListProperty([0., 0., 0., 0.])
     theme_text_color = OptionProperty(None, allownone=True,
                                       options=['Primary', 'Secondary', 'Hint',
@@ -130,50 +130,50 @@ class BaseButton(ThemableBehavior, ButtonBehavior,
     def _finish_init(self, dt):
         self._update_color()
 
-    def on_background_color(self, instance, value):
+    def on_md_bg_color(self, instance, value):
         self._update_color()
 
     def _update_color(self):
         if not self.disabled:
-            self._current_button_color = self.background_color
+            self._current_button_color = self.md_bg_color
         else:
-            self._current_button_color = self.background_color_disabled
+            self._current_button_color = self.md_bg_color_disabled
 
     def _call_get_bg_color_down(self):
-        return self._get_background_color_down()
+        return self._get_md_bg_color_down()
 
-    def _get_background_color_down(self):
-        if self._background_color_down:
-            return self._background_color_down
+    def _get_md_bg_color_down(self):
+        if self._md_bg_color_down:
+            return self._md_bg_color_down
         else:
             raise NotImplementedError
 
-    def _set_background_color_down(self, value):
-        self._background_color_down = value
+    def _set_md_bg_color_down(self, value):
+        self._md_bg_color_down = value
 
-    background_color_down = AliasProperty(_call_get_bg_color_down,
-                                          _set_background_color_down)
+    md_bg_color_down = AliasProperty(_call_get_bg_color_down,
+                                          _set_md_bg_color_down)
 
     def _call_get_bg_color_disabled(self):
-        return self._get_background_color_disabled()
+        return self._get_md_bg_color_disabled()
 
-    def _get_background_color_disabled(self):
-        if self._background_color_disabled:
-            return self._background_color_disabled
+    def _get_md_bg_color_disabled(self):
+        if self._md_bg_color_disabled:
+            return self._md_bg_color_disabled
         else:
             raise NotImplementedError
 
-    def _set_background_color_disabled(self, value):
-        self._background_color_disabled = value
+    def _set_md_bg_color_disabled(self, value):
+        self._md_bg_color_disabled = value
 
-    background_color_disabled = AliasProperty(_call_get_bg_color_disabled,
-                                              _set_background_color_disabled)
+    md_bg_color_disabled = AliasProperty(_call_get_bg_color_disabled,
+                                              _set_md_bg_color_disabled)
 
     def on_disabled(self, instance, value):
         if value:
-            self._current_button_color = self.background_color_disabled
+            self._current_button_color = self.md_bg_color_disabled
         else:
-            self._current_button_color = self.background_color
+            self._current_button_color = self.md_bg_color
         super(BaseButton, self).on_disabled(instance, value)
 
 
@@ -193,7 +193,7 @@ class BasePressedButton(BaseButton):
             return False
         else:
             self.fade_bg = Animation(duration=.5,
-                    _current_button_color=self.background_color_down)
+                    _current_button_color=self.md_bg_color_down)
             self.fade_bg.start(self)
             return super(BaseButton, self).on_touch_down(touch)
 
@@ -201,7 +201,7 @@ class BasePressedButton(BaseButton):
         if touch.grab_current is self:
             self.fade_bg.stop_property(self, '_current_button_color')
             Animation(duration=.05,
-                      _current_button_color=self.background_color).start(self)
+                      _current_button_color=self.md_bg_color).start(self)
         return super(BaseButton, self).on_touch_up(touch)
 
 
@@ -214,9 +214,9 @@ class BaseFlatButton(BaseButton):
 
     def __init__(self, **kwargs):
         super(BaseFlatButton, self).__init__(**kwargs)
-        self.background_color = (0., 0., 0., 0.)
+        self.md_bg_color = (0., 0., 0., 0.)
 
-    def _get_background_color_down(self):
+    def _get_md_bg_color_down(self):
         if self.theme_cls.theme_style == 'Dark':
             c = get_color_from_hex('cccccc')
             c[3] = 0.25
@@ -225,8 +225,8 @@ class BaseFlatButton(BaseButton):
             c[3] = 0.4
         return c
 
-    def _get_background_color_disabled(self):
-        bg_c = self.background_color
+    def _get_md_bg_color_disabled(self):
+        bg_c = self.md_bg_color
         if bg_c[3]:  # transparent background
             c = bg_c
         else:
@@ -312,18 +312,18 @@ class BaseRaisedButton(CommonElevationBehavior, BaseButton):
             self.elevation_release_anim.start(self)
         return super(BaseRaisedButton, self).on_touch_up(touch)
 
-    def _get_background_color_down(self):
+    def _get_md_bg_color_down(self):
         t = self.theme_cls
-        c = self.background_color  # Default to no change on touch
+        c = self.md_bg_color  # Default to no change on touch
         # Material design specifies using darker hue when on Dark theme
         if t.theme_style == 'Dark':
-            if self.background_color == t.primary_color:
+            if self.md_bg_color == t.primary_color:
                 c = t.primary_dark
-            elif self.background_color == t.accent_color:
+            elif self.md_bg_color == t.accent_color:
                 c = t.accent_dark
         return c
 
-    def _get_background_color_disabled(self):
+    def _get_md_bg_color_disabled(self):
         if self.theme_cls.theme_style == 'Dark':
             c = (1., 1., 1., 0.12)
         else:

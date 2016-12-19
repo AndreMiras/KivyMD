@@ -32,7 +32,7 @@ Builder.load_string('''
         title: root.title
         opposite_colors: False
         title_theme_color: 'Secondary'
-        background_color: root.theme_cls.bg_light
+        md_bg_color: root.theme_cls.bg_light
         elevation: 0
     ScrollView:
         do_scroll_x: False

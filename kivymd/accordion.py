@@ -27,7 +27,7 @@ class MDAccordionItem(ThemableBehavior, AccordionItem):
     title_color = ListProperty(None, allownone=True)
     ''' Color for title text and icon if `title_theme_color` is Custom '''
     
-    background_color = ListProperty(None, allownone=True)
+    md_bg_color = ListProperty(None, allownone=True)
     ''' Color for the background of the accordian item title in rgba format. 
     '''
     
@@ -68,7 +68,7 @@ Builder.load_string('''
 <MDAccordionItem>:
     canvas.before:
         Color:
-            rgba: self.background_color or self.theme_cls.primary_color
+            rgba: self.md_bg_color or self.theme_cls.primary_color
         Rectangle:
             size:self.size
             pos:self.pos
@@ -99,7 +99,7 @@ Builder.load_string('''
             xy: (-dp(2),0) if ctx.item.orientation == 'vertical' else (0,-dp(2))
             
         Color:
-            rgba: self.background_color or self.theme_cls.primary_color
+            rgba: self.md_bg_color or self.theme_cls.primary_color
         Rectangle:
             size:self.size
             pos:self.pos

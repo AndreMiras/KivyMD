@@ -15,7 +15,6 @@ Builder.load_string('''
 <Toolbar>
     size_hint_y: None
     height: root.theme_cls.standard_increment
-    background_color: root.background_color
     padding: [root.theme_cls.horizontal_margins - dp(12), 0]
     opposite_colors: True
     elevation: 6
@@ -64,7 +63,7 @@ class Toolbar(ThemableBehavior, RectangularElevationBehavior,
     title = StringProperty()
     """The text displayed on the Toolbar."""
 
-    background_color = ListProperty([0, 0, 0, 1])
+    md_bg_color = ListProperty([0, 0, 0, 1])
 
     def __init__(self, **kwargs):
         super(Toolbar, self).__init__(**kwargs)

@@ -11,7 +11,7 @@ Builder.load_string('''
 <BackgroundColorBehavior>
     canvas:
         Color:
-            rgba: self.background_color
+            rgba: self.md_bg_color
         Rectangle:
             size: self.size
             pos: self.pos
@@ -24,7 +24,7 @@ class BackgroundColorBehavior(Widget):
     b = BoundedNumericProperty(1., min=0., max=1.)
     a = BoundedNumericProperty(0., min=0., max=1.)
 
-    background_color = ReferenceListProperty(r, g, b, a)
+    md_bg_color = ReferenceListProperty(r, g, b, a)
 
 
 class SpecificBackgroundColorBehavior(BackgroundColorBehavior):

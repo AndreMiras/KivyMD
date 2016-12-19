@@ -35,7 +35,7 @@ Builder.load_string("""
             id: tab_bar
             size_hint_y: None
             height: panel._tab_display_height[panel.tab_display_mode]
-            background_color: panel.tab_color or panel.theme_cls.primary_color
+            md_bg_color: panel.tab_color or panel.theme_cls.primary_color
             canvas:
                 # Draw bottom border
                 Color:
@@ -107,7 +107,7 @@ Builder.load_string("""
     MDBottomNavigationBar:
         size_hint_y: None
         height: dp(56)  # Spec
-        background_color: root.theme_cls.bg_dark
+        md_bg_color: root.theme_cls.bg_dark
         BoxLayout:
             pos_hint: {'center_x': .5, 'center_y': .5}
             id: tab_bar
@@ -520,7 +520,7 @@ BoxLayout:
     Toolbar:
         id: toolbar
         title: 'Page title'
-        background_color: app.theme_cls.primary_color
+        md_bg_color: app.theme_cls.primary_color
         left_action_items: [['menu', lambda x: '']]
         right_action_items: [['magnify', lambda x: ''],['dots-vertical',lambda x:'']]
     MDTabbedPanel:
