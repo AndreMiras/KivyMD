@@ -66,6 +66,7 @@ Builder.load_string('''
 
 <BaseRectangularButton>:
     canvas:
+        Clear
         Color:
             rgba: self._current_button_color
         RoundedRectangle:
@@ -101,7 +102,6 @@ Builder.load_string('''
     # guidelines
     size: (dp(56), dp(56))
     md_bg_color: root.theme_cls.accent_color
-    md_bg_color_disabled: (0, 0, 0, 1)
     theme_text_color: 'Custom'
     text_color: root.specific_text_color
 ''')
