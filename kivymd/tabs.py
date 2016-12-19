@@ -5,22 +5,22 @@
 #
 # @author: jrm
 
+from kivy.animation import Animation
+from kivy.clock import Clock
+from kivy.core.window import Window
+from kivy.lang import Builder
+from kivy.logger import Logger
+from kivy.metrics import dp, sp
 from kivy.properties import StringProperty, DictProperty, ListProperty, \
     ObjectProperty, OptionProperty, BoundedNumericProperty, NumericProperty, BooleanProperty
-from kivy.uix.screenmanager import Screen
-from kivy.lang import Builder
-from kivy.metrics import dp, sp
 from kivy.uix.boxlayout import BoxLayout
-from kivymd.theming import ThemableBehavior
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.screenmanager import Screen
 from kivymd.backgroundcolorbehavior import (BackgroundColorBehavior,
                                             SpecificBackgroundColorBehavior)
 from kivymd.button import MDFlatButton, BaseFlatButton, BasePressedButton
 from kivymd.elevationbehavior import RectangularElevationBehavior
-from kivy.animation import Animation
-from kivy.uix.floatlayout import FloatLayout
-from kivy.core.window import Window
-from kivy.clock import Clock
-from kivy.logger import Logger
+from kivymd.theming import ThemableBehavior
 
 Builder.load_string("""
 #:import sm kivy.uix.screenmanager
@@ -69,10 +69,9 @@ Builder.load_string("""
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
     theme_text_color: 'Custom'
-    text_color: (self.panel.tab_text_color_active or app.theme_cls.bg_light if app.theme_cls.theme_style == "Light" \
-            else app.theme_cls.opposite_bg_light) if self.tab and self.tab.manager \
-            and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color \
-            or self.panel.theme_cls.primary_light)
+    text_color: (self.panel.tab_text_color_active or self.panel.specific_text_color) if self.tab and self.tab.manager \
+            and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color or \
+            self.panel.specific_secondary_text_color)
     on_press: 
         self.tab.dispatch('on_tab_press')
     on_release: self.tab.dispatch('on_tab_release')

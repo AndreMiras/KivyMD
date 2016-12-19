@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.uix.modalview import ModalView
+from kivy.properties import OptionProperty
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.button import MDFlatButton, MDIconButton
-from kivymd.theming import ThemableBehavior
-from kivymd.elevationbehavior import RectangularElevationBehavior
-from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
-from kivy.properties import ObjectProperty, ListProperty, OptionProperty
-from kivymd.label import MDLabel
-from kivy.metrics import dp
+from kivy.uix.modalview import ModalView
 from kivy.utils import get_color_from_hex
+from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
+from kivymd.button import MDIconButton
 from kivymd.color_definitions import colors
+from kivymd.elevationbehavior import RectangularElevationBehavior
+from kivymd.theming import ThemableBehavior
 
 Builder.load_string("""
 #:import SingleLineTextField kivymd.textfields.SingleLineTextField
@@ -69,8 +66,6 @@ Builder.load_string("""
         pos_hint: {'center_x': 0.5, 'center_y': 0.475}
         id: tab_panel
         tab_display_mode:'text'
-        tab_text_color: root.specific_secondary_text_color
-        tab_text_color_active: root.specific_text_color
 
         MDTab:
             name: 'color'

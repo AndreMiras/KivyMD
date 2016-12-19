@@ -370,3 +370,4 @@ class MDRaisedButton(BaseRectangularButton, RectangularElevationBehavior,
 class MDFloatingActionButton(BaseRoundButton, CircularElevationBehavior,
                              BaseRaisedButton):
     icon = StringProperty('android')
+    background_palette = StringProperty('Accent')

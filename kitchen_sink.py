@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-import kivymd.snackbar as Snackbar
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
+from kivymd import snackbar as Snackbar
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
+from kivymd.date_picker import MDDatePicker
+from kivymd.dialog import MDDialog
 from kivymd.label import MDLabel
 from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch
+from kivymd.material_resources import DEVICE_TYPE
 from kivymd.navigationdrawer import NavigationDrawer
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.theming import ThemeManager
-from kivymd.dialog import MDDialog
 from kivymd.time_picker import MDTimePicker
-from kivymd.date_picker import MDDatePicker
-from kivymd.material_resources import DEVICE_TYPE
 
 main_widget_kv = '''
 #:import Toolbar kivymd.toolbar.Toolbar
@@ -44,6 +44,7 @@ main_widget_kv = '''
 #:import MDProgressBar kivymd.progressbar.MDProgressBar
 #:import MDAccordion kivymd.accordion.MDAccordion
 #:import MDAccordionItem kivymd.accordion.MDAccordionItem
+#:import MDAccordionSubItem kivymd.accordion.MDAccordionSubItem
 #:import MDThemePicker kivymd.theme_picker.MDThemePicker
 #:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
 #:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
@@ -561,8 +562,6 @@ BoxLayout:
             MDTabbedPanel:
                 id: tab_panel
                 tab_display_mode:'text'
-                tab_text_color: self.specific_secondary_text_color
-                tab_text_color_active: self.specific_text_color
 
                 MDTab:
                     name: 'music' 
@@ -600,61 +599,36 @@ BoxLayout:
             name: 'accordion'
             BoxLayout:
                 MDAccordion:
-                    orientation:'vertical'
+                    orientation: 'vertical'
                     size_hint_x: None
                     width: '240dp'
                     MDAccordionItem:
-                        id: accordion_item
                         title:'Item 1'
                         icon: 'home'
-                        ScrollView:
-                            MDList:
-                                OneLineListItem:
-                                    text: "Subitem 1"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 2"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 3"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
+                        MDAccordionSubItem:
+                            text: "Subitem 1"
+                        MDAccordionSubItem:
+                            text: "Subitem 2"
+                        MDAccordionSubItem:
+                            text: "Subitem 3"
                     MDAccordionItem:
                         title:'Item 2'
                         icon: 'earth'
-                        ScrollView:
-                            MDList:
-                                OneLineListItem:
-                                    text: "Subitem 4"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 5"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 6"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
+                        MDAccordionSubItem:
+                            text: "Subitem 4"
+                        MDAccordionSubItem:
+                            text: "Subitem 5"
+                        MDAccordionSubItem:
+                            text: "Subitem 6"
                     MDAccordionItem:
                         title:'Item 3'
                         icon: 'account'
-                        ScrollView:
-                            MDList:
-                                OneLineListItem:
-                                    text: "Subitem 7"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 8"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
-                                OneLineListItem:
-                                    text: "Subitem 9"
-                                    theme_text_color: 'Custom'
-                                    text_color: [1,1,1,1]
+                        MDAccordionSubItem:
+                            text: "Subitem 7"
+                        MDAccordionSubItem:
+                            text: "Subitem 8"
+                        MDAccordionSubItem:
+                            text: "Subitem 9"
                 MDLabel:
                     text: 'Content'
                     theme_text_color: 'Primary'
