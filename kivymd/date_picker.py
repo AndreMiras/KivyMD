@@ -3,13 +3,14 @@ from kivy.lang import Builder
 from kivy.uix.modalview import ModalView
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
+from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivy.uix.floatlayout import FloatLayout
 from kivymd.elevationbehavior import RectangularElevationBehavior
 import calendar
 from datetime import date
 import datetime
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, \
-    BooleanProperty
+    BooleanProperty, ListProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.ripplebehavior import CircularRippleBehavior
@@ -44,7 +45,7 @@ Builder.load_string("""
     MDLabel:
         id: label_full_date
         font_style: 'Display1'
-        text_color: 1, 1, 1, 1
+        text_color: root.specific_text_color
         theme_text_color: 'Custom'
         size_hint: (None, None)
         size: [root.width, dp(30)] if root.theme_cls.device_orientation == 'portrait'\
@@ -61,7 +62,7 @@ Builder.load_string("""
     MDLabel:
         id: label_year
         font_style: 'Subhead'
-        text_color: 1, 1, 1, 1
+        text_color: root.specific_text_color
         theme_text_color: 'Custom'
         size_hint: (None, None)
         size: root.width, dp(30)
@@ -98,7 +99,7 @@ Builder.load_string("""
     MDIconButton:
         icon: 'chevron-left'
         theme_text_color: 'Secondary'
-        pos_hint: {'center_x': 0.09, 'center_y': 0.745} if root.theme_cls.device_orientation == 'portrait'\
+        pos_hint: {'center_x': 0.08, 'center_y': 0.745} if root.theme_cls.device_orientation == 'portrait'\
             else {'center_x': 0.39, 'center_y': 0.925}
         on_release: root.change_month('prev')
     MDIconButton:
@@ -204,7 +205,7 @@ class WeekdayLabel(MDLabel):
 
 
 class MDDatePicker(FloatLayout, ThemableBehavior, RectangularElevationBehavior,
-                   ModalView):
+                   SpecificBackgroundColorBehavior, ModalView):
     _sel_day_widget = ObjectProperty()
     cal_list = None
     cal_layout = ObjectProperty()
@@ -216,6 +217,7 @@ class MDDatePicker(FloatLayout, ThemableBehavior, RectangularElevationBehavior,
     year = NumericProperty()
     today = date.today()
     callback = ObjectProperty()
+    background_color = ListProperty([0, 0, 0, 0.7])
 
     class SetDateError(Exception):
         pass

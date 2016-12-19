@@ -11,7 +11,7 @@ Builder.load_string('''
 <MDCard>
     canvas:
         Color:
-            rgba: self.background_color
+            rgba: self.md_bg_color
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -21,7 +21,7 @@ Builder.load_string('''
             a: self.border_color_a
         Line:
             rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius) 
-    background_color: self.theme_cls.bg_light
+    md_bg_color: self.theme_cls.bg_light
     
 <MDSeparator>
     canvas:
@@ -55,4 +55,4 @@ class MDCard(ThemableBehavior, RectangularElevationBehavior, BoxLayout):
     
     border_radius = BoundedNumericProperty(dp(3),min=0)
     border_color_a = BoundedNumericProperty(0, min=0., max=1.)
-    background_color = ReferenceListProperty(r, g, b, a)
+    md_bg_color = ReferenceListProperty(r, g, b, a)

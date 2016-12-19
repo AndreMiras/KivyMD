@@ -7,7 +7,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.button import MDFlatButton, MDIconButton
 from kivymd.theming import ThemableBehavior
 from kivymd.elevationbehavior import RectangularElevationBehavior
-from kivy.properties import ObjectProperty, ListProperty
+from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
+from kivy.properties import ObjectProperty, ListProperty, OptionProperty
 from kivymd.label import MDLabel
 from kivy.metrics import dp
 from kivy.utils import get_color_from_hex
@@ -17,20 +18,37 @@ Builder.load_string("""
 #:import SingleLineTextField kivymd.textfields.SingleLineTextField
 #:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
 #:import MDTab kivymd.tabs.MDTab
+<ColorSelector>:
+    size: dp(40), dp(40)
+    pos: self.pos
+    size_hint: (None, None)
+    canvas:
+        Color:
+            rgba: root.rgb_hex(root.color_name)
+        Ellipse:
+            size: self.size
+            pos: self.pos
+
+<AccentColorSelector@ColorSelector>:
+    on_release: app.theme_cls.accent_palette = root.color_name
+
+<PrimaryColorSelector@ColorSelector>:
+    on_release: app.theme_cls.primary_palette = root.color_name
+
 <MDThemePicker>:
     size_hint: (None, None)
-    size: dp(260), dp(120)+dp(290)
+    size: dp(284), dp(120)+dp(290)
     pos_hint: {'center_x': .5, 'center_y': .5}
     canvas:
         Color:
             rgb: app.theme_cls.primary_color
         Rectangle:
-            size: dp(260), dp(120)
+            size: self.width, dp(120)
             pos: root.pos[0], root.pos[1] + root.height-dp(120)
         Color:
             rgb: app.theme_cls.bg_normal
         Rectangle:
-            size: dp(260), dp(290)
+            size: self.width, dp(290)
             pos: root.pos[0], root.pos[1] + root.height-(dp(120)+dp(290))
 
     MDFlatButton:
@@ -44,14 +62,15 @@ Builder.load_string("""
         size: dp(160), dp(50)
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
         theme_text_color: 'Custom'
-        text_color: (app.theme_cls.bg_light if app.theme_cls.theme_style == "Light" \
-            else app.theme_cls.opposite_bg_light)
+        text_color: root.specific_text_color
     MDTabbedPanel:
         size_hint: (None, None)
-        size: dp(260), root.height-dp(135)
+        size: root.width, root.height-dp(135)
         pos_hint: {'center_x': 0.5, 'center_y': 0.475}
         id: tab_panel
         tab_display_mode:'text'
+        tab_text_color: root.specific_secondary_text_color
+        tab_text_color_active: root.specific_text_color
 
         MDTab:
             name: 'color'
@@ -70,53 +89,17 @@ Builder.load_string("""
                     halign: 'center'
                     orientation: 'horizontal'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Red')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Red'
+                        PrimaryColorSelector:
+                            color_name: 'Red'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Pink')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Pink'
+                        PrimaryColorSelector:
+                            color_name: 'Pink'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Purple')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Purple'
+                        PrimaryColorSelector:
+                            color_name: 'Purple'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('DeepPurple')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'DeepPurple'
+                        PrimaryColorSelector:
+                            color_name: 'DeepPurple'
                 BoxLayout:
                     size_hint: (None, None)
                     pos_hint: {'center_x': .5, 'center_y': 0.5}
@@ -125,53 +108,17 @@ Builder.load_string("""
                     halign: 'center'
                     orientation: 'horizontal'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Indigo')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Indigo'
+                        PrimaryColorSelector:
+                            color_name: 'Indigo'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Blue')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Blue'
+                        PrimaryColorSelector:
+                            color_name: 'Blue'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('LightBlue')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'LightBlue'
+                        PrimaryColorSelector:
+                            color_name: 'LightBlue'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Cyan')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Cyan'
+                        PrimaryColorSelector:
+                            color_name: 'Cyan'
                 BoxLayout:
                     size_hint: (None, None)
                     pos_hint: {'center_x': .5, 'center_y': 0.5}
@@ -181,53 +128,17 @@ Builder.load_string("""
                     orientation: 'horizontal'
                     padding: 0, 0, 0, dp(1)
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Teal')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Teal'
+                        PrimaryColorSelector:
+                            color_name: 'Teal'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Green')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Green'
+                        PrimaryColorSelector:
+                            color_name: 'Green'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('LightGreen')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'LightGreen'
+                        PrimaryColorSelector:
+                            color_name: 'LightGreen'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Lime')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Lime'
+                        PrimaryColorSelector:
+                            color_name: 'Lime'
                 BoxLayout:
                     size_hint: (None, None)
                     pos_hint: {'center_x': .5, 'center_y': 0.5}
@@ -237,53 +148,17 @@ Builder.load_string("""
                     halign: 'center'
                     padding: 0, 0, 0, dp(1)
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Yellow')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Yellow'
+                        PrimaryColorSelector:
+                            color_name: 'Yellow'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Amber')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Amber'
+                        PrimaryColorSelector:
+                            color_name: 'Amber'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Orange')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Orange'
+                        PrimaryColorSelector:
+                            color_name: 'Orange'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('DeepOrange')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'DeepOrange'
+                        PrimaryColorSelector:
+                            color_name: 'DeepOrange'
                 BoxLayout:
                     size_hint: (None, None)
                     pos_hint: {'center_x': .5, 'center_y': 0.5}
@@ -292,40 +167,129 @@ Builder.load_string("""
                     orientation: 'horizontal'
                     padding: 0, 0, 0, dp(1)
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('Brown')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Brown'
+                        PrimaryColorSelector:
+                            color_name: 'Brown'
+                    BoxLayout:
+                        PrimaryColorSelector:
+                            color_name: 'Grey'
+                    BoxLayout:
+                        PrimaryColorSelector:
+                            color_name: 'BlueGrey'
                     BoxLayout:
                         MDIconButton:
                             size: dp(40), dp(40)
-                            pos: self.pos
                             size_hint: (None, None)
                             canvas:
                                 Color:
-                                    rgba: root.rgb_hex('Grey')
+                                    rgba: app.theme_cls.bg_normal
                                 Ellipse:
                                     size: self.size
                                     pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'Grey'
+                            disabled: True
+
+        MDTab:
+            name: 'accent_color'
+            text: "Accent Color"
+            BoxLayout:
+                spacing: dp(4)
+                size_hint: (None, None)
+                size: dp(270), root.height  # -dp(120)
+                pos_hint: {'center_x': 0.532, 'center_y': 0.89}
+                orientation: 'vertical'
+                BoxLayout:
+                    size_hint: (None, None)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    size: dp(230), dp(40)
+                    pos: self.pos
+                    halign: 'center'
+                    orientation: 'horizontal'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            #pos: self.pos
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: root.rgb_hex('BlueGrey')
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            on_release: app.theme_cls.primary_palette = 'BlueGrey'
+                        AccentColorSelector:
+                            color_name: 'Red'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Pink'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Purple'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'DeepPurple'
+                BoxLayout:
+                    size_hint: (None, None)
+                    pos_hint: {'center_x': .5, 'center_y': 0.5}
+                    size: dp(230), dp(40)
+                    pos: self.pos
+                    halign: 'center'
+                    orientation: 'horizontal'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Indigo'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Blue'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'LightBlue'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Cyan'
+                BoxLayout:
+                    size_hint: (None, None)
+                    pos_hint: {'center_x': .5, 'center_y': 0.5}
+                    size: dp(230), dp(40)
+                    pos: self.pos
+                    halign: 'center'
+                    orientation: 'horizontal'
+                    padding: 0, 0, 0, dp(1)
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Teal'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Green'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'LightGreen'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Lime'
+                BoxLayout:
+                    size_hint: (None, None)
+                    pos_hint: {'center_x': .5, 'center_y': 0.5}
+                    size: dp(230), dp(40)
+                    pos: self.pos
+                    orientation: 'horizontal'
+                    halign: 'center'
+                    padding: 0, 0, 0, dp(1)
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Yellow'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Amber'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Orange'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'DeepOrange'
+                BoxLayout:
+                    size_hint: (None, None)
+                    pos_hint: {'center_x': .5, 'center_y': 0.5}
+                    size: dp(230), dp(40)
+                    #pos: self.pos
+                    orientation: 'horizontal'
+                    padding: 0, 0, 0, dp(1)
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Brown'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'Grey'
+                    BoxLayout:
+                        AccentColorSelector:
+                            color_name: 'BlueGrey'
                     BoxLayout:
                         MDIconButton:
                             size: dp(40), dp(40)
@@ -341,22 +305,19 @@ Builder.load_string("""
         MDTab:
             name: 'style'
             text: "Theme Style"
-            BoxLayout:
-                size_hint: (None, None)
-                pos_hint: {'center_x': .3, 'center_y': 0.5}
+            FloatLayout:
                 size: self.size
                 pos: self.pos
-                halign: 'center'
-                spacing: dp(10)
                 BoxLayout:
-                    halign: 'center'
                     size_hint: (None, None)
-                    size: dp(100), dp(100)
-                    pos: self.pos
-                    pos_hint: {'center_x': .3, 'center_y': 0.5}
+                    pos_hint: {'center_x': .5, 'center_y': .6}
+                    halign: 'center'
+                    valign: 'center'
+                    spacing: dp(10)
+                    width: dp(210)
+                    height: dp(100)
                     MDIconButton:
                         size: dp(100), dp(100)
-                        pos: self.pos
                         size_hint: (None, None)
                         canvas:
                             Color:
@@ -368,12 +329,8 @@ Builder.load_string("""
                                 rgba: 0, 0, 0, 1
                             Line:
                                 width: 1.
-                                circle: (self.center_x, self.center_y, 50)
+                                circle: (self.center_x, self.center_y, dp(50))
                         on_release: app.theme_cls.theme_style = 'Light'
-                BoxLayout:
-                    halign: 'center'
-                    size_hint: (None, None)
-                    size: dp(100), dp(100)
                     MDIconButton:
                         size: dp(100), dp(100)
                         pos: self.pos
@@ -388,16 +345,22 @@ Builder.load_string("""
 """)
 
 
-class MDThemePicker(ThemableBehavior, FloatLayout, ModalView,
-                    RectangularElevationBehavior):
-    # background_color = ListProperty([0, 0, 0, 0])
-    time = ObjectProperty()
-
-    def __init__(self, **kwargs):
-        super(MDThemePicker, self).__init__(**kwargs)
+class ColorSelector(MDIconButton):
+    color_name = OptionProperty(
+            'Indigo',
+            options=['Red', 'Pink', 'Purple', 'DeepPurple', 'Indigo', 'Blue',
+                     'LightBlue', 'Cyan', 'Teal', 'Green', 'LightGreen',
+                     'Lime', 'Yellow', 'Amber', 'Orange', 'DeepOrange',
+                     'Brown', 'Grey', 'BlueGrey'])
 
     def rgb_hex(self, col):
         return get_color_from_hex(colors[col][self.theme_cls.accent_hue])
+
+
+class MDThemePicker(ThemableBehavior, FloatLayout, ModalView,
+                    SpecificBackgroundColorBehavior,
+                    RectangularElevationBehavior):
+    pass
 
 
 if __name__ == "__main__":

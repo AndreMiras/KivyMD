@@ -63,7 +63,7 @@ class MDDialog(ThemableBehavior, RectangularElevationBehavior, ModalView):
 
     content = ObjectProperty(None)
 
-    background_color = ListProperty([0, 0, 0, .2])
+    md_bg_color = ListProperty([0, 0, 0, .2])
 
     _container = ObjectProperty()
     _action_buttons = ListProperty([])
@@ -89,7 +89,7 @@ class MDDialog(ThemableBehavior, RectangularElevationBehavior, ModalView):
         if action:
             button.bind(on_release=action)
         button.text_color = self.theme_cls.primary_color
-        button.background_color = self.theme_cls.bg_light
+        button.md_bg_color = self.theme_cls.bg_light
         self._action_buttons.append(button)
 
     def add_widget(self, widget):

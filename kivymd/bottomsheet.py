@@ -58,7 +58,7 @@ from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <MDBottomSheet>
-    background_color: 0,0,0,.8
+    md_bg_color: 0,0,0,.8
     sv: sv
     upper_padding: upper_padding
     gl_content: gl_content
@@ -78,7 +78,7 @@ Builder.load_string('''
             BottomSheetContent:
                 id: gl_content
                 size_hint_y: None
-                background_color: root.theme_cls.bg_normal
+                md_bg_color: root.theme_cls.bg_normal
                 cols: 1
 ''')
 
