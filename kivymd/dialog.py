@@ -13,48 +13,44 @@ Builder.load_string('''
 <MDDialog>:
     canvas:
         Color:
-            rgba:     self.theme_cls.bg_light
+            rgba: self.theme_cls.bg_light
         Rectangle:
-            size:     self.size
-            pos:     self.pos
+            size: self.size
+            pos: self.pos
 
-    _container:        container
-    _action_area:    action_area
-    elevation:        12
+    _container: container
+    _action_area:action_area
+    elevation: 12
     GridLayout:
-        cols:            1
-
+        cols: 1
         GridLayout:
             cols: 1
-            padding:        dp(24), dp(24), dp(24), 0
-            spacing:        dp(20)
+            padding: dp(24), dp(24), dp(24), 0
+            spacing: dp(20)
             MDLabel:
-                text:                root.title
-                font_style:            'Title'
-                theme_text_color:    'Primary'
-                halign:                'left'
-                valign:                'middle'
-                size_hint_y:        None
-                text_size:            self.width, None
-                height:                self.texture_size[1]
-
+                text: root.title
+                font_style: 'Title'
+                theme_text_color: 'Primary'
+                halign: 'left'
+                valign: 'middle'
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
             BoxLayout:
-                id:                    container
-
+                id: container
         AnchorLayout:
-            anchor_x:            'right'
-            anchor_y:            'center'
-            size_hint:            1, None
-            height:                dp(48)
-            padding:            dp(8), dp(8)
-            spacing:            dp(4)
-
+            anchor_x: 'right'
+            anchor_y: 'center'
+            size_hint: 1, None
+            height: dp(48)
+            padding: dp(8), dp(8)
+            spacing: dp(4)
             GridLayout:
-                id:                action_area
-                rows:            1
-                size_hint:        None, None if len(root._action_buttons) > 0 else 1
-                height:            dp(36) if len(root._action_buttons) > 0 else 0
-                width:            self.minimum_width
+                id: action_area
+                rows: 1
+                size_hint: None, None if len(root._action_buttons) > 0 else 1
+                height: dp(36) if len(root._action_buttons) > 0 else 0
+                width: self.minimum_width
 ''')
 
 
