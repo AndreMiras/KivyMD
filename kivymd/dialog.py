@@ -25,7 +25,7 @@ Builder.load_string('''
         cols: 1
         GridLayout:
             cols: 1
-            padding: dp(24), dp(24), dp(24), 0
+            padding: dp(24), dp(24), dp(24), dp(24)
             spacing: dp(20)
             MDLabel:
                 text: root.title
@@ -46,7 +46,7 @@ Builder.load_string('''
             anchor_x: 'right'
             anchor_y: 'center'
             size_hint: 1, None
-            height: dp(52) if len(root._action_buttons) > 0 else dp(16)
+            height: dp(52) if len(root._action_buttons) > 0 else 0
             padding: dp(8), dp(8)
             GridLayout:
                 id: action_area
