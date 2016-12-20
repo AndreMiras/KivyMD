@@ -42,15 +42,15 @@ Builder.load_string('''
             anchor_x: 'right'
             anchor_y: 'center'
             size_hint: 1, None
-            height: dp(48)
+            height: dp(52) if len(root._action_buttons) > 0 else dp(16)
             padding: dp(8), dp(8)
-            spacing: dp(4)
             GridLayout:
                 id: action_area
                 rows: 1
                 size_hint: None, None if len(root._action_buttons) > 0 else 1
                 height: dp(36) if len(root._action_buttons) > 0 else 0
                 width: self.minimum_width
+                spacing: dp(8)
 ''')
 
 
