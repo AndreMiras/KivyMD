@@ -157,9 +157,16 @@ BoxLayout:
                 text: "Open dialog"
                 size_hint: None, None
                 size: 3 * dp(48), dp(48)
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.7}
                 opposite_colors: True
                 on_release: app.show_example_dialog()
+            MDRaisedButton:
+                text: "Open lengthy dialog"
+                size_hint: None, None
+                size: 3 * dp(48), dp(48)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                opposite_colors: True
+                on_release: app.show_example_long_dialog()
         Screen:
             name: 'grid'
             ScrollView:
@@ -887,10 +894,37 @@ class KitchenSink(App):
                           theme_text_color='Secondary',
                           text="This is a dialog with a title and some text. "
                                "That's pretty awesome right!",
+                          size_hint_y=None,
                           valign='top')
-
-        content.bind(size=content.setter('text_size'))
+        content.bind(texture_size=content.setter('size'))
         self.dialog = MDDialog(title="This is a test dialog",
+                               content=content,
+                               size_hint=(.8, None),
+                               height=dp(200),
+                               auto_dismiss=False)
+
+        self.dialog.add_action_button("Dismiss",
+                                      action=lambda *x: self.dialog.dismiss())
+        self.dialog.open()
+
+    def show_example_long_dialog(self):
+        content = MDLabel(font_style='Body1',
+                          theme_text_color='Secondary',
+                          text="Lorem ipsum dolor sit amet, consectetur "
+                               "adipiscing elit, sed do eiusmod tempor "
+                               "incididunt ut labore et dolore magna aliqua. "
+                               "Ut enim ad minim veniam, quis nostrud "
+                               "exercitation ullamco laboris nisi ut aliquip "
+                               "ex ea commodo consequat. Duis aute irure "
+                               "dolor in reprehenderit in voluptate velit "
+                               "esse cillum dolore eu fugiat nulla pariatur. "
+                               "Excepteur sint occaecat cupidatat non "
+                               "proident, sunt in culpa qui officia deserunt "
+                               "mollit anim id est laborum.",
+                          size_hint_y=None,
+                          valign='top')
+        content.bind(texture_size=content.setter('size'))
+        self.dialog = MDDialog(title="This is a long test dialog",
                                content=content,
                                size_hint=(.8, None),
                                height=dp(200),
