@@ -227,7 +227,7 @@ class BaseFlatButton(BaseButton):
 
     def _get_md_bg_color_disabled(self):
         bg_c = self.md_bg_color
-        if bg_c[3]:  # transparent background
+        if bg_c[3] == 0:  # transparent background
             c = bg_c
         else:
             if self.theme_cls.theme_style == 'Dark':
