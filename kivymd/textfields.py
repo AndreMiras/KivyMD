@@ -302,6 +302,9 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                           _current_line_color=self.base_line_color_focus).start(self)
                 if self.message_mode == "on_error":
                     Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
+        if len(self.text) != 0 and not self.focus:
+            self._hint_y = dp(34)
+            self._hint_lbl_font_size = sp(12)
 
     def on_text_validate(self):
         self.has_had_text = True
