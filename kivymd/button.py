@@ -119,7 +119,8 @@ class BaseButton(ThemableBehavior, ButtonBehavior,
     _current_button_color = ListProperty([0., 0., 0., 0.])
     theme_text_color = OptionProperty(None, allownone=True,
                                       options=['Primary', 'Secondary', 'Hint',
-                                               'Error', 'Custom'])
+                                               'Error', 'Custom',
+                                               'ContrastParentBackground'])
     text_color = ListProperty(None, allownone=True)
     opposite_colors = BooleanProperty(False)
 
