@@ -55,7 +55,7 @@ Builder.load_string('''
         Rectangle:
             texture: self._hint_lbl.texture
             size: self._hint_lbl.texture_size
-            pos: self.x, self.y + self._hint_y
+            pos: self.x, self.y + self.height - self._hint_y
         Color:
             rgba: self.disabled_foreground_color if self.disabled else \
             (self.hint_text_color if not self.text and not self.focus else \
@@ -69,6 +69,10 @@ Builder.load_string('''
     multiline:    False
     size_hint_y: None
     height: dp(48)
+
+<MultiLineTextField>:
+    -height: self.minimum_height
+    -multiline: True
 
 <TextfieldLabel>
     disabled_color: self.theme_cls.disabled_hint_text_color
@@ -131,7 +135,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
     _hint_txt_color = ListProperty()
     _hint_lbl = ObjectProperty()
     _hint_lbl_font_size = NumericProperty(sp(16))
-    _hint_y = NumericProperty(dp(10))
+    _hint_y = NumericProperty(dp(38))
     _error_label = ObjectProperty()
     _line_width = NumericProperty(0)
     _hint_txt = StringProperty('')
@@ -221,7 +225,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
             Animation.cancel_all(self, '_line_width', '_hint_y',
                                  '_hint_lbl_font_size')
             if len(self.text) == 0:
-                Animation(_hint_y=dp(34),
+                Animation(_hint_y=dp(14),
                           _hint_lbl_font_size=sp(12), duration=.2,
                           t='out_quad').start(self)
             Animation(_line_width=self.width, duration=.2, t='out_quad').start(self)
@@ -247,7 +251,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                     Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
         else:
             if len(self.text) == 0:
-                Animation(_hint_y=dp(10),
+                Animation(_hint_y=dp(38),
                           _hint_lbl_font_size=sp(16), duration=.2,
                           t='out_quad').start(self)
             if has_error:
@@ -303,7 +307,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
                 if self.message_mode == "on_error":
                     Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
         if len(self.text) != 0 and not self.focus:
-            self._hint_y = dp(34)
+            self._hint_y = dp(14)
             self._hint_lbl_font_size = sp(12)
 
     def on_text_validate(self):
@@ -330,3 +334,7 @@ class SingleLineTextField(ThemableBehavior, FixedHintTextInput):
     def _set_max_text_length(self, instance, length):
         self.max_text_length = length
         self._right_msg_lbl.text = "{}/{}".format(len(self.text), length)
+
+
+class MultiLineTextField(SingleLineTextField):
+    pass
