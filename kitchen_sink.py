@@ -31,6 +31,7 @@ main_widget_kv = '''
 #:import OneLineIconListItem kivymd.list.OneLineIconListItem
 #:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
 #:import SingleLineTextField kivymd.textfields.SingleLineTextField
+#:import MultiLineTextField kivymd.textfields.MultiLineTextField
 #:import MDSpinner kivymd.spinner.MDSpinner
 #:import MDCard kivymd.card.MDCard
 #:import MDSeparator kivymd.card.MDSeparator
@@ -204,6 +205,104 @@ BoxLayout:
                     SmartTile:
                         mipmap: True
                         source: './assets/tangerines-1111529_1280.jpg'
+        Screen:
+            name: 'labels'
+            ScrollView:
+                do_scroll_x: False
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: dp(1000)
+                    BoxLayout:
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Primary'
+                            text: "Body1 label"
+                            halign: 'center'
+                        MDLabel:
+                            font_style: 'Body2'
+                            theme_text_color: 'Primary'
+                            text: "Body2 label"
+                            halign: 'center'
+                    BoxLayout:
+                        MDLabel:
+                            font_style: 'Caption'
+                            theme_text_color: 'Primary'
+                            text: "Caption label"
+                            halign: 'center'
+                        MDLabel:
+                            font_style: 'Subhead'
+                            theme_text_color: 'Primary'
+                            text: "Subhead label"
+                            halign: 'center'
+                    BoxLayout:
+                        MDLabel:
+                            font_style: 'Title'
+                            theme_text_color: 'Primary'
+                            text: "Title label"
+                            halign: 'center'
+                        MDLabel:
+                            font_style: 'Headline'
+                            theme_text_color: 'Primary'
+                            text: "Headline label"
+                            halign: 'center'
+                    MDLabel:
+                        font_style: 'Display1'
+                        theme_text_color: 'Primary'
+                        text: "Display1 label"
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(4)
+                    MDLabel:
+                        font_style: 'Display2'
+                        theme_text_color: 'Primary'
+                        text: "Display2 label"
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(4)
+                    MDLabel:
+                        font_style: 'Display3'
+                        theme_text_color: 'Primary'
+                        text: "Display3 label"
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(4)
+                    MDLabel:
+                        font_style: 'Display4'
+                        theme_text_color: 'Primary'
+                        text: "Display4 label"
+                        halign: 'center'
+                        size_hint_y: None
+                        height: self.texture_size[1] + dp(4)
+                    BoxLayout:
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Primary'
+                            text: "Primary color"
+                            halign: 'center'
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Secondary'
+                            text: "Secondary color"
+                            halign: 'center'
+                    BoxLayout:
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Hint'
+                            text: "Hint color"
+                            halign: 'center'
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Error'
+                            text: "Error color"
+                            halign: 'center'
+                    MDLabel:
+                        font_style: 'Body1'
+                        theme_text_color: 'Custom'
+                        text_color: (0,1,0,.4)
+                        text: "Custom"
+                        halign: 'center'
+
         Screen:
             name: 'list'
             ScrollView:
@@ -398,125 +497,35 @@ BoxLayout:
                 BoxLayout:
                     orientation: 'vertical'
                     size_hint_y: None
-                    height: dp(1000)
-                    BoxLayout:
-                        size_hint_y: None
-                        height: dp(400)
-                        padding: dp(48)
-                        orientation: 'vertical'
-                        spacing: 10
-                        SingleLineTextField:
-                            hint_text: "No helper text"
-                        SingleLineTextField:
-                            hint_text: "Helper text on focus"
-                            message: "This will disappear when you click off"
-                            message_mode: "on_focus"
-                        SingleLineTextField:
-                            hint_text: "Persistent helper text"
-                            message: "Text is always here"
-                            message_mode: "persistent"
-                        SingleLineTextField:
-                            id: text_field_error
-                            hint_text: "Helper text on error (Hit Enter with two characters here)"
-                            message: "Two is my least favorite number"
-                            message_mode: "on_error"
-                        SingleLineTextField:
-                            hint_text: "Max text length = 10"
-                            max_text_length: 10
-                        SingleLineTextField:
-                            hint_text: "required = True"
-                            required: True
-                            message_mode: "on_error"
-
-                    BoxLayout:
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Primary'
-                            text: "Body1 label"
-                            halign: 'center'
-                        MDLabel:
-                            font_style: 'Body2'
-                            theme_text_color: 'Primary'
-                            text: "Body2 label"
-                            halign: 'center'
-                    BoxLayout:
-                        MDLabel:
-                            font_style: 'Caption'
-                            theme_text_color: 'Primary'
-                            text: "Caption label"
-                            halign: 'center'
-                        MDLabel:
-                            font_style: 'Subhead'
-                            theme_text_color: 'Primary'
-                            text: "Subhead label"
-                            halign: 'center'
-                    BoxLayout:
-                        MDLabel:
-                            font_style: 'Title'
-                            theme_text_color: 'Primary'
-                            text: "Title label"
-                            halign: 'center'
-                        MDLabel:
-                            font_style: 'Headline'
-                            theme_text_color: 'Primary'
-                            text: "Headline label"
-                            halign: 'center'
-                    MDLabel:
-                        font_style: 'Display1'
-                        theme_text_color: 'Primary'
-                        text: "Display1 label"
-                        halign: 'center'
-                        size_hint_y: None
-                        height: self.texture_size[1] + dp(4)
-                    MDLabel:
-                        font_style: 'Display2'
-                        theme_text_color: 'Primary'
-                        text: "Display2 label"
-                        halign: 'center'
-                        size_hint_y: None
-                        height: self.texture_size[1] + dp(4)
-                    MDLabel:
-                        font_style: 'Display3'
-                        theme_text_color: 'Primary'
-                        text: "Display3 label"
-                        halign: 'center'
-                        size_hint_y: None
-                        height: self.texture_size[1] + dp(4)
-                    MDLabel:
-                        font_style: 'Display4'
-                        theme_text_color: 'Primary'
-                        text: "Display4 label"
-                        halign: 'center'
-                        size_hint_y: None
-                        height: self.texture_size[1] + dp(4)
-                    BoxLayout:
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Primary'
-                            text: "Primary color"
-                            halign: 'center'
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Secondary'
-                            text: "Secondary color"
-                            halign: 'center'
-                    BoxLayout:
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Hint'
-                            text: "Hint color"
-                            halign: 'center'
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Error'
-                            text: "Error color"
-                            halign: 'center'
-                    MDLabel:
-                        font_style: 'Body1'
-                        theme_text_color: 'Custom'
-                        text_color: (0,1,0,.4)
-                        text: "Custom"
-                        halign: 'center'
+                    height: self.minimum_height
+                    padding: dp(48)
+                    spacing: 10
+                    SingleLineTextField:
+                        hint_text: "No helper text"
+                    SingleLineTextField:
+                        hint_text: "Helper text on focus"
+                        message: "This will disappear when you click off"
+                        message_mode: "on_focus"
+                    SingleLineTextField:
+                        hint_text: "Persistent helper text"
+                        message: "Text is always here"
+                        message_mode: "persistent"
+                    SingleLineTextField:
+                        id: text_field_error
+                        hint_text: "Helper text on error (Hit Enter with two characters here)"
+                        message: "Two is my least favorite number"
+                        message_mode: "on_error"
+                    SingleLineTextField:
+                        hint_text: "Max text length = 10"
+                        max_text_length: 10
+                    SingleLineTextField:
+                        hint_text: "required = True"
+                        required: True
+                        message_mode: "on_error"
+                    MultiLineTextField:
+                        hint_text: "Multi-line text"
+                        message: "Messages are also supported here"
+                        message_mode: "persistent"
 
         Screen:
             name: 'theming'
@@ -774,6 +783,10 @@ BoxLayout:
         icon: 'checkbox-blank-circle'
         text: "Grid lists"
         on_release: app.root.ids.scr_mngr.current = 'grid'
+    NavigationDrawerIconButton:
+        icon: 'checkbox-blank-circle'
+        text: "Labels"
+        on_release: app.root.ids.scr_mngr.current = 'labels'
     NavigationDrawerIconButton:
         icon: 'checkbox-blank-circle'
         text: "Lists"
