@@ -30,8 +30,7 @@ main_widget_kv = '''
 #:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
 #:import OneLineIconListItem kivymd.list.OneLineIconListItem
 #:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
-#:import SingleLineTextField kivymd.textfields.SingleLineTextField
-#:import MultiLineTextField kivymd.textfields.MultiLineTextField
+#:import MDTextField kivymd.textfields.MDTextField
 #:import MDSpinner kivymd.spinner.MDSpinner
 #:import MDCard kivymd.card.MDCard
 #:import MDSeparator kivymd.card.MDSeparator
@@ -500,29 +499,30 @@ BoxLayout:
                     height: self.minimum_height
                     padding: dp(48)
                     spacing: 10
-                    SingleLineTextField:
+                    MDTextField:
                         hint_text: "No helper text"
-                    SingleLineTextField:
+                    MDTextField:
                         hint_text: "Helper text on focus"
                         message: "This will disappear when you click off"
                         message_mode: "on_focus"
-                    SingleLineTextField:
+                    MDTextField:
                         hint_text: "Persistent helper text"
                         message: "Text is always here"
                         message_mode: "persistent"
-                    SingleLineTextField:
+                    MDTextField:
                         id: text_field_error
                         hint_text: "Helper text on error (Hit Enter with two characters here)"
                         message: "Two is my least favorite number"
                         message_mode: "on_error"
-                    SingleLineTextField:
+                    MDTextField:
                         hint_text: "Max text length = 10"
                         max_text_length: 10
-                    SingleLineTextField:
+                    MDTextField:
                         hint_text: "required = True"
                         required: True
                         message_mode: "on_error"
-                    MultiLineTextField:
+                    MDTextField:
+                        multiline: True
                         hint_text: "Multi-line text"
                         message: "Messages are also supported here"
                         message_mode: "persistent"
@@ -734,7 +734,7 @@ BoxLayout:
                         size_hint_y: None
                         padding: dp(48)
                         spacing: 10
-                        SingleLineTextField:
+                        MDTextField:
                             hint_text: "You can put any widgets here"
                             message: "Hello :)"
                             message_mode: "on_focus"
@@ -748,7 +748,7 @@ BoxLayout:
                         size_hint_y: None
                         padding: dp(48)
                         spacing: 10
-                        SingleLineTextField:
+                        MDTextField:
                             hint_text: "Hello again"
                 MDBottomNavigationItem:
                     name: 'bottom_navigation_desktop_2'
