@@ -12,7 +12,6 @@ from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string("""
-#:import SingleLineTextField kivymd.textfields.SingleLineTextField
 #:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
 #:import MDTab kivymd.tabs.MDTab
 <ColorSelector>:
