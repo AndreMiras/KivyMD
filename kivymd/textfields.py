@@ -20,7 +20,7 @@ Builder.load_string('''
             rgba: self.line_color_normal
         Line:
             id: "the_line"
-            points: self.x, self.y + dp(8), self.x + self.width, self.y + dp(8)
+            points: self.x, self.y + dp(16), self.x + self.width, self.y + dp(16)
             width: 1
             dash_length: dp(3)
             dash_offset: 2 if self.disabled else 0
@@ -28,19 +28,19 @@ Builder.load_string('''
             rgba: self._current_line_color
         Rectangle:
             size: self._line_width, dp(2)
-            pos: self.center_x - (self._line_width / 2), self.y + dp(8)
+            pos: self.center_x - (self._line_width / 2), self.y + dp(16)
         Color:
             rgba: self._current_error_color
         Rectangle:
             texture: self._msg_lbl.texture
             size: self._msg_lbl.texture_size
-            pos: self.x, self.y - dp(8)
+            pos: self.x, self.y
         Color:
             rgba: self._current_right_lbl_color
         Rectangle:
             texture: self._right_msg_lbl.texture
             size: self._right_msg_lbl.texture_size
-            pos: self.width-self._right_msg_lbl.texture_size[0]+dp(45), self.y - dp(8)
+            pos: self.width-self._right_msg_lbl.texture_size[0]+dp(45), self.y
         Color:
             rgba: (self._current_line_color if self.focus and not self.cursor_blink \
             else (0, 0, 0, 0))
@@ -68,7 +68,7 @@ Builder.load_string('''
     padding:    0, dp(16), 0, dp(10)
     multiline:    False
     size_hint_y: None
-    height: self.minimum_height
+    height: self.minimum_height + dp(8)
 
 <TextfieldLabel>
     disabled_color: self.theme_cls.disabled_hint_text_color
