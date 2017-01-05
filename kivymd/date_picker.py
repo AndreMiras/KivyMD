@@ -156,7 +156,7 @@ Builder.load_string("""
             size: (dp(40), dp(40)) if root.theme_cls.device_orientation == 'portrait'\
                 else (dp(32), dp(32))
             pos: self.pos if root.theme_cls.device_orientation == 'portrait'\
-                else [self.pos[0] + (dp(3) if platform.system() != "Linux" else 0), self.pos[1]]
+                else [self.pos[0], self.pos[1]]
 """)
 
 
