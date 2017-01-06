@@ -4,8 +4,7 @@ from kivy.animation import Animation
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.metrics import sp
-from kivy.properties import ObjectProperty, NumericProperty, StringProperty, \
-    BooleanProperty
+from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivy.properties import OptionProperty, ListProperty
 from kivy.uix.textinput import TextInput
 from kivymd.label import MDLabel
@@ -18,7 +17,6 @@ Builder.load_string('''
         Color:
             rgba: self.line_color_normal
         Line:
-            id: "the_line"
             points: self.x, self.y + dp(16), self.x + self.width, self.y + dp(16)
             width: 1
             dash_length: dp(3)
@@ -41,8 +39,7 @@ Builder.load_string('''
             size: self._right_msg_lbl.texture_size
             pos: self.width-self._right_msg_lbl.texture_size[0]+dp(45), self.y
         Color:
-            rgba: (self._current_line_color if self.focus and not self.cursor_blink \
-            else (0, 0, 0, 0))
+            rgba: (self._current_line_color if self.focus and not self.cursor_blink else (0, 0, 0, 0))
         Rectangle:
             pos: [int(x) for x in self.cursor_pos]
             size: 1, -self.line_height
@@ -54,8 +51,7 @@ Builder.load_string('''
             pos: self.x, self.y + self.height - self._hint_y
         Color:
             rgba: self.disabled_foreground_color if self.disabled else \
-            (self.hint_text_color if not self.text and not self.focus else \
-            self.foreground_color)
+            (self.hint_text_color if not self.text and not self.focus else self.foreground_color)
 
     font_name: 'Roboto'
     foreground_color: app.theme_cls.text_color
@@ -187,7 +183,7 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
 
     def _update_theme_style(self, *args):
         self.line_color_normal = self.theme_cls.divider_color
-        if not self.error and not self._text_len_error:
+        if not any([self.error, self._text_len_error]):
             if not self.focus:
                 self._current_hint_text_color = self.theme_cls.disabled_hint_text_color
                 self._current_right_lbl_color = self.theme_cls.disabled_hint_text_color
@@ -195,7 +191,7 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
                     self._current_error_color = self.theme_cls.disabled_hint_text_color
 
     def on_width(self, instance, width):
-        if self.focus and instance is not None or self.error and instance is not None or self._text_len_error and instance is not None:
+        if any([self.focus, self.error, self._text_len_error]) and instance is not None:
             self._line_width = width
         self._msg_lbl.width = self.width
         self._right_msg_lbl.width = self.width
@@ -208,12 +204,12 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
             max_text_length = sys.maxsize
         else:
             max_text_length = self.max_text_length
-        if len(self.text) > max_text_length or (True if self.required and len(self.text) == 0 and self.has_had_text else False):
+        if len(self.text) > max_text_length or all([self.required, len(self.text) == 0, self.has_had_text]):
             self._text_len_error = True
-        if self.error or (True if self.max_text_length is not None and len(self.text) > self.max_text_length else False):
+        if self.error or all([self.max_text_length is not None and len(self.text) > self.max_text_length]):
             has_error = True
         else:
-            if self.required and len(self.text) == 0 and self.has_had_text:
+            if all([self.required, len(self.text) == 0, self.has_had_text]):
                 has_error = True
             else:
                 has_error = False
@@ -228,7 +224,8 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
                           t='out_quad').start(self)
             Animation(_line_width=self.width, duration=.2, t='out_quad').start(self)
             if has_error:
-                Animation(duration=.2, _current_hint_text_color=self.error_color, _current_right_lbl_color=self.error_color,
+                Animation(duration=.2, _current_hint_text_color=self.error_color,
+                          _current_right_lbl_color=self.error_color,
                           _current_line_color=self.error_color).start(self)
                 if self.helper_text_mode == "on_error" and (self.error or self._text_len_error):
                     Animation(duration=.2, _current_error_color=self.error_color).start(self)
