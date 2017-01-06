@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
+import sys
 from kivy.animation import Animation
-from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.metrics import sp
@@ -116,22 +115,23 @@ class TextfieldLabel(MDLabel):
 
 
 class MDTextField(ThemableBehavior, FixedHintTextInput):
+    helper_text = StringProperty("This field is required")
+    helper_text_mode = OptionProperty('none', options=['none', 'on_error', 'persistent', 'on_focus'])
+
+    max_text_length = NumericProperty(None)
+    required = BooleanProperty(False)
+
+    color_mode = OptionProperty('primary', options=['primary', 'accent', 'custom'])
     line_color_normal = ListProperty()
     line_color_focus = ListProperty()
     error_color = ListProperty()
+
     error = BooleanProperty(False)
-    text_len_error = BooleanProperty(False)
-    helper_text = StringProperty("This field is required")
-    helper_text_mode = OptionProperty('none', options=['none', 'on_error', 'persistent', 'on_focus'])
-    max_text_length = NumericProperty(None)
-    required = BooleanProperty(False)
-    color_mode = OptionProperty('primary', options=['primary', 'accent', 'custom'])
-    _hint_lbl = ObjectProperty()
+    _text_len_error = BooleanProperty(False)
+
     _hint_lbl_font_size = NumericProperty(sp(16))
     _hint_y = NumericProperty(dp(38))
-    _error_label = ObjectProperty()
     _line_width = NumericProperty(0)
-    _hint_txt = StringProperty('')
     _current_line_color = ListProperty([0.0, 0.0, 0.0, 0.0])
     _current_error_color = ListProperty([0.0, 0.0, 0.0, 0.0])
     _current_hint_text_color = ListProperty([0.0, 0.0, 0.0, 0.0])
@@ -159,7 +159,6 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
         self._current_hint_text_color = self.theme_cls.disabled_hint_text_color
         self._current_line_color = self.theme_cls.primary_color
 
-        self.cursor_color = self.theme_cls.primary_color
         self.bind(helper_text=self._set_msg,
                   hint_text=self._set_hint,
                   _hint_lbl_font_size=self._hint_lbl.setter('font_size'),
@@ -173,10 +172,9 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
 
     def _update_colors(self, color):
         self.line_color_focus = color
-        if not self.error and not self.text_len_error:
+        if not self.error and not self._text_len_error:
             self._current_line_color = color
             if self.focus:
-                self.cursor_color = color
                 self._current_line_color = color
 
     def _update_accent_color(self, *args):
@@ -189,7 +187,7 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
 
     def _update_theme_style(self, *args):
         self.line_color_normal = self.theme_cls.divider_color
-        if not self.error and not self.text_len_error:
+        if not self.error and not self._text_len_error:
             if not self.focus:
                 self._current_hint_text_color = self.theme_cls.disabled_hint_text_color
                 self._current_right_lbl_color = self.theme_cls.disabled_hint_text_color
@@ -197,7 +195,7 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
                     self._current_error_color = self.theme_cls.disabled_hint_text_color
 
     def on_width(self, instance, width):
-        if self.focus and instance is not None or self.error and instance is not None or self.text_len_error and instance is not None:
+        if self.focus and instance is not None or self.error and instance is not None or self._text_len_error and instance is not None:
             self._line_width = width
         self._msg_lbl.width = self.width
         self._right_msg_lbl.width = self.width
@@ -207,11 +205,11 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
         Animation.cancel_all(self, '_line_width', '_hint_y',
                              '_hint_lbl_font_size')
         if self.max_text_length is None:
-            max_text_length = 9999999999999
+            max_text_length = sys.maxsize
         else:
             max_text_length = self.max_text_length
         if len(self.text) > max_text_length or (True if self.required and len(self.text) == 0 and self.has_had_text else False):
-            self.text_len_error = True
+            self._text_len_error = True
         if self.error or (True if self.max_text_length is not None and len(self.text) > self.max_text_length else False):
             has_error = True
         else:
@@ -232,9 +230,9 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
             if has_error:
                 Animation(duration=.2, _current_hint_text_color=self.error_color, _current_right_lbl_color=self.error_color,
                           _current_line_color=self.error_color).start(self)
-                if self.helper_text_mode == "on_error" and (self.error or self.text_len_error):
+                if self.helper_text_mode == "on_error" and (self.error or self._text_len_error):
                     Animation(duration=.2, _current_error_color=self.error_color).start(self)
-                elif self.helper_text_mode == "on_error" and not self.error and not self.text_len_error:
+                elif self.helper_text_mode == "on_error" and not self.error and not self._text_len_error:
                     Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
                 elif self.helper_text_mode == "persistent":
                     Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
@@ -258,9 +256,9 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
                 Animation(duration=.2, _current_line_color=self.error_color,
                           _current_hint_text_color=self.error_color,
                           _current_right_lbl_color=self.error_color).start(self)
-                if self.helper_text_mode == "on_error" and (self.error or self.text_len_error):
+                if self.helper_text_mode == "on_error" and (self.error or self._text_len_error):
                     Animation(duration=.2, _current_error_color=self.error_color).start(self)
-                elif self.helper_text_mode == "on_error" and not self.error and not self.text_len_error:
+                elif self.helper_text_mode == "on_error" and not self.error and not self._text_len_error:
                     Animation(duration=.2, _current_error_color=(0, 0, 0, 0)).start(self)
                 elif self.helper_text_mode == "persistent":
                     Animation(duration=.2, _current_error_color=self.theme_cls.disabled_hint_text_color).start(self)
@@ -286,18 +284,18 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
             self._right_msg_lbl.text = "{}/{}".format(len(text), self.max_text_length)
             max_text_length = self.max_text_length
         else:
-            max_text_length = 9999999999999
-        if len(text) > max_text_length or (True if self.required and len(text) == 0 and self.has_had_text else False):
-            self.text_len_error = True
+            max_text_length = sys.maxsize
+        if len(text) > max_text_length or all([self.required, len(self.text) == 0, self.has_had_text]):
+            self._text_len_error = True
         else:
-            self.text_len_error = False
-        if self.error or self.text_len_error:
+            self._text_len_error = False
+        if self.error or self._text_len_error:
             if self.focus:
                 Animation(duration=.2, _current_hint_text_color=self.error_color,
                           _current_line_color=self.error_color).start(self)
-                if self.helper_text_mode == "on_error" and (self.error or self.text_len_error):
+                if self.helper_text_mode == "on_error" and (self.error or self._text_len_error):
                     Animation(duration=.2, _current_error_color=self.error_color).start(self)
-                if self.text_len_error:
+                if self._text_len_error:
                     Animation(duration=.2, _current_right_lbl_color=self.error_color).start(self)
         else:
             if self.focus:
@@ -313,11 +311,11 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
     def on_text_validate(self):
         self.has_had_text = True
         if self.max_text_length is None:
-            max_text_length = 9999999999999
+            max_text_length = sys.maxsize
         else:
             max_text_length = self.max_text_length
-        if len(self.text) > max_text_length or (True if self.required and len(self.text) == 0 and self.has_had_text else False):
-            self.text_len_error = True
+        if len(self.text) > max_text_length or all([self.required, len(self.text) == 0, self.has_had_text]):
+            self._text_len_error = True
 
     def _set_hint(self, instance, text):
         self._hint_lbl.text = text
