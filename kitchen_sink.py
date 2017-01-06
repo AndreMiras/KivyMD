@@ -176,7 +176,7 @@ BoxLayout:
                     row_default_height: (self.width - self.cols*self.spacing[0])/self.cols
                     row_force_default: True
                     size_hint_y: None
-                    height: 8 * dp(100) # /1 * self.row_default_height
+                    height: self.minimum_height
                     padding: dp(4), dp(4)
                     spacing: dp(4)
                     SmartTileWithLabel:
@@ -503,29 +503,41 @@ BoxLayout:
                         hint_text: "No helper text"
                     MDTextField:
                         hint_text: "Helper text on focus"
-                        message: "This will disappear when you click off"
-                        message_mode: "on_focus"
+                        helper_text: "This will disappear when you click off"
+                        helper_text_mode: "on_focus"
                     MDTextField:
                         hint_text: "Persistent helper text"
-                        message: "Text is always here"
-                        message_mode: "persistent"
+                        helper_text: "Text is always here"
+                        helper_text_mode: "persistent"
                     MDTextField:
                         id: text_field_error
                         hint_text: "Helper text on error (Hit Enter with two characters here)"
-                        message: "Two is my least favorite number"
-                        message_mode: "on_error"
+                        helper_text: "Two is my least favorite number"
+                        helper_text_mode: "on_error"
                     MDTextField:
                         hint_text: "Max text length = 10"
                         max_text_length: 10
                     MDTextField:
                         hint_text: "required = True"
                         required: True
-                        message_mode: "on_error"
+                        helper_text_mode: "on_error"
                     MDTextField:
                         multiline: True
                         hint_text: "Multi-line text"
-                        message: "Messages are also supported here"
-                        message_mode: "persistent"
+                        helper_text: "Messages are also supported here"
+                        helper_text_mode: "persistent"
+                    MDTextField:
+                        hint_text: "color_mode = \'accent\'"
+                        color_mode: 'accent'
+                    MDTextField:
+                        hint_text: "color_mode = \'custom\'"
+                        color_mode: 'custom'
+                        helper_text_mode: "on_focus"
+                        helper_text: "Color is defined by \'line_color_focus\' property"
+                        line_color_focus: self.theme_cls.opposite_bg_normal  # This is the color used by the textfield
+                    MDTextField:
+                        hint_text: "disabled = True"
+                        disabled: True
 
         Screen:
             name: 'theming'
@@ -736,8 +748,8 @@ BoxLayout:
                         spacing: 10
                         MDTextField:
                             hint_text: "You can put any widgets here"
-                            message: "Hello :)"
-                            message_mode: "on_focus"
+                            helper_text: "Hello :)"
+                            helper_text_mode: "on_focus"
                 MDBottomNavigationItem:
                     name: 'bottom_navigation_desktop_1'
                     text: "Hello"
