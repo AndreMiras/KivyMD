@@ -46,7 +46,7 @@ p4a.local_recipes = %(source.dir)s/../../gitlab-ci/p4a-recipes/
 requirements.source.kivymd = ../../
 
 # (list) Garden requirements
-garden_requirements = recycleview
+# garden_requirements =
 
 # (str) Presplash of the application
 presplash.filename = %(source.dir)s/../../kivymd/images/kivymd_logo.png
