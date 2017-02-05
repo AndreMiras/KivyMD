@@ -18,14 +18,6 @@ before_script:
   - cd $CI_PROJECT_DIR/gitlab-ci
   - python ./android_sdk_downloader.py
 
-after_script:
-  # If nothing in bin dir, then the build has failed
-  - cd $CI_PROJECT_DIR/demos/kitchen_sink
-  - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
-  - cd bin
-  # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
-  - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
-
 
 android_kitchen_armeabi:
   type: build
@@ -43,6 +35,12 @@ android_kitchen_armeabi:
     - export APP_ANDROID_API=19
     # Build
     - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 android_kitchen_arm-v7a:
   type: build
@@ -60,6 +58,12 @@ android_kitchen_arm-v7a:
     - export APP_ANDROID_API=21
     # Build
     - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 
 android_kitchen_arm64-v8a:
@@ -77,6 +81,12 @@ android_kitchen_arm64-v8a:
     - export APP_ANDROID_ARCH=arm64-v8a
     - export APP_ANDROID_API=21
     - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 android_kitchen_x86:
   type: build
@@ -94,3 +104,9 @@ android_kitchen_x86:
     - export APP_ANDROID_API=21
     # Build
     - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
