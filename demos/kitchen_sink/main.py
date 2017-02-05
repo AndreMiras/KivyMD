@@ -866,6 +866,7 @@ class KitchenSink(App):
     theme_cls = ThemeManager()
     nav_drawer = ObjectProperty()
     previous_date = ObjectProperty()
+    title = "KivyMD Kitchen Sink"
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
