@@ -1,0 +1,112 @@
+before_script:
+  # Prepare to install Java, skip the accept licence dialog
+  - apt-get install debconf
+  - echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+  - echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+  - dpkg --add-architecture i386
+  - apt-get update
+  # P4A dependencies
+  - apt-get install -y build-essential ccache git zlib1g-dev python2.7 python2.7-dev libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-7-jdk unzip ant ccache
+  - apt-get update -qy
+  - apt-get install -y python-dev python-pip
+  # Debug things
+  - python -v
+  - which python
+  - pip -V
+  # P4A dependencies
+  - pip install https://github.com/kivy/buildozer/archive/master.zip colorama appdirs sh jinja2 six cython --upgrade
+  - cd $CI_PROJECT_DIR/gitlab-ci
+  - python ./android_sdk_downloader.py
+
+
+android_kitchen_armeabi:
+  type: build
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  script:
+    - echo "Building KitchenSink for armeabi"
+    - cd $CI_PROJECT_DIR/gitlab-ci
+    # Install API
+    - python ./android_sdk_downloader.py --api 19
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    # Build vars
+    - export APP_ANDROID_ARCH=armeabi
+    - export APP_ANDROID_API=19
+    # Build
+    - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+
+android_kitchen_arm-v7a:
+  type: build
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  script:
+    - echo "Building KitchenSink for armeabi-v7a"
+    - cd $CI_PROJECT_DIR/gitlab-ci
+    # Install API
+    - python ./android_sdk_downloader.py --api 21
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    # Build vars
+    - export APP_ANDROID_ARCH=armeabi-v7a
+    - export APP_ANDROID_API=21
+    # Build
+    - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+
+
+android_kitchen_arm64-v8a:
+  type: build
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  script:
+    - echo "Building KitchenSink for arm64-v8a"
+    - cd $CI_PROJECT_DIR/gitlab-ci
+    # Install API
+    - python ./android_sdk_downloader.py --api 21
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    # Build vars
+    - export APP_ANDROID_ARCH=arm64-v8a
+    - export APP_ANDROID_API=21
+    - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+
+android_kitchen_x86:
+  type: build
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  script:
+    - echo "Building KitchenSink for x86"
+    - cd $CI_PROJECT_DIR/gitlab-ci
+    # Install API
+    - python ./android_sdk_downloader.py --api 21
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    # Build vars
+    - export APP_ANDROID_ARCH=x86
+    - export APP_ANDROID_API=21
+    # Build
+    - buildozer android_new debug
+    # If nothing in bin dir, then the build has failed
+    - cd $CI_PROJECT_DIR/demos/kitchen_sink
+    - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
+    - cd bin
+    # Rename apk in format {android_arch}-{git_branch}-{git_commit_hash}
+    - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
