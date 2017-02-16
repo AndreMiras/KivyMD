@@ -112,7 +112,7 @@ android_kitchen_x86:
     - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 trigger_build_site:
-  stage: deploy
+  stage: build
   script:
     - curl -X POST -F token=$KIVYMD_DOC_BUILD_TOKEN -F ref=master https://gitlab.com/api/v3/projects/2719855/trigger/builds
   only:
