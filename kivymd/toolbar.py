@@ -97,9 +97,3 @@ class Toolbar(ThemableBehavior, RectangularElevationBehavior,
             child.text_color = self.specific_text_color
         for child in self.ids['right_actions'].children:
             child.text_color = self.specific_text_color
-
-    def _update_specific_text_color(self, instance, value):
-        if isinstance(self, Factory.NavDrawerToolbar):
-            pass
-        else:
-            super(Toolbar, self)._update_specific_text_color(instance, value)

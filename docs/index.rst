@@ -6,6 +6,9 @@
 Welcome to KivyMD's documentation!
 ==================================
 
+.. warning::
+   KivyMD is currently in alpha status, so things are changing all the time and we cannot promise any kind of API stability. However it is safe to vendor now and make use of what's currently available; giving you freedom to upgrade when you're ready to do the necessary refactoring.
+
 Contents:
 
 .. toctree::
@@ -13,6 +16,7 @@ Contents:
 
    kivymd.list
    kivymd.bottomsheet
+   kivymd.navigationdrawer
 
 .. Module contents
 .. ---------------
@@ -27,5 +31,4 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`modindex`
-.. * :ref:`search`
-
+* :ref:`search`
