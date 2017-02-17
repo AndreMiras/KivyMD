@@ -1,29 +1,31 @@
-before_script:
-  # Prepare to install Java, skip the accept licence dialog
-  - apt-get install debconf
-  - echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-  - echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-  - dpkg --add-architecture i386
-  - apt-get update
-  # P4A dependencies
-  - apt-get install -y build-essential ccache git zlib1g-dev python2.7 python2.7-dev libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-7-jdk unzip ant ccache
-  - apt-get update -qy
-  - apt-get install -y python-dev python-pip
-  # Debug things
-  - python -v
-  - which python
-  - pip -V
-  # P4A dependencies
-  - pip install https://github.com/kivy/buildozer/archive/master.zip colorama appdirs sh jinja2 six cython --upgrade
-  - cd $CI_PROJECT_DIR/gitlab-ci
-  - python ./android_sdk_downloader.py
-
-
-android_kitchen_armeabi:
+.android_job_template: &android_job_definition
   type: build
   artifacts:
     paths:
       - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  before_script:
+    # Prepare to install Java, skip the accept licence dialog
+    - apt-get install debconf
+    - echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+    - echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+    - dpkg --add-architecture i386
+    - apt-get update
+    # P4A dependencies
+    - apt-get install -y build-essential ccache git zlib1g-dev python2.7 python2.7-dev libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-7-jdk unzip ant ccache
+    - apt-get update -qy
+    - apt-get install -y python-dev python-pip
+    # Debug things
+    - python -v
+    - which python
+    - pip -V
+    # P4A dependencies
+    - pip install https://github.com/kivy/buildozer/archive/master.zip colorama appdirs sh jinja2 six cython --upgrade
+    - cd $CI_PROJECT_DIR/gitlab-ci
+    - python ./android_sdk_downloader.py
+
+
+android_kitchen_armeabi:
+  <<: *android_job_definition
   script:
     - echo "Building KitchenSink for armeabi"
     - cd $CI_PROJECT_DIR/gitlab-ci
@@ -43,10 +45,7 @@ android_kitchen_armeabi:
     - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 android_kitchen_arm-v7a:
-  type: build
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  <<: *android_job_definition
   script:
     - echo "Building KitchenSink for armeabi-v7a"
     - cd $CI_PROJECT_DIR/gitlab-ci
@@ -67,10 +66,7 @@ android_kitchen_arm-v7a:
 
 
 android_kitchen_arm64-v8a:
-  type: build
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  <<: *android_job_definition
   script:
     - echo "Building KitchenSink for arm64-v8a"
     - cd $CI_PROJECT_DIR/gitlab-ci
@@ -89,10 +85,7 @@ android_kitchen_arm64-v8a:
     - mv *.apk $CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
 
 android_kitchen_x86:
-  type: build
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/demos/kitchen_sink/bin/$CI_BUILD_NAME-$CI_BUILD_REF_NAME-${CI_BUILD_REF:0:8}.apk
+  <<: *android_job_definition
   script:
     - echo "Building KitchenSink for x86"
     - cd $CI_PROJECT_DIR/gitlab-ci
