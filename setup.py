@@ -1,4 +1,3 @@
-#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
 import re
@@ -19,12 +18,13 @@ setup(name='kivymd',
                   'Design',
       author='Andrés Rodríguez',
       author_email='andres.rodriguez@lithersoft.com',
-      url='https://gitlab.com/kivymd/KivyMD/',
+      url='https://gitlab.com/kivymd/KivyMD',
       packages=['kivymd'],
       package_data={
           'kivymd': ['images/*.png', 'images/*.jpg', 'images/*.atlas',
                      'vendor/*.py',
                      'fonts/*.ttf', 'vendor/circleLayout/*.py',
-                     'vendor/circularTimePicker/*.py']},
+                     'vendor/circularTimePicker/*.py',
+                     'vendor/navigationdrawer/*.py']},
       requires=['kivy']
       )
