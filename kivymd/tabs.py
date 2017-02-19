@@ -46,6 +46,7 @@ Builder.load_string("""
         id: tab_manager
         current: root.current
         screens: root.tabs
+        transition: sm.SlideTransition()
             
 
 <MDTabHeader>:
@@ -272,9 +273,6 @@ class MDTab(Screen, ThemableBehavior):
         self.register_event_type('on_tab_touch_up')
         self.register_event_type('on_tab_press')
         self.register_event_type('on_tab_release')
-
-    def on_leave(self, *args):
-        self.parent_widget.ids.tab_manager.transition.direction = self.parent_widget.normal_dir
         
     def on_tab_touch_down(self, *args):
         pass
@@ -288,7 +286,6 @@ class MDTab(Screen, ThemableBehavior):
     def on_tab_press(self, *args):
         par = self.parent_widget
         if par.previous_tab is not self:
-            par.prev_dir = str(par.ids.tab_manager.transition.direction)
             if par.previous_tab.index > self.index:
                 par.ids.tab_manager.transition.direction = "right"
             elif par.previous_tab.index < self.index:
@@ -364,13 +361,8 @@ class MDTabbedPanel(TabbedPanelBase):
 
     def __init__(self, **kwargs):
         super(MDTabbedPanel, self).__init__(**kwargs)
-        self.prev_dir = None
         self.index = 0
         self._refresh_tabs()
-        Clock.schedule_once(self._set_normal_dir, 0)
-
-    def _set_normal_dir(self, *args):
-        self.normal_dir = str(self.ids.tab_manager.transition.direction)
         
     def on_tab_width_mode(self, *args):
         self._refresh_tabs()

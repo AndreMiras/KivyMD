@@ -506,13 +506,13 @@ NavigationLayout:
                     size_hint:    None, None
                     size:        dp(48), dp(48)
                     pos_hint:    {'center_x': 0.5, 'center_y': 0.4}
-                    _active: True
+                    active: True
                 MDSpinner:
                     id: spinner
                     size_hint: None, None
                     size: dp(46), dp(46)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    _active: True if chkbox._active else False
+                    active: True if chkbox.active else False
             Screen:
                 name: 'progressbars'
                 BoxLayout:
