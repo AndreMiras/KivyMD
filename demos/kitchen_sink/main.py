@@ -5,7 +5,6 @@ from kivy.metrics import dp
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 
-from kivymd import snackbar as Snackbar
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
 from kivymd.date_picker import MDDatePicker
@@ -15,6 +14,7 @@ from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
 from kivymd.selectioncontrols import MDCheckbox
+from kivymd.snackbar import Snackbar
 from kivymd.theming import ThemeManager
 from kivymd.time_picker import MDTimePicker
 
@@ -956,14 +956,11 @@ class KitchenSink(App):
 
     def show_example_snackbar(self, snack_type):
         if snack_type == 'simple':
-            Snackbar.make("This is a snackbar!")
+            Snackbar(text="This is a snackbar!").show()
         elif snack_type == 'button':
-            Snackbar.make("This is a snackbar", button_text="with a button!",
-                          button_callback=lambda *args: 2)
+            Snackbar(text="This is a snackbar", button_text="with a button!", button_callback=lambda *args: 2).show()
         elif snack_type == 'verylong':
-            Snackbar.make("This is a very very very very very very very long "
-                          "snackbar!",
-                          button_text="Hello world")
+            Snackbar(text="This is a very very very very very very very long snackbar!").show()
 
     def show_example_dialog(self):
         content = MDLabel(font_style='Body1',
