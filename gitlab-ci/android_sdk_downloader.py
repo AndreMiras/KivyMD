@@ -45,7 +45,7 @@ class NoOutputBuildozer(Buildozer):
 
 
 buildozer = NoOutputBuildozer(target='android')
-buildozer.log_level = 0
+buildozer.log_level = 2
 
 # Ensure directories exist
 buildozer.mkdir(buildozer.global_buildozer_dir)
