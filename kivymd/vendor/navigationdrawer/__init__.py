@@ -431,6 +431,20 @@ class NavigationDrawer(StencilView):
             self._main_above = False
 
     def on__main_above(self, *args):
+        # newval = self._main_above
+        # main_panel = self._main_panel
+        # side_panel = self._side_panel
+        # self.canvas.remove(main_panel.canvas)
+        # self.canvas.remove(side_panel.canvas)
+        # if newval:
+        #     self.canvas.insert(0, main_panel.canvas)
+        #     self.canvas.insert(0, side_panel.canvas)
+        # else:
+        #     self.canvas.insert(0, side_panel.canvas)
+        #     self.canvas.insert(0, main_panel.canvas)
+        pass
+
+    def on_main_panel(self, *args):
         newval = self._main_above
         main_panel = self._main_panel
         side_panel = self._side_panel
