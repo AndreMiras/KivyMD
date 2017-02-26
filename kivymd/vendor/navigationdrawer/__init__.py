@@ -655,6 +655,8 @@ class NavigationDrawer(StencilView):
                     self._anim_relax()
             else:
                 self._anim_relax()
+        elif self._side_panel.collide_point(*touch.pos):
+            return
         else:
             super(NavigationDrawer, self).on_touch_up(touch)
             return
