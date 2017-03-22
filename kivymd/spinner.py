@@ -17,11 +17,11 @@ Builder.load_string('''
         Color:
             rgba: self.color
             a: self._alpha
-        Line:
+        SmoothLine:
             circle: self.center_x, self.center_y, self.width / 2, \
             self._angle_start, self._angle_end
             cap: 'square'
-            width: dp(2)
+            width: dp(2.25)
     canvas.after:
         PopMatrix
 
