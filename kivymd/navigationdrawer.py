@@ -8,7 +8,7 @@ API
 ---
 '''
 
-from kivy.lang.builder import Builder
+from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty, ListProperty, BooleanProperty,\
     OptionProperty, Clock
