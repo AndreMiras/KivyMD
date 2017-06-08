@@ -36,7 +36,7 @@ android_kitchen_armeabi:
     - export APP_ANDROID_ARCH=armeabi
     - export APP_ANDROID_API=19
     # Build
-    - buildozer android_new debug
+    - buildozer android debug
     # If nothing in bin dir, then the build has failed
     - cd $CI_PROJECT_DIR/demos/kitchen_sink
     - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
@@ -56,7 +56,7 @@ android_kitchen_arm-v7a:
     - export APP_ANDROID_ARCH=armeabi-v7a
     - export APP_ANDROID_API=21
     # Build
-    - buildozer android_new debug
+    - buildozer android debug
     # If nothing in bin dir, then the build has failed
     - cd $CI_PROJECT_DIR/demos/kitchen_sink
     - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
@@ -76,7 +76,7 @@ android_kitchen_arm64-v8a:
     # Build vars
     - export APP_ANDROID_ARCH=arm64-v8a
     - export APP_ANDROID_API=21
-    - buildozer android_new debug
+    - buildozer android debug
     # If nothing in bin dir, then the build has failed
     - cd $CI_PROJECT_DIR/demos/kitchen_sink
     - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
@@ -96,7 +96,7 @@ android_kitchen_x86:
     - export APP_ANDROID_ARCH=x86
     - export APP_ANDROID_API=21
     # Build
-    - buildozer android_new debug
+    - buildozer android debug
     # If nothing in bin dir, then the build has failed
     - cd $CI_PROJECT_DIR/demos/kitchen_sink
     - if [ ! "$(ls -A ./bin)" ]; then exit 1; fi
