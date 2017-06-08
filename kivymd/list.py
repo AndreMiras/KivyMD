@@ -394,7 +394,7 @@ class ContainerSupport:
             self.ids['_right_container'].add_widget(widget)
             self._touchable_widgets.append(widget)
         else:
-            return super(BaseListItem, self).add_widget(widget,index)
+            return super(BaseListItem, self).add_widget(widget)
 
     def remove_widget(self, widget):
         super(BaseListItem, self).remove_widget(widget)
@@ -431,6 +431,9 @@ class ContainerSupport:
 
 
 class OneLineListItem(BaseListItem):
+    '''
+    A one line list item
+    '''
     _txt_top_pad = NumericProperty(dp(16))
     _txt_bot_pad = NumericProperty(dp(15))  # dp(20) - dp(5)
     _num_lines = 1
@@ -441,6 +444,9 @@ class OneLineListItem(BaseListItem):
 
 
 class TwoLineListItem(BaseListItem):
+    '''
+    A two line list item
+    '''
     _txt_top_pad = NumericProperty(dp(20))
     _txt_bot_pad = NumericProperty(dp(15))  # dp(20) - dp(5)
 
@@ -450,6 +456,9 @@ class TwoLineListItem(BaseListItem):
 
 
 class ThreeLineListItem(BaseListItem):
+    '''
+    A three line list item
+    '''
     _txt_top_pad = NumericProperty(dp(16))
     _txt_bot_pad = NumericProperty(dp(15))  # dp(20) - dp(5)
     _num_lines = 3

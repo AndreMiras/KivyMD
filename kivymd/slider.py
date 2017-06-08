@@ -144,10 +144,8 @@ class MDSlider(ThemableBehavior, Slider):
             self._track_color_active = self._track_color_normal
             self._track_color_disabled = self._track_color_normal
             self.thumb_color = get_color_from_hex(colors['Grey']['400'])
-            self.thumb_color_down = get_color_from_hex(
-                colors[self.theme_cls.primary_palette]['200'])
-            self.thumb_color_disabled = get_color_from_hex(
-                colors['Grey']['800'])
+            self.thumb_color_down = get_color_from_hex(colors[self.theme_cls.primary_palette]['200'])
+            self.thumb_color_disabled = get_color_from_hex(colors['Grey']['800'])
         else:
             self._track_color_normal = get_color_from_hex('000000')
             self._track_color_normal[3] = 0.26

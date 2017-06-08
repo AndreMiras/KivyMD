@@ -36,10 +36,6 @@ class MDLabel(ThemableBehavior, Label):
 
     theme_text_color = OptionProperty(None, allownone=True,
             options=['Primary', 'Secondary', 'Hint', 'Error', 'Custom',
-                     'ContrastPalettePrimary', 'ContrastPalettePrimaryLight',
-                     'ContrastPalettePrimaryDark',
-                     'ContrastAccentPrimary', 'ContrastAccentPrimaryLight',
-                     'ContrastAccentPrimaryDark',
                      'ContrastParentBackground']
             )
 

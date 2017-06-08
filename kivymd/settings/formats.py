@@ -1,3 +1,5 @@
+# Warning: do not name this module "types"
+import datetime
 import os
 
 from kivy.compat import text_type
@@ -14,6 +16,9 @@ from kivy.uix.settings import SettingSpacer
 from kivy.uix.textinput import TextInput
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.widget import Widget
+from kivymd.date_picker import MDDatePicker
+
+from kivymd.time_picker import MDTimePicker
 
 from kivymd.label import MDLabel
 from kivymd.list import TwoLineListItem, IRightBodyTouch, ContainerSupport
@@ -144,7 +149,7 @@ class KivyMDSettingsItem(TwoLineListItem, ContainerSupport):
     #     super(KivyMDSettingsItem, self).__init__()
 
 
-class KivyMDSettingsString(KivyMDSettingsItem):
+class KivyMDSettingString(KivyMDSettingsItem):
     popup = ObjectProperty(None, allownone=True)
     '''(internal) Used to store the current popup when it's shown.
 
@@ -208,7 +213,7 @@ class KivyMDSettingsString(KivyMDSettingsItem):
         popup.open()
 
 
-class KivyMDSettingNumeric(KivyMDSettingsString):
+class KivyMDSettingNumeric(KivyMDSettingString):
     def _validate(self, instance):
         # we know the type just by checking if there is a '.' in the original
         # value
@@ -227,7 +232,7 @@ class KivyMDSettingBoolean(KivyMDSettingsItem):
     values = ListProperty(['0', '1'])
 
 
-class KivyMDSettingOptions(KivyMDSettingsString):
+class KivyMDSettingOptions(KivyMDSettingString):
     '''Implementation of an option list on top of a :class:`SettingItem`.
     It is visualized with a :class:`~kivy.uix.label.Label` widget that, when
     clicked, will open a :class:`~kivy.uix.popup.Popup` with a
@@ -273,7 +278,7 @@ class KivyMDSettingOptions(KivyMDSettingsString):
         popup.open()
 
 
-class KivyMDSettingPath(KivyMDSettingsString):
+class KivyMDSettingPath(KivyMDSettingString):
     '''Implementation of a Path setting on top of a :class:`SettingItem`.
     It is visualized with a :class:`~kivy.uix.label.Label` widget that, when
     clicked, will open a :class:`~kivy.uix.popup.Popup` with a
@@ -354,3 +359,23 @@ class KivyMDSettingTitle(MDLabel):
     title = Label.text
     theme_text_color = 'Primary'
     panel = ObjectProperty(None)
+
+class KivyMDSettingTime(KivyMDSettingString):
+    def on_release(self):
+        time_picker = MDTimePicker()
+        time_picker.set_time(datetime.datetime.strptime(self.value, '%H:%M'))
+        time_picker.bind(time=self._set_value)
+        time_picker.open()
+
+    def _set_value(self, instance, value):
+        self.value = value.strftime('%H:%M')
+
+
+class KivyMDSettingDate(KivyMDSettingString):
+    def on_release(self):
+        value = datetime.datetime.strptime(self.value, '%Y-%m-%d').date()
+        date_picker = MDDatePicker(self._set_value, year=value.year, month=value.month, day=value.day)
+        date_picker.open()
+
+    def _set_value(self, value):
+        self.value = value.strftime('%Y-%m-%d')

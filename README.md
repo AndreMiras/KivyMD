@@ -18,14 +18,24 @@ If you wish to become a project developer (permission to create branches on the 
 Documentation
 =============
 
-Some very early documentation can be found at our project's website, other than that we recommend checking the kitchen_sink.py file for examples.
+Some very early documentation can be found at our project's website, other than that we recommend checking the [demos/kitchen_sink/main.py](https://gitlab.com/kivymd/KivyMD/blob/master/demos/kitchen_sink/main.py) file for examples.
 
 Installation and use with Buildozer
 ===================================
 
+#### Dependencies:
+* Kivy 1.9.2-dev0 or Kivy 1.9.2 (When released)
+
+#### How to install
+
 To install KivyMD, clone the project and run the setup.py script. The following line works on Linux, other OSes not tested:
 
-    sudo ./setup.py install
+    sudo python ./setup.py install
+
+Replace "python" with the Python interpreter you want to install KivyMD on (Python 3 is supported)
+
+
+#### How to use with Buildozer
 
 If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
 

@@ -1,0 +1,61 @@
+[
+  {
+    "type": "title",
+    "title": "Reminders"
+  },
+    {
+    "type": "string",
+    "title": "My string key",
+    "desc": "Description of my string key",
+    "section": "section1",
+    "key": "key-string"
+  },
+  {
+    "type": "numeric",
+    "title": "My numeric key",
+    "desc": "Description of my numeric key",
+    "section": "section1",
+    "key": "key-numeric"
+  },
+  {
+    "type": "bool",
+    "title": "My bool key",
+    "desc": "Description of my bool key",
+    "section": "section1",
+    "key": "key-bool"
+  },
+  {
+    "type": "options",
+    "title": "My options key",
+    "desc": "Description of my options key",
+    "section": "section1",
+    "key": "key-options",
+    "options": ["value1", "value2", "another value"]
+  },
+  {
+    "type": "path",
+    "title": "My path key",
+    "desc": "Description of my path key",
+    "section": "section1",
+    "key": "key-path"
+  },
+  {
+    "type": "title",
+    "title": "New types:"
+  },
+  {
+    "type": "time",
+    "title": "My time key",
+    "desc": "Description of my time key",
+    "section": "section1",
+    "key": "key-time"
+  },
+  {
+    "type": "date",
+    "title": "My date key",
+    "desc": "Description of my date key",
+    "section": "section1",
+    "key": "key-date"
+  }
+
+]
