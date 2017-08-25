@@ -186,7 +186,7 @@ class MDBottomNavigationBar(ThemableBehavior, BackgroundColorBehavior, FloatLayo
 class MDTabHeader(MDFlatButton):
     """ Internal widget for headers based on MDFlatButton"""
     
-    width = BoundedNumericProperty(dp(None), min=dp(72), max=dp(264), errorhandler=lambda x: dp(72))
+    width = BoundedNumericProperty(dp(0), min=dp(72), max=dp(264), errorhandler=lambda x: dp(72))
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
 
@@ -208,7 +208,7 @@ def small_error_warn(x):
 
 
 class MDBottomNavigationHeader(BaseFlatButton, BasePressedButton):
-    width = BoundedNumericProperty(dp(None), min=dp(80), max=dp(168), errorhandler=lambda x: small_error_warn(x))
+    width = BoundedNumericProperty(dp(0), min=dp(80), max=dp(168), errorhandler=lambda x: small_error_warn(x))
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
     _label = ObjectProperty()
