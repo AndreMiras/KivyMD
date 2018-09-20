@@ -6,7 +6,7 @@
   - Fixes `BaseButton.on_disabled` `AttributeError`
   - Adds tox/linter testing
   - Adds Travis CI testing
-  - Fixes tox F821, W293
+  - Fixes tox E231, E303, F821, W291, W293
 
 
 ## [20170825]

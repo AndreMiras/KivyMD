@@ -273,7 +273,6 @@ class ThemeManager(Widget):
 
     error_color = AliasProperty(_get_error_color)
 
-
     def _get_ripple_color(self):
         return self._ripple_color
 

@@ -73,7 +73,7 @@ Builder.load_string("""
     text_color: (self.panel.tab_text_color_active or self.panel.specific_text_color) if self.tab and self.tab.manager \
             and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color or \
             self.panel.specific_secondary_text_color)
-    on_press: 
+    on_press:
         self.tab.dispatch('on_tab_press')
     on_release: self.tab.dispatch('on_tab_release')
     on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
@@ -573,6 +573,5 @@ BoxLayout:
                 text: "all of the files"
                 halign: 'center'
 """)
-
 
     TabsApp().run()

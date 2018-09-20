@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ListProperty, NumericProperty,AliasProperty, BooleanProperty
+from kivy.properties import StringProperty, ListProperty, NumericProperty, AliasProperty, BooleanProperty
 from kivy.utils import get_color_from_hex
 from kivy.metrics import dp, sp
 from kivymd.color_definitions import colors
@@ -149,7 +149,7 @@ class MDSlider(ThemableBehavior, Slider):
             self._track_color_normal = get_color_from_hex('000000')
             self._track_color_normal[3] = 0.26
             self._track_color_active = get_color_from_hex('000000')
-            self._track_color_active[3] = 0.38 
+            self._track_color_active[3] = 0.38
             self._track_color_disabled = get_color_from_hex('000000')
             self._track_color_disabled[3] = 0.26
             self.thumb_color_down = self.theme_cls.primary_color
@@ -171,7 +171,7 @@ class MDSlider(ThemableBehavior, Slider):
         self._update_offset()
 
     def _update_offset(self):
-        """ Offset is used to shift the sliders so the background color 
+        """ Offset is used to shift the sliders so the background color
             shows through the off circle.
         """
         d = 2 if self.active else 0
@@ -181,7 +181,7 @@ class MDSlider(ThemableBehavior, Slider):
         if super(MDSlider, self).on_touch_down(touch):
             self.active = True
 
-    def on_touch_up(self,touch):
+    def on_touch_up(self, touch):
         if super(MDSlider, self).on_touch_up(touch):
             self.active = False
 #             thumb = self.ids['thumb']
@@ -238,6 +238,5 @@ BoxLayout:
         max:100
         value: 40
 """)
-
 
     SliderApp().run()

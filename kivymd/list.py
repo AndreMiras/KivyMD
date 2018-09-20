@@ -309,7 +309,7 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
                             'Headline', 'Display1', 'Display2', 'Display3',
                             'Display4', 'Button', 'Icon'])
 
-    theme_text_color = StringProperty('Primary',allownone=True)
+    theme_text_color = StringProperty('Primary', allownone=True)
     ''' Theme text color for primary text '''
 
     secondary_text = StringProperty()
@@ -324,10 +324,10 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     '''
 
     secondary_text_color = ListProperty(None)
-    ''' Text color used for secondary text if secondary_theme_text_color 
+    ''' Text color used for secondary text if secondary_theme_text_color
     is set to 'Custom' '''
 
-    secondary_theme_text_color = StringProperty('Secondary',allownone=True)
+    secondary_theme_text_color = StringProperty('Secondary', allownone=True)
     ''' Theme text color for secondary primary text '''
 
     secondary_font_style = OptionProperty(

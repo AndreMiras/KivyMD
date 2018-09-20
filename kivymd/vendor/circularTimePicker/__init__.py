@@ -96,7 +96,7 @@ Builder.load_string("""
             y: self.scale
 
     canvas.after:
-        PopMatrix            
+        PopMatrix
 
 <CircularTimePicker>:
     orientation: "vertical"

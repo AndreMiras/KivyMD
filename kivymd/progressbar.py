@@ -15,7 +15,7 @@ Builder.load_string('''
         Color:
             rgba:  self.theme_cls.divider_color
         Rectangle:
-            size:    (self.width , dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height) 
+            size:    (self.width , dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height)
             pos:   (self.x, self.center_y - dp(4)) if self.orientation == 'horizontal' \
                 else (self.center_x - dp(4),self.y)
 
@@ -71,6 +71,5 @@ BoxLayout:
             orientation:"vertical"
             value: slider.value
 """)
-
 
     ProgressBarApp().run()
