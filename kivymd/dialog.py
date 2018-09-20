@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from kivy import Logger
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, ListProperty
 from kivy.metrics import dp
 from kivy.uix.modalview import ModalView
+from kivy.uix.popup import PopupException
 from kivy.animation import Animation
 from kivymd.theming import ThemableBehavior
 from kivymd.elevationbehavior import RectangularElevationBehavior
