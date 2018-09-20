@@ -4,6 +4,8 @@
 ## [Unreleased]
 
   - Fixes `BaseButton.on_disabled` `AttributeError`
+  - Adds tox/linter testing
+  - Adds Travis CI testing
 
 
 ## [20170825]

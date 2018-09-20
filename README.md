@@ -1,6 +1,8 @@
 KivyMD
 ======
 
+[![Build Status](https://secure.travis-ci.org/AndreMiras/KivyMD.png?branch=develop)](http://travis-ci.org/AndreMiras/KivyMD)
+
 <img align="left" height="256" src="https://raw.githubusercontent.com/kivymd/KivyMD/master/assets/kivymd_logo.png"/>
 
 KivyMD is a collection of Material Design compliant widgets for use with [Kivy](http://kivy.org), a framework for cross-platform, touch-enabled graphical applications.
