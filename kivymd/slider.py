@@ -24,7 +24,7 @@ Builder.load_string('''
                 else (dp(4),self.height - self.padding*2 - self._offset[1])
             pos:   (self.x + self.padding + self._offset[0], self.center_y - dp(4)) \
                 if self.orientation == 'horizontal' else (self.center_x - dp(4),self.y + self.padding + self._offset[1])
-        
+
         # If 0 draw circle
         Color:
             rgba: [0,0,0,0] if not self._is_off else (self._track_color_disabled if self.disabled \
@@ -34,7 +34,7 @@ Builder.load_string('''
             circle: (self.x+self.padding+dp(3),self.center_y-dp(2),8 if self.active else 6 ) \
                 if self.orientation == 'horizontal' else (self.center_x-dp(2),self.y+self.padding+dp(3),8 \
                 if self.active else 6)
-            
+
         Color:
             rgba: [0,0,0,0] if self._is_off \
                 else (self.thumb_color_down if not self.disabled else self._track_color_disabled)
@@ -53,7 +53,6 @@ Builder.load_string('''
         color:       [0,0,0,0] if slider._is_off else (root._track_color_disabled if root.disabled \
             else root.thumb_color_down)
         elevation:    0 if slider._is_off else (4 if root.active else 2)
-        
 ''')
 
 
@@ -231,14 +230,13 @@ BoxLayout:
         min:0
         max:100
         value: 40
-    
+
     MDSlider:
         id:slider2
         orientation:"vertical"
         min:0
         max:100
         value: 40
-        
 """)
 
 

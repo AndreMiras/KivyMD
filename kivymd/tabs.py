@@ -47,7 +47,7 @@ Builder.load_string("""
         current: root.current
         screens: root.tabs
         transition: sm.SlideTransition()
-            
+
 
 <MDTabHeader>:
     canvas:
@@ -56,7 +56,7 @@ Builder.load_string("""
         Rectangle:
             size: self.size
             pos: self.pos
-            
+
         # Draw indicator
         Color:
             rgba: (self.panel.tab_indicator_color or self.panel.theme_cls.accent_color) if self.tab \
@@ -65,7 +65,7 @@ Builder.load_string("""
         Rectangle:
             size: (self.width,dp(2))
             pos: self.pos
-            
+
     size_hint: (None,None) #(1, None)  if self.panel.tab_width_mode=='fixed' else (None,None)
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
@@ -79,8 +79,8 @@ Builder.load_string("""
     on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
     on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
     on_touch_up: self.tab.dispatch('on_tab_touch_up',*args)
-    
-    
+
+
     MDLabel:
         id: _label
         text: root.tab.text if root.panel.tab_display_mode == 'text' else u"{}".format(md_icons[root.tab.icon])
