@@ -38,7 +38,7 @@ class MDSeparator(ThemableBehavior, BoxLayout):
     def __init__(self, *args, **kwargs):
         super(MDSeparator, self).__init__(*args, **kwargs)
         self.on_orientation()
-    
+
     def on_orientation(self,*args):
         self.size_hint = (1, None) if self.orientation == 'horizontal' else (None, 1)
         if self.orientation == 'horizontal':
@@ -52,7 +52,7 @@ class MDCard(ThemableBehavior, RectangularElevationBehavior, BoxLayout):
     g = BoundedNumericProperty(1., min=0., max=1.)
     b = BoundedNumericProperty(1., min=0., max=1.)
     a = BoundedNumericProperty(0., min=0., max=1.)
-    
+
     border_radius = BoundedNumericProperty(dp(3),min=0)
     border_color_a = BoundedNumericProperty(0, min=0., max=1.)
     md_bg_color = ReferenceListProperty(r, g, b, a)
