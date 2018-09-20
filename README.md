@@ -26,7 +26,7 @@ Installation and use with Buildozer
 ===================================
 
 #### Dependencies:
-* Kivy 1.9.2-dev0 or Kivy 1.9.2 (When released)
+* Kivy 1.10.1
 
 #### How to install
 
@@ -41,7 +41,7 @@ Replace "python" with the Python interpreter you want to install KivyMD on (Pyth
 
 If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
 
-    requirements = kivy==master,git+https://gitlab.com/kivymd/KivyMD.git
+    requirements = kivy,git+https://gitlab.com/kivymd/KivyMD.git
 
 License
 =======
