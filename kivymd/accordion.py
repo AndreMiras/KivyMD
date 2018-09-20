@@ -107,7 +107,7 @@ Builder.load_string('''
         PushMatrix
         Translate:
             xy: (-dp(2),0) if ctx.item.orientation == 'vertical' else (0,-dp(2))
-        
+
     canvas.after:
         PopMatrix
     MDLabel:
@@ -141,7 +141,7 @@ Builder.load_string('''
                 origin: self.center
         canvas.after:
             PopMatrix
-        
+
     MDLabel:
         id:_expand_icon
         theme_text_color: 'Custom'
@@ -159,7 +159,6 @@ Builder.load_string('''
                 origin: self.center
         canvas.after:
             PopMatrix
-    
 ''')
 
 if __name__ == '__main__':

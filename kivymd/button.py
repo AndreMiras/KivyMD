@@ -291,7 +291,7 @@ class BaseRaisedButton(CommonElevationBehavior, BaseButton):
         else:
             self.elevation = self.elevation_normal
         super(BaseRaisedButton, self).on_disabled(instance, value)
-    
+
     def on_touch_down(self, touch):
         if not self.disabled:
             if touch.is_mouse_scrolling:

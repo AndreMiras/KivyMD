@@ -18,8 +18,7 @@ Builder.load_string('''
             size:    (self.width , dp(4)) if self.orientation == 'horizontal' else (dp(4),self.height) 
             pos:   (self.x, self.center_y - dp(4)) if self.orientation == 'horizontal' \
                 else (self.center_x - dp(4),self.y)
-        
-            
+
         Color:
             rgba:  self.theme_cls.primary_color
         Rectangle:
@@ -28,22 +27,21 @@ Builder.load_string('''
             pos:    (self.width*(1-self.value_normalized)+self.x if self.reversed else self.x, self.center_y - dp(4)) \
                 if self.orientation == 'horizontal' else \
                 (self.center_x - dp(4),self.height*(1-self.value_normalized)+self.y if self.reversed else self.y)
-        
 ''')
 
 
 class MDProgressBar(ThemableBehavior, ProgressBar):
     reversed = BooleanProperty(False)
     ''' Reverse the direction the progressbar moves. '''
-    
+
     orientation = OptionProperty('horizontal', options=['horizontal', 'vertical'])
     ''' Orientation of progressbar'''
-            
-    
+
+
 if __name__ == '__main__':
     from kivy.app import App
     from kivymd.theming import ThemeManager
-    
+
     class ProgressBarApp(App):
         theme_cls = ThemeManager()
 
@@ -57,7 +55,7 @@ BoxLayout:
         min:0
         max:100
         value: 40
-        
+
     MDProgressBar:
         value: slider.value
     MDProgressBar:
@@ -68,12 +66,11 @@ BoxLayout:
             orientation:"vertical"
             reversed: True
             value: slider.value
-            
+
         MDProgressBar:
             orientation:"vertical"
             value: slider.value
-        
 """)
-            
+
 
     ProgressBarApp().run()
