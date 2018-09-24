@@ -38,12 +38,10 @@ Builder.load_string('''
                 size_hint_y: None
                 text_size: self.width, None
                 height: self.texture_size[1]
-            ScrollView:
-                effect_cls: 'ScrollEffect'
-                BoxLayout:
-                    size_hint_y: None
-                    height: self.minimum_height
-                    id: container
+            BoxLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                id: container
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'center'
