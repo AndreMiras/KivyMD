@@ -74,7 +74,7 @@ class CommonElevationBehavior(object):
                   size=self._update_shadow)
 
     def _update_shadow(self, *args):
-        raise NotImplemented
+        raise NotImplementedError
 
 class RectangularElevationBehavior(CommonElevationBehavior):
     def _update_shadow(self, *args):
