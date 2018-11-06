@@ -7,6 +7,7 @@
   - Adds tox/linter testing
   - Adds Travis CI testing
   - Fixes tox E231, E303, F821, W291, W293
+  - Fixes crash on `MDSwitch.disabled = True`, refs #4
 
 
 ## [20170825]
