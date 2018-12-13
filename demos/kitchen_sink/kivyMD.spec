@@ -7,7 +7,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\LAPTOP MSI\\Documents\\KivyMD\\demos\\kitchen_sink'],
+             pathex=['.'],
              binaries=[],
              datas=[(os.path.dirname(kivymd.__file__), 'kivymd'),
                     ('./assets','assets')],
@@ -30,11 +30,11 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
-               name='kivyMD')
+               name='KivyMD')

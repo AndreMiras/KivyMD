@@ -28,15 +28,15 @@ source.exclude_dirs = bin
 source.exclude_patterns = buildozer.spec
 
 # (str) Application versioning (method 1)
-# version = 0.1
+version = 0.1.3
 
 # (str) Application versioning (method 2)
-version.regex = __version__ = ['\"]([^'\"]*)['\"]
-version.filename = %(source.dir)s/../../kivymd/__init__.py
+#version.regex = __version__ = ['\"]([^'\"]*)['\"]
+#version.filename = %(source.dir)s/../../kivymd/__init__.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy==master, kivymd, hostpython2
+requirements = kivy==1.10.1, git+https://gitlab.com/kivymd/KivyMD.git@master
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
 p4a.local_recipes = %(source.dir)s/../../gitlab-ci/p4a-recipes/
@@ -200,7 +200,7 @@ log_level = 2
 warn_on_root = 0
 
 # (str) Path to build artifact storage, absolute or relative to spec file
-# build_dir = ./.buildozer
+# build_dir = ~/build
 
 # (str) Path to build output (i.e. .apk, .ipa) storage
 # bin_dir = ./bin
