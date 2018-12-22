@@ -1,6 +1,8 @@
 KivyMD
 ======
 
+[![Build Status](https://secure.travis-ci.org/AndreMiras/KivyMD.png?branch=develop)](http://travis-ci.org/AndreMiras/KivyMD)
+
 <img align="left" height="256" src="https://raw.githubusercontent.com/kivymd/KivyMD/master/assets/kivymd_logo.png"/>
 
 KivyMD is a collection of Material Design compliant widgets for use with [Kivy](http://kivy.org), a framework for cross-platform, touch-enabled graphical applications.
@@ -24,7 +26,7 @@ Installation and use with Buildozer
 ===================================
 
 #### Dependencies:
-* Kivy 1.9.2-dev0 or Kivy 1.9.2 (When released)
+* Kivy 1.10.1
 
 #### How to install
 
@@ -39,7 +41,7 @@ Replace "python" with the Python interpreter you want to install KivyMD on (Pyth
 
 If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
 
-    requirements = kivy==master,git+https://gitlab.com/kivymd/KivyMD.git
+    requirements = kivy,git+https://gitlab.com/kivymd/KivyMD.git
 
 License
 =======

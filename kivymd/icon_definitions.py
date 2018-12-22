@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # These expanded material design icons are maintained by Austin Andrews
 # (Templarian on Github). They can be found at materialdesignicons.com.
-# 
+#
 # LAST UPDATED: Version 1.7.22
 #
 # For those updating from an older version of KivyMD, icon names have

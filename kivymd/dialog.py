@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from kivy import Logger
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty, ListProperty
 from kivy.metrics import dp
 from kivy.uix.modalview import ModalView
+from kivy.uix.popup import PopupException
 from kivy.animation import Animation
 from kivymd.theming import ThemableBehavior
 from kivymd.elevationbehavior import RectangularElevationBehavior
@@ -36,12 +38,10 @@ Builder.load_string('''
                 size_hint_y: None
                 text_size: self.width, None
                 height: self.texture_size[1]
-            ScrollView:
-                effect_cls: 'ScrollEffect'
-                BoxLayout:
-                    size_hint_y: None
-                    height: self.minimum_height
-                    id: container
+            BoxLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                id: container
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'center'

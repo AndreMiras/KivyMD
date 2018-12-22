@@ -31,13 +31,13 @@ class MDAccordionItem(ThemableBehavior, AccordionItem):
     ''' Color for title text and icon if `title_theme_color` is Custom '''
 
     divider_color = ListProperty(None, allownone=True)
-    ''' Color for dividers between different titles in rgba format 
-    To remove the divider set a color with an alpha of 0. 
+    ''' Color for dividers between different titles in rgba format
+    To remove the divider set a color with an alpha of 0.
     '''
 
     indicator_color = ListProperty(None, allownone=True)
-    ''' Color for the indicator on the side of the active item in rgba format 
-    To remove the indicator set a color with an alpha of 0. 
+    ''' Color for the indicator on the side of the active item in rgba format
+    To remove the indicator set a color with an alpha of 0.
     '''
 
     font_style = OptionProperty(
@@ -107,7 +107,7 @@ Builder.load_string('''
         PushMatrix
         Translate:
             xy: (-dp(2),0) if ctx.item.orientation == 'vertical' else (0,-dp(2))
-        
+
     canvas.after:
         PopMatrix
     MDLabel:
@@ -141,7 +141,7 @@ Builder.load_string('''
                 origin: self.center
         canvas.after:
             PopMatrix
-        
+
     MDLabel:
         id:_expand_icon
         theme_text_color: 'Custom'
@@ -159,13 +159,11 @@ Builder.load_string('''
                 origin: self.center
         canvas.after:
             PopMatrix
-    
 ''')
 
 if __name__ == '__main__':
     from kivy.app import App
     from kivymd.theming import ThemeManager
-
 
     class AccordionApp(App):
         theme_cls = ThemeManager()
@@ -223,6 +221,5 @@ BoxLayout:
                 text:'Content 3'
                 theme_text_color:'Primary'
 """)
-
 
     AccordionApp().run()

@@ -47,7 +47,7 @@ Builder.load_string("""
         current: root.current
         screens: root.tabs
         transition: sm.SlideTransition()
-            
+
 
 <MDTabHeader>:
     canvas:
@@ -56,7 +56,7 @@ Builder.load_string("""
         Rectangle:
             size: self.size
             pos: self.pos
-            
+
         # Draw indicator
         Color:
             rgba: (self.panel.tab_indicator_color or self.panel.theme_cls.accent_color) if self.tab \
@@ -65,7 +65,7 @@ Builder.load_string("""
         Rectangle:
             size: (self.width,dp(2))
             pos: self.pos
-            
+
     size_hint: (None,None) #(1, None)  if self.panel.tab_width_mode=='fixed' else (None,None)
     width: (_label.texture_size[0] + dp(16))
     padding: (dp(12), 0)
@@ -73,14 +73,14 @@ Builder.load_string("""
     text_color: (self.panel.tab_text_color_active or self.panel.specific_text_color) if self.tab and self.tab.manager \
             and self.tab.manager.current==self.tab.name else (self.panel.tab_text_color or \
             self.panel.specific_secondary_text_color)
-    on_press: 
+    on_press:
         self.tab.dispatch('on_tab_press')
     on_release: self.tab.dispatch('on_tab_release')
     on_touch_down: self.tab.dispatch('on_tab_touch_down',*args)
     on_touch_move: self.tab.dispatch('on_tab_touch_move',*args)
     on_touch_up: self.tab.dispatch('on_tab_touch_up',*args)
-    
-    
+
+
     MDLabel:
         id: _label
         text: root.tab.text if root.panel.tab_display_mode == 'text' else u"{}".format(md_icons[root.tab.icon])
@@ -185,7 +185,7 @@ class MDBottomNavigationBar(ThemableBehavior, BackgroundColorBehavior, FloatLayo
 
 class MDTabHeader(MDFlatButton):
     """ Internal widget for headers based on MDFlatButton"""
-    
+
     width = BoundedNumericProperty(dp(0), min=dp(72), max=dp(264), errorhandler=lambda x: dp(72))
     tab = ObjectProperty(None)
     panel = ObjectProperty(None)
@@ -251,19 +251,19 @@ class MDTab(Screen, ThemableBehavior):
         that defines the content that goes in the tab header.
     """
     __events__ = ('on_tab_touch_down', 'on_tab_touch_move', 'on_tab_touch_up', 'on_tab_press', 'on_tab_release')
-    
+
     # Tab header text
     text = StringProperty("")
-    
+
     # Tab header icon
     icon = StringProperty("checkbox-blank-circle")
-    
+
     # Tab dropdown menu items
     menu_items = ListProperty()
-    
+
     # Tab dropdown menu (if you want to customize it)
     menu = ObjectProperty(None)
-    
+
     def __init__(self, **kwargs):
         super(MDTab, self).__init__(**kwargs)
         self.index = 0
@@ -273,13 +273,13 @@ class MDTab(Screen, ThemableBehavior):
         self.register_event_type('on_tab_touch_up')
         self.register_event_type('on_tab_press')
         self.register_event_type('on_tab_release')
-        
+
     def on_tab_touch_down(self, *args):
         pass
-    
+
     def on_tab_touch_move(self, *args):
         pass
-    
+
     def on_tab_touch_up(self, *args):
         pass
 
@@ -292,10 +292,10 @@ class MDTab(Screen, ThemableBehavior):
                 par.ids.tab_manager.transition.direction = "left"
             par.ids.tab_manager.current = self.name
             par.previous_tab = self
-    
+
     def on_tab_release(self, *args):
         pass
-    
+
     def __repr__(self):
         return "<MDTab name='{}', text='{}'>".format(self.name, self.text)
 
@@ -363,13 +363,13 @@ class MDTabbedPanel(TabbedPanelBase):
         super(MDTabbedPanel, self).__init__(**kwargs)
         self.index = 0
         self._refresh_tabs()
-        
+
     def on_tab_width_mode(self, *args):
         self._refresh_tabs()
-    
+
     def on_tab_display_mode(self, *args):
         self._refresh_tabs()
-    
+
     def _refresh_tabs(self):
         """ Refresh all tabs """
         # if fixed width, use a box layout
@@ -398,7 +398,7 @@ class MDTabbedPanel(TabbedPanelBase):
             self._refresh_tabs()
         else:
             super(MDTabbedPanel, self).add_widget(widget)
-        
+
     def remove_widget(self, widget):
         """ Remove tabs from the screen or the layout.
         :param widget: The widget to remove.
@@ -493,7 +493,7 @@ class MDBottomNavigation(TabbedPanelBase):
 if __name__ == '__main__':
     from kivy.app import App
     from kivymd.theming import ThemeManager
-    
+
     class TabsApp(App):
         theme_cls = ThemeManager()
 
@@ -573,6 +573,5 @@ BoxLayout:
                 text: "all of the files"
                 halign: 'center'
 """)
-            
 
     TabsApp().run()
