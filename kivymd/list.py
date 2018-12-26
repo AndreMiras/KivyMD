@@ -150,6 +150,7 @@ from kivy.uix.gridlayout import GridLayout
 import kivymd.material_resources as m_res
 from kivymd.ripplebehavior import RectangularRippleBehavior
 from kivymd.theming import ThemableBehavior
+from kivymd import LIST_FONT_NAME, DEFAULT_FONT_STYLE
 
 Builder.load_string('''
 #:import m_res kivymd.material_resources
@@ -305,9 +306,7 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     ''' Text color used if theme_text_color is set to 'Custom' '''
 
     font_style = OptionProperty(
-        'Subhead', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
-                            'Headline', 'Display1', 'Display2', 'Display3',
-                            'Display4', 'Button', 'Icon'])
+        'Subhead', options=LIST_FONT_NAME)
 
     theme_text_color = StringProperty('Primary', allownone=True)
     ''' Theme text color for primary text '''
@@ -331,9 +330,7 @@ class BaseListItem(ThemableBehavior, RectangularRippleBehavior,
     ''' Theme text color for secondary primary text '''
 
     secondary_font_style = OptionProperty(
-        'Body1', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
-                          'Headline', 'Display1', 'Display2', 'Display3',
-                          'Display4', 'Button', 'Icon'])
+        DEFAULT_FONT_STYLE, options=LIST_FONT_NAME)
 
     divider = OptionProperty('Full', options=['Full', 'Inset', None], allownone=True)
 

@@ -6,6 +6,8 @@ from kivy.uix.label import Label
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.theming import ThemableBehavior
 from kivymd.theming_dynamic_text import get_contrast_text_color
+from kivymd import LIST_FONT_STYLE, LIST_FONT_NAME,\
+                    DEFAULT_FONT_STYLE
 
 Builder.load_string('''
 <MDLabel>
@@ -13,26 +15,12 @@ Builder.load_string('''
     text_size: (self.width, None)
 ''')
 
-
 class MDLabel(ThemableBehavior, Label):
     font_style = OptionProperty(
-        'Body1', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
-                          'Headline', 'Display1', 'Display2', 'Display3',
-                          'Display4', 'Button', 'Icon'])
+        DEFAULT_FONT_STYLE, options=LIST_FONT_NAME)
 
     # Font, Bold, Mobile size, Desktop size (None if same as Mobile)
-    _font_styles = DictProperty({'Body1': ['Roboto', False, 14, 13],
-                                 'Body2': ['Roboto', True, 14, 13],
-                                 'Caption': ['Roboto', False, 12, None],
-                                 'Subhead': ['Roboto', False, 16, 15],
-                                 'Title': ['Roboto', True, 20, None],
-                                 'Headline': ['Roboto', False, 24, None],
-                                 'Display1': ['Roboto', False, 34, None],
-                                 'Display2': ['Roboto', False, 45, None],
-                                 'Display3': ['Roboto', False, 56, None],
-                                 'Display4': ['RobotoLight', False, 112, None],
-                                 'Button': ['Roboto', True, 14, None],
-                                 'Icon': ['Icons', False, 24, None]})
+    _font_styles = DictProperty(LIST_FONT_STYLE)
 
     theme_text_color = OptionProperty(None, allownone=True,
             options=['Primary', 'Secondary', 'Hint', 'Error', 'Custom',

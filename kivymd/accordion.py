@@ -7,6 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivymd.list import OneLineListItem
 from kivymd.theming import ThemableBehavior
+from kivymd import LIST_FONT_NAME
 
 
 class MDAccordionItemTitleLayout(ThemableBehavior, BoxLayout):
@@ -40,10 +41,7 @@ class MDAccordionItem(ThemableBehavior, AccordionItem):
     To remove the indicator set a color with an alpha of 0.
     '''
 
-    font_style = OptionProperty(
-        'Subhead', options=['Body1', 'Body2', 'Caption', 'Subhead', 'Title',
-                            'Headline', 'Display1', 'Display2', 'Display3',
-                            'Display4', 'Button', 'Icon'])
+    font_style = OptionProperty('Subhead', options=LIST_FONT_NAME)
     ''' Font style to use for the title text '''
 
     title_template = StringProperty('MDAccordionItemTitle')
