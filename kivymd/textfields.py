@@ -7,7 +7,6 @@ from kivy.metrics import sp
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivy.properties import OptionProperty, ListProperty
 from kivy.uix.textinput import TextInput
-from kivy.config import Config
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 from kivymd import DEFAULT_FONT_STYLE
@@ -55,7 +54,7 @@ Builder.load_string('''
             rgba: self.disabled_foreground_color if self.disabled else \
             (self.hint_text_color if not self.text and not self.focus else self.foreground_color)
 
-    font_name: DEFAULT_FONT_STYLE
+    font_name: 'Roboto'
     foreground_color: app.theme_cls.text_color
     font_size: sp(16)
     bold: False
