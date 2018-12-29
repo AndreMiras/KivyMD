@@ -26,8 +26,14 @@ LIST_FONT_STYLE = {
     'Button': ['Roboto', True, 14, None],
     'Icon': ['Icons', False, 24, None]
 }
-LIST_FONT_STYLE.update(literal_eval(Config.getdefault('myapp', 'list_fonts', {})))
+
+if Config.has_section('myapp'):
+    list_style = Config.getdefault('myapp', 'list_fonts', '{}')
+    LIST_FONT_STYLE.update(literal_eval(
+                                list_style if list_style not in (None, '') else '{}'))
+    font_style = Config.getdefault('myapp', 'default_font_style', 'Body1')
+    DEFAULT_FONT_STYLE = font_style if font_style not in (None, '') else 'Body1'
+else:
+    DEFAULT_FONT_STYLE = 'Body1'
 
 LIST_FONT_NAME = list(LIST_FONT_STYLE.keys())
-
-DEFAULT_FONT_STYLE = Config.getdefault('myapp', 'default_font_style', 'Body1')
