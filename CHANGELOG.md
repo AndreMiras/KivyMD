@@ -1,8 +1,11 @@
 # Change Log
 
 
-## [Unreleased]
+## [20181106]
 
+  - Fixes MDSwitch crash on disable, refs #4
+  - Fixes MDCheckbox color, refs #3
+  - Removes the default scrollview from the MDDialog, refs #1
   - Fixes `BaseButton.on_disabled` `AttributeError`
   - Adds tox/linter testing
   - Adds Travis CI testing
