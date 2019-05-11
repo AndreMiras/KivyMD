@@ -1,0 +1,15 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+env:
+  - TAG=kivymd-linux DOCKERFILE=dockerfiles/Dockerfile-linux COMMAND='tox'
+
+install:
+  - docker build --tag=$TAG --file=$DOCKERFILE .
+
+script:
+  - travis_wait docker run $TAG $COMMAND

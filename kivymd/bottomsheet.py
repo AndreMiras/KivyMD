@@ -126,7 +126,7 @@ class MDBottomSheet(ThemableBehavior, ModalView):
         if type(widget) == ScrollView:
             super(MDBottomSheet, self).add_widget(widget, index)
         else:
-            self.gl_content.add_widget(widget,index)
+            self.gl_content.add_widget(widget, index)
 
 
 Builder.load_string('''

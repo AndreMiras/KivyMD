@@ -634,8 +634,8 @@ class NavigationDrawer(StencilView):
             di = touch.x - touch.ox if pan_pos in ['left', 'right'] else touch.y - touch.oy
             if pan_pos in ['right', 'top']:
                 di *= -1
-            self._anim_progress = max(0, min(self._anim_init_progress +
-                                             (di / self.side_panel_width), 1))
+            self._anim_progress = max(0, min(self._anim_init_progress
+                                             + (di / self.side_panel_width), 1))
             if self._anim_progress < 0.975:
                 touch.ud['panels_jiggled'] = True
         else:

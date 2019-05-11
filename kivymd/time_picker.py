@@ -76,8 +76,9 @@ class MDTimePicker(ThemableBehavior, FloatLayout, ModalView,
         try:
             self.ids.time_picker.set_time(time)
         except AttributeError:
-            raise TypeError("MDTimePicker._set_time must receive a datetime object, not a \"" +
-                            type(time).__name__ + "\"")
+            raise TypeError(
+                'MDTimePicker.set_time must receive a datetime object, '
+                'not a "{}"'.format(type(time).__name__))
 
     def close_cancel(self):
         self.dismiss()

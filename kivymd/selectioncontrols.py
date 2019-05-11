@@ -22,7 +22,7 @@ Builder.load_string('''
     canvas:
         Clear
         Color:
-            rgba:         self.color
+            rgba:         1, 1, 1, 1
         Rectangle:
             texture:    self.texture
             size:        self.texture_size
@@ -220,6 +220,8 @@ class MDSwitch(ThemableBehavior, ButtonBehavior, FloatLayout):
             self._track_color_active[3] = .5
             self._track_color_disabled = self.theme_cls.disabled_hint_text_color
             self.thumb_color_down = self.theme_cls.primary_color
+            self.thumb_color_disabled = get_color_from_hex(
+                colors['Grey']['400'])
 
     def on_pos(self, *args):
         if self.active:

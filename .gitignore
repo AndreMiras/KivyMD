@@ -5,3 +5,5 @@ bin
 .idea
 build
 docs/_build
+venv/
+.tox/
