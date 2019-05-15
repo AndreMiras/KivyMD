@@ -36,7 +36,7 @@ version.filename = %(source.dir)s/../../kivymd/__init__.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy==master, kivymd, hostpython2
+requirements = kivy==1.10.1, git+https://github.com/AndreMiras/KivyMD.git@develop
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
 p4a.local_recipes = %(source.dir)s/../../gitlab-ci/p4a-recipes/

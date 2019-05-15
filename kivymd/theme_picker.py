@@ -170,16 +170,6 @@ Builder.load_string("""
                         PrimaryColorSelector:
                             color_name: 'BlueGrey'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: app.theme_cls.bg_normal
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            disabled: True
 
         MDTab:
             name: 'accent_color'
@@ -285,16 +275,6 @@ Builder.load_string("""
                         AccentColorSelector:
                             color_name: 'BlueGrey'
                     BoxLayout:
-                        MDIconButton:
-                            size: dp(40), dp(40)
-                            size_hint: (None, None)
-                            canvas:
-                                Color:
-                                    rgba: app.theme_cls.bg_normal
-                                Ellipse:
-                                    size: self.size
-                                    pos: self.pos
-                            disabled: True
 
         MDTab:
             name: 'style'

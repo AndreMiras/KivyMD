@@ -21,6 +21,7 @@ from kivymd.backgroundcolorbehavior import (BackgroundColorBehavior,
 from kivymd.button import MDFlatButton, BaseFlatButton, BasePressedButton
 from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.theming import ThemableBehavior
+from kivymd import DEFAULT_FONT_STYLE
 
 Builder.load_string("""
 #:import sm kivy.uix.screenmanager
@@ -522,7 +523,7 @@ BoxLayout:
             text: "Music"
             icon: "playlist-play"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "Here is my music list :)"
                 halign: 'center'
@@ -531,7 +532,7 @@ BoxLayout:
             text: 'Movies'
             icon: "movie"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "Show movies here :)"
                 halign: 'center'
@@ -542,7 +543,7 @@ BoxLayout:
             text: 'Movies'
             icon: "movie"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "Show movies here :)"
                 halign: 'center'
@@ -551,7 +552,7 @@ BoxLayout:
             text: "Files"
             icon: "file"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "all of the files"
                 halign: 'center'
@@ -560,7 +561,7 @@ BoxLayout:
             text: "Files"
             icon: "file"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "all of the files"
                 halign: 'center'
@@ -568,7 +569,7 @@ BoxLayout:
             name: 'files3'
             text: "Files"
             MDLabel:
-                font_style: 'Body1'
+                font_style: DEFAULT_FONT_STYLE
                 theme_text_color: 'Primary'
                 text: "all of the files"
                 halign: 'center'

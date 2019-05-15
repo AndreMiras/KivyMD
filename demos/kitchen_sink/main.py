@@ -893,7 +893,7 @@ NavigationLayout:
                     NavigationDrawerSubheader:
                         text: "NavigationDrawerSubheader"
                     NavigationDrawerIconButton:
-                        text: "NavigationDrawerDivider \/"
+                        text: "NavigationDrawerDivider \\/"
                     NavigationDrawerDivider:
 
 '''
