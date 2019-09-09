@@ -10,18 +10,22 @@ API
 
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import StringProperty, ObjectProperty, NumericProperty, ListProperty, BooleanProperty,\
-    OptionProperty, Clock
+from kivy.properties import (BooleanProperty, Clock, ListProperty,
+                             NumericProperty, ObjectProperty, OptionProperty,
+                             StringProperty)
 from kivy.uix.boxlayout import BoxLayout
 
 from kivymd import images_path
 from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.icon_definitions import md_icons
 from kivymd.label import MDLabel
-from kivymd.list import BaseListItem, ILeftBody, OneLineListItem, OneLineIconListItem, IRightBody
+from kivymd.list import (BaseListItem, ILeftBody, IRightBody,
+                         OneLineIconListItem, OneLineListItem)
 from kivymd.theming import ThemableBehavior
 from kivymd.toolbar import Toolbar
-from kivymd.vendor.navigationdrawer import (NavigationDrawer as VendorNavigationDrawer)
+from kivymd.vendor.navigationdrawer import \
+    NavigationDrawer as VendorNavigationDrawer
+
 
 Builder.load_string("""
 #:import Toolbar kivymd.toolbar.Toolbar

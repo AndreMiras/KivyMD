@@ -5,11 +5,13 @@ from kivy.properties import OptionProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.modalview import ModalView
 from kivy.utils import get_color_from_hex
+
 from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivymd.button import MDIconButton
 from kivymd.color_definitions import colors
 from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string("""
 #:import MDTabbedPanel kivymd.tabs.MDTabbedPanel

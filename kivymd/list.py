@@ -142,14 +142,16 @@ API
 
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import ObjectProperty, StringProperty, NumericProperty, \
-    ListProperty, OptionProperty
+from kivy.properties import (ListProperty, NumericProperty, ObjectProperty,
+                             OptionProperty, StringProperty)
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
+
 import kivymd.material_resources as m_res
 from kivymd.ripplebehavior import RectangularRippleBehavior
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 #:import m_res kivymd.material_resources

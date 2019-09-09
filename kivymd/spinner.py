@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from kivy.lang import Builder
-from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ListProperty, BooleanProperty
 from kivy.animation import Animation
+from kivy.lang import Builder
+from kivy.properties import BooleanProperty, ListProperty, NumericProperty
+from kivy.uix.widget import Widget
+
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 <MDSpinner>:

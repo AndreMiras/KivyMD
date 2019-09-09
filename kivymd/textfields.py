@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 import sys
+
 from kivy.animation import Animation
 from kivy.lang import Builder
-from kivy.metrics import dp
-from kivy.metrics import sp
-from kivy.properties import NumericProperty, StringProperty, BooleanProperty
-from kivy.properties import OptionProperty, ListProperty
+from kivy.metrics import dp, sp
+from kivy.properties import (BooleanProperty, ListProperty, NumericProperty,
+                             OptionProperty, StringProperty)
 from kivy.uix.textinput import TextInput
+
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 <MDTextField>:

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from kivy.lang import Builder
-from kivy.properties import BoundedNumericProperty, ReferenceListProperty
-from kivy.properties import OptionProperty, ListProperty
+from kivy.properties import (BoundedNumericProperty, ListProperty,
+                             OptionProperty, ReferenceListProperty)
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
+
 from kivymd.color_definitions import text_colors
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 <BackgroundColorBehavior>

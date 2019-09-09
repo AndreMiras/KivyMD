@@ -11,16 +11,19 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.metrics import dp, sp
-from kivy.properties import StringProperty, DictProperty, ListProperty, \
-    ObjectProperty, OptionProperty, BoundedNumericProperty, NumericProperty, BooleanProperty
+from kivy.properties import (BooleanProperty, BoundedNumericProperty,
+                             DictProperty, ListProperty, NumericProperty,
+                             ObjectProperty, OptionProperty, StringProperty)
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import Screen
+
 from kivymd.backgroundcolorbehavior import (BackgroundColorBehavior,
                                             SpecificBackgroundColorBehavior)
-from kivymd.button import MDFlatButton, BaseFlatButton, BasePressedButton
+from kivymd.button import BaseFlatButton, BasePressedButton, MDFlatButton
 from kivymd.elevationbehavior import RectangularElevationBehavior
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string("""
 #:import sm kivy.uix.screenmanager

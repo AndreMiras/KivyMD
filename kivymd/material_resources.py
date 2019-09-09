@@ -2,6 +2,7 @@
 from kivy import platform
 from kivy.core.window import Window
 from kivy.metrics import dp
+
 from kivymd import fonts_path
 
 # Feel free to override this const if you're designing for a device such as

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.uix.modalview import ModalView
+from kivy.properties import ListProperty, ObjectProperty
 from kivy.uix.floatlayout import FloatLayout
-from kivymd.theming import ThemableBehavior
+from kivy.uix.modalview import ModalView
+
 from kivymd.elevationbehavior import RectangularElevationBehavior
-from kivy.properties import ObjectProperty, ListProperty
+from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string("""
 #:import MDFlatButton kivymd.button.MDFlatButton

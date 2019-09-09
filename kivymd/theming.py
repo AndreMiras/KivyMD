@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from kivy.app import App
+from kivy.atlas import Atlas
+from kivy.clock import Clock
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
-from kivy.clock import Clock
 from kivy.metrics import dp
-from kivy.properties import OptionProperty, AliasProperty, ObjectProperty, \
-    StringProperty, ListProperty, BooleanProperty
+from kivy.properties import (AliasProperty, BooleanProperty, ListProperty,
+                             ObjectProperty, OptionProperty, StringProperty)
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
-from kivy.atlas import Atlas
-from kivymd.color_definitions import colors, text_colors
-from kivymd.material_resources import FONTS, DEVICE_TYPE
+
 from kivymd import images_path
+from kivymd.color_definitions import colors, text_colors
+from kivymd.material_resources import DEVICE_TYPE, FONTS
 
 for font in FONTS:
     LabelBase.register(**font)

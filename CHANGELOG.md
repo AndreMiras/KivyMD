@@ -4,6 +4,7 @@
 
   - Adds release documentation
   - Adds `Makefile`
+  - Applies `isort` linting
 
 ## [20181106]
 

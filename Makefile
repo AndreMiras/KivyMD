@@ -24,7 +24,7 @@ PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
 all: system_dependencies virtualenv
 
 venv:
-	test -d venv || virtualenv -p python$(PYTHON_WITH_VERSION) venv
+	test -d venv || virtualenv -p $(PYTHON_WITH_VERSION) venv
 
 virtualenv: venv
 	$(PIP) install Cython==0.28.6
@@ -46,16 +46,16 @@ run: run/linux
 test:
 	$(TOX)
 
-isort-check: virtualenv-test
+lint/isort-check: virtualenv-test
 	$(ISORT) --check-only --recursive --diff $(SOURCES)
 
-isort-fix: virtualenv-test
+lint/isort-fix: virtualenv-test
 	$(ISORT) --recursive $(SOURCES)
 
 flake8: virtualenv-test
 	$(FLAKE8) $(SOURCES)
 
-lint: isort-check flake8
+lint: lint/isort-check lint/flake8
 
 docs/clean:
 	rm -rf $(DOCS_DIR)/build/
@@ -75,9 +75,9 @@ release/upload:
 	$(TWINE) upload dist/*
 
 clean: release/clean docs/clean
-	py3clean src/
-	find src/ -type d -name "__pycache__" -exec rm -r {} +
-	find src/ -type d -name "*.egg-info" -exec rm -r {} +
+	py3clean kivymd/
+	find kivymd/ -type d -name "__pycache__" -exec rm -r {} +
+	find kivymd/ -type d -name "*.egg-info" -exec rm -r {} +
 
 clean/all: clean
 	rm -rf $(VENV_NAME) .tox/
