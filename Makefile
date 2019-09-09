@@ -52,7 +52,7 @@ lint/isort-check: virtualenv-test
 lint/isort-fix: virtualenv-test
 	$(ISORT) --recursive $(SOURCES)
 
-flake8: virtualenv-test
+lint/flake8: virtualenv-test
 	$(FLAKE8) $(SOURCES)
 
 lint: lint/isort-check lint/flake8
