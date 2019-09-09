@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [20190910]
 
   - Adds release documentation
   - Adds `Makefile`
