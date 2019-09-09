@@ -3,6 +3,7 @@
 ## [Unreleased]
 
   - Adds release documentation
+  - Adds `Makefile`
 
 ## [20181106]
 
