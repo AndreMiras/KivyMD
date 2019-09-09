@@ -1,5 +1,4 @@
-KivyMD
-======
+# KivyMD
 
 [![Build Status](https://secure.travis-ci.org/AndreMiras/KivyMD.png?branch=develop)](http://travis-ci.org/AndreMiras/KivyMD)
 
@@ -11,40 +10,34 @@ The project's goal is to approximate Google's [Material Design spec](https://www
 
 Currently we're in **alpha** status, so things are changing all the time and we cannot promise any kind of API stability. However it is safe to vendor now and make use of what's currently available; giving you freedom to upgrade when you're ready to do the necessary refactoring.
 
-Roadmap is available on [the project's wiki](https://gitlab.com/kivymd/KivyMD/wikis/Roadmap).
-
-If you wish to contribute, [the project's coding style](https://gitlab.com/kivymd/KivyMD/wikis/Coding-style) is available there as well. Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments or access to your for may be requested to outright submit them.
+Just fork the project, branch out and submit a pull request when your patch is ready. If any changes are necessary, we'll guide you through the steps that need to be done via PR comments or access to your for may be requested to outright submit them.
 
 If you wish to become a project developer (permission to create branches on the project without forking for easier collaboration), have at least one PR approved and ask for it. If you contribute regularly to the project the role may be offered to you without asking too.
 
-Documentation
-=============
+## Documentation
 
-Some very early documentation can be found at our project's website, other than that we recommend checking the [demos/kitchen_sink/main.py](https://gitlab.com/kivymd/KivyMD/blob/master/demos/kitchen_sink/main.py) file for examples.
+Some very early documentation can be found at our project's website, other than that we recommend checking the
+[demos/kitchen_sink/main.py](https://github.com/AndreMiras/KivyMD/blob/develop/demos/kitchen_sink/main.py) file for examples.
 
-Installation and use with Buildozer
-===================================
+## Installation and use with Buildozer
 
 #### Dependencies:
 * Kivy 1.10.1
 
 #### How to install
 
-To install KivyMD, clone the project and run the setup.py script. The following line works on Linux, other OSes not tested:
-
-    sudo python ./setup.py install
-
-Replace "python" with the Python interpreter you want to install KivyMD on (Python 3 is supported)
-
+```sh
+pip install https://github.com/AndreMiras/KivyMD/archive/master.zip
+```
 
 #### How to use with Buildozer
 
 If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
+```sh
+requirements = https://github.com/AndreMiras/KivyMD/archive/master.zip
+```
 
-    requirements = kivy,git+https://gitlab.com/kivymd/KivyMD.git
-
-License
-=======
+## License
 
 MIT, same as Kivy.
 
