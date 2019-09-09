@@ -13,7 +13,7 @@ git flow release start YYYYMMDD
 Now update the [CHANGELOG.md](https://github.com/AndreMiras/KivyMD/blob/develop/CHANGELOG.md)
 `[Unreleased]` section to match the new release version.
 Also update the `version` string from the
-[`kivymd/__init__.py`](https://github.com/AndreMiras/KivyMD/blob/develop/kivymd/__init__.py)
+[kivymd/version.py](https://github.com/AndreMiras/KivyMD/blob/develop/kivymd/version.py)
 file.
 Then commit and finish release.
 ```sh
