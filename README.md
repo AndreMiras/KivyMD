@@ -1,6 +1,7 @@
 # KivyMD
 
 [![Build Status](https://secure.travis-ci.org/AndreMiras/KivyMD.png?branch=develop)](http://travis-ci.org/AndreMiras/KivyMD)
+[![PyPI version](https://badge.fury.io/py/kivy-garden.kivymd.svg)](https://badge.fury.io/py/kivy-garden.kivymd)
 
 <img align="left" height="256" src="https://raw.githubusercontent.com/kivymd/KivyMD/master/assets/kivymd_logo.png"/>
 
@@ -19,22 +20,12 @@ If you wish to become a project developer (permission to create branches on the 
 Some very early documentation can be found at our project's website, other than that we recommend checking the
 [demos/kitchen_sink/main.py](https://github.com/AndreMiras/KivyMD/blob/develop/demos/kitchen_sink/main.py) file for examples.
 
-## Installation and use with Buildozer
-
-#### Dependencies:
-* Kivy 1.10.1
+## Install
 
 #### How to install
 
 ```sh
-pip install https://github.com/AndreMiras/KivyMD/archive/master.zip
-```
-
-#### How to use with Buildozer
-
-If you want to use KivyMD with buildozer, in your buildozer.spec's requirements line you should add the full git HTTPS address, like this example:
-```sh
-requirements = https://github.com/AndreMiras/KivyMD/archive/master.zip
+pip install kivy-garden.kivymd
 ```
 
 ## License
