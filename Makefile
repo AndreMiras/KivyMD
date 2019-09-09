@@ -68,7 +68,6 @@ release/clean:
 
 release/build: release/clean
 	$(PYTHON) setup.py sdist bdist_wheel
-	$(PYTHON) setup_meta.py sdist bdist_wheel
 	$(TWINE) check dist/*
 
 release/upload:
@@ -77,7 +76,7 @@ release/upload:
 clean: release/clean docs/clean
 	py3clean kivymd/
 	find kivymd/ -type d -name "__pycache__" -exec rm -r {} +
-	find kivymd/ -type d -name "*.egg-info" -exec rm -r {} +
+	find . -type d -name "*.egg-info" -exec rm -r {} +
 
 clean/all: clean
 	rm -rf $(VENV_NAME) .tox/
