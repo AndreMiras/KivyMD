@@ -5,6 +5,7 @@
   - Adds release documentation
   - Adds `Makefile`
   - Applies `isort` linting
+  - Improves `setup.py`
 
 ## [20181106]
 

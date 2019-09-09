@@ -2,14 +2,7 @@ import os
 import re
 from setuptools import setup
 
-VERSION_FILE = "kivymd/__init__.py"
-ver_file_data = open(VERSION_FILE, "rt").read()
-ver_regex = r"^__version__ = ['\"]([^'\"]*)['\"]"
-ver_reg_search = re.search(ver_regex, ver_file_data, re.M)
-if ver_reg_search:
-    version = ver_reg_search.group(1)
-else:
-    raise ValueError("Unable to find version string in {}.".format(VERSION_FILE))
+from kivymd.version import __version__
 
 
 def read(fname):
@@ -19,7 +12,7 @@ def read(fname):
 
 setup_params = {
     'name': 'kivy_garden.kivymd',
-    'version': version,
+    'version': __version__,
     'description': "Set of widgets for Kivy inspired by Google's Material Design",
     'long_description': read('README.md'),
     'long_description_content_type': 'text/markdown',
@@ -38,7 +31,7 @@ setup_params = {
             'vendor/navigationdrawer/*.py',
         ]
     },
-    'requires': ['kivy'],
+    'install_requires': ['kivy'],
 }
 
 
