@@ -18,7 +18,7 @@ setup(name='kivymd',
                   'Design',
       author='Andrés Rodríguez',
       author_email='andres.rodriguez@lithersoft.com',
-      url='https://gitlab.com/kivymd/KivyMD',
+      url='https://github.com/AndreMiras/KivyMD',
       packages=['kivymd'],
       package_data={
           'kivymd': ['images/*.png', 'images/*.jpg', 'images/*.atlas',

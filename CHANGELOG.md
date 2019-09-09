@@ -1,5 +1,8 @@
 # Change Log
 
+## [Unreleased]
+
+  - Adds release documentation
 
 ## [20181106]
 
