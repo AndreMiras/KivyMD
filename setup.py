@@ -18,7 +18,7 @@ def read(fname):
 
 
 setup_params = {
-    'name': 'kivymd',
+    'name': 'kivy_garden.kivymd',
     'version': version,
     'description': "Set of widgets for Kivy inspired by Google's Material Design",
     'long_description': read('README.md'),
