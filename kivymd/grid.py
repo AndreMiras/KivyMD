@@ -1,12 +1,14 @@
 # coding=utf-8
 from kivy.lang import Builder
-from kivy.properties import StringProperty, BooleanProperty, ObjectProperty, \
-    NumericProperty, ListProperty, OptionProperty
+from kivy.properties import (BooleanProperty, ListProperty, NumericProperty,
+                             ObjectProperty, OptionProperty, StringProperty)
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
+
 from kivymd.ripplebehavior import RectangularRippleBehavior
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string("""
 <SmartTile>

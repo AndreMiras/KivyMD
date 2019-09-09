@@ -1,5 +1,11 @@
 # Change Log
 
+## [20190910]
+
+  - Adds release documentation
+  - Adds `Makefile`
+  - Applies `isort` linting
+  - Improves `setup.py`
 
 ## [20181106]
 

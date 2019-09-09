@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ListProperty, OptionProperty, ObjectProperty
+from kivy.properties import (ListProperty, ObjectProperty, OptionProperty,
+                             StringProperty)
 from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.uix.boxlayout import BoxLayout
+
 from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivymd.list import OneLineListItem
 from kivymd.theming import ThemableBehavior

@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
-from kivy.lang import Builder
-from kivy.uix.modalview import ModalView
-from kivymd.label import MDLabel
-from kivymd.theming import ThemableBehavior
-from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
-from kivy.uix.floatlayout import FloatLayout
-from kivymd.elevationbehavior import RectangularElevationBehavior
 import calendar
-from datetime import date
 import datetime
-from kivy.properties import StringProperty, NumericProperty, ObjectProperty, \
-    BooleanProperty, ListProperty
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.behaviors import ButtonBehavior
-from kivymd.ripplebehavior import CircularRippleBehavior
+from datetime import date
+
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.lang import Builder
+from kivy.properties import (BooleanProperty, ListProperty, NumericProperty,
+                             ObjectProperty, StringProperty)
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.modalview import ModalView
+
+from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
+from kivymd.elevationbehavior import RectangularElevationBehavior
+from kivymd.label import MDLabel
+from kivymd.ripplebehavior import CircularRippleBehavior
+from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string("""
 #:import calendar calendar
@@ -324,7 +327,7 @@ class MDDatePicker(FloatLayout, ThemableBehavior, RectangularElevationBehavior,
         self.cal_list = cal_list
 
     def change_month(self, operation):
-        op = 1 if operation is 'next' else -1
+        op = 1 if operation == 'next' else -1
         sl, sy = self.month, self.year
         m = 12 if sl + op == 0 else 1 if sl + op == 13 else sl + op
         y = sy - 1 if sl + op == 0 else sy + 1 if sl + op == 13 else sy

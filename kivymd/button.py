@@ -9,24 +9,28 @@ Buttons
 
 TO-DO: DOCUMENT MODULE
 '''
+from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.utils import get_color_from_hex
-from kivy.properties import StringProperty, BoundedNumericProperty, \
-    ListProperty, AliasProperty, BooleanProperty, NumericProperty, \
-    OptionProperty, ReferenceListProperty
+from kivy.properties import (AliasProperty, BooleanProperty,
+                             BoundedNumericProperty, ListProperty,
+                             NumericProperty, OptionProperty,
+                             ReferenceListProperty, StringProperty)
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
-from kivy.animation import Animation
+from kivy.utils import get_color_from_hex
+
 from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
-from kivymd.ripplebehavior import CircularRippleBehavior, \
-    RectangularRippleBehavior
-from kivymd.elevationbehavior import CommonElevationBehavior, \
-    RectangularElevationBehavior, CircularElevationBehavior
-from kivymd.theming import ThemableBehavior
 from kivymd.color_definitions import colors
+from kivymd.elevationbehavior import (CircularElevationBehavior,
+                                      CommonElevationBehavior,
+                                      RectangularElevationBehavior)
+from kivymd.ripplebehavior import (CircularRippleBehavior,
+                                   RectangularRippleBehavior)
+from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 #:import md_icons kivymd.icon_definitions.md_icons

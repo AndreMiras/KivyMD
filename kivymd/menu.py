@@ -3,16 +3,18 @@ from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.recycleview import RecycleView
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.metrics import dp
-from kivy.properties import NumericProperty, ListProperty, OptionProperty, \
-    StringProperty
+from kivy.properties import (ListProperty, NumericProperty, OptionProperty,
+                             StringProperty)
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
+from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+
 import kivymd.material_resources as m_res
 from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 #:import STD_INC kivymd.material_resources.STANDARD_INCREMENT

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ListProperty, NumericProperty, AliasProperty, BooleanProperty
-from kivy.utils import get_color_from_hex
 from kivy.metrics import dp, sp
+from kivy.properties import (AliasProperty, BooleanProperty, ListProperty,
+                             NumericProperty, StringProperty)
+from kivy.uix.slider import Slider
+from kivy.utils import get_color_from_hex
+
 from kivymd.color_definitions import colors
 from kivymd.theming import ThemableBehavior
-from kivy.uix.slider import Slider
 
 
 Builder.load_string('''

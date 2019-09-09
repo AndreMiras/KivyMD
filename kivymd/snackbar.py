@@ -10,15 +10,18 @@ API
 '''
 
 from collections import deque
+
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.event import EventDispatcher
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import ObjectProperty, StringProperty, NumericProperty
+from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivy.uix.relativelayout import RelativeLayout
+
 from kivymd.material_resources import DEVICE_TYPE
+
 
 Builder.load_string('''
 #:import Window kivy.core.window.Window

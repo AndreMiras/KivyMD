@@ -3,12 +3,14 @@ from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.metrics import dp
-from kivy.properties import ListProperty, StringProperty, OptionProperty
+from kivy.properties import ListProperty, OptionProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
+
 from kivymd.backgroundcolorbehavior import SpecificBackgroundColorBehavior
 from kivymd.button import MDIconButton
-from kivymd.theming import ThemableBehavior
 from kivymd.elevationbehavior import RectangularElevationBehavior
+from kivymd.theming import ThemableBehavior
+
 
 Builder.load_string('''
 #:import m_res kivymd.material_resources
